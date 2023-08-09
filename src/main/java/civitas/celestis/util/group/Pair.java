@@ -1,10 +1,11 @@
-package civitas.celestis.group;
+package civitas.celestis.util.group;
 
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.function.UnaryOperator;
 
 /**
  * A group of two elements.
@@ -80,6 +81,12 @@ public class Pair<E> implements Group<E> {
     @Override
     public boolean contains(@Nullable Object obj) {
         return Objects.equals(a, obj) || Objects.equals(b, obj);
+    }
+
+    @Nonnull
+    @Override
+    public Pair<E> apply(@Nonnull UnaryOperator<E> operator) {
+        return new Pair<>(operator.apply(a), operator.apply(b));
     }
 
     /**

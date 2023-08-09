@@ -35,7 +35,7 @@ public class Matrix implements Iterable<Double> {
      */
     public Matrix(@Nonnull double[][] values) {
         if (values.length == 0) {
-            throw new IllegalArgumentException("A matrix cannot have a size of 0x0.");
+            throw new IllegalArgumentException("A matrix cannot have a size of 0*n.");
         }
 
         this.rows = values.length;
@@ -428,5 +428,89 @@ public class Matrix implements Iterable<Double> {
     @Nonnull
     public Iterator<Double> iterator() {
         return Arrays.stream(values()).iterator();
+    }
+
+    //
+    // Equality
+    //
+
+    /**
+     * Checks for equality between this matrix and given object.
+     *
+     * @param obj Object to compare to
+     * @return {@code true} if given object is a matrix, and the components are equal
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+        if (!(obj instanceof Matrix m)) return false;
+        if (rows != m.rows || columns != m.columns) return false;
+
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < columns; c++) {
+                if (values[r][c] != m.values[r][c]) return false;
+            }
+        }
+
+        return true;
+    }
+
+    //
+    // Serialization
+    //
+
+    /**
+     * Parses a string into a matrix.
+     *
+     * @param s String to parse
+     * @return Matrix parsed from given string
+     * @throws NumberFormatException    When the string is not parsable to a matrix
+     * @throws IllegalArgumentException When the string contains non-finite values
+     */
+    @Nonnull
+    public static Matrix parseMatrix(@Nonnull String s) throws IllegalArgumentException {
+        final String[] lines = s.replaceAll("Matrix\\{\n|}", "").split("\n");
+
+        final int rows = lines.length;
+        final int columns;
+        try {
+            columns = lines[0].replaceAll("\\[|]", "").trim().split(", ").length;
+        } catch (IndexOutOfBoundsException e) {
+            throw new NumberFormatException("String is not a matrix.");
+        }
+
+        final double[][] values = new double[rows][columns];
+
+        for (int r = 0; r < lines.length; r++) {
+            final String cleanLine = lines[r].replaceAll("\\[|]", "").trim();
+            final String[] elements = cleanLine.split(", ");
+
+            for (int c = 0; c < columns; c++) {
+                values[r][c] = Double.parseDouble(elements[c]);
+            }
+        }
+
+        return new Matrix(values);
+    }
+
+    /**
+     * Serializes this matrix into a string.
+     *
+     * @return The string representation of this matrix
+     */
+    @Override
+    @Nonnull
+    public String toString() {
+        final StringBuilder out = new StringBuilder();
+
+        out.append("Matrix{\n");
+
+        for (int r = 0; r < rows; r++) {
+            out.append("  ").append(Arrays.toString(values[r])).append("\n");
+        }
+
+        out.append("}");
+
+        return out.toString();
     }
 }

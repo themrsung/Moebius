@@ -1,4 +1,4 @@
-package civitas.celestis.graphics;
+package civitas.celestis.graphics.util;
 
 import jakarta.annotation.Nonnull;
 

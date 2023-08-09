@@ -1,10 +1,12 @@
-package civitas.celestis.group;
+package civitas.celestis.util.group;
 
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.UnaryOperator;
 
 /**
  * A group of elements.
@@ -29,6 +31,31 @@ public interface Group<E> extends Iterable<E> {
                 throw new UnsupportedOperationException("There is no defined group of size " + elements.length + ".");
             }
         }
+    }
+
+    /**
+     * Gets a list of unique pairs of given list.
+     *
+     * @param list List to get pairs of
+     * @param <E>  Type of element to contain
+     * @return A list of unique pairs of the list
+     */
+    @Nonnull
+    static <E> List<Pair<E>> pairsOf(@Nonnull List<E> list) {
+        final List<Pair<E>> result = new ArrayList<>();
+
+        for (final E e1 : list) {
+            for (final E e2 : list) {
+                if (e1.equals(e2)) continue;
+                final Pair<E> pair = new Pair<>(e1, e2);
+
+                if (result.stream().anyMatch(p -> p.equalsIgnoreOrder(pair))) continue;
+
+                result.add(pair);
+            }
+        }
+
+        return result;
     }
 
     /**
@@ -63,6 +90,15 @@ public interface Group<E> extends Iterable<E> {
      * @return {@code true} if this group contains given object
      */
     boolean contains(@Nullable Object obj);
+
+    /**
+     * Applies given operator to each element of this group, then returns the resulting group.
+     *
+     * @param operator Operator to apply to each element of this group
+     * @return The resulting group
+     */
+    @Nonnull
+    Group<E> apply(@Nonnull UnaryOperator<E> operator);
 
     /**
      * Returns an iterator of all the elements of this group.
