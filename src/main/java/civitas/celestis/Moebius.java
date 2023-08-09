@@ -1,5 +1,7 @@
 package civitas.celestis;
 
+import civitas.celestis.event.lifecycle.EventManager;
+import civitas.celestis.event.lifecycle.SyncEventManager;
 import civitas.celestis.task.lifecycle.AsyncScheduler;
 import civitas.celestis.task.lifecycle.Scheduler;
 import jakarta.annotation.Nonnull;
@@ -20,6 +22,7 @@ public final class Moebius {
     public static void start() {
         // Start modules
         scheduler.start();
+        eventManager.start();
     }
 
     /**
@@ -28,6 +31,7 @@ public final class Moebius {
     public static void stop() {
         // Stop modules
         scheduler.stop();
+        eventManager.stop();
     }
 
     //
@@ -45,6 +49,15 @@ public final class Moebius {
     }
 
     /**
+     * Gets the event manager instance of Moebius.
+     * @return Event manager instance
+     */
+    @Nonnull
+    public static EventManager getEventManager() {
+        return eventManager;
+    }
+
+    /**
      * Gets the logger instance of Moebius.
      *
      * @return Logger instance
@@ -59,5 +72,6 @@ public final class Moebius {
     //
 
     private static final Scheduler scheduler = new AsyncScheduler();
+    private static final EventManager eventManager = new SyncEventManager();
     private static final Logger logger = Logger.getLogger("Moebius");
 }
