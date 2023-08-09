@@ -5,8 +5,10 @@ civitas.celestis.event.object
 civitas.celestis.graphics.face
 civitas.celestis.graphics.model
 civitas.celestis.graphics.ray
+civitas.celestis.graphics.scene
 civitas.celestis.graphics.shape
 civitas.celestis.graphics.util
+civitas.celestis.graphics.viewport
 civitas.celestis.listener.object
 civitas.celestis.math.matrix
 civitas.celestis.math.quaternion
