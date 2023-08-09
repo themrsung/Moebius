@@ -5,6 +5,7 @@ import civitas.celestis.math.vector.Vector;
 import civitas.celestis.util.Copyable;
 import jakarta.annotation.Nonnull;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.function.UnaryOperator;
@@ -12,7 +13,7 @@ import java.util.function.UnaryOperator;
 /**
  * A rectangular array of {@code double}s.
  */
-public class Matrix implements Iterable<Double>, Copyable<Matrix> {
+public class Matrix implements Iterable<Double>, Copyable<Matrix>, Serializable {
     //
     // Constructors
     //

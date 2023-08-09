@@ -2,12 +2,13 @@ package civitas.celestis.math.vector;
 
 import jakarta.annotation.Nonnull;
 
+import java.io.Serializable;
 import java.util.function.UnaryOperator;
 
 /**
  * A one-dimensional array of numbers.
  */
-public interface Vector {
+public interface Vector extends Serializable {
     //
     // Factory
     //
