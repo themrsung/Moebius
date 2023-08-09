@@ -25,6 +25,7 @@ import java.util.UUID;
 
 public class MoebiusTest {
     public static void main(String[] args) {
+//        final File file = new File("src/main/resources/models/mcx/MCX.obj");
         final File file = new File("src/main/resources/models/bc304/BC304Render.obj");
         final FileReader reader;
         final Obj obj;
@@ -37,6 +38,7 @@ public class MoebiusTest {
         }
 
         final Model model = new ColoredModel(obj, Color.GRAY, 3);
+//        final Model model = new ColoredModel(obj, Color.GRAY, 150);
 
         final BaseObject odyssey = new BaseObject(
                 UUID.randomUUID(),
@@ -60,12 +62,11 @@ public class MoebiusTest {
 
         final JFrame frame = new JFrame("Moebius");
         frame.setSize(1920, 1080);
-        frame.setVisible(true);
 
         final Viewport viewport = new Viewport(new Scene(earth));
         frame.add(viewport);
 
-        Moebius.getScheduler().register(delta -> frame.repaint());
+        Moebius.getScheduler().register(delta -> viewport.repaint());
 
         Moebius.start();
 
@@ -76,5 +77,7 @@ public class MoebiusTest {
                 Moebius.stop();
             }
         });
+
+        frame.setVisible(true);
     }
 }
