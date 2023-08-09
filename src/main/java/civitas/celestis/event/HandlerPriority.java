@@ -8,5 +8,5 @@ public enum HandlerPriority {
     EARLY,
     NORMAL,
     LATE,
-    PERMISSIVE;
+    PERMISSIVE
 }

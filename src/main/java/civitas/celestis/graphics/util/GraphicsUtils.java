@@ -99,4 +99,24 @@ public final class GraphicsUtils {
     public static Vector3 reflection(@Nonnull Vector3 incidentVector, @Nonnull Vector3 surfaceNormal) {
         return incidentVector.subtract(surfaceNormal.multiply(2.0 * incidentVector.dot(surfaceNormal)));
     }
+
+    //
+    // Rendering
+    //
+
+    /**
+     * Translates a 3D vector into a 2D vector with respect to focal length.
+     * This also inverts the Y coordinate to be compatible with the coordinate system of AWT.
+     *
+     * @param in          Input vector
+     * @param focalLength Focal length to use in conversion
+     * @return Converted {@link Vector2}
+     */
+    @Nonnull
+    public static Vector2 translate3Dto2D(@Nonnull Vector3 in, double focalLength) {
+        return new Vector2(
+                (focalLength / (focalLength + in.z())) * in.x(),
+                (focalLength / (focalLength + in.z())) * -in.y()
+        );
+    }
 }

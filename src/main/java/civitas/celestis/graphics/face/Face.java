@@ -58,6 +58,14 @@ public interface Face extends Copyable<Face> {
     Vector3 getNormal();
 
     /**
+     * Gets the geometric centroid of this face.
+     *
+     * @return The centroid of this face
+     */
+    @Nonnull
+    Vector3 getCentroid();
+
+    /**
      * On a scale of {@code 0-1}, this returns the reflectiveness of this face.
      *
      * @return The reflectiveness of this face

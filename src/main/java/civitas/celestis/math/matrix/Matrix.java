@@ -403,9 +403,7 @@ public class Matrix implements Iterable<Double>, Copyable<Matrix>, Serializable 
         final int columnCount = Math.min(columns, c);
 
         for (int i = 0; i < rowCount; i++) {
-            for (int j = 0; j < columnCount; j++) {
-                result[i][j] = values[i][j];
-            }
+            if (columnCount >= 0) System.arraycopy(values[i], 0, result[i], 0, columnCount);
         }
 
         return new Matrix(result);

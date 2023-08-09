@@ -2,18 +2,22 @@ package civitas.celestis;
 
 import civitas.celestis.graphics.model.ColoredModel;
 import civitas.celestis.graphics.model.Model;
+import civitas.celestis.graphics.scene.Scene;
+import civitas.celestis.graphics.viewport.Viewport;
 import civitas.celestis.math.quaternion.Quaternion;
 import civitas.celestis.math.vector.Vector3;
 import civitas.celestis.object.BaseObject;
 import civitas.celestis.physics.profile.SphereProfile;
 import civitas.celestis.physics.unit.MassUnit;
-import civitas.celestis.task.Task;
 import civitas.celestis.world.RealisticWorld;
 import civitas.celestis.world.World;
 import de.javagl.obj.Obj;
 import de.javagl.obj.ObjReader;
 
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -36,11 +40,13 @@ public class MoebiusTest {
 
         final BaseObject odyssey = new BaseObject(
                 UUID.randomUUID(),
-                Vector3.ZERO,
+                new Vector3(0, 0, 1000),
                 Quaternion.IDENTITY,
                 new SphereProfile(300, MassUnit.IMPERIAL_TON.toKilograms(60000)),
                 model
         );
+
+        odyssey.setRotationRate(Quaternion.builder().pitchDegrees(23).yawDegrees(45).build());
 
         final World earth = new RealisticWorld(
                 UUID.randomUUID(),
@@ -52,18 +58,23 @@ public class MoebiusTest {
         earth.addObject(odyssey);
         Moebius.getWorldManager().addWorld(earth);
 
-        Moebius.getScheduler().register(new Task() {
-            @Override
-            public void execute(long delta) {
-                System.out.println(odyssey.getLocation());
-            }
+        final JFrame frame = new JFrame("Moebius");
+        frame.setSize(1920, 1080);
+        frame.setVisible(true);
 
-            @Override
-            public long interval() {
-                return 1000;
-            }
-        });
+        final Viewport viewport = new Viewport(new Scene(earth));
+        frame.add(viewport);
+
+        Moebius.getScheduler().register(delta -> frame.repaint());
 
         Moebius.start();
+
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                frame.dispose();
+                Moebius.stop();
+            }
+        });
     }
 }

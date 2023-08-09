@@ -169,6 +169,12 @@ public class ColoredFace implements Face {
         return normal;
     }
 
+    @Nonnull
+    @Override
+    public Vector3 getCentroid() {
+        return a.add(b).add(c).divide(3);
+    }
+
     /**
      * Gets the current color of this face.
      *

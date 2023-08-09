@@ -56,7 +56,6 @@ public final class SchedulerCore {
      */
     public void start() {
         thread.start();
-        ;
     }
 
     /**
