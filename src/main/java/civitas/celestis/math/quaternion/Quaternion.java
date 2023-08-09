@@ -7,7 +7,7 @@ import jakarta.annotation.Nonnull;
 /**
  * A quaternion is used to represent the rotation of a {@link Vector3}.
  */
-public class Quaternion extends Vector4 {
+public final class Quaternion extends Vector4 {
     //
     // Constants
     //
@@ -20,6 +20,16 @@ public class Quaternion extends Vector4 {
     //
     // Constructors
     //
+
+    /**
+     * Returns a new builder instance.
+     *
+     * @return A new builder instance
+     */
+    @Nonnull
+    public static Builder builder() {
+        return new Builder();
+    }
 
     /**
      * Creates a new quaternion from four component scalars.
@@ -284,6 +294,16 @@ public class Quaternion extends Vector4 {
         return divide(m2);
     }
 
+    /**
+     * Converts this quaternion into a builder for modification.
+     *
+     * @return Builder constructed from this quaternion
+     */
+    @Nonnull
+    public Builder toBuilder() {
+        return new Builder(this);
+    }
+
     //
     // Serialization
     //
@@ -310,5 +330,259 @@ public class Quaternion extends Vector4 {
     @Override
     public String toString() {
         return super.toString().replaceAll("Vector4", "Quaternion");
+    }
+
+    //
+    // Builder
+    //
+
+    /**
+     * Constructs a new quaternion from a {@link Builder}.
+     *
+     * @param builder Builder to use
+     */
+    private Quaternion(@Nonnull Builder builder) {
+        this(builder.w, builder.x, builder.y, builder.z);
+    }
+
+    /**
+     * The builder class for {@link Quaternion}.
+     */
+    public static final class Builder {
+        /**
+         * Initializes the building sequence.
+         */
+        private Builder() {
+            this.w = 1;
+            this.x = 0;
+            this.y = 0;
+            this.z = 0;
+        }
+
+        /**
+         * Initializes the building sequence.
+         *
+         * @param q Quaternion to use as an initial state
+         */
+        private Builder(@Nonnull Quaternion q) {
+            this.w = q.w();
+            this.x = q.x();
+            this.y = q.y();
+            this.z = q.z();
+        }
+
+        private double w, x, y, z;
+
+        /**
+         * Sets the W component of this quaternion.
+         *
+         * @param w The W component to set to
+         * @return {@code this}
+         */
+        @Nonnull
+        public Builder w(double w) {
+            this.w = w;
+            return this;
+        }
+
+        /**
+         * Sets the X component of this quaternion.
+         *
+         * @param x The X component to set to
+         * @return {@code this}
+         */
+        @Nonnull
+        public Builder x(double x) {
+            this.x = x;
+            return this;
+        }
+
+        /**
+         * Sets the Y component of this quaternion.
+         *
+         * @param y The Y component to set to
+         * @return {@code this}
+         */
+        @Nonnull
+        public Builder y(double y) {
+            this.y = y;
+            return this;
+        }
+
+        /**
+         * Sets the Z component of this quaternion.
+         *
+         * @param z The Z component to set to
+         * @return {@code this}
+         */
+        @Nonnull
+        public Builder z(double z) {
+            this.z = z;
+            return this;
+        }
+
+        /**
+         * Sets the vector part of this quaternion.
+         *
+         * @param x The X component to set to
+         * @param y The Y component to set to
+         * @param z The Z component to set to
+         * @return {@code this}
+         */
+        @Nonnull
+        public Builder xyz(double x, double y, double z) {
+            this.x = x;
+            this.y = y;
+            this.z = z;
+            return this;
+        }
+
+        /**
+         * Sets the vector part of this quaternion.
+         *
+         * @param v The vector to use
+         * @return {@code this}
+         */
+        @Nonnull
+        public Builder xyz(@Nonnull Vector3 v) {
+            this.x = v.x();
+            this.y = v.y();
+            this.z = v.z();
+            return this;
+        }
+
+        /**
+         * Rotates this quaternion by given rotation.
+         *
+         * @param rq Rotation to apply to this builder instance
+         * @return {@code this}
+         */
+        @Nonnull
+        public Builder rotate(@Nonnull Quaternion rq) {
+            final Quaternion current = build();
+            final Quaternion result = rq.multiply(current);
+
+            this.w = result.w();
+            this.x = result.x();
+            this.y = result.y();
+            this.z = result.z();
+
+            return this;
+        }
+
+        /**
+         * Adds pitch (counter-clockwise rotation along positive X) to this rotation.
+         *
+         * @param rads Angle of pitch in radians
+         * @return {@code this}
+         */
+        @Nonnull
+        public Builder pitch(double rads) {
+            final double halfAngle = rads * 0.5;
+            final double sinHalfAngle = Math.sin(halfAngle);
+            final double cosHalfAngle = Math.cos(halfAngle);
+
+            final Quaternion current = build();
+            final Quaternion input = new Quaternion(cosHalfAngle, sinHalfAngle, 0, 0);
+            final Quaternion result = input.multiply(current);
+
+            this.w = result.w();
+            this.x = result.x();
+            this.y = result.y();
+            this.z = result.z();
+
+            return this;
+        }
+
+        /**
+         * Adds yaw (counter-clockwise rotation along positive Y) to this rotation.
+         *
+         * @param rads Angle of yaw in radians
+         * @return {@code this}
+         */
+        @Nonnull
+        public Builder yaw(double rads) {
+            final double halfAngle = rads * 0.5;
+            final double sinHalfAngle = Math.sin(halfAngle);
+            final double cosHalfAngle = Math.cos(halfAngle);
+
+            final Quaternion current = build();
+            final Quaternion input = new Quaternion(cosHalfAngle, 0, sinHalfAngle, 0);
+            final Quaternion result = input.multiply(current);
+
+            this.w = result.w();
+            this.x = result.x();
+            this.y = result.y();
+            this.z = result.z();
+
+            return this;
+        }
+
+        /**
+         * Adds roll (counter-clockwise rotation along positive Z) to this rotation.
+         *
+         * @param rads Angle of roll in radians
+         * @return {@code this}
+         */
+        @Nonnull
+        public Builder roll(double rads) {
+            final double halfAngle = rads * 0.5;
+            final double sinHalfAngle = Math.sin(halfAngle);
+            final double cosHalfAngle = Math.cos(halfAngle);
+
+            final Quaternion current = build();
+            final Quaternion input = new Quaternion(cosHalfAngle, 0, 0, sinHalfAngle);
+            final Quaternion result = input.multiply(current);
+
+            this.w = result.w();
+            this.x = result.x();
+            this.y = result.y();
+            this.z = result.z();
+
+            return this;
+        }
+
+        /**
+         * Adds pitch to this rotation.
+         *
+         * @param deg Angle of pitch in degrees
+         * @return {@code this}
+         */
+        @Nonnull
+        public Builder pitchDegrees(double deg) {
+            return pitch(Math.toRadians(deg));
+        }
+
+        /**
+         * Adds yaw to this rotation.
+         *
+         * @param deg Angle of yaw in degrees
+         * @return {@code this}
+         */
+        @Nonnull
+        public Builder yawDegrees(double deg) {
+            return yaw(Math.toRadians(deg));
+        }
+
+        /**
+         * Adds roll to this rotation.
+         *
+         * @param deg Angle of roll in degrees
+         * @return {@code this}
+         */
+        @Nonnull
+        public Builder rollDegrees(double deg) {
+            return roll(Math.toRadians(deg));
+        }
+
+        /**
+         * Finalizes the building sequence and builds the quaternion.
+         *
+         * @return Built quaternion
+         */
+        @Nonnull
+        public Quaternion build() {
+            return new Quaternion(this);
+        }
     }
 }

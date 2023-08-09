@@ -9,6 +9,34 @@ import java.util.function.UnaryOperator;
  */
 public interface Vector {
     //
+    // Factory
+    //
+
+    /**
+     * Creates a new vector from an array of component scalars.
+     *
+     * @param values Values to use
+     * @return Vector constructed from given values
+     * @throws IllegalArgumentException When at least one of the provided component scalars is non-finite
+     */
+    @Nonnull
+    static Vector of(@Nonnull double... values) {
+        try {
+            return new Vector2(values);
+        } catch (IllegalArgumentException ignored) {}
+
+        try {
+            return new Vector3(values);
+        } catch (IllegalArgumentException ignored) {}
+
+        try {
+            return new Vector4(values);
+        } catch (IllegalArgumentException ignored) {}
+
+        return new VectorX(values);
+    }
+
+    //
     // Properties
     //
 
