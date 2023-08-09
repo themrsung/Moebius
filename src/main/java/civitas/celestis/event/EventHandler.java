@@ -9,6 +9,7 @@ import java.lang.annotation.Target;
 
 /**
  * This annotation marks a method as an event handler.
+ *
  * @see Listener
  */
 @Target(ElementType.METHOD)
@@ -16,6 +17,7 @@ import java.lang.annotation.Target;
 public @interface EventHandler {
     /**
      * Gets the priority of this event handler.
+     *
      * @return The priority of this event handler
      * @see HandlerPriority
      */

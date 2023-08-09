@@ -9,12 +9,14 @@ import java.lang.reflect.Method;
 
 /**
  * A reference object to an event handler.
+ *
  * @param listener Listener object containing the handler
- * @param method Handler method to be called
+ * @param method   Handler method to be called
  */
 public record HandlerReference(@Nonnull Listener listener, @Nonnull Method method) {
     /**
      * Gets the priority of this event handler.
+     *
      * @return The event handler priority
      */
     @Nonnull

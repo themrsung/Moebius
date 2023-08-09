@@ -11,6 +11,7 @@ import jakarta.annotation.Nonnull;
 public class ObjectsCollidedEvent extends ObjectPairEvent implements Cancellable {
     /**
      * Creates a new collision event.
+     *
      * @param objects The pair of objects which collided
      */
     public ObjectsCollidedEvent(@Nonnull Pair<BaseObject> objects) {

@@ -55,6 +55,7 @@ public final class Moebius {
 
     /**
      * Gets the event manager instance of Moebius.
+     *
      * @return Event manager instance
      */
     @Nonnull
