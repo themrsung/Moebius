@@ -23,6 +23,7 @@ public interface WorldManager {
 
     /**
      * Gets a list of all worlds currently present in this session.
+     *
      * @return List of worlds of this session
      */
     @Nonnull
@@ -30,6 +31,7 @@ public interface WorldManager {
 
     /**
      * Gets a world by unique identifier.
+     *
      * @param uniqueId Unique identifier of world to get
      * @return The world of matching unique ID
      * @throws NullPointerException When a world of matching unique identifier cannot be found
@@ -39,6 +41,7 @@ public interface WorldManager {
 
     /**
      * Gets a world by name. This may return {@code null}.
+     *
      * @param name Name of world to get
      * @return World of matching name if found, {@code null} if not
      */
@@ -47,12 +50,14 @@ public interface WorldManager {
 
     /**
      * Adds a world to this session.
+     *
      * @param world World to add
      */
     void addWorld(@Nonnull World world);
 
     /**
      * Removes a world from this session.
+     *
      * @param world World to remove
      */
     void removeWorld(@Nonnull World world);

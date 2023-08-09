@@ -11,7 +11,6 @@ import civitas.celestis.util.Tickable;
 import civitas.celestis.util.Unique;
 import jakarta.annotation.Nonnull;
 
-import java.util.IdentityHashMap;
 import java.util.UUID;
 
 /**
@@ -90,6 +89,7 @@ public class BaseObject implements Unique, Movable, Renderable, Physical, Tickab
 
     /**
      * {@inheritDoc}
+     *
      * @param delta Duration between the last tick and now in milliseconds
      */
     @Override
@@ -312,6 +312,7 @@ public class BaseObject implements Unique, Movable, Renderable, Physical, Tickab
 
     /**
      * Checks if this object is moving, while accounting for the {@link Numbers#MARGIN_OF_SIGNIFICANCE}.
+     *
      * @return {@code true} if this object has movement
      */
     public boolean isMoving() {
@@ -320,6 +321,7 @@ public class BaseObject implements Unique, Movable, Renderable, Physical, Tickab
 
     /**
      * Checks if this object is rotating, while accounting for the {@link Numbers#MARGIN_OF_SIGNIFICANCE}.
+     *
      * @return {@code true} if this object is rotating
      */
     public boolean isRotating() {
@@ -342,6 +344,7 @@ public class BaseObject implements Unique, Movable, Renderable, Physical, Tickab
 
     /**
      * Gets the current velocity of this object.
+     *
      * @return The velocity of this object
      */
     public double getVelocity() {
@@ -350,6 +353,7 @@ public class BaseObject implements Unique, Movable, Renderable, Physical, Tickab
 
     /**
      * Gets the squared velocity of this object.
+     *
      * @return The squared velocity of this object
      */
     public double getVelocity2() {
@@ -359,6 +363,7 @@ public class BaseObject implements Unique, Movable, Renderable, Physical, Tickab
     /**
      * Gets the negated acceleration of this object.
      * This is used to get the opposing direction of the heading of this object.
+     *
      * @return The negated acceleration of this object
      */
     @Nonnull
@@ -368,6 +373,7 @@ public class BaseObject implements Unique, Movable, Renderable, Physical, Tickab
 
     /**
      * Gets the mass of this object.
+     *
      * @return The mass of this object
      */
     public double getMass() {
@@ -376,6 +382,7 @@ public class BaseObject implements Unique, Movable, Renderable, Physical, Tickab
 
     /**
      * Gets the volume of this object.
+     *
      * @return The volume of this object
      */
     public double getVolume() {
@@ -384,6 +391,7 @@ public class BaseObject implements Unique, Movable, Renderable, Physical, Tickab
 
     /**
      * Gets the density of this object.
+     *
      * @return The density of this object
      */
     public double getDensity() {
@@ -392,6 +400,7 @@ public class BaseObject implements Unique, Movable, Renderable, Physical, Tickab
 
     /**
      * Gets the current coefficient of drag of this object.
+     *
      * @return The coefficient of drag of this object
      */
     public double getDragCoefficient() {
@@ -400,6 +409,7 @@ public class BaseObject implements Unique, Movable, Renderable, Physical, Tickab
 
     /**
      * Gets the current cross-sectional area of this object.
+     *
      * @return The cross-sectional area of this object
      */
     public double getCrossSection() {
@@ -408,6 +418,7 @@ public class BaseObject implements Unique, Movable, Renderable, Physical, Tickab
 
     /**
      * Checks if this object overlaps another object.
+     *
      * @param other The object to compare to
      * @return {@code true} if the two objects overlap
      */

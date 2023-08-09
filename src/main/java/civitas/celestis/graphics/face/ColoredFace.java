@@ -43,12 +43,13 @@ public class ColoredFace implements Face {
 
     /**
      * Creates a new colored face.
-     * @param a The first point of this face
-     * @param b The second point of this face
-     * @param c The third point of this face
-     * @param color The initial color of this face
+     *
+     * @param a              The first point of this face
+     * @param b              The second point of this face
+     * @param c              The third point of this face
+     * @param color          The initial color of this face
      * @param reflectiveness The reflectiveness factor of this face
-     * @param translucent Whether this face is translucent
+     * @param translucent    Whether this face is translucent
      */
     public ColoredFace(
             @Nonnull Vector3 a,
@@ -70,10 +71,11 @@ public class ColoredFace implements Face {
 
     /**
      * Creates a new colored face.
-     * @param points A tuple containing the points of this face
-     * @param color The initial color of this face
+     *
+     * @param points         A tuple containing the points of this face
+     * @param color          The initial color of this face
      * @param reflectiveness The reflectiveness factor of this face
-     * @param translucent Whether this face is translucent
+     * @param translucent    Whether this face is translucent
      */
     public ColoredFace(@Nonnull Tuple<Vector3> points, @Nonnull Color color, double reflectiveness, boolean translucent) {
         this.a = points.a();
@@ -88,6 +90,7 @@ public class ColoredFace implements Face {
 
     /**
      * Creates a new colored face from another.
+     *
      * @param other Colored face to copy values from
      */
     public ColoredFace(@Nonnull ColoredFace other) {
@@ -102,13 +105,14 @@ public class ColoredFace implements Face {
 
     /**
      * Protected all-args constructor.
-     * @param a The first point of this face
-     * @param b The second point of this face
-     * @param c The third point of this face
-     * @param normal The surface normal of this face
-     * @param color The color of this face
+     *
+     * @param a              The first point of this face
+     * @param b              The second point of this face
+     * @param c              The third point of this face
+     * @param normal         The surface normal of this face
+     * @param color          The color of this face
      * @param reflectiveness The reflectiveness of this face
-     * @param translucent Whether this face is translucent
+     * @param translucent    Whether this face is translucent
      */
     protected ColoredFace(@Nonnull Vector3 a, @Nonnull Vector3 b, @Nonnull Vector3 c, @Nonnull Vector3 normal, @Nonnull Color color, double reflectiveness, boolean translucent) {
         this.a = a;
@@ -167,6 +171,7 @@ public class ColoredFace implements Face {
 
     /**
      * Gets the current color of this face.
+     *
      * @return The color of this face
      */
     @Nonnull
@@ -186,6 +191,7 @@ public class ColoredFace implements Face {
 
     /**
      * Sets the color of this face.
+     *
      * @param color The color of this face
      */
     public void setColor(@Nonnull Color color) {
@@ -307,6 +313,7 @@ public class ColoredFace implements Face {
 
     /**
      * Serializes this face into a string.
+     *
      * @return The string representation of this face
      */
     @Override

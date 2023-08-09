@@ -2,7 +2,6 @@ package civitas.celestis.physics.profile;
 
 import civitas.celestis.math.util.Numbers;
 import civitas.celestis.object.Physical;
-import civitas.celestis.physics.solid.Solid;
 import civitas.celestis.physics.solid.Sphere;
 import jakarta.annotation.Nonnull;
 

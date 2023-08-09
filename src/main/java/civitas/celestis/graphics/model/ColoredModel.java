@@ -1,7 +1,6 @@
 package civitas.celestis.graphics.model;
 
 import civitas.celestis.graphics.face.ColoredFace;
-import civitas.celestis.graphics.face.Face;
 import civitas.celestis.graphics.util.GraphicsUtils;
 import civitas.celestis.math.vector.Vector3;
 import de.javagl.obj.FloatTuple;
@@ -18,6 +17,7 @@ import java.util.Arrays;
 public class ColoredModel implements Model {
     /**
      * Creates a new colored model.
+     *
      * @param faces Array of faces to use
      */
     public ColoredModel(@Nonnull ColoredFace[] faces) {
@@ -26,9 +26,10 @@ public class ColoredModel implements Model {
 
     /**
      * Creates a new colored model.
-     * @param obj The Wavefront {@link Obj} object to use
+     *
+     * @param obj          The Wavefront {@link Obj} object to use
      * @param initialColor The initial color of all faces
-     * @param scale The scale factor to apply to all faces
+     * @param scale        The scale factor to apply to all faces
      */
     public ColoredModel(@Nonnull Obj obj, @Nonnull Color initialColor, double scale) {
         this.faces = new ColoredFace[obj.getNumFaces()];
@@ -82,6 +83,7 @@ public class ColoredModel implements Model {
 
     /**
      * Serializes this model into a string.
+     *
      * @return The string representation of this model
      */
     @Override

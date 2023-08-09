@@ -11,6 +11,7 @@ import jakarta.annotation.Nonnull;
 public abstract class ObjectPairEvent implements Event {
     /**
      * Creates a new object pair event.
+     *
      * @param objects Pair of objects involved in this event
      */
     public ObjectPairEvent(@Nonnull Pair<BaseObject> objects) {
@@ -22,6 +23,7 @@ public abstract class ObjectPairEvent implements Event {
 
     /**
      * Gets the pair of objects involved in this event.
+     *
      * @return The pair of objects involved in this event
      */
     @Nonnull
@@ -31,6 +33,7 @@ public abstract class ObjectPairEvent implements Event {
 
     /**
      * Gets the first object involved in this event.
+     *
      * @return The first object of this event
      */
     @Nonnull
@@ -40,6 +43,7 @@ public abstract class ObjectPairEvent implements Event {
 
     /**
      * Gets the second object involved in this event.
+     *
      * @return The second object of this event
      */
     @Nonnull

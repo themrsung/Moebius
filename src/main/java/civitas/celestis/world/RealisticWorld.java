@@ -34,10 +34,11 @@ public class RealisticWorld implements World {
 
     /**
      * Creates a new realistic world.
-     * @param uniqueId Unique identifier of this world
-     * @param name Name of this world
-     * @param objects List of objects to contain in this world
-     * @param gravity Gravity vector of this world
+     *
+     * @param uniqueId   Unique identifier of this world
+     * @param name       Name of this world
+     * @param objects    List of objects to contain in this world
+     * @param gravity    Gravity vector of this world
      * @param airDensity Air density of this world
      */
     public RealisticWorld(
@@ -192,6 +193,7 @@ public class RealisticWorld implements World {
 
     /**
      * Gets the gravity of this world.
+     *
      * @return The gravity of this world
      */
     @Nonnull
@@ -201,6 +203,7 @@ public class RealisticWorld implements World {
 
     /**
      * Gets the air density of this world.
+     *
      * @return The air density of this world
      */
     public double getAirDensity() {
@@ -209,6 +212,7 @@ public class RealisticWorld implements World {
 
     /**
      * Sets the gravity of this world.
+     *
      * @param gravity The gravity of this world
      */
     public void setGravity(@Nonnull Vector3 gravity) {
@@ -217,6 +221,7 @@ public class RealisticWorld implements World {
 
     /**
      * Sets the air density of this world.
+     *
      * @param airDensity The air density of this world
      */
     public void setAirDensity(double airDensity) {

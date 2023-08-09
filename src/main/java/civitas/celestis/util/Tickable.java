@@ -6,6 +6,7 @@ package civitas.celestis.util;
 public interface Tickable {
     /**
      * Called every tick.
+     *
      * @param delta Duration between the last tick and now in milliseconds
      */
     void tick(long delta);

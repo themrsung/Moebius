@@ -4,8 +4,6 @@ import civitas.celestis.graphics.face.Face;
 import civitas.celestis.util.Copyable;
 import jakarta.annotation.Nonnull;
 
-import java.util.function.BiConsumer;
-
 /**
  * A 3D model which represents the graphical profile of an object.
  */

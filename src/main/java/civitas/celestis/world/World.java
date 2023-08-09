@@ -27,6 +27,7 @@ public interface World extends Unique, Tickable {
 
     /**
      * Gets the name of this world.
+     *
      * @return The name of this world
      */
     @Nonnull
@@ -38,6 +39,7 @@ public interface World extends Unique, Tickable {
 
     /**
      * Gets a list of all objects in this world.
+     *
      * @return List of objects in this world
      */
     @Nonnull
@@ -45,6 +47,7 @@ public interface World extends Unique, Tickable {
 
     /**
      * Gets an object by unique identifier.
+     *
      * @param uniqueId Unique ID of object to get
      * @return Object of matching unique ID
      * @throws NullPointerException When an object of matching unique identifier cannot be found
@@ -54,12 +57,14 @@ public interface World extends Unique, Tickable {
 
     /**
      * Adds an object to this world.
+     *
      * @param object Object to add to this world
      */
     void addObject(@Nonnull BaseObject object);
 
     /**
      * Removes an object from this world.
+     *
      * @param object Object to remove from this world
      */
     void removeObject(@Nonnull BaseObject object);

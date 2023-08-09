@@ -59,6 +59,7 @@ public interface Face extends Copyable<Face> {
 
     /**
      * On a scale of {@code 0-1}, this returns the reflectiveness of this face.
+     *
      * @return The reflectiveness of this face
      */
     double getReflectiveness();
@@ -72,12 +73,14 @@ public interface Face extends Copyable<Face> {
 
     /**
      * Sets the reflectiveness of this face on a scale of {@code 0-1}.
+     *
      * @param reflectiveness The reflectiveness of this face
      */
     void setReflectiveness(double reflectiveness);
 
     /**
      * Sets whether this face allows the pass-through of rays.
+     *
      * @param translucent {@code true} to allow the pass-through of rays
      */
     void setTranslucent(boolean translucent);

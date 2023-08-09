@@ -1,6 +1,5 @@
 package civitas.celestis;
 
-import civitas.celestis.graphics.face.Face;
 import civitas.celestis.graphics.model.ColoredModel;
 import civitas.celestis.graphics.model.Model;
 import civitas.celestis.math.quaternion.Quaternion;
