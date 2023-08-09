@@ -2,10 +2,12 @@ package civitas.celestis;
 
 import civitas.celestis.event.lifecycle.EventManager;
 import civitas.celestis.event.lifecycle.SyncEventManager;
+import civitas.celestis.listener.object.ObjectsCollidedListener;
 import civitas.celestis.task.lifecycle.AsyncScheduler;
 import civitas.celestis.task.lifecycle.Scheduler;
 import jakarta.annotation.Nonnull;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 /**
@@ -20,6 +22,9 @@ public final class Moebius {
      * Starts the Moebius engine.
      */
     public static void start() {
+        // Register listeners
+        registerListeners();
+
         // Start modules
         scheduler.start();
         eventManager.start();
@@ -74,4 +79,17 @@ public final class Moebius {
     private static final Scheduler scheduler = new AsyncScheduler();
     private static final EventManager eventManager = new SyncEventManager();
     private static final Logger logger = Logger.getLogger("Moebius");
+
+    //
+    // Internal
+    //
+
+    /**
+     * Registers first-party listeners to the event manager.
+     */
+    private static void registerListeners() {
+        eventManager.register(List.of(
+                new ObjectsCollidedListener()
+        ));
+    }
 }
