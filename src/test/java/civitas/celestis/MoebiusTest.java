@@ -19,7 +19,5 @@ public class MoebiusTest {
         } catch (IOException e) {
             return;
         }
-
-        final Model model = new Model(obj);
     }
 }
