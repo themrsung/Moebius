@@ -25,6 +25,7 @@ public interface Group<E> extends Iterable<E> {
     @SafeVarargs
     static <E> Group<E> of(@Nonnull E... elements) {
         switch (elements.length) {
+            case 1 -> {return new Singleton<>(elements[0]);}
             case 2 -> {return new Pair<>(elements[0], elements[1]);}
             case 3 -> {return new Tuple<>(elements[0], elements[1], elements[2]);}
             default -> {

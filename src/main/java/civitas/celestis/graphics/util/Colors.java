@@ -49,4 +49,30 @@ public final class Colors {
         return new Color(r, g, b, a);
     }
 
+    /**
+     * Calculates the simple average of two colors.
+     *
+     * @param c1 The first color
+     * @param c2 The second color
+     * @return The simple average of the two colors
+     */
+    @Nonnull
+    public static Color average(@Nonnull Color c1, @Nonnull Color c2) {
+        final double r1 = c1.getRed();
+        final double g1 = c1.getGreen();
+        final double b1 = c1.getBlue();
+        final double a1 = c1.getAlpha();
+
+        final double r2 = c2.getRed();
+        final double g2 = c2.getGreen();
+        final double b2 = c2.getBlue();
+        final double a2 = c2.getAlpha();
+
+        final int r = (int) ((r1 + r2) / 2);
+        final int g = (int) ((g1 + g2) / 2);
+        final int b = (int) ((b1 + b2) / 2);
+        final int a = (int) ((a1 + a2) / 2);
+
+        return new Color(r, g, b, a);
+    }
 }

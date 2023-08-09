@@ -14,6 +14,8 @@ public interface Vector {
 
     /**
      * Creates a new vector from an array of component scalars.
+     * Note that this constructor is very inefficient, and using the discrete types' constructors
+     * is faster when dealing with arrays of known sizes.
      *
      * @param values Values to use
      * @return Vector constructed from given values

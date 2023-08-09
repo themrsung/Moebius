@@ -5,6 +5,8 @@ import civitas.celestis.event.lifecycle.SyncEventManager;
 import civitas.celestis.listener.object.ObjectsCollidedListener;
 import civitas.celestis.task.lifecycle.AsyncScheduler;
 import civitas.celestis.task.lifecycle.Scheduler;
+import civitas.celestis.world.lifecycle.SyncWorldManager;
+import civitas.celestis.world.lifecycle.WorldManager;
 import jakarta.annotation.Nonnull;
 
 import java.util.List;
@@ -28,6 +30,7 @@ public final class Moebius {
         // Start modules
         scheduler.start();
         eventManager.start();
+        worldManager.start();
     }
 
     /**
@@ -37,6 +40,7 @@ public final class Moebius {
         // Stop modules
         scheduler.stop();
         eventManager.stop();
+        worldManager.stop();
     }
 
     //
@@ -64,6 +68,15 @@ public final class Moebius {
     }
 
     /**
+     * Gets the world manager instance of Moebius.
+     * @return World manager instance
+     */
+    @Nonnull
+    public static WorldManager getWorldManager() {
+        return worldManager;
+    }
+
+    /**
      * Gets the logger instance of Moebius.
      *
      * @return Logger instance
@@ -79,6 +92,7 @@ public final class Moebius {
 
     private static final Scheduler scheduler = new AsyncScheduler();
     private static final EventManager eventManager = new SyncEventManager();
+    private static final WorldManager worldManager = new SyncWorldManager();
     private static final Logger logger = Logger.getLogger("Moebius");
 
     //

@@ -2,6 +2,7 @@ package civitas.celestis.math.matrix;
 
 import civitas.celestis.math.util.Numbers;
 import civitas.celestis.math.vector.Vector;
+import civitas.celestis.util.Copyable;
 import jakarta.annotation.Nonnull;
 
 import java.util.Arrays;
@@ -11,7 +12,7 @@ import java.util.function.UnaryOperator;
 /**
  * A rectangular array of {@code double}s.
  */
-public class Matrix implements Iterable<Double> {
+public class Matrix implements Iterable<Double>, Copyable<Matrix> {
     //
     // Constructors
     //
@@ -414,6 +415,7 @@ public class Matrix implements Iterable<Double> {
      *
      * @return Deep copy of this matrix
      */
+    @Override
     @Nonnull
     public Matrix copy() {
         return new Matrix(values);
