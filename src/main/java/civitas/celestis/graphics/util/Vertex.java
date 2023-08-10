@@ -493,7 +493,7 @@ public final class Vertex extends Vector3 {
         final double z = (z() - origin.z()) * inflation;
 
         // Inlined calculation to minimize method calls
-        final Quaternion result = rotation.multiply(new Quaternion(0, x, y, z)).multiply(rotation.conjugate());
+        final Quaternion result = rotation.multiply(quaternion()).multiply(rotation.conjugate());
 
         return new Vertex(result.x(), result.y(), result.z());
     }
