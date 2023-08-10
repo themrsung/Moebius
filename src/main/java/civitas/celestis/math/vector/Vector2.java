@@ -154,6 +154,32 @@ public class Vector2 implements Vector {
     }
 
     //
+    // Setters
+    //
+
+    /**
+     * Returns a new vector where only the X component is changed.
+     *
+     * @param x The new value to set the X component to
+     * @return The resulting vector
+     */
+    @Nonnull
+    public Vector2 x(double x) {
+        return new Vector2(x, y);
+    }
+
+    /**
+     * Returns a new vector where only the Y component is changed.
+     *
+     * @param y The new value to set the Y component to
+     * @return The resulting vector
+     */
+    @Nonnull
+    public Vector2 y(double y) {
+        return new Vector2(x, y);
+    }
+
+    //
     // Arithmetic
     //
 
@@ -256,6 +282,38 @@ public class Vector2 implements Vector {
     // Utility
     //
 
+    /**
+     * Given an array of vectors, this returns the sum of the vectors.
+     * This is faster than chaining {@link Vector2#add(Vector2)} as it does not create a new instance every iteration.
+     *
+     * @param vectors Vectors to sum
+     * @return The sum of the given vectors
+     */
+    @Nonnull
+    public static Vector2 sum(@Nonnull Vector2... vectors) {
+        double x = 0;
+        double y = 0;
+
+        for (final Vector2 vector : vectors) {
+            x += vector.x;
+            y += vector.y;
+        }
+
+        return new Vector2(x, y);
+    }
+
+    /**
+     * Given an array of vectors, this returns the average of the vectors.
+     * This is faster than chaining {@link Vector2#add(Vector2)} then dividing it by the total vector count
+     * as it does not create a new instance every iteration.
+     *
+     * @param vectors Vectors to average
+     * @return The average of the given vectors
+     */
+    @Nonnull
+    public static Vector2 avg(@Nonnull Vector2... vectors) {
+        return sum(vectors).divide(vectors.length);
+    }
 
     /**
      * {@inheritDoc}
@@ -281,6 +339,26 @@ public class Vector2 implements Vector {
     }
 
     /**
+     * Negates the X component of this vector.
+     *
+     * @return The negated vector
+     */
+    @Nonnull
+    public Vector2 negateX() {
+        return new Vector2(-x, y);
+    }
+
+    /**
+     * Negates the Y component of this vector.
+     *
+     * @return The negated vector
+     */
+    @Nonnull
+    public Vector2 negateY() {
+        return new Vector2(x, -y);
+    }
+
+    /**
      * {@inheritDoc}
      *
      * @return A new vector where all the components are normalized
@@ -294,6 +372,50 @@ public class Vector2 implements Vector {
         return divide(m);
     }
 
+    /**
+     * Returns the maximum vector between this vector and the provided vector {@code v}.
+     * This is calculated by applying {@link Math#max(double, double)} to all components.
+     *
+     * @param v Vector to get the maximum between
+     * @return Maximum vector of the two vectors
+     */
+    @Nonnull
+    public Vector2 max(@Nonnull Vector2 v) {
+        return new Vector2(
+                Math.max(x, v.x),
+                Math.max(y, v.y)
+        );
+    }
+
+    /**
+     * Returns the minimum vector between this vector and the provided vector {@code v}.
+     * This is calculated by applying {@link Math#min(double, double)} to all components.
+     *
+     * @param v Vector to get the minimum between
+     * @return Minimum vector of the two vectors
+     */
+    @Nonnull
+    public Vector2 min(@Nonnull Vector2 v) {
+        return new Vector2(
+                Math.min(x, v.x),
+                Math.min(y, v.y)
+        );
+    }
+
+    /**
+     * Given a minimum and maximum allowed range, this returns a vector which respects the given bounds.
+     *
+     * @param min Minimum allowed boundaries
+     * @param max Maximum allowed boundaries
+     * @return The clamped vector
+     */
+    @Nonnull
+    public Vector2 clamp(@Nonnull Vector2 min, @Nonnull Vector2 max) {
+        return new Vector2(
+                Math.max(Math.min(x, max.x), min.x),
+                Math.max(Math.min(y, max.y), min.y)
+        );
+    }
 
     /**
      * Returns the distance between {@code this} and the provided vector {@code v}.
@@ -327,7 +449,7 @@ public class Vector2 implements Vector {
         final double cos = Math.cos(angle);
         final double sin = Math.sin(angle);
 
-        return multiply(new Vector2(cos, -sin));
+        return multiply(new Vector2(cos, sin));
     }
 
     //

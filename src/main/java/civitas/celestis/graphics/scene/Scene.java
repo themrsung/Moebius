@@ -1,9 +1,14 @@
 package civitas.celestis.graphics.scene;
 
 import civitas.celestis.graphics.face.Face;
+import civitas.celestis.graphics.ray.Ray;
+import civitas.celestis.graphics.util.GraphicsUtils;
+import civitas.celestis.math.vector.Vector3;
 import civitas.celestis.object.BaseObject;
+import civitas.celestis.object.RaySource;
 import civitas.celestis.world.World;
 import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -84,16 +89,52 @@ public class Scene {
         // Mark state as rendering
         state = State.RENDERING;
 
+        // Cache list of objects for consistency
+        final List<BaseObject> objects = world.getObjects();
+
         // Add faces to scene
-        for (final BaseObject object : world.getObjects()) {
+        for (final BaseObject object : objects) {
             faces.addAll(Arrays.asList(object.getFaces()));
         }
 
         // Handle lighting
-        // TODO Implement light rays
+        for (BaseObject object : objects) {
+            if (!(object instanceof RaySource raySource)) continue;
+            for (final Ray ray : raySource.generateRays()) {
+                initiateRay(ray, 10);
+            }
+        }
 
         // Reset state
         state = State.IDLE;
+    }
+
+    /**
+     * Initiates a ray sequence.
+     *
+     * @param ray   Ray to shoot
+     * @param limit Maximum allowed number of recursions
+     */
+    private void initiateRay(@Nonnull Ray ray, long limit) {
+        shootRay(ray, limit, null);
+    }
+
+    /**
+     * Shoots a ray into this scene.
+     *
+     * @param ray    Ray to shoot
+     * @param limit  Remaining number of recursions
+     * @param source The source face
+     */
+    private void shootRay(@Nonnull Ray ray, long limit, @Nullable Face source) {
+        for (final Face face : faces) {
+            if (face.equals(source)) continue;
+
+            final Vector3 intersection = GraphicsUtils.intersection(ray, face);
+            if (intersection == null) continue;
+
+            // AHHH HELP
+        }
     }
 
     private State state = State.IDLE;

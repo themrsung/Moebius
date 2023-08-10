@@ -178,6 +178,43 @@ public class Vector3 implements Vector {
     }
 
     //
+    // Setters
+    //
+
+    /**
+     * Returns a new vector where only the X component is changed.
+     *
+     * @param x The new value to set the X component to
+     * @return The resulting vector
+     */
+    @Nonnull
+    public Vector3 x(double x) {
+        return new Vector3(x, y, z);
+    }
+
+    /**
+     * Returns a new vector where only the Y component is changed.
+     *
+     * @param y The new value to set the Y component to
+     * @return The resulting vector
+     */
+    @Nonnull
+    public Vector3 y(double y) {
+        return new Vector3(x, y, z);
+    }
+
+    /**
+     * Returns a new vector where only the Z component is changed.
+     *
+     * @param z The new value to set the Z component to
+     * @return The resulting vector
+     */
+    @Nonnull
+    public Vector3 z(double z) {
+        return new Vector3(x, y, z);
+    }
+
+    //
     // Arithmetic
     //
 
@@ -280,6 +317,41 @@ public class Vector3 implements Vector {
     //
 
     /**
+     * Given an array of vectors, this returns the sum of the vectors.
+     * This is faster than chaining {@link Vector3#add(Vector3)} as it does not create a new instance every iteration.
+     *
+     * @param vectors Vectors to sum
+     * @return The sum of the given vectors
+     */
+    @Nonnull
+    public static Vector3 sum(@Nonnull Vector3... vectors) {
+        double x = 0;
+        double y = 0;
+        double z = 0;
+
+        for (final Vector3 vector : vectors) {
+            x += vector.x;
+            y += vector.y;
+            z += vector.z;
+        }
+
+        return new Vector3(x, y, z);
+    }
+
+    /**
+     * Given an array of vectors, this returns the average of the vectors.
+     * This is faster than chaining {@link Vector3#add(Vector3)} then dividing it by the total vector count
+     * as it does not create a new instance every iteration.
+     *
+     * @param vectors Vectors to average
+     * @return The average of the given vectors
+     */
+    @Nonnull
+    public static Vector3 avg(@Nonnull Vector3... vectors) {
+        return sum(vectors).divide(vectors.length);
+    }
+
+    /**
      * {@inheritDoc}
      *
      * @param operator The operator to apply to all components of this vector
@@ -303,6 +375,36 @@ public class Vector3 implements Vector {
     }
 
     /**
+     * Negates the X component of this vector.
+     *
+     * @return The negated vector
+     */
+    @Nonnull
+    public Vector3 negateX() {
+        return new Vector3(-x, y, z);
+    }
+
+    /**
+     * Negates the Y component of this vector.
+     *
+     * @return The negated vector
+     */
+    @Nonnull
+    public Vector3 negateY() {
+        return new Vector3(x, -y, z);
+    }
+
+    /**
+     * Negates the Z component of this vector.
+     *
+     * @return The negated vector
+     */
+    @Nonnull
+    public Vector3 negateZ() {
+        return new Vector3(x, y, -z);
+    }
+
+    /**
      * {@inheritDoc}
      *
      * @return A new vector where all the components are normalized
@@ -314,6 +416,54 @@ public class Vector3 implements Vector {
         if (m == 0) return ZERO;
 
         return divide(m);
+    }
+
+    /**
+     * Returns the maximum vector between this vector and the provided vector {@code v}.
+     * This is calculated by applying {@link Math#max(double, double)} to all components.
+     *
+     * @param v Vector to get the maximum between
+     * @return Maximum vector of the two vectors
+     */
+    @Nonnull
+    public Vector3 max(@Nonnull Vector3 v) {
+        return new Vector3(
+                Math.max(x, v.x),
+                Math.max(y, v.y),
+                Math.max(z, v.z)
+        );
+    }
+
+    /**
+     * Returns the minimum vector between this vector and the provided vector {@code v}.
+     * This is calculated by applying {@link Math#min(double, double)} to all components.
+     *
+     * @param v Vector to get the minimum between
+     * @return Minimum vector of the two vectors
+     */
+    @Nonnull
+    public Vector3 min(@Nonnull Vector3 v) {
+        return new Vector3(
+                Math.min(x, v.x),
+                Math.min(y, v.y),
+                Math.min(z, v.z)
+        );
+    }
+
+    /**
+     * Given a minimum and maximum allowed range, this returns a vector which respects the given bounds.
+     *
+     * @param min Minimum allowed boundaries
+     * @param max Maximum allowed boundaries
+     * @return The clamped vector
+     */
+    @Nonnull
+    public Vector3 clamp(@Nonnull Vector3 min, @Nonnull Vector3 max) {
+        return new Vector3(
+                Math.max(Math.min(x, max.x), min.x),
+                Math.max(Math.min(y, max.y), min.y),
+                Math.max(Math.min(z, max.z), min.z)
+        );
     }
 
     /**

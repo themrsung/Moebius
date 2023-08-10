@@ -201,6 +201,54 @@ public class Vector4 implements Vector {
     }
 
     //
+    // Setters
+    //
+
+    /**
+     * Returns a new vector where only the W component is changed.
+     *
+     * @param w The new value to set the W component to
+     * @return The resulting vector
+     */
+    @Nonnull
+    public Vector4 w(double w) {
+        return new Vector4(w, x, y, z);
+    }
+
+    /**
+     * Returns a new vector where only the X component is changed.
+     *
+     * @param x The new value to set the X component to
+     * @return The resulting vector
+     */
+    @Nonnull
+    public Vector4 x(double x) {
+        return new Vector4(w, x, y, z);
+    }
+
+    /**
+     * Returns a new vector where only the Y component is changed.
+     *
+     * @param y The new value to set the Y component to
+     * @return The resulting vector
+     */
+    @Nonnull
+    public Vector4 y(double y) {
+        return new Vector4(w, x, y, z);
+    }
+
+    /**
+     * Returns a new vector where only the Z component is changed.
+     *
+     * @param z The new value to set the Z component to
+     * @return The resulting vector
+     */
+    @Nonnull
+    public Vector4 z(double z) {
+        return new Vector4(w, x, y, z);
+    }
+
+    //
     // Arithmetic
     //
 
@@ -292,6 +340,43 @@ public class Vector4 implements Vector {
     //
 
     /**
+     * Given an array of vectors, this returns the sum of the vectors.
+     * This is faster than chaining {@link Vector4#add(Vector4)} as it does not create a new instance every iteration.
+     *
+     * @param vectors Vectors to sum
+     * @return The sum of the given vectors
+     */
+    @Nonnull
+    public static Vector4 sum(@Nonnull Vector4... vectors) {
+        double w = 0;
+        double x = 0;
+        double y = 0;
+        double z = 0;
+
+        for (final Vector4 vector : vectors) {
+            w += vector.w;
+            x += vector.x;
+            y += vector.y;
+            z += vector.z;
+        }
+
+        return new Vector4(w, x, y, z);
+    }
+
+    /**
+     * Given an array of vectors, this returns the average of the vectors.
+     * This is faster than chaining {@link Vector4#add(Vector4)} then dividing it by the total vector count
+     * as it does not create a new instance every iteration.
+     *
+     * @param vectors Vectors to average
+     * @return The average of the given vectors
+     */
+    @Nonnull
+    public static Vector4 avg(@Nonnull Vector4... vectors) {
+        return sum(vectors).divide(vectors.length);
+    }
+
+    /**
      * {@inheritDoc}
      *
      * @param operator The operator to apply to all components of this vector
@@ -312,6 +397,46 @@ public class Vector4 implements Vector {
     @Override
     public Vector4 negate() {
         return new Vector4(-w, -x, -y, -z);
+    }
+
+    /**
+     * Negates the W component of this vector.
+     *
+     * @return The negated vector
+     */
+    @Nonnull
+    public Vector4 negateW() {
+        return new Vector4(-w, x, y, z);
+    }
+
+    /**
+     * Negates the X component of this vector.
+     *
+     * @return The negated vector
+     */
+    @Nonnull
+    public Vector4 negateX() {
+        return new Vector4(w, -x, y, z);
+    }
+
+    /**
+     * Negates the Y component of this vector.
+     *
+     * @return The negated vector
+     */
+    @Nonnull
+    public Vector4 negateY() {
+        return new Vector4(w, x, -y, z);
+    }
+
+    /**
+     * Negates the Z component of this vector.
+     *
+     * @return The negated vector
+     */
+    @Nonnull
+    public Vector4 negateZ() {
+        return new Vector4(w, x, y, -z);
     }
 
     /**
@@ -346,6 +471,57 @@ public class Vector4 implements Vector {
      */
     public double distance2(@Nonnull Vector4 v) {
         return v.subtract(this).magnitude2();
+    }
+
+    /**
+     * Returns the maximum vector between this vector and the provided vector {@code v}.
+     * This is calculated by applying {@link Math#max(double, double)} to all components.
+     *
+     * @param v Vector to get the maximum between
+     * @return Maximum vector of the two vectors
+     */
+    @Nonnull
+    public Vector4 max(@Nonnull Vector4 v) {
+        return new Vector4(
+                Math.max(w, v.w),
+                Math.max(x, v.x),
+                Math.max(y, v.y),
+                Math.max(z, v.z)
+        );
+    }
+
+    /**
+     * Returns the minimum vector between this vector and the provided vector {@code v}.
+     * This is calculated by applying {@link Math#min(double, double)} to all components.
+     *
+     * @param v Vector to get the minimum between
+     * @return Minimum vector of the two vectors
+     */
+    @Nonnull
+    public Vector4 min(@Nonnull Vector4 v) {
+        return new Vector4(
+                Math.min(w, v.w),
+                Math.min(x, v.x),
+                Math.min(y, v.y),
+                Math.min(z, v.z)
+        );
+    }
+
+    /**
+     * Given a minimum and maximum allowed range, this returns a vector which respects the given bounds.
+     *
+     * @param min Minimum allowed boundaries
+     * @param max Maximum allowed boundaries
+     * @return The clamped vector
+     */
+    @Nonnull
+    public Vector4 clamp(@Nonnull Vector4 min, @Nonnull Vector4 max) {
+        return new Vector4(
+                Math.max(Math.min(w, max.w), min.w),
+                Math.max(Math.min(x, max.x), min.x),
+                Math.max(Math.min(y, max.y), min.y),
+                Math.max(Math.min(z, max.z), min.z)
+        );
     }
 
     /**

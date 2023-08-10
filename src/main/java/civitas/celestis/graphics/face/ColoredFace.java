@@ -1,5 +1,6 @@
 package civitas.celestis.graphics.face;
 
+import civitas.celestis.graphics.util.Vertex;
 import civitas.celestis.math.quaternion.Quaternion;
 import civitas.celestis.math.vector.Vector3;
 import civitas.celestis.util.group.Tuple;
@@ -18,110 +19,29 @@ public class ColoredFace implements Face {
 
     /**
      * Creates a new colored face.
-     * The reflectiveness and translucency is derived from the color component.
      *
-     * @param a     The first point of this face
-     * @param b     The second point of this face
-     * @param c     The third point of this face
+     * @param a     The first vertex of this face
+     * @param b     The second vertex of this face
+     * @param c     The third vertex of this face
      * @param color The initial color of this face
      */
-    public ColoredFace(
-            @Nonnull Vector3 a,
-            @Nonnull Vector3 b,
-            @Nonnull Vector3 c,
-            @Nonnull Color color
-    ) {
-        this(
-                a,
-                b,
-                c,
-                color,
-                (double) (color.getRed() + color.getGreen() + color.getBlue()) / (255 * 3),
-                color.getAlpha() != 255
-        );
-    }
-
-    /**
-     * Creates a new colored face.
-     *
-     * @param a              The first point of this face
-     * @param b              The second point of this face
-     * @param c              The third point of this face
-     * @param color          The initial color of this face
-     * @param reflectiveness The reflectiveness factor of this face
-     * @param translucent    Whether this face is translucent
-     */
-    public ColoredFace(
-            @Nonnull Vector3 a,
-            @Nonnull Vector3 b,
-            @Nonnull Vector3 c,
-            @Nonnull Color color,
-            double reflectiveness,
-            boolean translucent
-    ) {
+    public ColoredFace(@Nonnull Vertex a, @Nonnull Vertex b, @Nonnull Vertex c, @Nonnull Color color) {
         this.a = a;
         this.b = b;
         this.c = c;
         this.color = color;
-        this.reflectiveness = reflectiveness;
-        this.translucent = translucent;
-
-        this.normal = b.subtract(a).cross(c.subtract(a));
-    }
-
-    /**
-     * Creates a new colored face.
-     *
-     * @param points         A tuple containing the points of this face
-     * @param color          The initial color of this face
-     * @param reflectiveness The reflectiveness factor of this face
-     * @param translucent    Whether this face is translucent
-     */
-    public ColoredFace(@Nonnull Tuple<Vector3> points, @Nonnull Color color, double reflectiveness, boolean translucent) {
-        this.a = points.a();
-        this.b = points.b();
-        this.c = points.c();
-        this.color = color;
-        this.reflectiveness = reflectiveness;
-        this.translucent = translucent;
-
-        this.normal = b.subtract(a).cross(c.subtract(a));
     }
 
     /**
      * Creates a new colored face from another.
      *
-     * @param other Colored face to copy values from
+     * @param other The face to copy values from
      */
-    public ColoredFace(@Nonnull ColoredFace other) {
-        this.a = other.a;
-        this.b = other.b;
-        this.c = other.c;
-        this.normal = other.normal;
-        this.color = other.color;
-        this.reflectiveness = other.reflectiveness;
-        this.translucent = other.translucent;
-    }
-
-    /**
-     * Protected all-args constructor.
-     *
-     * @param a              The first point of this face
-     * @param b              The second point of this face
-     * @param c              The third point of this face
-     * @param normal         The surface normal of this face
-     * @param color          The color of this face
-     * @param reflectiveness The reflectiveness of this face
-     * @param translucent    Whether this face is translucent
-     */
-    protected ColoredFace(@Nonnull Vector3 a, @Nonnull Vector3 b, @Nonnull Vector3 c, @Nonnull Vector3 normal, @Nonnull Color color, double reflectiveness, boolean translucent) {
-        this.a = a;
-        this.b = b;
-        this.c = c;
-        this.normal = normal;
-        this.color = color;
-        this.reflectiveness = reflectiveness;
-        this.translucent = translucent;
+    public ColoredFace(@Nonnull Face other) {
+        this.a = other.getA();
+        this.b = other.getB();
+        this.c = other.getC();
+        this.color = other.getColor();
     }
 
     //
@@ -129,70 +49,59 @@ public class ColoredFace implements Face {
     //
 
     @Nonnull
-    private final Vector3 a, b, c, normal;
+    private final Vertex a, b, c;
     @Nonnull
     private Color color;
-    private double reflectiveness;
-    private boolean translucent;
 
     //
-    // Properties
+    // Geometry
     //
 
     @Override
     @Nonnull
-    public Vector3 getA() {
+    public Vertex getA() {
         return a;
     }
 
     @Override
     @Nonnull
-    public Vector3 getB() {
+    public Vertex getB() {
         return b;
     }
 
     @Override
     @Nonnull
-    public Vector3 getC() {
+    public Vertex getC() {
         return c;
     }
 
     @Nonnull
     @Override
-    public Tuple<Vector3> getPoints() {
+    public Tuple<Vertex> getVertices() {
         return new Tuple<>(a, b, c);
     }
 
-    @Override
     @Nonnull
-    public Vector3 getNormal() {
-        return normal;
+    @Override
+    public Vertex getNormal() {
+        return Vertex.normal(a, b, c);
     }
 
     @Nonnull
     @Override
-    public Vector3 getCentroid() {
-        return a.add(b).add(c).divide(3);
+    public Vertex getCentroid() {
+        return Vertex.avg(a, b, c);
     }
 
-    /**
-     * Gets the current color of this face.
-     *
-     * @return The color of this face
-     */
+    //
+    // Graphics
+    //
+
+
+    @Override
     @Nonnull
     public Color getColor() {
         return color;
-    }
-
-    @Override
-    public double getReflectiveness() {
-        return reflectiveness;
-    }
-
-    @Override
-    public boolean isTranslucent() {
-        return translucent;
     }
 
     /**
@@ -205,13 +114,13 @@ public class ColoredFace implements Face {
     }
 
     @Override
-    public void setReflectiveness(double reflectiveness) {
-        this.reflectiveness = reflectiveness;
+    public double getAlpha() {
+        return color.getAlpha() / 255d;
     }
 
     @Override
-    public void setTranslucent(boolean translucent) {
-        this.translucent = translucent;
+    public boolean isTranslucent() {
+        return color.getAlpha() != 255;
     }
 
     //
@@ -220,14 +129,12 @@ public class ColoredFace implements Face {
 
     @Nonnull
     @Override
-    public ColoredFace apply(@Nonnull UnaryOperator<Vector3> operator) {
+    public ColoredFace apply(@Nonnull UnaryOperator<Vertex> operator) {
         return new ColoredFace(
                 operator.apply(a),
                 operator.apply(b),
                 operator.apply(c),
-                color,
-                reflectiveness,
-                translucent
+                color
         );
     }
 
@@ -238,10 +145,7 @@ public class ColoredFace implements Face {
                 a.multiply(scale),
                 b.multiply(scale),
                 c.multiply(scale),
-                normal.multiply(scale),
-                color,
-                reflectiveness,
-                translucent
+                color
         );
     }
 
@@ -252,9 +156,7 @@ public class ColoredFace implements Face {
                 a.subtract(origin),
                 b.subtract(origin),
                 c.subtract(origin),
-                color,
-                reflectiveness,
-                translucent
+                color
         );
     }
 
@@ -265,23 +167,7 @@ public class ColoredFace implements Face {
                 a.rotate(rotation),
                 b.rotate(rotation),
                 c.rotate(rotation),
-                normal.rotate(rotation),
-                color,
-                reflectiveness,
-                translucent
-        );
-    }
-
-    @Nonnull
-    @Override
-    public ColoredFace transform(@Nonnull Vector3 origin, @Nonnull Quaternion rotation) {
-        return new ColoredFace(
-                a.subtract(origin).rotate(rotation),
-                b.subtract(origin).rotate(rotation),
-                c.subtract(origin).rotate(rotation),
-                color,
-                reflectiveness,
-                translucent
+                color
         );
     }
 
@@ -289,25 +175,10 @@ public class ColoredFace implements Face {
     @Override
     public ColoredFace transform(@Nonnull Vector3 origin, @Nonnull Quaternion rotation, double scale) {
         return new ColoredFace(
-                a.subtract(origin).rotate(rotation).multiply(scale),
-                b.subtract(origin).rotate(rotation).multiply(scale),
-                c.subtract(origin).rotate(rotation).multiply(scale),
-                color,
-                reflectiveness,
-                translucent
-        );
-    }
-
-    @Nonnull
-    @Override
-    public ColoredFace offset(@Nonnull Vector3 offset, @Nonnull Quaternion rotation) {
-        return new ColoredFace(
-                a.rotate(rotation).add(offset),
-                b.rotate(rotation).add(offset),
-                c.rotate(rotation).add(offset),
-                color,
-                reflectiveness,
-                translucent
+                a.transform(origin, rotation, scale),
+                b.transform(origin, rotation, scale),
+                c.transform(origin, rotation, scale),
+                color
         );
     }
 
@@ -315,6 +186,19 @@ public class ColoredFace implements Face {
     @Override
     public ColoredFace copy() {
         return new ColoredFace(this);
+    }
+
+    /**
+     * Checks for equality between this face and another object.
+     *
+     * @param obj The object to compare to
+     * @return {@code true} if the object is a face, and all the components are exactly equal
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+        if (!(obj instanceof ColoredFace face)) return false;
+        return a.equals(face.a) && b.equals(face.b) && c.equals(face.c) && color.equals(face.color);
     }
 
     /**
@@ -329,10 +213,7 @@ public class ColoredFace implements Face {
                 "a=" + a +
                 ", b=" + b +
                 ", c=" + c +
-                ", normal=" + normal +
                 ", color=" + color +
-                ", reflectiveness=" + reflectiveness +
-                ", translucent=" + translucent +
                 '}';
     }
 }

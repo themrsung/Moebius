@@ -1,11 +1,13 @@
 package civitas.celestis.graphics.face;
 
+import civitas.celestis.graphics.util.Vertex;
 import civitas.celestis.math.quaternion.Quaternion;
 import civitas.celestis.math.vector.Vector3;
 import civitas.celestis.util.Copyable;
 import civitas.celestis.util.group.Tuple;
 import jakarta.annotation.Nonnull;
 
+import java.awt.*;
 import java.util.function.UnaryOperator;
 
 /**
@@ -14,40 +16,40 @@ import java.util.function.UnaryOperator;
  */
 public interface Face extends Copyable<Face> {
     //
-    // Properties
+    // Geometry
     //
 
     /**
-     * Gets the first point of this face.
+     * Gets the first vertex of this face.
      *
-     * @return The first point of this face
+     * @return The first vertex of this face
      */
     @Nonnull
-    Vector3 getA();
+    Vertex getA();
 
     /**
-     * Gets the second point of this face.
+     * Gets the second vertex of this face.
      *
-     * @return The second point of this face
+     * @return The second vertex of this face
      */
     @Nonnull
-    Vector3 getB();
+    Vertex getB();
 
     /**
-     * Gets the third point of this face.
+     * Gets the third vertex of this face.
      *
-     * @return The third point of this face
+     * @return The third vertex of this face
      */
     @Nonnull
-    Vector3 getC();
+    Vertex getC();
 
     /**
-     * Gets a tuple object containing the three points of this face.
+     * Gets a tuple of vertices of this face.
      *
-     * @return A tuple of all points of this face
+     * @return A tuple containing the vertices of this face
      */
     @Nonnull
-    Tuple<Vector3> getPoints();
+    Tuple<Vertex> getVertices();
 
     /**
      * Gets the surface normal of this face.
@@ -55,112 +57,90 @@ public interface Face extends Copyable<Face> {
      * @return The surface normal of this face
      */
     @Nonnull
-    Vector3 getNormal();
+    Vertex getNormal();
 
     /**
      * Gets the geometric centroid of this face.
      *
-     * @return The centroid of this face
+     * @return The geometric centroid of this face
      */
     @Nonnull
-    Vector3 getCentroid();
+    Vertex getCentroid();
+
+    //
+    // Graphics
+    //
 
     /**
-     * On a scale of {@code 0-1}, this returns the reflectiveness of this face.
+     * Gets the color of this face.
      *
-     * @return The reflectiveness of this face
+     * @return The color of this face
      */
-    double getReflectiveness();
+    @Nonnull
+    Color getColor();
 
     /**
-     * Whether this face allows rays to pass through.
+     * Gets the alpha of this face between a range of {@code 0-1}.
+     *
+     * @return The alpha of this face
+     */
+    double getAlpha();
+
+    /**
+     * Gets whether this face allows the pass-through of rays.
      *
      * @return {@code true} if this face allows the pass-through of rays
      */
     boolean isTranslucent();
-
-    /**
-     * Sets the reflectiveness of this face on a scale of {@code 0-1}.
-     *
-     * @param reflectiveness The reflectiveness of this face
-     */
-    void setReflectiveness(double reflectiveness);
-
-    /**
-     * Sets whether this face allows the pass-through of rays.
-     *
-     * @param translucent {@code true} to allow the pass-through of rays
-     */
-    void setTranslucent(boolean translucent);
 
     //
     // Utility
     //
 
     /**
-     * Applies given operator to all vertices of this face, then returns a new instance.
+     * Applies given operator to all vertices of this face.
      *
-     * @param operator Operator to apply to each vertex of this face
+     * @param operator The operator to apply to each vertex of this face
      * @return A new face containing the modified vertices
      */
     @Nonnull
-    Face apply(@Nonnull UnaryOperator<Vector3> operator);
+    Face apply(@Nonnull UnaryOperator<Vertex> operator);
 
     /**
      * Inflates this face by given scalar.
      *
-     * @param scale Scale factor to apply to all vertices.
-     * @return The resulting face
+     * @param scale Scale factor to apply to each vertex of this face
+     * @return The inflated face
      */
     @Nonnull
     Face inflate(double scale);
 
     /**
-     * Translates the origin of this face.
+     * Translates this face into a relative coordinate system.
      *
      * @param origin The new origin of this face
-     * @return The resulting face
+     * @return The translated face
      */
     @Nonnull
     Face translate(@Nonnull Vector3 origin);
 
     /**
-     * Rotates every vertex of this face.
+     * Rotates this face by a given rotation.
      *
-     * @param rotation Rotation to apply to all vertices of this face
-     * @return The resulting face
+     * @param rotation The rotation to apply to each vertex of this face
+     * @return The rotated face
      */
     @Nonnull
     Face rotate(@Nonnull Quaternion rotation);
 
     /**
-     * Transforms this face into a relative coordinate system.
+     * Transforms this face.
      *
-     * @param origin   New origin of this face
-     * @param rotation Rotation to apply to this face
-     * @return The resulting face
-     */
-    @Nonnull
-    Face transform(@Nonnull Vector3 origin, @Nonnull Quaternion rotation);
-
-    /**
-     * Transforms this face into a relative coordinate system.
-     *
-     * @param origin   New origin of this face
-     * @param rotation Rotation to apply to this face
-     * @param scale    Scale factor to apply to this face
-     * @return The resulting face
+     * @param origin   The new origin of this face
+     * @param rotation The rotation to apply to this face
+     * @param scale    The scale factor to apply to this face
+     * @return The transformed face
      */
     @Nonnull
     Face transform(@Nonnull Vector3 origin, @Nonnull Quaternion rotation, double scale);
-
-    /**
-     * Offsets this face into a new coordinate system.
-     *
-     * @param offset   Offset to apply to each vertex of this face
-     * @param rotation Rotation to apply to this face
-     * @return The resulting face
-     */
-    @Nonnull
-    Face offset(@Nonnull Vector3 offset, @Nonnull Quaternion rotation);
 }

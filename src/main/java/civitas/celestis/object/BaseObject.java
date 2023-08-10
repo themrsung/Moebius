@@ -437,7 +437,7 @@ public class BaseObject implements Unique, Movable, Renderable, Physical, Tickab
         final Face[] faces = new Face[model.getFaceCount()];
 
         for (int i = 0; i < model.getFaceCount(); i++) {
-            faces[i] = model.getFace(i).offset(location, rotation);
+            faces[i] = model.getFace(i).apply(v -> v.rotate(rotation).add(location));
         }
 
         return faces;

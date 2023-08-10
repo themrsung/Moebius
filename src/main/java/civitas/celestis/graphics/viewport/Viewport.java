@@ -1,10 +1,7 @@
 package civitas.celestis.graphics.viewport;
 
-import civitas.celestis.graphics.face.ColoredFace;
 import civitas.celestis.graphics.face.Face;
 import civitas.celestis.graphics.scene.Scene;
-import civitas.celestis.graphics.shape.PolygonX;
-import civitas.celestis.graphics.util.GraphicsUtils;
 import civitas.celestis.math.quaternion.Quaternion;
 import civitas.celestis.math.vector.Vector3;
 import jakarta.annotation.Nonnull;
@@ -103,17 +100,17 @@ public class Viewport extends JPanel {
         // Draw faces
         for (final Face face : scene.getFaces()) {
             final Face transformed = face.transform(location, rotation, inflation);
-            final PolygonX polygon = new PolygonX();
+//            final PolygonX polygon = new PolygonX();
 
             // Filter out faces behind the camera
             if (transformed.getCentroid().z() < 0) continue;
 
-            for (final Vector3 point : transformed.getPoints()) {
-                polygon.addPoint(GraphicsUtils.translate3Dto2D(point, focalLength));
+            for (final Vector3 point : transformed.getVertices()) {
+//                polygon.addPoint(new Point2(GraphicsUtils.translate3Dto2D(point, focalLength)));
             }
 
-            g.setColor((face instanceof ColoredFace cf) ? cf.getColor() : Color.BLACK); // Fallback color
-            g.fillPolygon(polygon);
+            g.setColor(face.getColor());
+//            g.fillPolygon(polygon);
         }
 
         painting = false;

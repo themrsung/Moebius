@@ -1,18 +1,15 @@
 package civitas.celestis.graphics.model;
 
 import civitas.celestis.graphics.face.ColoredFace;
-import civitas.celestis.graphics.util.GraphicsUtils;
-import civitas.celestis.math.vector.Vector3;
-import de.javagl.obj.FloatTuple;
+import civitas.celestis.graphics.util.Vertex;
 import de.javagl.obj.Obj;
 import de.javagl.obj.ObjFace;
 import jakarta.annotation.Nonnull;
 
 import java.awt.*;
-import java.util.Arrays;
 
 /**
- * A model constructed from colored faces.
+ * A model which uses colored faces.
  */
 public class ColoredModel implements Model {
     /**
@@ -21,31 +18,44 @@ public class ColoredModel implements Model {
      * @param faces Array of faces to use
      */
     public ColoredModel(@Nonnull ColoredFace[] faces) {
-        this.faces = Arrays.copyOf(faces, faces.length);
+        this.faces = new ColoredFace[faces.length];
+
+        for (int i = 0; i < faces.length; i++) {
+            this.faces[i] = faces[i].copy();
+        }
     }
 
     /**
-     * Creates a new colored model.
+     * Creates a new colored model from an {@link Obj} object.
      *
-     * @param obj          The Wavefront {@link Obj} object to use
-     * @param initialColor The initial color of all faces
-     * @param scale        The scale factor to apply to all faces
+     * @param obj          Object data to use
+     * @param initialColor Initial color component of all faces
      */
-    public ColoredModel(@Nonnull Obj obj, @Nonnull Color initialColor, double scale) {
-        this.faces = new ColoredFace[obj.getNumFaces()];
+    public ColoredModel(@Nonnull Obj obj, @Nonnull Color initialColor) {
+        final int numVertices = obj.getNumVertices();
+        final int numFaces = obj.getNumFaces();
 
-        for (int i = 0; i < obj.getNumFaces(); i++) {
-            final ObjFace face = obj.getFace(i);
+        //
+        // Intermediate step of copying all vertices to ensure the re-use of same vertices across faces
+        // This is only possible because Vertex is immutable
+        //
 
-            final FloatTuple t1 = obj.getVertex(face.getVertexIndex(0));
-            final FloatTuple t2 = obj.getVertex(face.getVertexIndex(1));
-            final FloatTuple t3 = obj.getVertex(face.getVertexIndex(2));
+        final Vertex[] vertices = new Vertex[numVertices];
 
-            final Vector3 v1 = GraphicsUtils.wavefrontTupleToVector3(t1).multiply(scale);
-            final Vector3 v2 = GraphicsUtils.wavefrontTupleToVector3(t2).multiply(scale);
-            final Vector3 v3 = GraphicsUtils.wavefrontTupleToVector3(t3).multiply(scale);
+        for (int i = 0; i < numVertices; i++) {
+            vertices[i] = new Vertex(obj.getVertex(i)).swapXZ(); // Swaps X and Z coordinates for accurate representation
+        }
 
-            faces[i] = new ColoredFace(v1, v2, v3, initialColor);
+        this.faces = new ColoredFace[numFaces];
+
+        for (int i = 0; i < numFaces; i++) {
+            final ObjFace face = obj.getFace(0);
+
+            final Vertex a = vertices[face.getVertexIndex(0)];
+            final Vertex b = vertices[face.getVertexIndex(1)];
+            final Vertex c = vertices[face.getVertexIndex(2)];
+
+            faces[i] = new ColoredFace(a, b, c, initialColor);
         }
     }
 
@@ -55,7 +65,7 @@ public class ColoredModel implements Model {
     @Override
     @Nonnull
     public ColoredFace[] getFaces() {
-        return faces; // Array not copied intentionally
+        return faces;
     }
 
     @Nonnull
@@ -71,26 +81,13 @@ public class ColoredModel implements Model {
 
     @Nonnull
     @Override
-    public ColoredModel copy() {
-        final ColoredFace[] result = new ColoredFace[faces.length];
+    public Model copy() {
+        final ColoredFace[] copiedFaces = new ColoredFace[faces.length];
 
         for (int i = 0; i < faces.length; i++) {
-            result[i] = faces[i].copy();
+            copiedFaces[i] = faces[i].copy();
         }
 
-        return new ColoredModel(result);
-    }
-
-    /**
-     * Serializes this model into a string.
-     *
-     * @return The string representation of this model
-     */
-    @Override
-    @Nonnull
-    public String toString() {
-        return "ColoredModel{" +
-                "faces=" + Arrays.toString(faces) +
-                '}';
+        return new ColoredModel(copiedFaces);
     }
 }

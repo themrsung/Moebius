@@ -61,13 +61,104 @@ public final class Numbers {
     }
 
     //
+    // Casting
+    //
+
+    /**
+     * Safely casts a {@code double} to an {@code int}.
+     * The resulting value is guaranteed to represent the double as accurately as possible.
+     *
+     * @param value Value to represent as an integer
+     * @return The integer representation of the {@code double}
+     * @throws UnsupportedOperationException When the operation will result in an underflow or an overflow
+     */
+    public static int safeCastToInt(double value) {
+        // Adds margin of 1 to the comparison for safety
+        if (value > Integer.MAX_VALUE || value < -Integer.MAX_VALUE) {
+            throw new UnsupportedOperationException("The provided value is not representable by an integer.");
+        }
+
+        return (int) value;
+    }
+
+    //
     // Algorithms
     //
 
     /**
+     * Given an array of {@code double}s, this returns the sum of the values.
+     *
+     * @param values Values to sum
+     * @return The sum of the given values
+     */
+    public static double sum(double... values) {
+        double sum = 0;
+
+        for (final double value : values) {
+            sum += value;
+        }
+
+        return sum;
+    }
+
+    /**
+     * Given an array of {@code double}s, this returns the average of the values.
+     *
+     * @param values Values to average
+     * @return The average of the given values
+     */
+    public static double avg(double... values) {
+        return divide(sum(values), values.length);
+    }
+
+    /**
+     * Given an array of {@code double}s, this returns the maximum value.
+     *
+     * @param values Values to max
+     * @return The maximum value
+     */
+    public static double max(double... values) {
+        double max = -Double.MAX_VALUE;
+
+        for (final double value : values) {
+            max = Math.max(max, value);
+        }
+
+        return max;
+    }
+
+    /**
+     * Given an array of {@code double}s, this returns the minimum value.
+     *
+     * @param values Values to mim
+     * @return The minimum value
+     */
+    public static double min(double... values) {
+        double min = Double.MAX_VALUE;
+
+        for (final double value : values) {
+            min = Math.min(min, value);
+        }
+
+        return min;
+    }
+
+    /**
+     * Given a minimum and maximum allowed range, this returns the clamped value.
+     *
+     * @param value Value to clamp
+     * @param min   Minimum allowed value
+     * @param max   Maximum allowed value
+     * @return The clamped value
+     */
+    public static double clamp(double value, double min, double max) {
+        return Math.max(Math.min(value, max), min);
+    }
+
+    /**
      * Performs floating point division while triggering an arithmetic exception.
      *
-     * @param numerator Numerator of the calculation
+     * @param numerator   Numerator of the calculation
      * @param denominator Denominator of the calculation
      * @return The result of the division
      * @throws ArithmeticException When the denominator is zero

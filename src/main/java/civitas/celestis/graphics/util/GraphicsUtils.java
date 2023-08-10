@@ -17,14 +17,14 @@ public final class GraphicsUtils {
     //
 
     /**
-     * Converts a Wavefront {@link FloatTuple} to a {@link Vector3}.
+     * Converts a Wavefront {@link FloatTuple} to a {@link Vertex}.
      *
      * @param in Input tuple
-     * @return Converted {@link Vector3}
+     * @return Converted {@link Vertex}
      */
     @Nonnull
-    public static Vector3 wavefrontTupleToVector3(@Nonnull FloatTuple in) {
-        return new Vector3(in.getZ(), in.getY(), in.getX());
+    public static Vertex wavefrontTupleToVertex(@Nonnull FloatTuple in) {
+        return new Vertex(in.getZ(), in.getY(), in.getX());
     }
 
     /**
