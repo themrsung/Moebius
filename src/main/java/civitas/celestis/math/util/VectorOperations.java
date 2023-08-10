@@ -24,8 +24,9 @@ public final class VectorOperations {
 
     /**
      * Gets the magnitude of a vector.
+     *
      * @param result Pointer to put the result in
-     * @param v Vector to get magnitude of
+     * @param v      Vector to get magnitude of
      */
     public static void magnitude(@Nonnull AtomicReference<Double> result, @Nonnull Vector v) {
         result.set(v.magnitude());
@@ -33,8 +34,9 @@ public final class VectorOperations {
 
     /**
      * Gets the squared magnitude of a vector.
+     *
      * @param result Pointer to put the result in
-     * @param v Vector to get squared magnitude of
+     * @param v      Vector to get squared magnitude of
      */
     public static void magnitude2(@Nonnull AtomicReference<Double> result, @Nonnull Vector v) {
         result.set(v.magnitude2());
@@ -384,9 +386,9 @@ public final class VectorOperations {
      *
      * @param result Pointer to put the result in
      * @param p1     The first position of this operation
-     * @param p2     The second position of this operation
+     * @param p2     The second position (or vector) of this operation
      */
-    public static void add(@Nonnull AtomicReference<Position> result, @Nonnull Position p1, @Nonnull Position p2) {
+    public static void add(@Nonnull AtomicReference<Position> result, @Nonnull Position p1, @Nonnull Vector2 p2) {
         result.set(p1.add(p2));
     }
 
@@ -406,9 +408,9 @@ public final class VectorOperations {
      *
      * @param result Pointer to put the result in
      * @param v1     The first vertex of this operation
-     * @param v2     The second vertex of this operation
+     * @param v2     The second vertex (or vector) of this operation
      */
-    public static void add(@Nonnull AtomicReference<Vertex> result, @Nonnull Vertex v1, @Nonnull Vertex v2) {
+    public static void add(@Nonnull AtomicReference<Vertex> result, @Nonnull Vertex v1, @Nonnull Vector3 v2) {
         result.set(v1.add(v2));
     }
 
@@ -428,9 +430,9 @@ public final class VectorOperations {
      *
      * @param result Pointer to put the result in
      * @param q1     The first quaternion of this operation
-     * @param q2     The second quaternion of this operation
+     * @param q2     The second quaternion (or vector) of this operation
      */
-    public static void add(@Nonnull AtomicReference<Quaternion> result, @Nonnull Quaternion q1, @Nonnull Quaternion q2) {
+    public static void add(@Nonnull AtomicReference<Quaternion> result, @Nonnull Quaternion q1, @Nonnull Vector4 q2) {
         result.set(q1.add(q2));
     }
 
@@ -454,9 +456,9 @@ public final class VectorOperations {
      *
      * @param result Pointer to put the result in
      * @param p1     The first position of this operation
-     * @param p2     The second position of this operation
+     * @param p2     The second position (or vector) of this operation
      */
-    public static void subtract(@Nonnull AtomicReference<Position> result, @Nonnull Position p1, @Nonnull Position p2) {
+    public static void subtract(@Nonnull AtomicReference<Position> result, @Nonnull Position p1, @Nonnull Vector2 p2) {
         result.set(p1.subtract(p2));
     }
 
@@ -476,9 +478,9 @@ public final class VectorOperations {
      *
      * @param result Pointer to put the result in
      * @param v1     The first vertex of this operation
-     * @param v2     The second vertex of this operation
+     * @param v2     The second vertex (or vector) of this operation
      */
-    public static void subtract(@Nonnull AtomicReference<Vertex> result, @Nonnull Vertex v1, @Nonnull Vertex v2) {
+    public static void subtract(@Nonnull AtomicReference<Vertex> result, @Nonnull Vertex v1, @Nonnull Vector3 v2) {
         result.set(v1.subtract(v2));
     }
 
@@ -498,9 +500,9 @@ public final class VectorOperations {
      *
      * @param result Pointer to put the result in
      * @param v1     The first quaternion of this operation
-     * @param v2     The second quaternion of this operation
+     * @param v2     The second quaternion (or vector) of this operation
      */
-    public static void subtract(@Nonnull AtomicReference<Quaternion> result, @Nonnull Quaternion v1, @Nonnull Quaternion v2) {
+    public static void subtract(@Nonnull AtomicReference<Quaternion> result, @Nonnull Quaternion v1, @Nonnull Vector4 v2) {
         result.set(v1.subtract(v2));
     }
 
@@ -557,9 +559,9 @@ public final class VectorOperations {
      *
      * @param result Pointer to put the result in
      * @param v1     The left vertex of this operation
-     * @param v2     The right vertex of this operation
+     * @param v2     The right vertex (or a vector) of this operation
      */
-    public static void cross(@Nonnull AtomicReference<Vertex> result, @Nonnull Vertex v1, @Nonnull Vertex v2) {
+    public static void cross(@Nonnull AtomicReference<Vertex> result, @Nonnull Vertex v1, @Nonnull Vector3 v2) {
         result.set(v1.cross(v2));
     }
 
@@ -571,6 +573,17 @@ public final class VectorOperations {
      * @param v2     The right vector of this operation
      */
     public static void multiply(@Nonnull AtomicReference<Vector2> result, @Nonnull Vector2 v1, @Nonnull Vector2 v2) {
+        result.set(v1.multiply(v2));
+    }
+
+    /**
+     * Calculates the product of two positions.
+     *
+     * @param result Pointer to put the result in
+     * @param v1     The left position of this operation
+     * @param v2     The right position (or a vector) of this operation
+     */
+    public static void multiply(@Nonnull AtomicReference<Position> result, @Nonnull Position v1, @Nonnull Vector2 v2) {
         result.set(v1.multiply(v2));
     }
 

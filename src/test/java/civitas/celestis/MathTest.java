@@ -1,5 +1,7 @@
 package civitas.celestis;
 
+import civitas.celestis.math.matrix.Matrix;
+import civitas.celestis.math.util.MatrixOperations;
 import civitas.celestis.math.util.VectorOperations;
 import civitas.celestis.math.vector.Vector3;
 
@@ -7,11 +9,13 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class MathTest {
     public static void main(String[] args) {
-        final AtomicReference<Vector3> result = new AtomicReference<>(Vector3.ZERO);
-        final Vector3 v = new Vector3(1, 1, 1);
+        final AtomicReference<Vector3> reference = new AtomicReference<>(null);
+        final Vector3 v1 = new Vector3(1, 2, 3);
+        final Matrix m1 = new Matrix(3, 3);
+        m1.fill(Math.PI);
 
-        VectorOperations.add(result, v, 1);
+        MatrixOperations.multiply(reference, m1, v1);
 
-        System.out.println(result.get());
+        System.out.println(reference.get());
     }
 }

@@ -3,6 +3,7 @@ package civitas.celestis.math.vector;
 import jakarta.annotation.Nonnull;
 
 import java.io.Serializable;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.UnaryOperator;
 
 /**
