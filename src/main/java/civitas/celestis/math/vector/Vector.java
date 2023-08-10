@@ -26,17 +26,50 @@ public interface Vector extends Serializable {
     static Vector of(@Nonnull double... values) {
         try {
             return new Vector2(values);
-        } catch (IllegalArgumentException ignored) {}
+        } catch (final IllegalArgumentException ignored) {}
 
         try {
             return new Vector3(values);
-        } catch (IllegalArgumentException ignored) {}
+        } catch (final IllegalArgumentException ignored) {}
 
         try {
             return new Vector4(values);
-        } catch (IllegalArgumentException ignored) {}
+        } catch (final IllegalArgumentException ignored) {}
 
         return new VectorX(values);
+    }
+
+    //
+    // Parser
+    //
+
+    /**
+     * Parses a vector into a string.
+     * Only direct subclasses of {@link Vector} are accounted for.
+     *
+     * @param input Input to parse into a vector
+     * @return The parsed vector
+     * @throws NumberFormatException When the string does not represent a vector
+     */
+    @Nonnull
+    static Vector parseVector(@Nonnull String input) throws NumberFormatException {
+        try {
+            return Vector2.parseVector(input);
+        } catch (final NumberFormatException ignored) {}
+
+        try {
+            return Vector3.parseVector(input);
+        } catch (final NumberFormatException ignored) {}
+
+        try {
+            return Vector4.parseVector(input);
+        } catch (final NumberFormatException ignored) {}
+
+        try {
+            return VectorX.parseVector(input);
+        } catch (final NumberFormatException ignored) {}
+
+        throw new NumberFormatException("The given string does not represent a vector.");
     }
 
     //

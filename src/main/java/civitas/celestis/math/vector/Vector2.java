@@ -234,7 +234,6 @@ public class Vector2 implements Vector {
         return new Vector2(x / s, y / s);
     }
 
-
     /**
      * Adds another vector to this vector.
      *

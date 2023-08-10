@@ -7,6 +7,7 @@ import de.javagl.obj.ObjFace;
 import jakarta.annotation.Nonnull;
 
 import java.awt.*;
+import java.util.Arrays;
 
 /**
  * A model which uses colored faces.
@@ -30,8 +31,9 @@ public class ColoredModel implements Model {
      *
      * @param obj          Object data to use
      * @param initialColor Initial color component of all faces
+     * @param scale        The scale factor to apply to all vertices
      */
-    public ColoredModel(@Nonnull Obj obj, @Nonnull Color initialColor) {
+    public ColoredModel(@Nonnull Obj obj, @Nonnull Color initialColor, double scale) {
         final int numVertices = obj.getNumVertices();
         final int numFaces = obj.getNumFaces();
 
@@ -43,13 +45,14 @@ public class ColoredModel implements Model {
         final Vertex[] vertices = new Vertex[numVertices];
 
         for (int i = 0; i < numVertices; i++) {
-            vertices[i] = new Vertex(obj.getVertex(i)).swapXZ(); // Swaps X and Z coordinates for accurate representation
+            // Swaps X and Z coordinates for accurate representation
+            vertices[i] = new Vertex(obj.getVertex(i)).swapXZ().multiply(scale);
         }
 
         this.faces = new ColoredFace[numFaces];
 
         for (int i = 0; i < numFaces; i++) {
-            final ObjFace face = obj.getFace(0);
+            final ObjFace face = obj.getFace(i);
 
             final Vertex a = vertices[face.getVertexIndex(0)];
             final Vertex b = vertices[face.getVertexIndex(1)];
@@ -89,5 +92,18 @@ public class ColoredModel implements Model {
         }
 
         return new ColoredModel(copiedFaces);
+    }
+
+    /**
+     * Serializes this model into a string.
+     *
+     * @return The string representation of this model
+     */
+    @Override
+    @Nonnull
+    public String toString() {
+        return "ColoredModel{" +
+                "faces=" + Arrays.toString(faces) +
+                '}';
     }
 }

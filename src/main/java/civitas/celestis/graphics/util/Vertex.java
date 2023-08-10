@@ -1,7 +1,6 @@
 package civitas.celestis.graphics.util;
 
 import civitas.celestis.math.quaternion.Quaternion;
-import civitas.celestis.math.vector.Vector2;
 import civitas.celestis.math.vector.Vector3;
 import de.javagl.obj.FloatTuple;
 import jakarta.annotation.Nonnull;
@@ -470,34 +469,23 @@ public class Vertex extends Vector3 {
     }
 
     /**
-     * Converts this vertex to a 2D vector with the provided focal length.
+     * Converts this vertex to a 2D position with the provided focal length.
      * <p>
      * This assumes that this vertex is already converted to a relative coordinate system,
      * the Z coordinate represents depth, and X and Y represent width and height respectively.
      * </p>
      *
      * @param focalLength The focal length to use in conversion
-     * @return The converted vector
+     * @return The converted position
      */
     @Nonnull
-    public Vector2 vector2(double focalLength) {
+    public Position position(double focalLength) {
         final double focalLengthDenominator = focalLength + z();
 
-        return new Vector2(
+        return new Position(
                 (focalLength / focalLengthDenominator) * x(),
                 (focalLength / focalLengthDenominator) * y()
         );
-    }
-
-    /**
-     * Converts this vertex into a renderable AWT point in the form of a {@link Vector2}.
-     *
-     * @param focalLength The focal length to use in conversion
-     * @return The converted point
-     */
-    @Nonnull
-    public Vector2 awtPoint(double focalLength) {
-        return vector2(focalLength).negateY();
     }
 
     /**

@@ -23,5 +23,6 @@ civitas.celestis.task.lifecycle
 civitas.celestis.util
 civitas.celestis.util.counter
 civitas.celestis.util.group
+civitas.celestis.util.product
 civitas.celestis.world
 civitas.celestis.world.lifecycle

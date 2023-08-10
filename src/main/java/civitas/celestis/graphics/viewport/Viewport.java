@@ -2,6 +2,8 @@ package civitas.celestis.graphics.viewport;
 
 import civitas.celestis.graphics.face.Face;
 import civitas.celestis.graphics.scene.Scene;
+import civitas.celestis.graphics.shape.PolygonX;
+import civitas.celestis.graphics.util.Vertex;
 import civitas.celestis.math.quaternion.Quaternion;
 import civitas.celestis.math.vector.Vector3;
 import jakarta.annotation.Nonnull;
@@ -98,20 +100,33 @@ public class Viewport extends JPanel {
         final double focalLength = context.focalLength();
 
         // Draw faces
-        for (final Face face : scene.getFaces()) {
-            final Face transformed = face.transform(location, rotation, inflation);
-//            final PolygonX polygon = new PolygonX();
+        scene.getFaces().stream()
+                // Filter out faces behind camera
+                .filter(f -> f.getCentroid().z() > 0)
 
-            // Filter out faces behind the camera
-            if (transformed.getCentroid().z() < 0) continue;
+                // Sort by distance from camera descending
+                .sorted((f1, f2) -> Double.compare(f2.getCentroid().magnitude2(), f1.getCentroid().magnitude2()))
 
-            for (final Vector3 point : transformed.getVertices()) {
-//                polygon.addPoint(new Point2(GraphicsUtils.translate3Dto2D(point, focalLength)));
-            }
+                // Iterate through faces
+                .forEach(face -> {
+                    // Transform face
+                    final Face transformed = face.transform(location, rotation, inflation);
 
-            g.setColor(face.getColor());
-//            g.fillPolygon(polygon);
-        }
+                    // Define polygon
+                    final PolygonX polygon = new PolygonX();
+
+                    // Iterate through vertices
+                    for (final Vertex v : transformed.getVertices()) {
+                        polygon.addPoint(v.position(focalLength));
+                    }
+
+                    // Invert Y coordinates to be compatible with the AWT coordinate system
+                    polygon.invertY();
+
+                    // Draw face
+                    g.setColor(face.getColor());
+                    g.fillPolygon(polygon);
+                });
 
         painting = false;
     }

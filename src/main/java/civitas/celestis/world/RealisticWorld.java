@@ -159,10 +159,14 @@ public class RealisticWorld implements World {
             if (fluidDensity > 0) {
                 // Calculate drag force
                 final double dragForceMagnitude = 0.5 * dragCoefficient * crossSection * fluidDensity * velocity2;
-                final Vector3 dragForce = acceleration.normalize().multiply(-dragForceMagnitude / mass);
 
-                // Apply force to object
-                object.accelerate(dragForce);
+                // Safety check
+                if (Double.isFinite(dragForceMagnitude)) {
+                    final Vector3 dragForce = acceleration.normalize().multiply(-dragForceMagnitude / mass);
+
+                    // Apply force to object
+                    object.accelerate(dragForce);
+                }
             }
 
             // Tick object
