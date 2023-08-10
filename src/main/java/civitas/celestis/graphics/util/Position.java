@@ -10,7 +10,7 @@ import java.util.function.UnaryOperator;
  * The position of an object on a two-dimensional plane.
  * This is used to designate the coordinates of an object to render on-screen.
  */
-public class Position extends Vector2 {
+public final class Position extends Vector2 {
     //
     // Constants
     //

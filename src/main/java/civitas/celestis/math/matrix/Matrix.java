@@ -78,7 +78,7 @@ public class Matrix implements Iterable<Double>, Copyable<Matrix>, Serializable 
      * @return Value in specified position
      * @throws IndexOutOfBoundsException When the index is out of bounds
      */
-    public double get(int row, int column) throws IndexOutOfBoundsException {
+    public final double get(int row, int column) throws IndexOutOfBoundsException {
         return values[row][column];
     }
 
@@ -90,7 +90,7 @@ public class Matrix implements Iterable<Double>, Copyable<Matrix>, Serializable 
      * @param value  Value to set to
      * @throws IndexOutOfBoundsException When the index is out of bounds
      */
-    public void set(int row, int column, double value) throws IndexOutOfBoundsException {
+    public final void set(int row, int column, double value) throws IndexOutOfBoundsException {
         values[row][column] = Numbers.requireFinite(value);
     }
 
@@ -100,7 +100,7 @@ public class Matrix implements Iterable<Double>, Copyable<Matrix>, Serializable 
      * @return Array of all values in this matrix
      */
     @Nonnull
-    public double[] values() {
+    public final double[] values() {
         final int size = size();
         final double[] result = new double[size];
 
@@ -118,7 +118,7 @@ public class Matrix implements Iterable<Double>, Copyable<Matrix>, Serializable 
      *
      * @return The number of rows
      */
-    public int rows() {
+    public final int rows() {
         return rows;
     }
 
@@ -127,7 +127,7 @@ public class Matrix implements Iterable<Double>, Copyable<Matrix>, Serializable 
      *
      * @return The number of columns
      */
-    public int columns() {
+    public final int columns() {
         return columns;
     }
 
@@ -136,7 +136,7 @@ public class Matrix implements Iterable<Double>, Copyable<Matrix>, Serializable 
      *
      * @return {@code rows * columns}
      */
-    public int size() {
+    public final int size() {
         return rows * columns;
     }
 

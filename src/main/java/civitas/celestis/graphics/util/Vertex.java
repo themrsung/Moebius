@@ -11,7 +11,7 @@ import java.util.function.UnaryOperator;
 /**
  * A specialized {@link Vector3} used in a graphical context.
  */
-public class Vertex extends Vector3 {
+public final class Vertex extends Vector3 {
     //
     // Constants
     //
