@@ -104,9 +104,9 @@ public final class Quaternion extends Vector4 {
      * @return The yaw angle in radians
      */
     public double yaw() {
-        final double sinp = 2 * (w() * y() - z() * x());
-        final double cosp = 1 - 2 * (y() * y() + z() * z());
-        return Math.atan2(sinp, cosp);
+        final double siny = 2 * (w() * y() - z() * x());
+        final double cosy = 1 - 2 * (y() * y() + z() * z());
+        return Math.atan2(siny, cosy);
     }
 
     /**

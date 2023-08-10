@@ -16,7 +16,7 @@ public final class Numbers {
     //
 
     /**
-     * Explicitly denotes that a given field requires a finite values as its input.
+     * Explicitly denotes that a given field requires a finite value as its input.
      *
      * @param value Value to check for finiteness
      * @return The value provided as the input parameter
@@ -28,6 +28,250 @@ public final class Numbers {
         }
 
         return value;
+    }
+
+    /**
+     * Explicitly denotes that a given field requires a non-negative value as its input.
+     *
+     * @param value Value to check for non-negativeness
+     * @return The value provided as the input parameter
+     * @throws IllegalArgumentException When the given input is non-negative ({@code value < 0})
+     */
+    public static double requireNonNegative(double value) {
+        if (value < 0) {
+            throw new IllegalArgumentException("This field requires a non-negative value. The provided value was " + value + ".");
+        }
+
+        return value;
+    }
+
+    /**
+     * Explicitly denotes that a given field requires a positive value as its input.
+     *
+     * @param value Value to check for positiveness
+     * @return The value provided as the input parameter
+     * @throws IllegalArgumentException When the given input is non-positive ({@code value <= 0})
+     */
+    public static double requirePositive(double value) {
+        if (value <= 0) {
+            throw new IllegalArgumentException("This field requires a positive value. The provided value was " + value + ".");
+        }
+
+        return value;
+    }
+
+    //
+    // Algorithms
+    //
+
+    /**
+     * Performs floating point division while triggering an arithmetic exception.
+     *
+     * @param numerator Numerator of the calculation
+     * @param denominator Denominator of the calculation
+     * @return The result of the division
+     * @throws ArithmeticException When the denominator is zero
+     */
+    public static double divide(double numerator, double denominator) throws ArithmeticException {
+        if (denominator == 0) throw new ArithmeticException("Cannot divide by zero.");
+
+        return numerator / denominator;
+    }
+
+    /**
+     * If the given value is an integer (which is determined by {@link Numbers#isInteger(double)}),
+     * this corrects the given value to the nearest integer.
+     *
+     * @param value Value to correct to nearest integer
+     * @return Corrected value is the value is an integer, the original value if not
+     */
+    public static double correct(double value) {
+        if (isInteger(value)) {
+            return (double) (long) value;
+        }
+
+        return value;
+    }
+
+    /**
+     * Checks if given value {@code n} is an integer, while accounting for the {@link Numbers#MARGIN_OF_SIGNIFICANCE}.
+     *
+     * @param n The number to check
+     * @return {@code true} if the number can be considered an integer
+     */
+    public static boolean isInteger(double n) {
+        return equals(n, Math.round(n));
+    }
+
+    /**
+     * Rounds a number while retaining an arbitrary number of decimal points.
+     *
+     * @param n      Number to round
+     * @param digits Number of digits to retain
+     * @return The rounded value
+     */
+    public static double round(double n, int digits) {
+        if (digits == 0) {
+            return Math.round(n);
+        }
+
+        final double factor = Math.pow(10, digits);
+
+        return Math.round(n * factor) / factor;
+    }
+
+    /**
+     * Floors a number while retaining an arbitrary number of decimal points.
+     *
+     * @param n      Number to round
+     * @param digits Number of digits to retain
+     * @return The floored value
+     */
+    public static double floor(double n, int digits) {
+        if (digits == 0) {
+            return Math.floor(n);
+        }
+
+        final double factor = Math.pow(10, digits);
+
+        return Math.floor(n * factor) / factor;
+    }
+
+    /**
+     * Returns the ceiling of a number while retaining an arbitrary number of decimal points.
+     *
+     * @param n      Number to ceil
+     * @param digits Number of digits to retain
+     * @return The ceiling of the number
+     */
+    public static double ceil(double n, int digits) {
+        if (digits == 0) {
+            return Math.ceil(n);
+        }
+
+        final double factor = Math.pow(10, digits);
+
+        return Math.ceil(n * factor) / factor;
+    }
+
+    /**
+     * Calculates the factorial of the provided input {@code n}.
+     * Note that this requires a non-negative input.
+     *
+     * @param n The number to get the factorial of
+     * @return The factorial of {@code n}
+     */
+    public static double factorial(double n) {
+        // Estimate factorial using the Gamma function
+        return gamma(requireNonNegative(n) + 1);
+    }
+
+    /**
+     * Calculates the factorial of the provided input {@code n}.
+     * Note that this requires a non-negative input.
+     *
+     * @param n The number to get the factorial of
+     * @return The factorial of {@code n}
+     */
+    public static long factorial(long n) {
+        // Use factorial table if possible
+        if (requireNonNegative(n) < FACTORIALS.length) {
+            return FACTORIALS[(int) n];
+        }
+
+        // Numbers above the threshold will result in overflows
+        if (n > FACTORIAL_CALCULATION_THRESHOLD) {
+            throw new ArithmeticException("Given input will trigger an integer overflow. Use factorial(double) instead.");
+        }
+
+        // This fallback algorithm will not be reached if the default settings are kept intact
+
+        // Calculate factorial through recursion
+        return n * factorial(n - 1);
+    }
+
+    /**
+     * Calculates the factorial of the provided input {@code n}.
+     * Note that this requires a non-negative input.
+     *
+     * @param n The number to get the factorial of
+     * @return The factorial of {@code n}
+     */
+    public static long factorial(int n) {
+        // Use factorial table if possible
+        if (requireNonNegative(n) < FACTORIALS.length) {
+            return FACTORIALS[n];
+        }
+
+        // Delegate to factorial(long)
+        return factorial((long) n);
+    }
+
+    // Factorial table
+    private static final long[] FACTORIALS = {
+            1,
+            1,
+            2,
+            6,
+            24,
+            120,
+            720,
+            5040,
+            40320,
+            362880,
+            3628800,
+            39916800,
+            479001600,
+            6227020800L,
+            87178291200L,
+            1307674368000L,
+            20922789888000L,
+            355687428096000L,
+            6402373705728000L,
+            121645100408832000L,
+            2432902008176640000L
+    };
+
+    // The maximum input of the factorial function this class will attempt to calculate
+    private static final int FACTORIAL_CALCULATION_THRESHOLD = FACTORIALS.length - 1;
+
+
+    // Lanczos parameters
+    private static final double LANCZOS_G = 7;
+    private static final double[] LANCZOS_COEFFICIENTS = {
+            0.99999999999980993,
+            676.5203681218851,
+            -1259.1392167224028,
+            771.32342877765313,
+            -176.61502916214059,
+            12.507343278686905,
+            -0.13857109526572012,
+            9.9843695780195716e-6,
+            1.5056327351493116e-7
+    };
+
+    /**
+     * Returns the gamma of the given input {@code n}.
+     *
+     * @param n The value to get the gamma of
+     * @return The gamma function value of {@code n}
+     */
+    public static double gamma(double n) {
+        // Copy value for manipulation
+        double x = n;
+
+        if (x <= 0.5) {
+            return Math.PI / (Math.sin(Math.PI * x) * gamma(1 - x));
+        }
+
+        x -= 1;
+        double result = LANCZOS_COEFFICIENTS[0];
+        for (int i = 1; i < LANCZOS_COEFFICIENTS.length; i++) {
+            result += LANCZOS_COEFFICIENTS[i] / (x + i);
+        }
+
+        double t = x + LANCZOS_G + 0.5;
+        return Math.sqrt(2 * Math.PI) * Math.pow(t, x + 0.5) * Math.exp(-t) * result;
     }
 
     //
@@ -144,5 +388,19 @@ public final class Numbers {
     public static int compare(double d1, double d2) {
         if (equals(d1, d2)) return 0;
         return d1 > d2 ? 1 : -1;
+    }
+
+    public static final double DOT_PRODUCT_THRESHOLD = 1e-3;
+
+    /**
+     * Checks if two vectors are facing the same direction.
+     * This accounts for small errors using the {@link Numbers#DOT_PRODUCT_THRESHOLD}.
+     *
+     * @param v1 The first vector to compare
+     * @param v2 The second vector to compare
+     * @return {@code true} if the dot product of the two vectors are equal to or smaller than the threshold
+     */
+    public static boolean isParallel(@Nonnull Vector3 v1, @Nonnull Vector3 v2) {
+        return v1.dot(v2) <= DOT_PRODUCT_THRESHOLD;
     }
 }
