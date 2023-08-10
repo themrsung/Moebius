@@ -127,7 +127,7 @@ public class Vector4 implements Vector {
      *
      * @return The W component of this vector
      */
-    public double w() {
+    public final double w() {
         return w;
     }
 
@@ -136,7 +136,7 @@ public class Vector4 implements Vector {
      *
      * @return The X component of this vector
      */
-    public double x() {
+    public final double x() {
         return x;
     }
 
@@ -145,7 +145,7 @@ public class Vector4 implements Vector {
      *
      * @return The Y component of this vector
      */
-    public double y() {
+    public final double y() {
         return y;
     }
 
@@ -154,7 +154,7 @@ public class Vector4 implements Vector {
      *
      * @return The Z component of this vector
      */
-    public double z() {
+    public final double z() {
         return z;
     }
 
@@ -165,7 +165,7 @@ public class Vector4 implements Vector {
      */
     @Nonnull
     @Override
-    public double[] values() {
+    public final double[] values() {
         return new double[]{w, x, y, z};
     }
 
@@ -176,7 +176,7 @@ public class Vector4 implements Vector {
      * @return {@code 4}
      */
     @Override
-    public int length() {
+    public final int length() {
         return 4;
     }
 
@@ -186,7 +186,7 @@ public class Vector4 implements Vector {
      * @return The square root of {@code w * w + x * x + y * y + z * z}
      */
     @Override
-    public double magnitude() {
+    public final double magnitude() {
         return Math.sqrt(w * w + x * x + y * y + z * z);
     }
 
@@ -196,7 +196,7 @@ public class Vector4 implements Vector {
      * @return {@code w * w + x * x + y * y + z * z}
      */
     @Override
-    public double magnitude2() {
+    public final double magnitude2() {
         return w * w + x * x + y * y + z * z;
     }
 

@@ -98,7 +98,7 @@ public class Vector2 implements Vector {
      *
      * @return The X component of this vector
      */
-    public double x() {
+    public final double x() {
         return x;
     }
 
@@ -107,7 +107,7 @@ public class Vector2 implements Vector {
      *
      * @return The Y component of this vector
      */
-    public double y() {
+    public final double y() {
         return y;
     }
 
@@ -118,7 +118,7 @@ public class Vector2 implements Vector {
      */
     @Nonnull
     @Override
-    public double[] values() {
+    public final double[] values() {
         return new double[]{x, y};
     }
 
@@ -129,7 +129,7 @@ public class Vector2 implements Vector {
      * @return {@code 2}
      */
     @Override
-    public int length() {
+    public final int length() {
         return 2;
     }
 
@@ -139,7 +139,7 @@ public class Vector2 implements Vector {
      * @return The square root of {@code x * x + y * y}
      */
     @Override
-    public double magnitude() {
+    public final double magnitude() {
         return Math.sqrt(x * x + y * y);
     }
 
@@ -149,7 +149,7 @@ public class Vector2 implements Vector {
      * @return {@code x * x + y * y}
      */
     @Override
-    public double magnitude2() {
+    public final double magnitude2() {
         return x * x + y * y;
     }
 

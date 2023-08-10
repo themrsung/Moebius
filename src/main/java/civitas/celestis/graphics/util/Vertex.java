@@ -251,6 +251,48 @@ public class Vertex extends Vector3 {
     }
 
     /**
+     * Given an array of vertices, this returns the maximum vertex.
+     *
+     * @param vertices Vertices to get maximum of
+     * @return The maximum vertex of the given vertices
+     */
+    @Nonnull
+    public static Vertex max(@Nonnull Vertex... vertices) {
+        double x = -Double.MAX_VALUE;
+        double y = -Double.MAX_VALUE;
+        double z = -Double.MAX_VALUE;
+
+        for (final Vertex vertex : vertices) {
+            x = Math.max(x, vertex.x());
+            y = Math.max(y, vertex.y());
+            z = Math.max(z, vertex.z());
+        }
+
+        return new Vertex(x, y, z);
+    }
+
+    /**
+     * Given an array of vertices, this returns the minimum vertex.
+     *
+     * @param vertices Vertices to get minimum of
+     * @return The minimum vertex of the given vertices
+     */
+    @Nonnull
+    public static Vertex min(@Nonnull Vertex... vertices) {
+        double x = Double.MAX_VALUE;
+        double y = Double.MAX_VALUE;
+        double z = Double.MAX_VALUE;
+
+        for (final Vertex vertex : vertices) {
+            x = Math.min(x, vertex.x());
+            y = Math.min(y, vertex.y());
+            z = Math.min(z, vertex.z());
+        }
+
+        return new Vertex(x, y, z);
+    }
+
+    /**
      * Given three points which represent the vertices of a triangular surface, this calculates the surface normal.
      * This method assumes that the given coordinates are in counter-clockwise order.
      *
