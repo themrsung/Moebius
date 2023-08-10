@@ -480,10 +480,27 @@ public final class Numbers {
         return d1 > d2 ? 1 : -1;
     }
 
+    /**
+     * The maximum dot product magnitude when considering two vectors as parallel.
+     */
     public static final double DOT_PRODUCT_THRESHOLD = 1e-3;
 
     /**
      * Checks if two vectors are facing the same direction.
+     * This will only work with unit vectors.
+     * This accounts for small errors using the {@link Numbers#DOT_PRODUCT_THRESHOLD}.
+     *
+     * @param v1 The first vector to compare
+     * @param v2 The second vector to compare
+     * @return {@code true} if the dot product of the two vectors are equal to or smaller than the threshold
+     */
+    public static boolean isParallel(@Nonnull Vector2 v1, @Nonnull Vector2 v2) {
+        return Math.abs(v1.dot(v2)) <= DOT_PRODUCT_THRESHOLD;
+    }
+
+    /**
+     * Checks if two vectors are facing the same direction.
+     * This will only work with unit vectors.
      * This accounts for small errors using the {@link Numbers#DOT_PRODUCT_THRESHOLD}.
      *
      * @param v1 The first vector to compare
@@ -491,6 +508,19 @@ public final class Numbers {
      * @return {@code true} if the dot product of the two vectors are equal to or smaller than the threshold
      */
     public static boolean isParallel(@Nonnull Vector3 v1, @Nonnull Vector3 v2) {
-        return v1.dot(v2) <= DOT_PRODUCT_THRESHOLD;
+        return Math.abs(v1.dot(v2)) <= DOT_PRODUCT_THRESHOLD;
+    }
+
+    /**
+     * Checks if two vectors are facing the same direction.
+     * This will only work with unit vectors.
+     * This accounts for small errors using the {@link Numbers#DOT_PRODUCT_THRESHOLD}.
+     *
+     * @param v1 The first vector to compare
+     * @param v2 The second vector to compare
+     * @return {@code true} if the dot product of the two vectors are equal to or smaller than the threshold
+     */
+    public static boolean isParallel(@Nonnull Vector4 v1, @Nonnull Vector4 v2) {
+        return Math.abs(v1.dot(v2)) <= DOT_PRODUCT_THRESHOLD;
     }
 }
