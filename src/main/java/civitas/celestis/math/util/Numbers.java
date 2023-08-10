@@ -235,7 +235,6 @@ public final class Numbers {
     // The maximum input of the factorial function this class will attempt to calculate
     private static final int FACTORIAL_CALCULATION_THRESHOLD = FACTORIALS.length - 1;
 
-
     // Lanczos parameters
     private static final double LANCZOS_G = 7;
     private static final double[] LANCZOS_COEFFICIENTS = {
