@@ -46,7 +46,7 @@ public class MoebiusTest {
         }
 
         final ColoredModel model = new ColoredModel(obj, Color.LIGHT_GRAY, 3);
-//        final Model model = new ColoredModel(obj, Color.GRAY, 150);
+//        final ColoredModel model = new ColoredModel(obj, Color.GRAY, 150);
 
         for (final ColoredFace face : model.getFaces()) {
             face.setColor(Colors.average(face.getColor(), Colors.BLACK, 3, Numbers.random(Double.MIN_VALUE, 1)));
@@ -120,11 +120,11 @@ public class MoebiusTest {
         });
 
         Moebius.getScheduler().register(delta -> {
-//            odyssey.accelerate(Vector3.random().multiply(10));
-//            odyssey.rotateRate(Quaternion.random());
-//
-//            daedalus.move(Vector3.random());
-//            daedalus.rotate(Quaternion.random());
+            odyssey.accelerate(Vector3.random().multiply(10));
+            odyssey.rotateRate(Quaternion.random());
+
+            daedalus.accelerate(Vector3.random());
+            daedalus.rotateRate(Quaternion.random());
         });
 
         Moebius.getScheduler().register(new Task() {
@@ -159,6 +159,32 @@ public class MoebiusTest {
             public long interval() {
                 return 100;
             }
+        });
+
+        Moebius.getScheduler().register(delta -> {
+            final Vector3 offset = new Vector3(0, 100, -1000);
+            final Vector3 cameraLocation = odyssey.getLocation().add(offset.rotate(odyssey.getRotation()));
+
+            final Vector3 axis = cameraLocation.cross(odyssey.getLocation());
+
+            final Vector3 cameraNorm = cameraLocation.normalize();
+            final Vector3 objectNorm = odyssey.getLocation().normalize();
+
+            final double dot = cameraNorm.dot(objectNorm);
+            final double angle = Math.acos(dot);
+
+            final double halfAngle = angle / 2;
+            final double sinHalfAngle = Math.sin(halfAngle);
+            final double cosHalfAngle = Math.cos(halfAngle);
+
+            final Quaternion rotation = new Quaternion(
+                    cosHalfAngle,
+                    axis.multiply(sinHalfAngle)
+            );
+
+            viewport.setContext(viewport.getContext()
+                    .location(cameraLocation)
+                    .rotation(rotation));
         });
     }
 }
