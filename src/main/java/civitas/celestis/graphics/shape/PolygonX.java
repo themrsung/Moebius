@@ -7,7 +7,7 @@ import java.awt.*;
 import java.util.function.UnaryOperator;
 
 /**
- * An improved {@link Polygon} class which supports the use of {@link Position} objects.
+ * An improved {@link Polygon} class which supports the use of objects.
  */
 public class PolygonX extends Polygon {
     //

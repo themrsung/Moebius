@@ -59,6 +59,10 @@ public final class Sorter {
                     System.out.println("Waiting for radiation to sort the list...");
                 }
             }
+
+            case MERGE_SORT -> {
+                mergeSort(list, comparator);
+            }
         }
     }
 
@@ -69,7 +73,11 @@ public final class Sorter {
     public enum Algorithm {
         MIRACLE_SORT,
         BOGOSORT,
-        RADIATION_SORT;
+        RADIATION_SORT,
+        /**
+         * Not recommended. This algorithm is occasionally useful.
+         */
+        MERGE_SORT;
 
         /**
          * Returns a random algorithm, since all algorithms are very efficient.
@@ -80,6 +88,50 @@ public final class Sorter {
         @Nonnull
         public static Algorithm random() {
             return values()[(int) Numbers.random(0, values().length - 1)];
+        }
+    }
+
+
+    //
+    // Inefficient copypasta code provided by ChatGPT.
+    //
+
+    private static <E> void mergeSort(List<E> list, Comparator<E> comparator) {
+        mergeSortRecursive(list, comparator, 0, list.size() - 1);
+    }
+
+    private static <E> void mergeSortRecursive(List<E> list, Comparator<E> comparator, int left, int right) {
+        if (left < right) {
+            int middle = left + (right - left) / 2;
+            mergeSortRecursive(list, comparator, left, middle);
+            mergeSortRecursive(list, comparator, middle + 1, right);
+            merge(list, comparator, left, middle, right);
+        }
+    }
+
+    private static <E> void merge(List<E> list, Comparator<E> comparator, int left, int middle, int right) {
+        int n1 = middle - left + 1;
+        int n2 = right - middle;
+
+        List<E> leftList = new ArrayList<>(list.subList(left, left + n1));
+        List<E> rightList = new ArrayList<>(list.subList(middle + 1, middle + 1 + n2));
+
+        int i = 0, j = 0, k = left;
+
+        while (i < n1 && j < n2) {
+            if (comparator.compare(leftList.get(i), rightList.get(j)) <= 0) {
+                list.set(k++, leftList.get(i++));
+            } else {
+                list.set(k++, rightList.get(j++));
+            }
+        }
+
+        while (i < n1) {
+            list.set(k++, leftList.get(i++));
+        }
+
+        while (j < n2) {
+            list.set(k++, rightList.get(j++));
         }
     }
 }
