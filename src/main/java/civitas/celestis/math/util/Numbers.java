@@ -1,10 +1,7 @@
 package civitas.celestis.math.util;
 
 import civitas.celestis.math.matrix.Matrix;
-import civitas.celestis.math.vector.Vector;
-import civitas.celestis.math.vector.Vector2;
-import civitas.celestis.math.vector.Vector3;
-import civitas.celestis.math.vector.Vector4;
+import civitas.celestis.math.vector.*;
 import jakarta.annotation.Nonnull;
 
 /**
@@ -58,6 +55,21 @@ public final class Numbers {
         }
 
         return value;
+    }
+
+    //
+    // Randomization
+    //
+
+    /**
+     * Returns a random {@code double} between the provided boundaries.
+     *
+     * @param min Minimum acceptable value
+     * @param max Maximum acceptable value
+     * @return A random value between {@code min} and {@code max}
+     */
+    public static double random(double min, double max) {
+        return Math.random() * (max - min) + min;
     }
 
     //
@@ -376,6 +388,7 @@ public final class Numbers {
     private static final double VECTOR2_COMPONENT_MARGIN = MARGIN_OF_SIGNIFICANCE / 2;
     private static final double VECTOR3_COMPONENT_MARGIN = MARGIN_OF_SIGNIFICANCE / 3;
     private static final double VECTOR4_COMPONENT_MARGIN = MARGIN_OF_SIGNIFICANCE / 4;
+    private static final double VECTOR5_COMPONENT_MARGIN = MARGIN_OF_SIGNIFICANCE / 5;
 
     /**
      * Checks for equality between two {@code double}s while accounting for the {@link Numbers#MARGIN_OF_SIGNIFICANCE}.
@@ -449,6 +462,21 @@ public final class Numbers {
     }
 
     /**
+     * Checks for equality between two {@link Vector5}s while accounting for the {@link Numbers#MARGIN_OF_SIGNIFICANCE}.
+     *
+     * @param v1 The first vector to compare
+     * @param v2 The second vector to compare
+     * @return {@code true} if the two vectors are considered equal
+     */
+    public static boolean equals(@Nonnull Vector5 v1, @Nonnull Vector5 v2) {
+        return Math.abs(v1.v() - v2.v()) < VECTOR5_COMPONENT_MARGIN &&
+                Math.abs(v1.w() - v2.w()) < VECTOR5_COMPONENT_MARGIN &&
+                Math.abs(v1.x() - v2.x()) < VECTOR5_COMPONENT_MARGIN &&
+                Math.abs(v1.y() - v2.y()) < VECTOR5_COMPONENT_MARGIN &&
+                Math.abs(v1.z() - v2.z()) < VECTOR5_COMPONENT_MARGIN;
+    }
+
+    /**
      * Checks for equality between two {@link Matrix} instances while accounting for the {@link Numbers#MARGIN_OF_SIGNIFICANCE}.
      *
      * @param m1 The first matrix to compare
@@ -481,46 +509,62 @@ public final class Numbers {
     }
 
     /**
-     * The maximum dot product magnitude when considering two vectors as parallel.
-     */
-    public static final double DOT_PRODUCT_THRESHOLD = 1e-3;
-
-    /**
      * Checks if two vectors are facing the same direction.
-     * This will only work with unit vectors.
-     * This accounts for small errors using the {@link Numbers#DOT_PRODUCT_THRESHOLD}.
+     * This accounts for small errors using the {@link Numbers#MARGIN_OF_SIGNIFICANCE}.
      *
      * @param v1 The first vector to compare
      * @param v2 The second vector to compare
      * @return {@code true} if the dot product of the two vectors are equal to or smaller than the threshold
      */
     public static boolean isParallel(@Nonnull Vector2 v1, @Nonnull Vector2 v2) {
-        return Math.abs(v1.dot(v2)) <= DOT_PRODUCT_THRESHOLD;
+        final Vector2 n1 = v1.normalize();
+        final Vector2 n2 = v2.normalize();
+
+        return equals(Math.pow(n1.dot(n2), 2), 1);
     }
 
     /**
      * Checks if two vectors are facing the same direction.
-     * This will only work with unit vectors.
-     * This accounts for small errors using the {@link Numbers#DOT_PRODUCT_THRESHOLD}.
+     * This accounts for small errors using the {@link Numbers#MARGIN_OF_SIGNIFICANCE}.
      *
      * @param v1 The first vector to compare
      * @param v2 The second vector to compare
      * @return {@code true} if the dot product of the two vectors are equal to or smaller than the threshold
      */
     public static boolean isParallel(@Nonnull Vector3 v1, @Nonnull Vector3 v2) {
-        return Math.abs(v1.dot(v2)) <= DOT_PRODUCT_THRESHOLD;
+        final Vector3 n1 = v1.normalize();
+        final Vector3 n2 = v2.normalize();
+
+        return equals(Math.pow(n1.dot(n2), 2), 1);
     }
 
     /**
      * Checks if two vectors are facing the same direction.
-     * This will only work with unit vectors.
-     * This accounts for small errors using the {@link Numbers#DOT_PRODUCT_THRESHOLD}.
+     * This accounts for small errors using the {@link Numbers#MARGIN_OF_SIGNIFICANCE}.
      *
      * @param v1 The first vector to compare
      * @param v2 The second vector to compare
      * @return {@code true} if the dot product of the two vectors are equal to or smaller than the threshold
      */
     public static boolean isParallel(@Nonnull Vector4 v1, @Nonnull Vector4 v2) {
-        return Math.abs(v1.dot(v2)) <= DOT_PRODUCT_THRESHOLD;
+        final Vector4 n1 = v1.normalize();
+        final Vector4 n2 = v2.normalize();
+
+        return equals(Math.pow(n1.dot(n2), 2), 1);
+    }
+
+    /**
+     * Checks if two vectors are facing the same direction.
+     * This accounts for small errors using the {@link Numbers#MARGIN_OF_SIGNIFICANCE}.
+     *
+     * @param v1 The first vector to compare
+     * @param v2 The second vector to compare
+     * @return {@code true} if the dot product of the two vectors are equal to or smaller than the threshold
+     */
+    public static boolean isParallel(@Nonnull Vector5 v1, @Nonnull Vector5 v2) {
+        final Vector5 n1 = v1.normalize();
+        final Vector5 n2 = v2.normalize();
+
+        return equals(Math.pow(n1.dot(n2), 2), 1);
     }
 }

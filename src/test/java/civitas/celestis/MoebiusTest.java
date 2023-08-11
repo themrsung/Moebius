@@ -5,13 +5,17 @@ import civitas.celestis.graphics.face.Face;
 import civitas.celestis.graphics.model.ColoredModel;
 import civitas.celestis.graphics.model.Model;
 import civitas.celestis.graphics.scene.Scene;
+import civitas.celestis.graphics.util.Colors;
 import civitas.celestis.graphics.viewport.Viewport;
 import civitas.celestis.listener.object.ObjectsCollidedListener;
 import civitas.celestis.math.quaternion.Quaternion;
+import civitas.celestis.math.util.Numbers;
 import civitas.celestis.math.vector.Vector3;
 import civitas.celestis.object.BaseObject;
 import civitas.celestis.physics.profile.SphereProfile;
 import civitas.celestis.physics.unit.MassUnit;
+import civitas.celestis.task.Task;
+import civitas.celestis.util.counter.Repeater;
 import civitas.celestis.world.RealisticWorld;
 import civitas.celestis.world.World;
 import de.javagl.obj.Obj;
@@ -25,6 +29,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class MoebiusTest {
     public static void main(String[] args) {
@@ -40,8 +45,12 @@ public class MoebiusTest {
             return;
         }
 
-        final Model model = new ColoredModel(obj, Color.GRAY, 3);
+        final ColoredModel model = new ColoredModel(obj, Color.LIGHT_GRAY, 3);
 //        final Model model = new ColoredModel(obj, Color.GRAY, 150);
+
+        for (final ColoredFace face : model.getFaces()) {
+            face.setColor(Colors.average(face.getColor(), Colors.BLACK, 3, Numbers.random(Double.MIN_VALUE, 1)));
+        }
 
         final BaseObject odyssey = new BaseObject(
                 UUID.randomUUID(),
@@ -53,10 +62,10 @@ public class MoebiusTest {
 
         odyssey.setRotationRate(Quaternion.builder().pitchDegrees(23).yawDegrees(45).build());
 
-        final Model model2 = model.copy();
+        final ColoredModel model2 = new ColoredModel(obj, Color.LIGHT_GRAY, 3);
 
-        for (final Face face : model2.getFaces()) {
-            ((ColoredFace) face).setColor(Color.DARK_GRAY);
+        for (final ColoredFace face : model2.getFaces()) {
+            face.setColor(Colors.average(face.getColor(), Colors.BLACK, 1, Numbers.random(Double.MIN_VALUE, 1)));
         }
 
         final BaseObject daedalus = new BaseObject(
@@ -108,6 +117,48 @@ public class MoebiusTest {
             final double s = delta / 1000d;
             final Vector3 a = earth.getGravity().negate().multiply(s);
             odyssey.accelerate(a);
+        });
+
+        Moebius.getScheduler().register(delta -> {
+//            odyssey.accelerate(Vector3.random().multiply(10));
+//            odyssey.rotateRate(Quaternion.random());
+//
+//            daedalus.move(Vector3.random());
+//            daedalus.rotate(Quaternion.random());
+        });
+
+        Moebius.getScheduler().register(new Task() {
+            private final Color[] colors = {
+                    Color.RED,
+                    Color.GREEN,
+                    Color.BLUE
+            };
+            private final Repeater repeater = new Repeater(colors.length);
+            private Color next() {
+                return colors[repeater.next()];
+            }
+
+            @Override
+            public void execute(long delta) {
+                if (new AtomicBoolean(true).get()) return;
+
+                Color c1 = next();
+                for (final ColoredFace face : model.getFaces()) {
+//                    face.setColor(c1);
+                    face.setColor(Colors.random());
+                }
+
+                c1 = next();
+                for (final ColoredFace face : model2.getFaces()) {
+//                    face.setColor(c1);
+                    face.setColor(Colors.random());
+                }
+            }
+
+            @Override
+            public long interval() {
+                return 100;
+            }
         });
     }
 }

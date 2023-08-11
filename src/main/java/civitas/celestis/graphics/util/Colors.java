@@ -1,5 +1,6 @@
 package civitas.celestis.graphics.util;
 
+import civitas.celestis.math.util.Numbers;
 import jakarta.annotation.Nonnull;
 
 import java.awt.*;
@@ -30,6 +31,24 @@ public final class Colors {
     public static final Color ORANGE = Color.ORANGE;
     public static final Color YELLOW = Color.YELLOW;
     public static final Color GOLD = new Color(246, 205, 51);
+
+    //
+    // Randomization
+    //
+
+    /**
+     * Returns a random color with an alpha of {@code 1.0} (opaque).
+     *
+     * @return A random opaque color
+     */
+    @Nonnull
+    public static Color random() {
+        return new Color(
+                (int) Numbers.random(0, 255),
+                (int) Numbers.random(0, 255),
+                (int) Numbers.random(0, 255)
+        );
+    }
 
     //
     // Mixing

@@ -22,6 +22,16 @@ public class Vector3 implements Vector {
     public static final Vector3 ZERO = new Vector3(0, 0, 0);
 
     /**
+     * The maximum possible value a vector can have.
+     */
+    public static final Vector3 POSITIVE_MAX = new Vector3(Double.MAX_VALUE, Double.MAX_VALUE, Double.MAX_VALUE);
+
+    /**
+     * The minimum possible value a vector can have. (the negation of POSITIVE_MAX)
+     */
+    public static final Vector3 NEGATIVE_MAX = POSITIVE_MAX.negate();
+
+    /**
      * A unit vector representing positive X.
      */
     public static final Vector3 POSITIVE_X = new Vector3(1, 0, 0);
@@ -93,6 +103,20 @@ public class Vector3 implements Vector {
         this.x = other.x;
         this.y = other.y;
         this.z = other.z;
+    }
+
+    //
+    // Randomization
+    //
+
+    /**
+     * Returns a randomized normal vector.
+     *
+     * @return A normal vector with a random direction
+     */
+    @Nonnull
+    public static Vector3 random() {
+        return new Vector3(Numbers.random(-1, 1), Numbers.random(-1, 1), Numbers.random(-1, 1)).normalize();
     }
 
     //
@@ -349,6 +373,50 @@ public class Vector3 implements Vector {
     @Nonnull
     public static Vector3 avg(@Nonnull Vector3... vectors) {
         return sum(vectors).divide(vectors.length);
+    }
+
+    /**
+     * Given an array of vectors, this returns the maximum vector.
+     * This is faster than chaining {@link Vector3#max(Vector3)} as it does not create a new instance every iteration.
+     *
+     * @param vectors Vectors to max
+     * @return The maximum of the given vectors
+     */
+    @Nonnull
+    public static Vector3 max(@Nonnull Vector3... vectors) {
+        double x = -Double.MAX_VALUE;
+        double y = -Double.MAX_VALUE;
+        double z = -Double.MAX_VALUE;
+
+        for (final Vector3 vector : vectors) {
+            x = Math.max(x, vector.x);
+            y = Math.max(y, vector.y);
+            z = Math.max(z, vector.z);
+        }
+
+        return new Vector3(x, y, z);
+    }
+
+    /**
+     * Given an array of vectors, this returns the minimum vector.
+     * This is faster than chaining {@link Vector3#min(Vector3)} as it does not create a new instance every iteration.
+     *
+     * @param vectors Vectors to min
+     * @return The minimum of the given vectors
+     */
+    @Nonnull
+    public static Vector3 min(@Nonnull Vector3... vectors) {
+        double x = Double.MAX_VALUE;
+        double y = Double.MAX_VALUE;
+        double z = Double.MAX_VALUE;
+
+        for (final Vector3 vector : vectors) {
+            x = Math.min(x, vector.x);
+            y = Math.min(y, vector.y);
+            z = Math.min(z, vector.z);
+        }
+
+        return new Vector3(x, y, z);
     }
 
     /**

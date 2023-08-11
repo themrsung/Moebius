@@ -1,6 +1,6 @@
 package civitas.celestis.graphics.shape;
 
-import civitas.celestis.graphics.util.Position;
+import civitas.celestis.math.vector.Vector2;
 import jakarta.annotation.Nonnull;
 
 import java.awt.*;
@@ -25,8 +25,8 @@ public class PolygonX extends Polygon {
      *
      * @param points Array of points of this polygon
      */
-    public PolygonX(@Nonnull Position... points) {
-        for (final Position point : points) {
+    public PolygonX(@Nonnull Vector2... points) {
+        for (final Vector2 point : points) {
             addPoint(point);
         }
     }
@@ -40,8 +40,8 @@ public class PolygonX extends Polygon {
      *
      * @param p Point to add
      */
-    public void addPoint(@Nonnull Position p) {
-        addPoint(p.xInt(), p.yInt());
+    public void addPoint(@Nonnull Vector2 p) {
+        addPoint((int) p.x(), (int) p.y());
     }
 
     /**
@@ -52,12 +52,12 @@ public class PolygonX extends Polygon {
      * @throws IndexOutOfBoundsException When the index {@code i} is out of bounds
      */
     @Nonnull
-    public Position getPoint(int i) throws IndexOutOfBoundsException {
+    public Vector2 getPoint(int i) throws IndexOutOfBoundsException {
         if (i >= npoints) {
             throw new IndexOutOfBoundsException("Index " + i + " is out of bounds for this polygon.");
         }
 
-        return new Position(xpoints[i], ypoints[i]);
+        return new Vector2(xpoints[i], ypoints[i]);
     }
 
     /**
@@ -66,8 +66,8 @@ public class PolygonX extends Polygon {
      * @return Array containing every point of this polygon
      */
     @Nonnull
-    public Position[] getPoints() {
-        final Position[] points = new Position[npoints];
+    public Vector2[] getPoints() {
+        final Vector2[] points = new Vector2[npoints];
 
         for (int i = 0; i < npoints; i++) {
             points[i] = getPoint(i);
@@ -83,13 +83,13 @@ public class PolygonX extends Polygon {
      * @param p Point to set to
      * @throws IndexOutOfBoundsException When the index {@code i} is out of bounds
      */
-    public void setPoint(int i, @Nonnull Position p) throws IndexOutOfBoundsException {
+    public void setPoint(int i, @Nonnull Vector2 p) throws IndexOutOfBoundsException {
         if (i >= npoints) {
             throw new IndexOutOfBoundsException("Index " + i + " is out of bounds for this polygon.");
         }
 
-        xpoints[i] = p.xInt();
-        ypoints[i] = p.yInt();
+        xpoints[i] = (int) p.x();
+        ypoints[i] = (int) p.y();
     }
 
     //
@@ -119,7 +119,7 @@ public class PolygonX extends Polygon {
      *
      * @param operator Operator to apply to each point of this polygon
      */
-    public void modify(@Nonnull UnaryOperator<Position> operator) {
+    public void modify(@Nonnull UnaryOperator<Vector2> operator) {
         for (int i = 0; i < npoints; i++) {
             setPoint(i, operator.apply(getPoint(i)));
         }

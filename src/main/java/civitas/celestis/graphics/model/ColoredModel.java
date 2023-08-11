@@ -1,7 +1,8 @@
 package civitas.celestis.graphics.model;
 
 import civitas.celestis.graphics.face.ColoredFace;
-import civitas.celestis.graphics.util.Vertex;
+import civitas.celestis.math.vector.Vector3;
+import de.javagl.obj.FloatTuple;
 import de.javagl.obj.Obj;
 import de.javagl.obj.ObjFace;
 import jakarta.annotation.Nonnull;
@@ -42,11 +43,12 @@ public class ColoredModel implements Model {
         // This is only possible because Vertex is immutable
         //
 
-        final Vertex[] vertices = new Vertex[numVertices];
+        final Vector3[] vertices = new Vector3[numVertices];
 
         for (int i = 0; i < numVertices; i++) {
             // Swaps X and Z coordinates for accurate representation
-            vertices[i] = new Vertex(obj.getVertex(i)).swapXZ().multiply(scale);
+            final FloatTuple ft = obj.getVertex(i);
+            vertices[i] = new Vector3(ft.getZ(), ft.getY(), ft.getX()).multiply(scale);
         }
 
         this.faces = new ColoredFace[numFaces];
@@ -54,9 +56,9 @@ public class ColoredModel implements Model {
         for (int i = 0; i < numFaces; i++) {
             final ObjFace face = obj.getFace(i);
 
-            final Vertex a = vertices[face.getVertexIndex(0)];
-            final Vertex b = vertices[face.getVertexIndex(1)];
-            final Vertex c = vertices[face.getVertexIndex(2)];
+            final Vector3 a = vertices[face.getVertexIndex(0)];
+            final Vector3 b = vertices[face.getVertexIndex(1)];
+            final Vector3 c = vertices[face.getVertexIndex(2)];
 
             faces[i] = new ColoredFace(a, b, c, initialColor);
         }
@@ -84,7 +86,7 @@ public class ColoredModel implements Model {
 
     @Nonnull
     @Override
-    public Model copy() {
+    public ColoredModel copy() {
         final ColoredFace[] copiedFaces = new ColoredFace[faces.length];
 
         for (int i = 0; i < faces.length; i++) {

@@ -13,13 +13,12 @@ public class BoundingBox {
 
     /**
      * Creates a new bounding box.
-     * If the array is empty, this will result in creating an effectively infinite box.
      *
      * @param vertices Array of vertices to use
      */
-    public BoundingBox(@Nonnull Vertex... vertices) {
-        this.min = Vertex.min(vertices);
-        this.max = Vertex.max(vertices);
+    public BoundingBox(@Nonnull Vector3... vertices) {
+        this.min = Vector3.min(vertices);
+        this.max = Vector3.max(vertices);
     }
 
     /**
@@ -37,7 +36,7 @@ public class BoundingBox {
     //
 
     @Nonnull
-    private final Vertex min, max;
+    private final Vector3 min, max;
 
     //
     // Getters
@@ -49,7 +48,7 @@ public class BoundingBox {
      * @return The minimum vertex
      */
     @Nonnull
-    public Vertex min() {
+    public Vector3 min() {
         return min;
     }
 
@@ -59,7 +58,7 @@ public class BoundingBox {
      * @return The maximum vertex
      */
     @Nonnull
-    public Vertex max() {
+    public Vector3 max() {
         return max;
     }
 
@@ -69,7 +68,7 @@ public class BoundingBox {
      * @return The size of this box
      */
     @Nonnull
-    public Vertex size() {
+    public Vector3 size() {
         return max.subtract(min);
     }
 
@@ -79,8 +78,8 @@ public class BoundingBox {
      * @return The center of this box
      */
     @Nonnull
-    public Vertex center() {
-        // Does not use Vertex.avg(Vertex...) as that would be slower for only 2 vertices
+    public Vector3 center() {
+        // Does not use Vector3.avg(Vertex...) as that would be slower for only 2 vertices
         return min.add(max).divide(2);
     }
 
@@ -94,7 +93,7 @@ public class BoundingBox {
      * @param v Vertex to check
      * @return {@code true} if this box contains the given vertex
      */
-    public boolean contains(@Nonnull Vertex v) {
+    public boolean contains(@Nonnull Vector3 v) {
         final double x = v.x();
         final double y = v.y();
         final double z = v.z();
@@ -122,17 +121,6 @@ public class BoundingBox {
      */
     @Nonnull
     public Vector3 clamp(@Nonnull Vector3 v) {
-        return v.clamp(min, max);
-    }
-
-    /**
-     * Clamps a vertex to respect the bounds of this bounding box.
-     *
-     * @param v The vertex to clamp
-     * @return The clamped vertex
-     */
-    @Nonnull
-    public Vertex clamp(@Nonnull Vertex v) {
         return v.clamp(min, max);
     }
 

@@ -1,6 +1,5 @@
 package civitas.celestis.graphics.face;
 
-import civitas.celestis.graphics.util.Vertex;
 import civitas.celestis.math.quaternion.Quaternion;
 import civitas.celestis.math.vector.Vector3;
 import civitas.celestis.util.Copyable;
@@ -25,7 +24,7 @@ public interface Face extends Copyable<Face> {
      * @return The first vertex of this face
      */
     @Nonnull
-    Vertex getA();
+    Vector3 getA();
 
     /**
      * Gets the second vertex of this face.
@@ -33,7 +32,7 @@ public interface Face extends Copyable<Face> {
      * @return The second vertex of this face
      */
     @Nonnull
-    Vertex getB();
+    Vector3 getB();
 
     /**
      * Gets the third vertex of this face.
@@ -41,7 +40,7 @@ public interface Face extends Copyable<Face> {
      * @return The third vertex of this face
      */
     @Nonnull
-    Vertex getC();
+    Vector3 getC();
 
     /**
      * Gets a tuple of vertices of this face.
@@ -49,7 +48,7 @@ public interface Face extends Copyable<Face> {
      * @return A tuple containing the vertices of this face
      */
     @Nonnull
-    Tuple<Vertex> getVertices();
+    Tuple<Vector3> getVertices();
 
     /**
      * Gets the surface normal of this face.
@@ -57,7 +56,7 @@ public interface Face extends Copyable<Face> {
      * @return The surface normal of this face
      */
     @Nonnull
-    Vertex getNormal();
+    Vector3 getNormal();
 
     /**
      * Gets the geometric centroid of this face.
@@ -65,7 +64,7 @@ public interface Face extends Copyable<Face> {
      * @return The geometric centroid of this face
      */
     @Nonnull
-    Vertex getCentroid();
+    Vector3 getCentroid();
 
     //
     // Graphics
@@ -104,7 +103,7 @@ public interface Face extends Copyable<Face> {
      * @return A new face containing the modified vertices
      */
     @Nonnull
-    Face apply(@Nonnull UnaryOperator<Vertex> operator);
+    Face apply(@Nonnull UnaryOperator<Vector3> operator);
 
     /**
      * Inflates this face by given scalar.

@@ -73,6 +73,20 @@ public final class Quaternion extends Vector4 {
     }
 
     //
+    // Randomization
+    //
+
+    /**
+     * Returns a random unit quaternion.
+     *
+     * @return A random unit quaternion
+     */
+    @Nonnull
+    public static Quaternion random() {
+        return new Quaternion(Vector4.random());
+    }
+
+    //
     // Properties
     //
 

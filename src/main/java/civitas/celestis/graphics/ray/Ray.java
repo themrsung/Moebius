@@ -1,6 +1,6 @@
 package civitas.celestis.graphics.ray;
 
-import civitas.celestis.graphics.util.Vertex;
+import civitas.celestis.math.vector.Vector3;
 import jakarta.annotation.Nonnull;
 
 /**
@@ -13,7 +13,7 @@ public interface Ray {
      * @return Point of origin
      */
     @Nonnull
-    Vertex getOrigin();
+    Vector3 getOrigin();
 
     /**
      * Gets the direction of this ray.
@@ -21,7 +21,7 @@ public interface Ray {
      * @return The directional vector of this ray
      */
     @Nonnull
-    Vertex getDirection();
+    Vector3 getDirection();
 
     /**
      * Given a distance parameter {@code t}, this returns the destination of this ray.
@@ -30,5 +30,5 @@ public interface Ray {
      * @return The destination of this ray
      */
     @Nonnull
-    Vertex getDestination(double t);
+    Vector3 getDestination(double t);
 }

@@ -1,6 +1,5 @@
 package civitas.celestis.graphics.face;
 
-import civitas.celestis.graphics.util.Vertex;
 import civitas.celestis.math.quaternion.Quaternion;
 import civitas.celestis.math.vector.Vector3;
 import civitas.celestis.util.group.Tuple;
@@ -25,7 +24,7 @@ public class ColoredFace implements Face {
      * @param c     The third vertex of this face
      * @param color The initial color of this face
      */
-    public ColoredFace(@Nonnull Vertex a, @Nonnull Vertex b, @Nonnull Vertex c, @Nonnull Color color) {
+    public ColoredFace(@Nonnull Vector3 a, @Nonnull Vector3 b, @Nonnull Vector3 c, @Nonnull Color color) {
         this.a = a;
         this.b = b;
         this.c = c;
@@ -49,7 +48,7 @@ public class ColoredFace implements Face {
     //
 
     @Nonnull
-    private final Vertex a, b, c;
+    private final Vector3 a, b, c;
     @Nonnull
     private Color color;
 
@@ -59,38 +58,41 @@ public class ColoredFace implements Face {
 
     @Override
     @Nonnull
-    public Vertex getA() {
+    public Vector3 getA() {
         return a;
     }
 
     @Override
     @Nonnull
-    public Vertex getB() {
+    public Vector3 getB() {
         return b;
     }
 
     @Override
     @Nonnull
-    public Vertex getC() {
+    public Vector3 getC() {
         return c;
     }
 
     @Nonnull
     @Override
-    public Tuple<Vertex> getVertices() {
+    public Tuple<Vector3> getVertices() {
         return new Tuple<>(a, b, c);
     }
 
     @Nonnull
     @Override
-    public Vertex getNormal() {
-        return Vertex.normal(a, b, c);
+    public Vector3 getNormal() {
+        final Vector3 ab = b.subtract(a);
+        final Vector3 ac = c.subtract(a);
+
+        return ab.cross(ac);
     }
 
     @Nonnull
     @Override
-    public Vertex getCentroid() {
-        return Vertex.avg(a, b, c);
+    public Vector3 getCentroid() {
+        return Vector3.avg(a, b, c);
     }
 
     //
@@ -129,7 +131,7 @@ public class ColoredFace implements Face {
 
     @Nonnull
     @Override
-    public ColoredFace apply(@Nonnull UnaryOperator<Vertex> operator) {
+    public ColoredFace apply(@Nonnull UnaryOperator<Vector3> operator) {
         return new ColoredFace(
                 operator.apply(a),
                 operator.apply(b),
@@ -175,9 +177,9 @@ public class ColoredFace implements Face {
     @Override
     public ColoredFace transform(@Nonnull Vector3 origin, @Nonnull Quaternion rotation, double scale) {
         return new ColoredFace(
-                a.transform(origin, rotation, scale),
-                b.transform(origin, rotation, scale),
-                c.transform(origin, rotation, scale),
+                a.subtract(origin).rotate(rotation).multiply(scale),
+                b.subtract(origin).rotate(rotation).multiply(scale),
+                c.subtract(origin).rotate(rotation).multiply(scale),
                 color
         );
     }

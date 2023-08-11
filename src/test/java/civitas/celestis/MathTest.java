@@ -1,21 +1,22 @@
 package civitas.celestis;
 
+import civitas.celestis.graphics.util.BoundingBox;
 import civitas.celestis.math.matrix.Matrix;
-import civitas.celestis.math.util.MatrixOperations;
-import civitas.celestis.math.util.VectorOperations;
+import civitas.celestis.math.util.Numbers;
 import civitas.celestis.math.vector.Vector3;
+import civitas.celestis.math.vector.Vector5;
 
 import java.util.concurrent.atomic.AtomicReference;
 
 public class MathTest {
     public static void main(String[] args) {
-        final AtomicReference<Vector3> reference = new AtomicReference<>(null);
-        final Vector3 v1 = new Vector3(1, 2, 3);
-        final Matrix m1 = new Matrix(3, 3);
-        m1.fill(Math.PI);
+        final BoundingBox box = new BoundingBox(Vector3.POSITIVE_MAX, Vector3.NEGATIVE_MAX);
 
-        MatrixOperations.multiply(reference, m1, v1);
+        final Vector3 v = Vector3.random();
+        System.out.println(box.contains(v));
 
-        System.out.println(reference.get());
+        for (int i = 0; i < 10000; i++) {
+            System.out.println(v.cross(Vector3.random()));
+        }
     }
 }

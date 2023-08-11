@@ -3,7 +3,7 @@ package civitas.celestis.graphics.viewport;
 import civitas.celestis.graphics.face.Face;
 import civitas.celestis.graphics.scene.Scene;
 import civitas.celestis.graphics.shape.PolygonX;
-import civitas.celestis.graphics.util.Vertex;
+import civitas.celestis.graphics.util.GraphicsUtils;
 import civitas.celestis.math.quaternion.Quaternion;
 import civitas.celestis.math.vector.Vector3;
 import jakarta.annotation.Nonnull;
@@ -116,8 +116,8 @@ public class Viewport extends JPanel {
                     final PolygonX polygon = new PolygonX();
 
                     // Iterate through vertices
-                    for (final Vertex v : transformed.getVertices()) {
-                        polygon.addPoint(v.position(focalLength));
+                    for (final Vector3 v : transformed.getVertices()) {
+                        polygon.addPoint(GraphicsUtils.translate3Dto2D(v, focalLength));
                     }
 
                     // Invert Y coordinates to be compatible with the AWT coordinate system

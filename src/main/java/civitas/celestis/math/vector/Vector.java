@@ -15,8 +15,6 @@ public interface Vector extends Serializable {
 
     /**
      * Creates a new vector from an array of component scalars.
-     * Note that this constructor is very inefficient, and using the discrete types' constructors
-     * is faster when dealing with arrays of known sizes.
      *
      * @param values Values to use
      * @return Vector constructed from given values
@@ -24,19 +22,13 @@ public interface Vector extends Serializable {
      */
     @Nonnull
     static Vector of(@Nonnull double... values) {
-        try {
-            return new Vector2(values);
-        } catch (final IllegalArgumentException ignored) {}
-
-        try {
-            return new Vector3(values);
-        } catch (final IllegalArgumentException ignored) {}
-
-        try {
-            return new Vector4(values);
-        } catch (final IllegalArgumentException ignored) {}
-
-        return new VectorX(values);
+        return switch (values.length) {
+            case 2 -> new Vector2(values);
+            case 3 -> new Vector3(values);
+            case 4 -> new Vector4(values);
+            case 5 -> new Vector5(values);
+            default -> new VectorX(values);
+        };
     }
 
     //
@@ -63,6 +55,10 @@ public interface Vector extends Serializable {
 
         try {
             return Vector4.parseVector(input);
+        } catch (final NumberFormatException ignored) {}
+
+        try {
+            return Vector5.parseVector(input);
         } catch (final NumberFormatException ignored) {}
 
         try {

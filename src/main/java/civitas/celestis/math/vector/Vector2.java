@@ -21,6 +21,16 @@ public class Vector2 implements Vector {
     public static final Vector2 ZERO = new Vector2(0, 0);
 
     /**
+     * The maximum possible value a vector can have.
+     */
+    public static final Vector2 POSITIVE_MAX = new Vector2(Double.MAX_VALUE, Double.MAX_VALUE);
+
+    /**
+     * The minimum possible value a vector can have. (the negation of POSITIVE_MAX)
+     */
+    public static final Vector2 NEGATIVE_MAX = POSITIVE_MAX.negate();
+
+    /**
      * A unit vector representing positive X.
      */
     public static final Vector2 POSITIVE_X = new Vector2(1, 0);
@@ -78,6 +88,20 @@ public class Vector2 implements Vector {
     public Vector2(@Nonnull Vector2 other) {
         this.x = other.x;
         this.y = other.y;
+    }
+
+    //
+    // Randomization
+    //
+
+    /**
+     * Returns a randomized normal vector.
+     *
+     * @return A normal vector with a random direction
+     */
+    @Nonnull
+    public static Vector2 random() {
+        return new Vector2(Numbers.random(-1, 1), Numbers.random(-1, 1)).normalize();
     }
 
     //
@@ -312,6 +336,46 @@ public class Vector2 implements Vector {
     @Nonnull
     public static Vector2 avg(@Nonnull Vector2... vectors) {
         return sum(vectors).divide(vectors.length);
+    }
+
+    /**
+     * Given an array of vectors, this returns the maximum vector.
+     * This is faster than chaining {@link Vector2#max(Vector2)} as it does not create a new instance every iteration.
+     *
+     * @param vectors Vectors to max
+     * @return The maximum of the given vectors
+     */
+    @Nonnull
+    public static Vector2 max(@Nonnull Vector2... vectors) {
+        double x = -Double.MAX_VALUE;
+        double y = -Double.MAX_VALUE;
+
+        for (final Vector2 vector : vectors) {
+            x = Math.max(x, vector.x);
+            y = Math.max(y, vector.y);
+        }
+
+        return new Vector2(x, y);
+    }
+
+    /**
+     * Given an array of vectors, this returns the minimum vector.
+     * This is faster than chaining {@link Vector2#min(Vector2)} as it does not create a new instance every iteration.
+     *
+     * @param vectors Vectors to min
+     * @return The minimum of the given vectors
+     */
+    @Nonnull
+    public static Vector2 min(@Nonnull Vector2... vectors) {
+        double x = Double.MAX_VALUE;
+        double y = Double.MAX_VALUE;
+
+        for (final Vector2 vector : vectors) {
+            x = Math.min(x, vector.x);
+            y = Math.min(y, vector.y);
+        }
+
+        return new Vector2(x, y);
     }
 
     /**
