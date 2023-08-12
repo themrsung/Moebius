@@ -250,6 +250,24 @@ public interface IntVector extends Serializable {
     IntVector negate();
 
     /**
+     * Returns the distance between this vector and the provided vector.
+     *
+     * @param v The vector to get the distance to
+     * @return The distance between this vector and {@code v}
+     * @throws IllegalArgumentException When the provided vector has a different length from this vector
+     */
+    double distance(@Nonnull IntVector v) throws IllegalArgumentException;
+
+    /**
+     * Returns the squared distance between this vector and the provided vector.
+     *
+     * @param v The vector to get the squared distance to
+     * @return The squared distance between this vector and {@code v}
+     * @throws IllegalArgumentException When the provided vector has a different length from this vector
+     */
+    double distance2(@Nonnull IntVector v) throws IllegalArgumentException;
+
+    /**
      * Converts this vector into a {@code double} vector.
      *
      * @return A {@link Vector} derived from {@code this}

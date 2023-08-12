@@ -460,6 +460,30 @@ public class MutableIntVector implements IntVector {
     /**
      * {@inheritDoc}
      *
+     * @param v The vector to get the distance to
+     * @return The distance between this vector and {@code v}
+     * @throws IllegalArgumentException When the provided vector {@code v}'s length is different from this vector's length
+     */
+    @Override
+    public double distance(@Nonnull IntVector v) throws IllegalArgumentException {
+        return subtract(v).magnitude();
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param v The vector to get the squared distance to
+     * @return The squared distance between this vector and {@code v}
+     * @throws IllegalArgumentException When the provided vector {@code v}'s length is different from this vector's length
+     */
+    @Override
+    public double distance2(@Nonnull IntVector v) throws IllegalArgumentException {
+        return subtract(v).magnitude2();
+    }
+
+    /**
+     * {@inheritDoc}
+     *
      * @return A {@link MutableVector} derived from {@code this}
      */
     @Nonnull

@@ -582,6 +582,50 @@ public class IntVector4 implements IntVector {
     /**
      * {@inheritDoc}
      *
+     * @param v The vector to get the distance to
+     * @return The distance between this vector and {@code v}
+     * @throws IllegalArgumentException When the provided vector {@code v}'s length is not {@code 4}
+     */
+    @Override
+    public double distance(@Nonnull IntVector v) throws IllegalArgumentException {
+        return subtract(v).magnitude();
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param v The vector to get the squared distance to
+     * @return The distance between this vector and {@code v}
+     * @throws IllegalArgumentException When the provided vector {@code v}'s length is not {@code 4}
+     */
+    @Override
+    public double distance2(@Nonnull IntVector v) throws IllegalArgumentException {
+        return subtract(v).magnitude2();
+    }
+
+    /**
+     * Returns the distance between this vector and the provided vector.
+     *
+     * @param v The vector to get the distance to
+     * @return The distance between this vector and {@code v}
+     */
+    public double distance(@Nonnull IntVector4 v) {
+        return subtract(v).magnitude();
+    }
+
+    /**
+     * Returns the squared distance between this vector and the provided vector.
+     *
+     * @param v The vector to get the squared distance to
+     * @return The squared distance between this vector and {@code v}
+     */
+    public double distance2(@Nonnull IntVector4 v) {
+        return subtract(v).magnitude2();
+    }
+
+    /**
+     * {@inheritDoc}
+     *
      * @return A {@link Vector4} derived from {@code this}
      */
     @Nonnull

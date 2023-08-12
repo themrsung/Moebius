@@ -3,7 +3,6 @@ package civitas.celestis;
 import civitas.celestis.graphics.Interpolation;
 import civitas.celestis.graphics.color.RichColor;
 import civitas.celestis.math.Numbers;
-import civitas.celestis.math.vector.Vector4;
 
 import javax.swing.*;
 
@@ -30,5 +29,7 @@ public class Tests {
         panel.color = color;
         frame.repaint();
         System.out.println(panel.color.color());
+
+        System.out.println(Numbers.scale(50, 0, 10, 0, 10000));
     }
 }
