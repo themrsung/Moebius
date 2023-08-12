@@ -316,7 +316,7 @@ public class RichColor extends Vector4 {
      * @param color An AWT {@link Color} object
      */
     public RichColor(@Nonnull Color color) {
-        this(color.getAlpha(), color.getRed(), color.getBlue(), color.getGreen());
+        super(color.getAlpha(), color.getRed(), color.getBlue(), color.getGreen());
     }
 
     /**
