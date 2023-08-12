@@ -8,6 +8,13 @@ import java.util.function.UnaryOperator;
 
 /**
  * A mapper class for rearranging vector components.
+ * This is intended to be used as a function.
+ * <p>
+ * <code>
+ * final Vector3 v = new Vector3(1, 2, 3);<br>
+ * final Vector3 p = VectorMapper.V3_SWAP_X_Z.apply(v); // {3, 2, 1}
+ * </code>
+ * </p>
  *
  * @param <V> The type of vector to rearrange
  */
