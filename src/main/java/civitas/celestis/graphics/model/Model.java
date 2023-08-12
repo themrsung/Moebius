@@ -1,0 +1,39 @@
+package civitas.celestis.graphics.model;
+
+import civitas.celestis.graphics.face.Face;
+import jakarta.annotation.Nonnull;
+
+import java.io.Serializable;
+import java.util.List;
+
+/**
+ * A model object used to store data about an object's graphical profile.
+ * Models have limited mutability.
+ */
+public interface Model extends Serializable {
+    /**
+     * Returns all faces of this model.
+     * This is not a copied list, and changes to the return value will be reflected in this model.
+     *
+     * @return A list containing every face of this model
+     */
+    @Nonnull
+    List<? extends Face> getFaces();
+
+    /**
+     * Returns the {@code i}th face of this model.
+     *
+     * @param i The index of the face to get
+     * @return The face at the specified index
+     * @throws IndexOutOfBoundsException When the index {@code i} is out of bounds
+     */
+    @Nonnull
+    Face getFace(int i) throws IndexOutOfBoundsException;
+
+    /**
+     * Returns the face count of this model.
+     *
+     * @return The number of faces this model has
+     */
+    int getFaceCount();
+}

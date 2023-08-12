@@ -55,12 +55,15 @@ public class SchedulerCore {
         this.thread = new Thread(() -> {
             while (!Thread.interrupted()) {
                 for (final Task task : List.copyOf(tasks)) {
+                    // Calculate delta
                     final long now = System.currentTimeMillis();
                     final long previous = times.getOrDefault(task, now);
                     final long delta = now - previous;
 
+                    // Respect interval
                     if (delta < task.interval()) continue;
 
+                    // Execute task
                     task.execute(delta);
                     times.put(task, now);
                 }

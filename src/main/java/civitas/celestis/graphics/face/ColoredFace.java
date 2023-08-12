@@ -200,8 +200,12 @@ public class ColoredFace extends AlphabeticalTuple<Vertex> implements Face {
         );
     }
 
+    //
+    // Serialization
+    //
+
     /**
-     * Serializes this face into a string.
+     * {@inheritDoc}
      *
      * @return The string representation of this face
      */

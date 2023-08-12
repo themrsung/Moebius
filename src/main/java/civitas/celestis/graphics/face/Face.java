@@ -16,6 +16,24 @@ import java.util.function.UnaryOperator;
  */
 public interface Face extends AlphabeticalGroup<Vertex>, Serializable {
     //
+    // Parser
+    //
+
+    /**
+     * Deserializes a string into a face.
+     *
+     * @param input Input string to parse
+     * @return The parsed face
+     * @throws IllegalArgumentException When the format is invalid
+     */
+    @Nonnull
+    static Face parseFace(@Nonnull String input) throws IllegalArgumentException {
+        try {return ColoredFace.parseFace(input);} catch (final IllegalArgumentException ignored) {}
+
+        throw new IllegalArgumentException("Given string is not a face.");
+    }
+
+    //
     // Geometry
     //
 
@@ -95,4 +113,16 @@ public interface Face extends AlphabeticalGroup<Vertex>, Serializable {
      */
     @Nonnull
     Face apply(@Nonnull UnaryOperator<Vertex> operator);
+
+    //
+    // Serialization
+    //
+
+    /**
+     * Serializes this face into a string.
+     *
+     * @return The string representation of this face
+     */
+    @Nonnull
+    String toString();
 }

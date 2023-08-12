@@ -84,6 +84,11 @@ public class RichColor extends Vector4 {
     public static final RichColor BLUE = new RichColor(0, 0, 255);
 
     /**
+     * The color gold.
+     */
+    public static final RichColor GOLD = new RichColor(218, 165, 32);
+
+    /**
      * A transparent color with the base color being white.
      */
     public static final RichColor TRANSPARENT_WHITE = new RichColor(255, 255, 255, 0);
@@ -296,7 +301,6 @@ public class RichColor extends Vector4 {
 
     /**
      * Creates a new color.
-     * All parameters must be within the range of {@code 0-255}.
      *
      * @param color An AWT {@link Color} object
      */

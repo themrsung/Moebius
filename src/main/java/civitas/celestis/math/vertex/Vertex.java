@@ -4,6 +4,8 @@ import civitas.celestis.math.Numbers;
 import civitas.celestis.math.quaternion.Quaternion;
 import civitas.celestis.math.vector.Vector;
 import civitas.celestis.math.vector.Vector3;
+import civitas.celestis.math.vector.VectorMapper;
+import de.javagl.obj.FloatTuple;
 import jakarta.annotation.Nonnull;
 
 import java.util.function.UnaryOperator;
@@ -53,6 +55,22 @@ public class Vertex extends Vector3 {
     public static final Vertex BACK = new Vertex(NEGATIVE_Z);
 
     //
+    // Static Utilities
+    //
+
+    /**
+     * Converts a Wavefront {@link FloatTuple} to a Moebius {@link Vertex}.
+     * This swaps the X and Z components to compensate for the differences in coordinate systems.
+     *
+     * @param in The input tuple
+     * @return The converted vertex
+     */
+    @Nonnull
+    public static Vertex fromObjTuple(@Nonnull FloatTuple in) {
+        return VectorMapper.VERTEX_SWAP_X_Z.apply(new Vertex(in));
+    }
+
+    //
     // Constructors
     //
 
@@ -80,6 +98,15 @@ public class Vertex extends Vector3 {
      */
     public Vertex(@Nonnull double[] values) {
         super(values);
+    }
+
+    /**
+     * Creates a new vertex from a {@link FloatTuple}.
+     *
+     * @param objTuple The tuple to copy values from
+     */
+    public Vertex(@Nonnull FloatTuple objTuple) {
+        super(objTuple.getX(), objTuple.getY(), objTuple.getZ());
     }
 
     /**
@@ -404,6 +431,19 @@ public class Vertex extends Vector3 {
         final double scaledZ = (z - origin.z()) * scale;
 
         return new Vertex(scaledX, scaledY, scaledZ).rotate(rotation);
+    }
+
+    /**
+     * Transforms this vertex to an absolute coordinate system.
+     * This is used to translate local coordinates into absolute coordinates.
+     *
+     * @param rotation The rotation to apply before translating
+     * @param offset   The offset of the local coordinate system's origin relative to absolute zero
+     * @return The absolute coordinates of this vertex
+     */
+    @Nonnull
+    public Vertex absolute(@Nonnull Quaternion rotation, @Nonnull Vector3 offset) {
+        return rotate(rotation).add(offset);
     }
 
     //
