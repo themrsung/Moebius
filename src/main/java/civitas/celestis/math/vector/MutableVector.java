@@ -74,7 +74,7 @@ public class MutableVector implements Vector {
      *
      * @param i Index of component to get
      * @return The component value at the given index
-     * @throws IndexOutOfBoundsException
+     * @throws IndexOutOfBoundsException When the index {@code i} is out of bounds
      */
     @Override
     public final double valueAt(int i) throws IndexOutOfBoundsException {

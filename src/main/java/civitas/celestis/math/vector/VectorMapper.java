@@ -87,6 +87,7 @@ public final class VectorMapper<V extends Vector> implements UnaryOperator<V> {
      * Creates a new vector mapper.
      *
      * @param map The map of indexes
+     * @param constructor The constructor function to use to create the new vector instance
      */
     public VectorMapper(@Nonnull int[] map, @Nonnull Function<double[], V> constructor) {
         this.map = map;
