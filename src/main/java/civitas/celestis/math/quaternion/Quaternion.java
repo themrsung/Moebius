@@ -23,6 +23,20 @@ public class Quaternion extends Vector4 {
     public static final Quaternion IDENTITY = new Quaternion(1, 0, 0, 0);
 
     //
+    // Builder
+    //
+
+    /**
+     * Creates a new builder instance and returns it.
+     *
+     * @return A new builder instance
+     */
+    @Nonnull
+    public static QuaternionBuilder builder() {
+        return new QuaternionBuilder();
+    }
+
+    //
     // Constructors
     //
 
@@ -333,9 +347,8 @@ public class Quaternion extends Vector4 {
     public Quaternion multiply(@Nonnull Quaternion q) {
         return new Quaternion(
                 w * q.w - vector().dot(q.vector()),
-                vector().cross(q.vector())
-                        .add(vector().multiply(q.w))
-                        .add(q.vector().multiply(w)));
+                vector().cross(q.vector()).add(vector().multiply(q.w)).add(q.vector().multiply(w))
+        );
     }
 
     /**
@@ -553,8 +566,10 @@ public class Quaternion extends Vector4 {
     @Nonnull
     public String toString() {
         return "Quaternion{" +
-                "x=" + x +
+                "w=" + w +
+                ", x=" + x +
                 ", y=" + y +
+                ", z=" + z +
                 '}';
     }
 }

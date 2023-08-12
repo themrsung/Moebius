@@ -33,6 +33,25 @@ public final class Numbers {
         return value;
     }
 
+    /**
+     * Explicitly denotes that a given {@code double} must be within the range {@code min} to {@code max}.
+     * If the value meets the requirements, this will simply pass through the value to the return value.
+     * If not, this will throw an {@link IllegalArgumentException}.
+     *
+     * @param value Value to validate
+     * @param min   The minimum acceptable value
+     * @param max   The maximum acceptable value
+     * @return The value given as the parameter
+     * @throws IllegalArgumentException When {@code value > max || value < min}
+     */
+    public static double requireRange(double value, double min, double max) {
+        if (value < min || value > max) {
+            throw new IllegalArgumentException("This field required the value to be within range " + min + "-" + max + ".");
+        }
+
+        return value;
+    }
+
     //
     // Randomization
     //

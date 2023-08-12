@@ -251,6 +251,24 @@ public interface Vector extends Serializable {
     @Nonnull
     Vector negate();
 
+    /**
+     * Returns the distance between this vector and the provided vector.
+     *
+     * @param v The vector to get the distance to
+     * @return The distance between this vector and {@code v}
+     * @throws IllegalArgumentException When the provided vector has a different length compared to this vector
+     */
+    double distance(@Nonnull Vector v) throws IllegalArgumentException;
+
+    /**
+     * Returns the squared distance between this vector and the provided vector.
+     *
+     * @param v The vector to get the squared distance to
+     * @return The squared distance between this vector and {@code v}
+     * @throws IllegalArgumentException When the provided vector has a different length compared to this vector
+     */
+    double distance2(@Nonnull Vector v) throws IllegalArgumentException;
+
     //
     // Equality
     //

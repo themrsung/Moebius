@@ -523,6 +523,30 @@ public class MutableVector implements Vector {
         return multiply(-1);
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param v The vector to get the distance to
+     * @return The distance between this vector and {@code v}
+     * @throws IllegalArgumentException When the vectors' lengths are different
+     */
+    @Override
+    public double distance(@Nonnull Vector v) throws IllegalArgumentException {
+        return subtract(v).magnitude();
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param v The vector to get the squared distance to
+     * @return The squared distance between this vector and {@code v}
+     * @throws IllegalArgumentException When the vectors' lengths are different
+     */
+    @Override
+    public double distance2(@Nonnull Vector v) throws IllegalArgumentException {
+        return subtract(v).magnitude2();
+    }
+
     //
     // Equality
     //

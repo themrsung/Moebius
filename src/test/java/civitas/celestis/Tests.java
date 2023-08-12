@@ -1,11 +1,15 @@
 package civitas.celestis;
 
-import civitas.celestis.math.vector.Vector3;
+import civitas.celestis.graphics.color.RichColor;
+import civitas.celestis.math.vector.Vector4;
 
 public class Tests {
     public static void main(String[] args) {
-        final Vector3 v1 = new Vector3(1, 2, 30);
-        System.out.println(Vector3.parseVector(v1.toString()));
-        System.out.println(1 / 0L);
+        final RichColor c1 = RichColor.random();
+        final RichColor c2 = RichColor.random();
+
+        System.out.println(c1 + " / " + c2);
+
+        System.out.println(c1.distance(c2));
     }
 }

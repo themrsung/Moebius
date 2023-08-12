@@ -598,6 +598,50 @@ public class Vector4 implements Vector {
         return new Vector4(-w, -x, -y, -z);
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param v The vector to get the distance to
+     * @return The distance between this vector and {@code v}
+     * @throws IllegalArgumentException When the provided vector {@code v}'s length is not {@code 4}
+     */
+    @Override
+    public double distance(@Nonnull Vector v) throws IllegalArgumentException {
+        return subtract(v).magnitude();
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param v The vector to get the squared distance to
+     * @return The squared distance between this vector and {@code v}
+     * @throws IllegalArgumentException When the provided vector {@code v}'s length is not {@code 4}
+     */
+    @Override
+    public double distance2(@Nonnull Vector v) throws IllegalArgumentException {
+        return subtract(v).magnitude2();
+    }
+
+    /**
+     * Returns the distance between this vector and the provided vector.
+     *
+     * @param v The vector to get the distance to
+     * @return The distance between this vector and {@code v}
+     */
+    public double distance(@Nonnull Vector4 v) {
+        return subtract(v).magnitude();
+    }
+
+    /**
+     * Returns the squared distance between this vector and the provided vector.
+     *
+     * @param v The vector to get the squared distance to
+     * @return The squared distance between this vector and {@code v}
+     */
+    public double distance2(@Nonnull Vector4 v) {
+        return subtract(v).magnitude2();
+    }
+
     //
     // Equality
     //
@@ -662,8 +706,10 @@ public class Vector4 implements Vector {
     @Nonnull
     public String toString() {
         return "Vector4{" +
-                "x=" + x +
+                "w=" + w +
+                ", x=" + x +
                 ", y=" + y +
+                ", z=" + z +
                 '}';
     }
 }
