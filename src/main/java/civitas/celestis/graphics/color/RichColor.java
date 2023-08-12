@@ -11,7 +11,7 @@ import java.util.function.UnaryOperator;
 
 /**
  * A color class with linear transition capability.
- * Color components are stored using {@code double} with a range of {@code 0-1}
+ * Color components are stored using {@code double} with a range of {@code 0-255}
  */
 public class RichColor extends Vector4 {
     //
