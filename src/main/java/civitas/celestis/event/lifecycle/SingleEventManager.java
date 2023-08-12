@@ -75,8 +75,19 @@ public final class SingleEventManager implements EventManager {
         listeners.forEach(this::unregister);
     }
 
+    /**
+     * The queue of events.
+     */
     private final Queue<Event> queue = new LinkedList<>();
+
+    /**
+     * The list of event handlers.
+     */
     private final List<HandlerReference> handlers = new ArrayList<>();
+
+    /**
+     * The thread which handles the events.
+     */
     private final Thread thread = new Thread(() -> {
         while (!Thread.interrupted()) {
             // Poll next event
