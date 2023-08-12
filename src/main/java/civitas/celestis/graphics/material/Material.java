@@ -50,8 +50,9 @@ public enum Material {
 
     /**
      * Creates a new material.
+     *
      * @param reflectiveness The reflectiveness coefficient of this material
-     * @param elasticity The elasticity coefficient of this material
+     * @param elasticity     The elasticity coefficient of this material
      */
     Material(double reflectiveness, double elasticity) {
         this.reflectiveness = reflectiveness;
@@ -71,6 +72,7 @@ public enum Material {
 
     /**
      * Returns the reflectiveness coefficient of this material.
+     *
      * @return The reflectiveness coefficient of this material
      */
     public double reflectiveness() {
@@ -79,6 +81,7 @@ public enum Material {
 
     /**
      * Returns the elasticity coefficient of this material.
+     *
      * @return The elasticity coefficient of this material
      */
     public double elasticity() {
@@ -87,6 +90,7 @@ public enum Material {
 
     /**
      * Calculates the restitution coefficient when colliding with the given material.
+     *
      * @param other The material this material has collided with
      * @return The restitution coefficient of the collision
      */

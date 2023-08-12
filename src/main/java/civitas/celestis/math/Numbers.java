@@ -20,6 +20,31 @@ public final class Numbers {
      */
     public static final double EPSILON = 1e-6;
 
+    /**
+     * Any differences below this value will be considered zero.
+     * In other words, if two values are different by less than this margin, they will be considered equal
+     * by this class.
+     */
+    public static final double MARGIN_OF_SIGNIFICANCE = 1e-6;
+
+    /**
+     * {@code 1 / 2} of the {@link Numbers#MARGIN_OF_SIGNIFICANCE}.
+     * This is used to compare the component values of two-dimensional vectors.
+     */
+    private static final double HALF_MARGIN_OF_SIGNIFICANCE = MARGIN_OF_SIGNIFICANCE / 2;
+
+    /**
+     * {@code 1 / 3} of the {@link Numbers#MARGIN_OF_SIGNIFICANCE}.
+     * This is used to compare the component values of three-dimensional vectors.
+     */
+    private static final double THIRD_MARGIN_OF_SIGNIFICANCE = MARGIN_OF_SIGNIFICANCE / 3;
+
+    /**
+     * {@code 1 / 4} of the {@link Numbers#MARGIN_OF_SIGNIFICANCE}.
+     * This is used to compare the component values of four-dimensional vectors.
+     */
+    private static final double QUARTER_MARGIN_OF_SIGNIFICANCE = MARGIN_OF_SIGNIFICANCE / 4;
+
     //
     // Constraints
     //
@@ -500,6 +525,108 @@ public final class Numbers {
         }
 
         return result;
+    }
+
+    //
+    // Loose Equality
+    //
+
+    /**
+     * Checks for equality between two {@code double}s with regard to the {@link Numbers#MARGIN_OF_SIGNIFICANCE}.
+     *
+     * @param v1 The first value to compare
+     * @param v2 The second value to compare
+     * @return {@code true} if the values are effectively equal
+     */
+    public static boolean equals(double v1, double v2) {
+        return Math.abs(v1 - v2) < MARGIN_OF_SIGNIFICANCE;
+    }
+
+    /**
+     * Checks for equality between two vectors with regard to the {@link Numbers#MARGIN_OF_SIGNIFICANCE}.
+     *
+     * @param v1 The first vector to compare
+     * @param v2 The second vector to compare
+     * @return {@code true} if the vectors are effectively equal
+     */
+    public static boolean equals(@Nonnull Vector v1, @Nonnull Vector v2) {
+        if (v1.length() != v2.length()) return false;
+        final double margin = MARGIN_OF_SIGNIFICANCE / v1.length();
+
+        for (int i = 0; i < v1.length(); i++) {
+            if (Math.abs(v1.valueAt(i) - v2.valueAt(i)) >= margin) return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Checks for equality between two vectors with regard to the {@link Numbers#MARGIN_OF_SIGNIFICANCE}.
+     *
+     * @param v1 The first vector to compare
+     * @param v2 The second vector to compare
+     * @return {@code true} if the vectors are effectively equal
+     */
+    public static boolean equals(@Nonnull Vector2 v1, @Nonnull Vector2 v2) {
+        return Math.abs(v1.x() - v2.x()) < HALF_MARGIN_OF_SIGNIFICANCE &&
+                Math.abs(v1.y() - v2.y()) < HALF_MARGIN_OF_SIGNIFICANCE;
+    }
+
+    /**
+     * Checks for equality between two vectors with regard to the {@link Numbers#MARGIN_OF_SIGNIFICANCE}.
+     *
+     * @param v1 The first vector to compare
+     * @param v2 The second vector to compare
+     * @return {@code true} if the vectors are effectively equal
+     */
+    public static boolean equals(@Nonnull Vector3 v1, @Nonnull Vector3 v2) {
+        return Math.abs(v1.x() - v2.x()) < THIRD_MARGIN_OF_SIGNIFICANCE &&
+                Math.abs(v1.y() - v2.y()) < THIRD_MARGIN_OF_SIGNIFICANCE &&
+                Math.abs(v1.z() - v2.z()) < THIRD_MARGIN_OF_SIGNIFICANCE;
+    }
+
+    /**
+     * Checks for equality between two vectors with regard to the {@link Numbers#MARGIN_OF_SIGNIFICANCE}.
+     *
+     * @param v1 The first vector to compare
+     * @param v2 The second vector to compare
+     * @return {@code true} if the vectors are effectively equal
+     */
+    public static boolean equals(@Nonnull Vector4 v1, @Nonnull Vector4 v2) {
+        return Math.abs(v1.w() - v2.w()) < QUARTER_MARGIN_OF_SIGNIFICANCE &&
+                Math.abs(v1.x() - v2.x()) < QUARTER_MARGIN_OF_SIGNIFICANCE &&
+                Math.abs(v1.y() - v2.y()) < QUARTER_MARGIN_OF_SIGNIFICANCE &&
+                Math.abs(v1.z() - v2.z()) < QUARTER_MARGIN_OF_SIGNIFICANCE;
+    }
+
+    /**
+     * Checks for equality between two matrices with regard to the {@link Numbers#MARGIN_OF_SIGNIFICANCE}.
+     *
+     * @param m1 The first matrix to compare
+     * @param m2 The second matrix to compare
+     * @return {@code true} if the matrices are effectively equal
+     */
+    public static boolean equals(@Nonnull Matrix m1, @Nonnull Matrix m2) {
+        if (!m1.size().equals(m2.size())) return false;
+
+        for (int r = 0; r < m1.rows(); r++) {
+            for (int c = 0; c < m1.columns(); c++) {
+                if (!equals(m1.get(r, c), m2.get(r, c))) return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Compares two {@code double}s with regard to the {@link Numbers#MARGIN_OF_SIGNIFICANCE}.
+     *
+     * @param v1 The first value to compare
+     * @param v2 The second value to compare
+     * @return {@code 0} if the values are effectively equal, {@code 1} if the first value is larger, {@code -1} otherwise
+     */
+    public static int compare(double v1, double v2) {
+        return equals(v1, v2) ? 0 : (v1 > v2 ? 1 : -1);
     }
 
     //
@@ -1319,4 +1446,30 @@ public final class Numbers {
         return sum(weighted).divide(sum(weights));
     }
 
+    //
+    // Miscellaneous
+    //
+
+    /**
+     * Calculates the distance between two scalars.
+     *
+     * @param v1 The first value
+     * @param v2 The second value
+     * @return The distance between the two scalars
+     */
+    public static double distance(double v1, double v2) {
+        return Math.abs(v2 - v1);
+    }
+
+    /**
+     * Calculates the squared distance between two scalars.
+     *
+     * @param v1 The first value
+     * @param v2 The second value
+     * @return The squared distance between the two scalars
+     */
+    public static double distance2(double v1, double v2) {
+        final double diff = v2 - v1;
+        return diff * diff;
+    }
 }

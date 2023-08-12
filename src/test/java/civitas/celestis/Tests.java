@@ -3,6 +3,8 @@ package civitas.celestis;
 import civitas.celestis.graphics.color.RichColor;
 import civitas.celestis.graphics.model.ColoredModel;
 import civitas.celestis.math.Numbers;
+import civitas.celestis.util.string.RichString;
+import civitas.celestis.util.string.RichText;
 import de.javagl.obj.Obj;
 import de.javagl.obj.ObjReader;
 
@@ -24,14 +26,11 @@ public class Tests {
 
         final ColoredModel model = new ColoredModel(obj, RichColor.GRAY, 1);
 
-        final RichColor c1 = RichColor.PINK;
-        final RichColor c2 = RichColor.ORANGE;
-        final RichColor c3 = RichColor.GOLD;
+        final RichString rs1 = new RichString("Hello world!\n");
+        final RichString rs2 = new RichString("Hello world2!");
 
-        System.out.println(c1.reflectiveness());
-        System.out.println(c2.reflectiveness());
-        System.out.println(c3.reflectiveness());
+        final RichText text = new RichText(rs1, rs2);
 
-        System.out.println(Numbers.scale(0.95, 0, 1, 0, 255));
+        System.out.println(RichText.parseText(text.toString()));
     }
 }

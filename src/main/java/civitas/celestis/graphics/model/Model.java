@@ -65,6 +65,7 @@ public interface Model extends Serializable {
 
     /**
      * Serializes this model into a string.
+     *
      * @return The string representation of this model
      */
     @Nonnull
