@@ -8,7 +8,7 @@ import jakarta.annotation.Nullable;
 import java.util.function.UnaryOperator;
 
 /**
- * An immutable two-dimensional {@code long} vector.
+ * An immutable two-dimensional {@code int} vector.
  */
 public class IntVector2 implements IntVector {
     //
