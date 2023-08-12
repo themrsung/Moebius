@@ -168,8 +168,8 @@ public class RichString implements Serializable {
      * @see String#lines()
      */
     @Nonnull
-    public Stream<String> lines() {
-        return content.lines();
+    public Stream<RichString> lines() {
+        return content.lines().map(l -> new RichString(l, color, format));
     }
 
     /**
