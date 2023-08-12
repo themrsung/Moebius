@@ -81,6 +81,7 @@ public class IntVector2 implements IntVector {
 
     /**
      * Creates a new vector.
+     *
      * @param v The {@link Vector} to copy values from
      */
     public IntVector2(@Nonnull Vector v) {
@@ -94,6 +95,7 @@ public class IntVector2 implements IntVector {
 
     /**
      * Creates a new vector.
+     *
      * @param v The {@link Vector2} to copy values from
      */
     public IntVector2(@Nonnull Vector2 v) {
@@ -302,6 +304,7 @@ public class IntVector2 implements IntVector {
     /**
      * {@inheritDoc}
      * This operation uses complex number multiplication.
+     *
      * @param v The vector to multiply this vector by
      * @return The resulting vector
      * @throws IllegalArgumentException When the provided vector {@code v}'s length is not {@code 2}
@@ -318,6 +321,7 @@ public class IntVector2 implements IntVector {
 
     /**
      * {@inheritDoc}
+     *
      * @param v The vector to get the dot product between
      * @return The dot product of the two vectors
      * @throws IllegalArgumentException When the given vector {@code v}'s length is not {@code 2}
@@ -496,6 +500,7 @@ public class IntVector2 implements IntVector {
 
     /**
      * {@inheritDoc}
+     *
      * @return A {@link Vector2} derived from {@code this}
      */
     @Nonnull

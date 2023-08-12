@@ -1,7 +1,6 @@
 package civitas.celestis.math.integer;
 
 import civitas.celestis.math.vector.Vector;
-import civitas.celestis.math.vector.Vector3;
 import civitas.celestis.math.vector.Vector4;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
@@ -108,6 +107,7 @@ public class IntVector4 implements IntVector {
 
     /**
      * Creates a new vector.
+     *
      * @param v The {@link Vector} to copy values from
      */
     public IntVector4(@Nonnull Vector v) {
@@ -123,6 +123,7 @@ public class IntVector4 implements IntVector {
 
     /**
      * Creates a new vector.
+     *
      * @param v The {@link Vector4} to copy values from
      */
     public IntVector4(@Nonnull Vector4 v) {
@@ -172,6 +173,7 @@ public class IntVector4 implements IntVector {
 
     /**
      * Returns the W component of this vector.
+     *
      * @return The W component of this vector
      */
     public final int w() {
@@ -198,6 +200,7 @@ public class IntVector4 implements IntVector {
 
     /**
      * Returns the Z component of this vector.
+     *
      * @return The Z component of this vector
      */
     public final int z() {
@@ -355,6 +358,7 @@ public class IntVector4 implements IntVector {
     /**
      * {@inheritDoc}
      * This operation uses quaternion left-multiplication.
+     *
      * @param v The vector to multiply this vector by
      * @return The resulting vector
      * @throws IllegalArgumentException When the provided vector {@code v}'s length is not {@code 4}
@@ -376,6 +380,7 @@ public class IntVector4 implements IntVector {
 
     /**
      * {@inheritDoc}
+     *
      * @param v The vector to get the dot product between
      * @return The dot product of the two vectors
      * @throws IllegalArgumentException When the given vector {@code v}'s length is not {@code 4}
@@ -413,6 +418,7 @@ public class IntVector4 implements IntVector {
 
     /**
      * Multiplies this vector by another vector using quaternion left-multiplication.
+     *
      * @param v The vector to multiply this vector by
      * @return The resulting vector
      */
@@ -575,6 +581,7 @@ public class IntVector4 implements IntVector {
 
     /**
      * {@inheritDoc}
+     *
      * @return A {@link Vector4} derived from {@code this}
      */
     @Nonnull

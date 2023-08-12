@@ -1,10 +1,10 @@
 package civitas.celestis.math;
 
+import civitas.celestis.exception.math.NotIntSafeException;
+import civitas.celestis.math.integer.*;
+import civitas.celestis.math.matrix.Matrix;
 import civitas.celestis.math.quaternion.Quaternion;
-import civitas.celestis.math.vector.Vector;
-import civitas.celestis.math.vector.Vector2;
-import civitas.celestis.math.vector.Vector3;
-import civitas.celestis.math.vector.Vector4;
+import civitas.celestis.math.vector.*;
 import jakarta.annotation.Nonnull;
 
 /**
@@ -54,6 +54,7 @@ public final class Numbers {
 
     /**
      * Checks if a {@code double} can be safely cast to an {@code int} without any overflows.
+     *
      * @param value Value to check
      * @return {@code true} if {@code (int) value} will not result in an overflow
      */
@@ -64,6 +65,7 @@ public final class Numbers {
 
     /**
      * Checks if a {@link Vector} can be safely cast to an {@link IntVector} without any overflows.
+     *
      * @param v Value to check
      * @return {@code true} if the vector is int-safe
      */
@@ -73,6 +75,154 @@ public final class Numbers {
         }
 
         return true;
+    }
+
+    /**
+     * Safely casts a {@code double} to an {@code int}.
+     *
+     * @param value The value to cast
+     * @return The integer value of the {@code value}
+     * @throws NotIntSafeException When the value is not int-safe (determined by {@link Numbers#isIntSafe(double)})
+     */
+    public static double safeCastToInt(double value) throws NotIntSafeException {
+        if (!isIntSafe(value)) {
+            throw new NotIntSafeException("The value " + value + " cannot be safely cast to an int.");
+        }
+
+        return (int) value;
+    }
+
+    /**
+     * Safely casts a {@code double} vector to an {@code int} vector.
+     *
+     * @param value The value to cast
+     * @return The integer vector of the provided vector
+     * @throws NotIntSafeException When the value is not int-safe (determined by {@link Numbers#isIntSafe(Vector)})
+     */
+    @Nonnull
+    public static IntVector safeCastToInt(@Nonnull Vector value) throws NotIntSafeException {
+        if (!isIntSafe(value)) {
+            throw new NotIntSafeException("The provided vector cannot be safely cast to an int vector.");
+        }
+
+        return IntVector.fromDouble(value);
+    }
+
+    /**
+     * Safely casts a {@code double} vector to an {@code int} vector.
+     *
+     * @param value The value to cast
+     * @return The integer vector of the provided vector
+     * @throws NotIntSafeException When the value is not int-safe (determined by {@link Numbers#isIntSafe(Vector)})
+     */
+    @Nonnull
+    public static IntVector2 safeCastToInt(@Nonnull Vector2 value) throws NotIntSafeException {
+        if (!isIntSafe(value)) {
+            throw new NotIntSafeException("The provided vector cannot be safely cast to an int vector.");
+        }
+
+        return new IntVector2(value);
+    }
+
+    /**
+     * Safely casts a {@code double} vector to an {@code int} vector.
+     *
+     * @param value The value to cast
+     * @return The integer vector of the provided vector
+     * @throws NotIntSafeException When the value is not int-safe (determined by {@link Numbers#isIntSafe(Vector)})
+     */
+    @Nonnull
+    public static IntVector3 safeCastToInt(@Nonnull Vector3 value) throws NotIntSafeException {
+        if (!isIntSafe(value)) {
+            throw new NotIntSafeException("The provided vector cannot be safely cast to an int vector.");
+        }
+
+        return new IntVector3(value);
+    }
+
+    /**
+     * Safely casts a {@code double} vector to an {@code int} vector.
+     *
+     * @param value The value to cast
+     * @return The integer vector of the provided vector
+     * @throws NotIntSafeException When the value is not int-safe (determined by {@link Numbers#isIntSafe(Vector)})
+     */
+    @Nonnull
+    public static IntVector4 safeCastToInt(@Nonnull Vector4 value) throws NotIntSafeException {
+        if (!isIntSafe(value)) {
+            throw new NotIntSafeException("The provided vector cannot be safely cast to an int vector.");
+        }
+
+        return new IntVector4(value);
+    }
+
+    //
+    // Deep Copy
+    //
+    // Note that copying immutable vectors is meaningless.
+    //
+
+    /**
+     * Deep copies a vector.
+     *
+     * @param v The vector to copy
+     * @return The copied vector
+     */
+    @Nonnull
+    public static Vector copy(@Nonnull Vector v) {
+        return Vector.of(v.values());
+    }
+
+    /**
+     * Deep copies a vector.
+     *
+     * @param v The vector to copy
+     * @return The copied vector
+     */
+    @Nonnull
+    public static MutableVector copy(@Nonnull MutableVector v) {
+        return new MutableVector(v.values());
+    }
+
+    /**
+     * Deep copies a vector.
+     *
+     * @param v The vector to copy
+     * @return The copied vector
+     */
+    @Nonnull
+    public static IntVector copy(@Nonnull IntVector v) {
+        return IntVector.of(v.values());
+    }
+
+    /**
+     * Deep copies a vector.
+     *
+     * @param v The vector to copy
+     * @return The copied vector
+     */
+    @Nonnull
+    public static MutableIntVector copy(@Nonnull MutableIntVector v) {
+        return new MutableIntVector(v.values());
+    }
+
+    /**
+     * Deep copies a matrix.
+     *
+     * @param m The matrix to copy
+     * @return The copied matrix
+     */
+    @Nonnull
+    public static Matrix copy(@Nonnull Matrix m) {
+        final Matrix result = new Matrix(m.rows(), m.columns());
+
+        for (int r = 0; r < m.rows(); r++) {
+            for (int c = 0; c < m.rows(); c++) {
+                result.set(r, c, m.get(r, c));
+            }
+        }
+
+        return result;
     }
 
     //
@@ -164,6 +314,75 @@ public final class Numbers {
         return new Quaternion(w, x, y, z);
     }
 
+    /**
+     * Returns the sum of the provided vectors.
+     * This is the equivalent of chaining {@link IntVector2#add(IntVector2)}, but is faster due to the lack of
+     * re-instantiation every iteration.
+     *
+     * @param values The vectors to sum
+     * @return The sum of the provided vectors
+     */
+    @Nonnull
+    public static IntVector2 sum(@Nonnull IntVector2... values) {
+        int x = 0;
+        int y = 0;
+
+        for (final IntVector2 value : values) {
+            x += value.x();
+            y += value.y();
+        }
+
+        return new IntVector2(x, y);
+    }
+
+    /**
+     * Returns the sum of the provided vectors.
+     * This is the equivalent of chaining {@link IntVector3#add(IntVector3)}, but is faster due to the lack of
+     * re-instantiation every iteration.
+     *
+     * @param values The vectors to sum
+     * @return The sum of the provided vectors
+     */
+    @Nonnull
+    public static IntVector3 sum(@Nonnull IntVector3... values) {
+        int x = 0;
+        int y = 0;
+        int z = 0;
+
+        for (final IntVector3 value : values) {
+            x += value.x();
+            y += value.y();
+            z += value.z();
+        }
+
+        return new IntVector3(x, y, z);
+    }
+
+    /**
+     * Returns the sum of the provided vectors.
+     * This is the equivalent of chaining {@link IntVector4#add(IntVector4)}, but is faster due to the lack of
+     * re-instantiation every iteration.
+     *
+     * @param values The vectors to sum
+     * @return The sum of the provided vectors
+     */
+    @Nonnull
+    public static IntVector4 sum(@Nonnull IntVector4... values) {
+        int w = 0;
+        int x = 0;
+        int y = 0;
+        int z = 0;
+
+        for (final IntVector4 value : values) {
+            w += value.w();
+            x += value.x();
+            y += value.y();
+            z += value.z();
+        }
+
+        return new IntVector4(w, x, y, z);
+    }
+
     //
     // Average
     //
@@ -215,6 +434,42 @@ public final class Numbers {
      */
     @Nonnull
     public static Vector4 avg(@Nonnull Vector4... values) {
+        return sum(values).divide(values.length);
+    }
+
+    /**
+     * Returns the average of the provided vectors.
+     * This is equivalent to the geometric centroid of the vectors.
+     *
+     * @param values The vectors to average
+     * @return The average (geometric centroid) of ths provided vectors
+     */
+    @Nonnull
+    public static IntVector2 avg(@Nonnull IntVector2... values) {
+        return sum(values).divide(values.length);
+    }
+
+    /**
+     * Returns the average of the provided vectors.
+     * This is equivalent to the geometric centroid of the vectors.
+     *
+     * @param values The vectors to average
+     * @return The average (geometric centroid) of ths provided vectors
+     */
+    @Nonnull
+    public static IntVector3 avg(@Nonnull IntVector3... values) {
+        return sum(values).divide(values.length);
+    }
+
+    /**
+     * Returns the average of the provided vectors.
+     * This is equivalent to the geometric centroid of the vectors.
+     *
+     * @param values The vectors to average
+     * @return The average (geometric centroid) of ths provided vectors
+     */
+    @Nonnull
+    public static IntVector4 avg(@Nonnull IntVector4... values) {
         return sum(values).divide(values.length);
     }
 
@@ -301,6 +556,69 @@ public final class Numbers {
         return new Vector4(w, x, y, z);
     }
 
+    /**
+     * Returns the minimum vector of the provided vectors.
+     *
+     * @param values The vectors to get the minimum of
+     * @return The minimum of the provided vectors
+     */
+    @Nonnull
+    public static IntVector2 min(@Nonnull IntVector2... values) {
+        int x = Integer.MAX_VALUE;
+        int y = Integer.MAX_VALUE;
+
+        for (final IntVector2 value : values) {
+            x = Math.min(x, value.x());
+            y = Math.min(y, value.y());
+        }
+
+        return new IntVector2(x, y);
+    }
+
+    /**
+     * Returns the minimum vector of the provided vectors.
+     *
+     * @param values The vectors to get the minimum of
+     * @return The minimum of the provided vectors
+     */
+    @Nonnull
+    public static IntVector3 min(@Nonnull IntVector3... values) {
+        int x = Integer.MAX_VALUE;
+        int y = Integer.MAX_VALUE;
+        int z = Integer.MAX_VALUE;
+
+        for (final IntVector3 value : values) {
+            x = Math.min(x, value.x());
+            y = Math.min(y, value.y());
+            z = Math.min(z, value.z());
+        }
+
+        return new IntVector3(x, y, z);
+    }
+
+    /**
+     * Returns the minimum vector of the provided vectors.
+     *
+     * @param values The vectors to get the minimum of
+     * @return The minimum of the provided vectors
+     */
+    @Nonnull
+    public static IntVector4 min(@Nonnull IntVector4... values) {
+        int w = Integer.MAX_VALUE;
+        int x = Integer.MAX_VALUE;
+        int y = Integer.MAX_VALUE;
+        int z = Integer.MAX_VALUE;
+
+        for (final IntVector4 value : values) {
+            w = Math.min(w, value.w());
+            x = Math.min(x, value.x());
+            y = Math.min(y, value.y());
+            z = Math.min(z, value.z());
+        }
+
+        return new IntVector4(w, x, y, z);
+    }
+
     //
     // Max
     //
@@ -382,6 +700,69 @@ public final class Numbers {
         }
 
         return new Vector4(w, x, y, z);
+    }
+
+    /**
+     * Returns the maximum vector of the provided vectors.
+     *
+     * @param values The vectors to get the minimum of
+     * @return The maximum of the provided vectors
+     */
+    @Nonnull
+    public static IntVector2 max(@Nonnull IntVector2... values) {
+        int x = -Integer.MAX_VALUE;
+        int y = -Integer.MAX_VALUE;
+
+        for (final IntVector2 value : values) {
+            x = Math.max(x, value.x());
+            y = Math.max(y, value.y());
+        }
+
+        return new IntVector2(x, y);
+    }
+
+    /**
+     * Returns the maximum vector of the provided vectors.
+     *
+     * @param values The vectors to get the minimum of
+     * @return The maximum of the provided vectors
+     */
+    @Nonnull
+    public static IntVector3 max(@Nonnull IntVector3... values) {
+        int x = -Integer.MAX_VALUE;
+        int y = -Integer.MAX_VALUE;
+        int z = -Integer.MAX_VALUE;
+
+        for (final IntVector3 value : values) {
+            x = Math.max(x, value.x());
+            y = Math.max(y, value.y());
+            z = Math.max(z, value.z());
+        }
+
+        return new IntVector3(x, y, z);
+    }
+
+    /**
+     * Returns the maximum vector of the provided vectors.
+     *
+     * @param values The vectors to get the minimum of
+     * @return The maximum of the provided vectors
+     */
+    @Nonnull
+    public static IntVector4 max(@Nonnull IntVector4... values) {
+        int w = -Integer.MAX_VALUE;
+        int x = -Integer.MAX_VALUE;
+        int y = -Integer.MAX_VALUE;
+        int z = -Integer.MAX_VALUE;
+
+        for (final IntVector4 value : values) {
+            w = Math.max(w, value.w());
+            x = Math.max(x, value.x());
+            y = Math.max(y, value.y());
+            z = Math.max(z, value.z());
+        }
+
+        return new IntVector4(w, x, y, z);
     }
 
     //

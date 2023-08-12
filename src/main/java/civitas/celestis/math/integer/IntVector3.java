@@ -1,7 +1,6 @@
 package civitas.celestis.math.integer;
 
 import civitas.celestis.math.vector.Vector;
-import civitas.celestis.math.vector.Vector2;
 import civitas.celestis.math.vector.Vector3;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
@@ -95,6 +94,7 @@ public class IntVector3 implements IntVector {
 
     /**
      * Creates a new vector.
+     *
      * @param v The {@link Vector} to copy values from
      */
     public IntVector3(@Nonnull Vector v) {
@@ -109,6 +109,7 @@ public class IntVector3 implements IntVector {
 
     /**
      * Creates a new vector.
+     *
      * @param v The {@link Vector3} to copy values from
      */
     public IntVector3(@Nonnull Vector3 v) {
@@ -173,6 +174,7 @@ public class IntVector3 implements IntVector {
 
     /**
      * Returns the Z component of this vector.
+     *
      * @return The Z component of this vector
      */
     public final int z() {
@@ -341,6 +343,7 @@ public class IntVector3 implements IntVector {
 
     /**
      * Returns the cross product between this vector and the provided vector.
+     *
      * @param v The vector on the right of this operation
      * @return The cross product of the two vectors
      * @throws IllegalArgumentException When the provided vector {@code v}'s length is not {@code 3}
@@ -360,6 +363,7 @@ public class IntVector3 implements IntVector {
 
     /**
      * {@inheritDoc}
+     *
      * @param v The vector to get the dot product between
      * @return The dot product of the two vectors
      * @throws IllegalArgumentException When the given vector {@code v}'s length is not {@code 3}
@@ -543,6 +547,7 @@ public class IntVector3 implements IntVector {
 
     /**
      * {@inheritDoc}
+     *
      * @return A {@link Vector3} derived from {@code this}
      */
     @Nonnull

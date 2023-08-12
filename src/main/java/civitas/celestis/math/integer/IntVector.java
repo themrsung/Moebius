@@ -20,6 +20,7 @@ public interface IntVector extends Serializable {
 
     /**
      * Creates a new vector.
+     *
      * @param values Values to create the vector from
      * @return The constructed vector
      */
@@ -34,7 +35,24 @@ public interface IntVector extends Serializable {
     }
 
     /**
+     * Creates a new vector from a {@code double} vector.
+     *
+     * @param v {@link Vector} object to use
+     * @return The constructed vector
+     */
+    @Nonnull
+    static IntVector fromDouble(@Nonnull Vector v) {
+        return switch (v.length()) {
+            case 2 -> new IntVector2(v);
+            case 3 -> new IntVector3(v);
+            case 4 -> new IntVector4(v);
+            default -> new MutableIntVector(v);
+        };
+    }
+
+    /**
      * Deserializes a string into a vector.
+     *
      * @param input Input string to parse
      * @return The parsed vector
      * @throws NumberFormatException When the string is not a vector
@@ -157,9 +175,10 @@ public interface IntVector extends Serializable {
 
     /**
      * Multiplies this vector by another vector.
+     *
      * @param v The vector to multiply this vector by
      * @return The resulting vector
-     * @throws IllegalArgumentException When the given vector has a different length compared to this vector
+     * @throws IllegalArgumentException      When the given vector has a different length compared to this vector
      * @throws UnsupportedOperationException When there is no default multiplication operation defined for this vector
      */
     @Nonnull
@@ -167,6 +186,7 @@ public interface IntVector extends Serializable {
 
     /**
      * Returns the dot product between this vector and the provided vector {@code v}.
+     *
      * @param v The vector to get the dot product between
      * @return The dot product of the two vectors
      * @throws IllegalArgumentException When the given vector has a different length compared to this vector
@@ -231,6 +251,7 @@ public interface IntVector extends Serializable {
 
     /**
      * Converts this vector into a {@code double} vector.
+     *
      * @return A {@link Vector} derived from {@code this}
      */
     @Nonnull

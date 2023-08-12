@@ -38,6 +38,7 @@ public class MutableIntVector implements IntVector {
 
     /**
      * Creates a new vector.
+     *
      * @param v The {@link Vector} to copy values from
      */
     public MutableIntVector(@Nonnull Vector v) {
@@ -314,6 +315,7 @@ public class MutableIntVector implements IntVector {
 
     /**
      * {@inheritDoc}
+     *
      * @param v The vector to multiply this vector by
      * @return This method cannot return a value
      * @throws UnsupportedOperationException Always throws an exception
@@ -326,6 +328,7 @@ public class MutableIntVector implements IntVector {
 
     /**
      * {@inheritDoc}
+     *
      * @param v The vector to get the dot product between
      * @return The dot product of the two vectors
      * @throws IllegalArgumentException When the given vector's length is different from this vector's length
@@ -456,6 +459,7 @@ public class MutableIntVector implements IntVector {
 
     /**
      * {@inheritDoc}
+     *
      * @return A {@link MutableVector} derived from {@code this}
      */
     @Nonnull

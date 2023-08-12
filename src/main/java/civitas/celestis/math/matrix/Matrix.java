@@ -2,11 +2,16 @@ package civitas.celestis.math.matrix;
 
 import civitas.celestis.math.Numbers;
 import civitas.celestis.math.integer.IntVector2;
+import civitas.celestis.math.vector.Vector;
+import civitas.celestis.math.vector.Vector2;
+import civitas.celestis.math.vector.Vector3;
+import civitas.celestis.math.vector.Vector4;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.function.UnaryOperator;
 
 /**
  * A two-dimensional array of scalars. Matrices can be used for various purposes.
@@ -75,7 +80,7 @@ public class Matrix implements Iterable<Double> {
         final double[] valueArray = new double[length()];
 
         for (int r = 0; r < rows; r++) {
-            if (columns >= 0) System.arraycopy(values[r], 0, valueArray, r * columns + 0, columns);
+            if (columns >= 0) System.arraycopy(values[r], 0, valueArray, r * columns, columns);
         }
 
         return valueArray;
@@ -208,6 +213,277 @@ public class Matrix implements Iterable<Double> {
         }
 
         return true;
+    }
+
+    //
+    // Scalar Arithmetic
+    //
+
+    /**
+     * Adds a scalar to this matrix.
+     *
+     * @param s The scalar to add to this matrix
+     * @return The resulting matrix
+     */
+    @Nonnull
+    public Matrix add(double s) {
+        final Matrix result = new Matrix(rows, columns);
+
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < columns; c++) {
+                result.values[r][c] = Numbers.requireFinite(values[r][c] + s);
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * Subtracts a scalar to this matrix.
+     *
+     * @param s The scalar to subtract to this matrix
+     * @return The resulting matrix
+     */
+    @Nonnull
+    public Matrix subtract(double s) {
+        final Matrix result = new Matrix(rows, columns);
+
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < columns; c++) {
+                result.values[r][c] = Numbers.requireFinite(values[r][c] - s);
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * Multiplies this matrix by a scalar.
+     *
+     * @param s The scalar to multiply this matrix by
+     * @return The resulting matrix
+     */
+    @Nonnull
+    public Matrix multiply(double s) {
+        final Matrix result = new Matrix(rows, columns);
+
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < columns; c++) {
+                result.values[r][c] = Numbers.requireFinite(values[r][c] * s);
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * Divides this matrix by a scalar.
+     *
+     * @param s The scalar to divide this matrix by
+     * @return The resulting matrix
+     * @throws ArithmeticException When the denominator {@code s} is zero
+     */
+    @Nonnull
+    public Matrix divide(double s) throws ArithmeticException {
+        if (s == 0) {
+            throw new ArithmeticException("Cannot divide by zero.");
+        }
+
+        final Matrix result = new Matrix(rows, columns);
+
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < columns; c++) {
+                result.values[r][c] = Numbers.requireFinite(values[r][c] / s);
+            }
+        }
+
+        return result;
+    }
+
+    //
+    // Vector Arithmetic
+    //
+
+    /**
+     * Performs vector-matrix multiplication.
+     *
+     * @param v The vector to multiply with this matrix
+     * @return The product of the operation
+     * @throws ArithmeticException When the length of the vector is not equal to the number of columns of this matrix
+     */
+    @Nonnull
+    public Vector multiply(@Nonnull Vector v) throws ArithmeticException {
+        if (columns != v.length()) {
+            throw new ArithmeticException("Cannot perform vector-matrix multiplication when the length of the vector != number of columns.");
+        }
+
+        if (rows != columns) {
+            throw new ArithmeticException("This matrix is not a square matrix.");
+        }
+
+        final double[] result = new double[v.length()];
+
+        for (int r = 0; r < rows; r++) {
+            double sum = 0;
+
+            for (int c = 0; c < columns; c++) {
+                sum += values[r][c] * v.valueAt(c);
+            }
+
+            result[r] = sum;
+        }
+
+        return Vector.of(result);
+    }
+
+    /**
+     * Performs vector-matrix multiplication.
+     *
+     * @param v The vector to multiply with this matrix
+     * @return The product of the operation
+     * @throws ArithmeticException When the length of the vector is not equal to the number of columns of this matrix
+     */
+    @Nonnull
+    public Vector2 multiply(@Nonnull Vector2 v) throws ArithmeticException {
+        return (Vector2) multiply((Vector) v);
+    }
+
+    /**
+     * Performs vector-matrix multiplication.
+     *
+     * @param v The vector to multiply with this matrix
+     * @return The product of the operation
+     * @throws ArithmeticException When the length of the vector is not equal to the number of columns of this matrix
+     */
+    @Nonnull
+    public Vector3 multiply(@Nonnull Vector3 v) throws ArithmeticException {
+        return (Vector3) multiply((Vector) v);
+    }
+
+    /**
+     * Performs vector-matrix multiplication.
+     *
+     * @param v The vector to multiply with this matrix
+     * @return The product of the operation
+     * @throws ArithmeticException When the length of the vector is not equal to the number of columns of this matrix
+     */
+    @Nonnull
+    public Vector4 multiply(@Nonnull Vector4 v) throws ArithmeticException {
+        return (Vector4) multiply((Vector) v);
+    }
+
+    //
+    // Matrix Arithmetic
+    //
+
+    /**
+     * Adds another matrix to this matrix.
+     *
+     * @param m The matrix to add to this matrix
+     * @return The resulting matrix
+     * @throws ArithmeticException When the matrices' dimensions do not match
+     */
+    @Nonnull
+    public Matrix add(@Nonnull Matrix m) throws ArithmeticException {
+        if (!size().equals(m.size())) {
+            throw new ArithmeticException("Matrix dimensions must match for this operation.");
+        }
+
+        final Matrix result = new Matrix(rows, columns);
+
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < columns; c++) {
+                result.values[r][c] = values[r][c] + m.values[r][c];
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * Subtracts another matrix from this matrix.
+     *
+     * @param m The matrix to subtract from this matrix
+     * @return The resulting matrix
+     * @throws ArithmeticException When the matrices' dimensions do not match
+     */
+    @Nonnull
+    public Matrix subtract(@Nonnull Matrix m) throws ArithmeticException {
+        if (!size().equals(m.size())) {
+            throw new ArithmeticException("Matrix dimensions must match for this operation.");
+        }
+
+        final Matrix result = new Matrix(rows, columns);
+
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < columns; c++) {
+                result.values[r][c] = values[r][c] - m.values[r][c];
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * Multiplies this matrix by another matrix.
+     *
+     * @param m The matrix to multiply to this matrix
+     * @return The resulting matrix
+     * @throws ArithmeticException When the matrices' dimensions are incompatible
+     */
+    @Nonnull
+    public Matrix multiply(@Nonnull Matrix m) throws ArithmeticException {
+        if (columns != m.rows) {
+            throw new ArithmeticException("Matrix dimensions are incompatible for multiplication.");
+        }
+
+        final Matrix result = new Matrix(rows, columns);
+
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < m.columns; c++) {
+                double sum = 0;
+
+                for (int i = 0; i < columns; i++) {
+                    sum += values[r][i] * m.values[i][c];
+                }
+                result.values[r][c] = sum;
+            }
+        }
+
+        return result;
+    }
+
+    //
+    // Utility
+    //
+
+    /**
+     * Applies given operator to each element of this matrix, then returns the resulting matrix.
+     *
+     * @param operator The operator to apply to each element of this matrix
+     * @return The resulting matrix
+     */
+    @Nonnull
+    public Matrix apply(@Nonnull UnaryOperator<Double> operator) {
+        final Matrix result = new Matrix(rows, columns);
+
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < columns; c++) {
+                result.values[r][c] = Numbers.requireFinite(operator.apply(values[r][c]));
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * Returns the negated matrix of this matrix.
+     *
+     * @return The negation of this matrix
+     */
+    @Nonnull
+    public Matrix negate() {
+        return multiply(-1);
     }
 
     //
