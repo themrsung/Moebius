@@ -197,7 +197,7 @@ public class RichColor extends Vector4 {
      * @return The weighted average of the two colors
      */
     @Nonnull
-    public static RichColor avg(@Nonnull RichColor c1, @Nonnull RichColor c2, double w1, double w2) {
+    public static RichColor avgw(@Nonnull RichColor c1, @Nonnull RichColor c2, double w1, double w2) {
         final Vector4 v1 = c1.multiply(w1);
         final Vector4 v2 = c2.multiply(w2);
 
@@ -212,7 +212,7 @@ public class RichColor extends Vector4 {
      * @return The weighted average of the given colors
      */
     @Nonnull
-    public static RichColor avg(@Nonnull RichColor[] colors, @Nonnull double[] weights) {
+    public static RichColor avgw(@Nonnull RichColor[] colors, @Nonnull double[] weights) {
         if (colors.length != weights.length) {
             throw new IllegalArgumentException("The length of colors and weights are different.");
         }
