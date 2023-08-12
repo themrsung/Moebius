@@ -116,4 +116,24 @@ public class LightRay implements Ray {
     public final double intensity() {
         return intensity;
     }
+
+    //
+    // Serialization
+    //
+
+    /**
+     * Serializes this ray into a string.
+     *
+     * @return The string representation of this ray
+     */
+    @Override
+    @Nonnull
+    public String toString() {
+        return "LightRay{" +
+                "origin=" + origin +
+                ", direction=" + direction +
+                ", color=" + color +
+                ", intensity=" + intensity +
+                '}';
+    }
 }

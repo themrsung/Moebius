@@ -45,11 +45,88 @@ public final class Numbers {
      * @throws IllegalArgumentException When {@code value > max || value < min}
      */
     public static double requireRange(double value, double min, double max) {
-        if (value < min || value > max) {
-            throw new IllegalArgumentException("This field required the value to be within range " + min + "-" + max + ".");
+        if (!isInRange(value, min, max)) {
+            throw new IllegalArgumentException("This field requires the value to be within range " + min + "-" + max + ".");
         }
 
         return value;
+    }
+
+    //
+    // Range Tests
+    //
+
+    /**
+     * Checks if a scalar is within the specified range.
+     *
+     * @param value The value to check
+     * @param min   The minimum acceptable value
+     * @param max   The maximum acceptable value
+     * @return {@code true} if the value obeys the bounds
+     */
+    public static boolean isInRange(double value, double min, double max) {
+        return value >= min && value <= max;
+    }
+
+    /**
+     * Checks if a vector is within the specified range.
+     *
+     * @param value The value to check
+     * @param min   The minimum acceptable value
+     * @param max   The maximum acceptable value
+     * @return {@code true} if the value obeys the bounds
+     */
+    public static boolean isInRange(@Nonnull Vector value, @Nonnull Vector min, @Nonnull Vector max) {
+        if (value.length() != min.length() || min.length() != max.length()) {
+            throw new ArithmeticException("Cannot test range for vectors with different lengths.");
+        }
+
+        for (int i = 0; i < value.length(); i++) {
+            if (!isInRange(value.valueAt(i), min.valueAt(i), max.valueAt(i))) return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Checks if a vector is within the specified range.
+     *
+     * @param value The value to check
+     * @param min   The minimum acceptable value
+     * @param max   The maximum acceptable value
+     * @return {@code true} if the value obeys the bounds
+     */
+    public static boolean isInRange(@Nonnull Vector2 value, @Nonnull Vector2 min, @Nonnull Vector2 max) {
+        return isInRange(value.x(), min.x(), max.x()) && isInRange(value.y(), min.y(), max.y());
+    }
+
+    /**
+     * Checks if a vector is within the specified range.
+     *
+     * @param value The value to check
+     * @param min   The minimum acceptable value
+     * @param max   The maximum acceptable value
+     * @return {@code true} if the value obeys the bounds
+     */
+    public static boolean isInRange(@Nonnull Vector3 value, @Nonnull Vector3 min, @Nonnull Vector3 max) {
+        return isInRange(value.x(), min.x(), max.x()) &&
+                isInRange(value.y(), min.y(), max.y()) &&
+                isInRange(value.z(), min.z(), max.z());
+    }
+
+    /**
+     * Checks if a vector is within the specified range.
+     *
+     * @param value The value to check
+     * @param min   The minimum acceptable value
+     * @param max   The maximum acceptable value
+     * @return {@code true} if the value obeys the bounds
+     */
+    public static boolean isInRange(@Nonnull Vector4 value, @Nonnull Vector4 min, @Nonnull Vector4 max) {
+        return isInRange(value.w(), min.w(), max.w()) &&
+                isInRange(value.x(), min.x(), max.x()) &&
+                isInRange(value.y(), min.y(), max.y()) &&
+                isInRange(value.z(), min.z(), max.z());
     }
 
     //
@@ -799,4 +876,264 @@ public final class Numbers {
     public static double clamp(double v, double min, double max) {
         return Math.max(Math.min(v, max), min);
     }
+
+    //
+    // Weighted Average
+    //
+
+    /**
+     * Returns the weighted average of two numbers.
+     *
+     * @param v1 The first number
+     * @param v2 The second number
+     * @param w1 The weight of the first number
+     * @param w2 The weight of the second number
+     * @return The weighted average
+     */
+    public static double avgw(double v1, double v2, double w1, double w2) {
+        final double denominator = w1 + w2;
+        if (denominator == 0) {
+            throw new ArithmeticException("Cannot divide by zero.");
+        }
+
+        return (v1 * w1 + v2 * w2) / denominator;
+    }
+
+    /**
+     * Returns the weighted average of three numbers.
+     *
+     * @param v1 The first number
+     * @param v2 The second number
+     * @param v3 The third number
+     * @param w1 The weight of the first number
+     * @param w2 The weight of the second number
+     * @param w3 The weight of the third number
+     * @return The weighted average
+     */
+    public static double avgw(double v1, double v2, double v3, double w1, double w2, double w3) {
+        final double denominator = w1 + w2 + w3;
+        if (denominator == 0) {
+            throw new ArithmeticException("Cannot divide by zero.");
+        }
+
+        return (v1 * w1 + v2 * w2 + v3 * w3) / denominator;
+    }
+
+    /**
+     * Returns the weighted average of the given numbers.
+     *
+     * @param values  The values to average
+     * @param weights The weights of the values to average
+     * @return The weighted average
+     */
+    public static double avgw(@Nonnull double[] values, @Nonnull double[] weights) {
+        if (values.length != weights.length) {
+            throw new IllegalArgumentException("The values and weights have a different length.");
+        }
+
+        final double denominator = Numbers.sum(weights);
+        if (denominator == 0) {
+            throw new ArithmeticException("Cannot divide by zero.");
+        }
+
+        double sum = 0;
+
+        for (int i = 0; i < values.length; i++) {
+            sum += (values[i] * weights[i]);
+        }
+
+        return sum / denominator;
+    }
+
+    /**
+     * Returns the weighted average of two vectors.
+     *
+     * @param v1 The first vector
+     * @param v2 The second vector
+     * @param w1 The weight of the first vector
+     * @param w2 The weight of the second vector
+     * @return The weighted average of the two vectors
+     */
+    @Nonnull
+    public static Vector avgw(@Nonnull Vector v1, @Nonnull Vector v2, double w1, double w2) {
+        if (v1.length() != v2.length()) {
+            throw new IllegalArgumentException("Cannot calculate the weighted average of vectors with different lengths.");
+        }
+
+        return v1.multiply(w1).add(v2.multiply(w2)).divide(w1 + w2);
+    }
+
+    /**
+     * Returns the weighted average of three vectors.
+     *
+     * @param v1 The first vector
+     * @param v2 The second vector
+     * @param v3 The third vector
+     * @param w1 The weight of the first vector
+     * @param w2 The weight of the second vector
+     * @param w3 The weight of the third vector
+     * @return The weighted average of the three vectors
+     */
+    @Nonnull
+    public static Vector avgw(@Nonnull Vector v1, @Nonnull Vector v2, @Nonnull Vector v3, double w1, double w2, double w3) {
+        if (v1.length() != v2.length() || v2.length() != v3.length()) {
+            throw new IllegalArgumentException("Cannot calculate the weighted average of vectors with different lengths.");
+        }
+
+        return v1.multiply(w1).add(v2.multiply(w2)).add(v3.multiply(w3)).divide(w1 + w2 + w3);
+    }
+
+    /**
+     * Returns the weighted average of two vectors.
+     *
+     * @param v1 The first vector
+     * @param v2 The second vector
+     * @param w1 The weight of the first vector
+     * @param w2 The weight of the second vector
+     * @return The weighted average of the two vectors
+     */
+    @Nonnull
+    public static Vector2 avgw(@Nonnull Vector2 v1, @Nonnull Vector2 v2, double w1, double w2) {
+        return v1.multiply(w1).add(v2.multiply(w2)).divide(w1 + w2);
+    }
+
+    /**
+     * Returns the weighted average of three vectors.
+     *
+     * @param v1 The first vector
+     * @param v2 The second vector
+     * @param v3 The third vector
+     * @param w1 The weight of the first vector
+     * @param w2 The weight of the second vector
+     * @param w3 The weight of the third vector
+     * @return The weighted average of the three vectors
+     */
+    @Nonnull
+    public static Vector2 avgw(@Nonnull Vector2 v1, @Nonnull Vector2 v2, @Nonnull Vector2 v3, double w1, double w2, double w3) {
+        return v1.multiply(w1).add(v2.multiply(w2)).add(v3.multiply(w3)).divide(w1 + w2 + w3);
+    }
+
+    /**
+     * Returns the weighted average of the given vectors.
+     *
+     * @param values  The vectors to average
+     * @param weights The weights of the vectors to average
+     * @return The weighted average
+     */
+    @Nonnull
+    public static Vector2 avgw(@Nonnull Vector2[] values, @Nonnull double[] weights) {
+        if (values.length != weights.length) {
+            throw new IllegalArgumentException("The length of the values and weights are different.");
+        }
+
+        final Vector2[] weighted = new Vector2[values.length];
+        for (int i = 0; i < values.length; i++) {
+            weighted[i] = values[i].multiply(weights[i]);
+        }
+
+        return sum(weighted).divide(sum(weights));
+    }
+
+    /**
+     * Returns the weighted average of two vectors.
+     *
+     * @param v1 The first vector
+     * @param v2 The second vector
+     * @param w1 The weight of the first vector
+     * @param w2 The weight of the second vector
+     * @return The weighted average of the two vectors
+     */
+    @Nonnull
+    public static Vector3 avgw(@Nonnull Vector3 v1, @Nonnull Vector3 v2, double w1, double w2) {
+        return v1.multiply(w1).add(v2.multiply(w2)).divide(w1 + w2);
+    }
+
+    /**
+     * Returns the weighted average of three vectors.
+     *
+     * @param v1 The first vector
+     * @param v2 The second vector
+     * @param v3 The third vector
+     * @param w1 The weight of the first vector
+     * @param w2 The weight of the second vector
+     * @param w3 The weight of the third vector
+     * @return The weighted average of the three vectors
+     */
+    @Nonnull
+    public static Vector3 avgw(@Nonnull Vector3 v1, @Nonnull Vector3 v2, @Nonnull Vector3 v3, double w1, double w2, double w3) {
+        return v1.multiply(w1).add(v2.multiply(w2)).add(v3.multiply(w3)).divide(w1 + w2 + w3);
+    }
+
+    /**
+     * Returns the weighted average of the given vectors.
+     *
+     * @param values  The vectors to average
+     * @param weights The weights of the vectors to average
+     * @return The weighted average
+     */
+    @Nonnull
+    public static Vector3 avgw(@Nonnull Vector3[] values, @Nonnull double[] weights) {
+        if (values.length != weights.length) {
+            throw new IllegalArgumentException("The length of the values and weights are different.");
+        }
+
+        final Vector3[] weighted = new Vector3[values.length];
+        for (int i = 0; i < values.length; i++) {
+            weighted[i] = values[i].multiply(weights[i]);
+        }
+
+        return sum(weighted).divide(sum(weights));
+    }
+
+    /**
+     * Returns the weighted average of two vectors.
+     *
+     * @param v1 The first vector
+     * @param v2 The second vector
+     * @param w1 The weight of the first vector
+     * @param w2 The weight of the second vector
+     * @return The weighted average of the two vectors
+     */
+    @Nonnull
+    public static Vector4 avgw(@Nonnull Vector4 v1, @Nonnull Vector4 v2, double w1, double w2) {
+        return v1.multiply(w1).add(v2.multiply(w2)).divide(w1 + w2);
+    }
+
+    /**
+     * Returns the weighted average of three vectors.
+     *
+     * @param v1 The first vector
+     * @param v2 The second vector
+     * @param v3 The third vector
+     * @param w1 The weight of the first vector
+     * @param w2 The weight of the second vector
+     * @param w3 The weight of the third vector
+     * @return The weighted average of the three vectors
+     */
+    @Nonnull
+    public static Vector4 avgw(@Nonnull Vector4 v1, @Nonnull Vector4 v2, @Nonnull Vector4 v3, double w1, double w2, double w3) {
+        return v1.multiply(w1).add(v2.multiply(w2)).add(v3.multiply(w3)).divide(w1 + w2 + w3);
+    }
+
+    /**
+     * Returns the weighted average of the given vectors.
+     *
+     * @param values  The vectors to average
+     * @param weights The weights of the vectors to average
+     * @return The weighted average
+     */
+    @Nonnull
+    public static Vector4 avgw(@Nonnull Vector4[] values, @Nonnull double[] weights) {
+        if (values.length != weights.length) {
+            throw new IllegalArgumentException("The length of the values and weights are different.");
+        }
+
+        final Vector4[] weighted = new Vector4[values.length];
+        for (int i = 0; i < values.length; i++) {
+            weighted[i] = values[i].multiply(weights[i]);
+        }
+
+        return sum(weighted).divide(sum(weights));
+    }
+
 }

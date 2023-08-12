@@ -125,6 +125,21 @@ public class RichColor extends Vector4 {
     }
 
     /**
+     * Safely converts an RGB vector to a color by clamping its values.
+     *
+     * @param rgb   The RGB components to use
+     * @param alpha The alpha component to use
+     * @return The converted color
+     */
+    @Nonnull
+    public static RichColor fromVector(@Nonnull Vector3 rgb, double alpha) {
+        return new RichColor(
+                rgb.clamp(new Vector3(0, 0, 0), new Vector3(255, 255, 255)),
+                Numbers.clamp(alpha, 0, 255)
+        );
+    }
+
+    /**
      * Returns the simple average of given colors.
      *
      * @param colors The colors to average
