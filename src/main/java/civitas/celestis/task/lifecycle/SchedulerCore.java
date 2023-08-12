@@ -71,7 +71,18 @@ public class SchedulerCore {
         }, name);
     }
 
+    /**
+     * The list of tasks to execute.
+     */
     private final List<Task> tasks = new ArrayList<>();
+
+    /**
+     * The map of the most recent execution times of tasks.
+     */
     private final Map<Task, Long> times = new HashMap<>();
+
+    /**
+     * The thread which executes tasks.
+     */
     private final Thread thread;
 }
