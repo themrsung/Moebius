@@ -27,9 +27,7 @@ public final class StringFormatter {
                 indentLevel--;
             }
 
-            for (int i = 0; i < indentLevel; i++) {
-                result.append(indent);
-            }
+            result.append(indent.repeat(Math.max(0, indentLevel)));
 
             result.append(line).append('\n');
 
