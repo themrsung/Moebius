@@ -11,6 +11,28 @@ import java.util.List;
  * Models have limited mutability.
  */
 public interface Model extends Serializable {
+    //
+    // Parser
+    //
+
+    /**
+     * Deserializes a string into a model.
+     *
+     * @param input The input string to parse
+     * @return The parsed model
+     * @throws IllegalArgumentException When the format is invalid
+     */
+    @Nonnull
+    static Model parseModel(@Nonnull String input) throws IllegalArgumentException {
+        try {return ColoredModel.parseModel(input);} catch (final IllegalArgumentException ignored) {}
+
+        throw new IllegalArgumentException("Given string is not a model.");
+    }
+
+    //
+    // Getters
+    //
+
     /**
      * Returns all faces of this model.
      * This is not a copied list, and changes to the return value will be reflected in this model.
@@ -36,4 +58,15 @@ public interface Model extends Serializable {
      * @return The number of faces this model has
      */
     int getFaceCount();
+
+    //
+    // Serialization
+    //
+
+    /**
+     * Serializes this model into a string.
+     * @return The string representation of this model
+     */
+    @Nonnull
+    String toString();
 }

@@ -1,6 +1,7 @@
 package civitas.celestis;
 
 import civitas.celestis.graphics.color.RichColor;
+import civitas.celestis.math.Interpolation;
 
 import javax.swing.*;
 
@@ -10,7 +11,7 @@ public class ColorView {
         final SingleColorPanel panel = new SingleColorPanel();
 
         // This color will be displayed
-        panel.color = RichColor.GOLD;
+        panel.color = Interpolation.lerp(RichColor.GOLD, RichColor.WHITE, 0.5);
 
         frame.add(panel);
 

@@ -126,7 +126,7 @@ public class ColoredModel implements Model {
     }
 
     /**
-     * Serializes this model into a string.
+     * {@inheritDoc}
      *
      * @return The string representation of this model
      */

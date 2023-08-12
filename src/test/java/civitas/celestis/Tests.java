@@ -2,6 +2,7 @@ package civitas.celestis;
 
 import civitas.celestis.graphics.color.RichColor;
 import civitas.celestis.graphics.model.ColoredModel;
+import civitas.celestis.math.Numbers;
 import de.javagl.obj.Obj;
 import de.javagl.obj.ObjReader;
 
@@ -22,6 +23,15 @@ public class Tests {
         }
 
         final ColoredModel model = new ColoredModel(obj, RichColor.GRAY, 1);
-        System.out.println(ColoredModel.parseModel(model.toString()));
+
+        final RichColor c1 = RichColor.PINK;
+        final RichColor c2 = RichColor.ORANGE;
+        final RichColor c3 = RichColor.GOLD;
+
+        System.out.println(c1.reflectiveness());
+        System.out.println(c2.reflectiveness());
+        System.out.println(c3.reflectiveness());
+
+        System.out.println(Numbers.scale(0.95, 0, 1, 0, 255));
     }
 }

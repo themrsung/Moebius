@@ -113,7 +113,6 @@ public final class Interpolation {
 
     /**
      * Performs linear interpolation between two colors.
-     * Alpha components are interpolated separately.
      *
      * @param start The starting color
      * @param end   The end color
@@ -122,7 +121,7 @@ public final class Interpolation {
      */
     @Nonnull
     public static RichColor lerp(@Nonnull RichColor start, @Nonnull RichColor end, double t) {
-        return new RichColor(lerp(start.rgb(), end.rgb(), t), lerp(start.alpha(), end.alpha(), t));
+        return new RichColor(start.add(end.subtract(start).multiply(t)));
     }
 
     //

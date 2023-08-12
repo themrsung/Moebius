@@ -22,7 +22,7 @@ public interface Face extends AlphabeticalGroup<Vertex>, Serializable {
     /**
      * Deserializes a string into a face.
      *
-     * @param input Input string to parse
+     * @param input The input string to parse
      * @return The parsed face
      * @throws IllegalArgumentException When the format is invalid
      */

@@ -89,6 +89,11 @@ public class RichColor extends Vector4 {
     public static final RichColor GOLD = new RichColor(218, 165, 32);
 
     /**
+     * The color brown.
+     */
+    public static final RichColor BROWN = new RichColor(139, 69, 19);
+
+    /**
      * A transparent color with the base color being white.
      */
     public static final RichColor TRANSPARENT_WHITE = new RichColor(255, 255, 255, 0);
@@ -97,6 +102,12 @@ public class RichColor extends Vector4 {
      * A transparent color with the base color being black.
      */
     public static final RichColor TRANSPARENT_BLACK = new RichColor(0, 0, 0, 0);
+
+    /**
+     * Any value of alpha above this value will be considered opaque by the graphics engine.
+     * Higher values will be more realistic, while lower values will offer better performance
+     */
+    public static final double TRANSLUCENT_THRESHOLD = 242.25;
 
     //
     // Static Utilities
@@ -507,6 +518,41 @@ public class RichColor extends Vector4 {
     @Nonnull
     public final Color colorRaw() {
         return new Color((int) x, (int) y, (int) z, (int) w);
+    }
+
+    //
+    // Properties
+    //
+
+    /**
+     * Returns whether this color is translucent.
+     *
+     * @return {@code true} if this color is translucent
+     * @see RichColor#TRANSLUCENT_THRESHOLD
+     */
+    public boolean translucent() {
+        return w <= TRANSLUCENT_THRESHOLD;
+    }
+
+    /**
+     * Returns whether this color is opaque.
+     *
+     * @return {@code true} if this color is opaque
+     * @see RichColor#TRANSLUCENT_THRESHOLD
+     */
+    public boolean opaque() {
+        return w > TRANSLUCENT_THRESHOLD;
+    }
+
+    /**
+     * Calculates the reflectiveness coefficient of this color.
+     * This is calculated by normalizing the sum of the RGB components,
+     * then multiplying it by the normalized alpha component.
+     *
+     * @return The reflectiveness coefficient of this color ({@code 0-1})
+     */
+    public double reflectiveness() {
+        return ((x + y + z) / 765) * (w / 255);
     }
 
     /**
