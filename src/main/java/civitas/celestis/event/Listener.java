@@ -25,7 +25,7 @@ public interface Listener {
      * Modifications in this logic will result in different behavior in the event manager.
      * </p>
      *
-     * @return An array containing the handler references
+     * @return A list containing the handler references
      */
     @Nonnull
     default List<HandlerReference> getHandlerReferences() {

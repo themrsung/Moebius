@@ -26,11 +26,8 @@ public class Tests {
 
         final ColoredModel model = new ColoredModel(obj, RichColor.GRAY, 1);
 
-        final RichString rs1 = new RichString("Hello world!\n");
-        final RichString rs2 = new RichString("Hello world2!");
-
-        final RichText text = new RichText(rs1, rs2);
-
-        System.out.println(RichText.parseText(text.toString()));
+        final RichColor color = RichColor.random();
+        System.out.println(color.magnitude());
+        System.out.println(color.magnitude2());
     }
 }
