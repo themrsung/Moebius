@@ -10,21 +10,36 @@ import java.util.*;
  * An event manager implementation with a single event queue.
  */
 public final class SingleEventManager implements EventManager {
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void start() {
         thread.start();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void stop() {
         thread.interrupt();
     }
 
+    /**
+     * {@inheritDoc}
+     * @param event The event to be called
+     * @param <E> THe type of event to be called
+     */
     @Override
     public <E extends Event> void call(@Nonnull E event) {
         queue.add(event);
     }
 
+    /**
+     * {@inheritDoc}
+     * @param listener The listener to register to this event manager
+     */
     @Override
     public void register(@Nonnull Listener listener) {
         handlers.addAll(listener.getHandlerReferences());
@@ -33,16 +48,28 @@ public final class SingleEventManager implements EventManager {
         handlers.sort(Comparator.comparing(HandlerReference::priority));
     }
 
+    /**
+     * {@inheritDoc}
+     * @param listeners The collection of listeners to register to this event manager
+     */
     @Override
     public void register(@Nonnull Collection<Listener> listeners) {
         listeners.forEach(this::register);
     }
 
+    /**
+     * {@inheritDoc}
+     * @param listener The listener to unregister from this event manager
+     */
     @Override
     public void unregister(@Nonnull Listener listener) {
         handlers.removeAll(listener.getHandlerReferences());
     }
 
+    /**
+     * {@inheritDoc}
+     * @param listeners The collection of listeners to unregister from this event manager
+     */
     @Override
     public void unregister(@Nonnull Collection<Listener> listeners) {
         listeners.forEach(this::unregister);
