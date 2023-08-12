@@ -3,6 +3,7 @@ package civitas.celestis.graphics.face;
 import civitas.celestis.graphics.raytracing.Ray;
 import civitas.celestis.math.vector.Vector3;
 import civitas.celestis.math.vertex.Vertex;
+import civitas.celestis.util.alphabetical.AlphabeticalGroup;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
@@ -13,7 +14,7 @@ import java.util.function.UnaryOperator;
  * A triangular face in 3D.
  * Faces are used to define the outer surface of an object.
  */
-public interface Face extends Serializable {
+public interface Face extends AlphabeticalGroup<Vertex>, Serializable {
     //
     // Geometry
     //

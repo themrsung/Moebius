@@ -37,6 +37,15 @@ public class BoundingBox {
         this.max = Numbers.max(points);
     }
 
+    /**
+     * Creates a new bounding box.
+     *
+     * @param face The face to use as the boundaries
+     */
+    public BoundingBox(@Nonnull Face face) {
+        this(face.toArray());
+    }
+
     //
     // Variables
     //
@@ -69,6 +78,16 @@ public class BoundingBox {
     }
 
     /**
+     * Returns the center of this bounding box.
+     *
+     * @return The center of this bounding box
+     */
+    @Nonnull
+    public Vector3 center() {
+        return min.add(max).divide(2);
+    }
+
+    /**
      * Checks if given point {@code v} is within the bounds of this box.
      *
      * @param v The point to check
@@ -96,7 +115,7 @@ public class BoundingBox {
      * @param ray The ray to check for intersections
      * @return {@code true} if the ray intersects this box
      */
-    public final boolean intersects(@Nonnull Ray ray) {
+    public boolean intersects(@Nonnull Ray ray) {
         double tmin = (min.x() - ray.origin().x()) / ray.direction().x();
         double tmax = (max.x() - ray.origin().x()) / ray.direction().x();
 

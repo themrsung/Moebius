@@ -1,8 +1,8 @@
 package civitas.celestis.graphics.face;
 
-import civitas.celestis.graphics.Geometry;
 import civitas.celestis.graphics.color.RichColor;
 import civitas.celestis.graphics.raytracing.Ray;
+import civitas.celestis.math.Geometry;
 import civitas.celestis.math.Numbers;
 import civitas.celestis.math.vector.Vector;
 import civitas.celestis.math.vector.Vector3;

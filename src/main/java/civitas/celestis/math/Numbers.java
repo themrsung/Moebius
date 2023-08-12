@@ -12,6 +12,15 @@ import jakarta.annotation.Nonnull;
  */
 public final class Numbers {
     //
+    // Constants
+    //
+
+    /**
+     * A small threshold value used in various calculations to substitute a very small interval.
+     */
+    public static final double EPSILON = 1e-6;
+
+    //
     // Constraints
     //
 

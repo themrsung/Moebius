@@ -3,10 +3,7 @@ package civitas.celestis.util.collection;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.NoSuchElementException;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * A circular queue. Entries can be added or removed concurrently to this queue.
@@ -14,6 +11,23 @@ import java.util.Queue;
  * @param <E> The type of element to contain in this queue
  */
 public class CircularQueue<E> extends ArrayList<E> implements Queue<E> {
+    //
+    // Static Initializers
+    //
+
+    /**
+     * Creates a new circular queue from a variable array of entries.
+     *
+     * @param entries The array of entries to contain
+     * @param <E>     The type of element to contain
+     * @return The constructed circular queue
+     */
+    @Nonnull
+    @SafeVarargs
+    public static <E> CircularQueue<E> of(@Nonnull E... entries) {
+        return new CircularQueue<>(Arrays.asList(entries));
+    }
+
     //
     // Constructors
     //

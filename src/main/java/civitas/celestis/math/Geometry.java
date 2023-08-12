@@ -1,4 +1,4 @@
-package civitas.celestis.graphics;
+package civitas.celestis.math;
 
 import civitas.celestis.graphics.face.Face;
 import civitas.celestis.graphics.raytracing.Ray;

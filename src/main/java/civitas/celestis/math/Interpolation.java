@@ -1,4 +1,4 @@
-package civitas.celestis.graphics;
+package civitas.celestis.math;
 
 import civitas.celestis.graphics.color.RichColor;
 import civitas.celestis.math.quaternion.Quaternion;
@@ -123,5 +123,46 @@ public final class Interpolation {
     @Nonnull
     public static RichColor lerp(@Nonnull RichColor start, @Nonnull RichColor end, double t) {
         return new RichColor(lerp(start.rgb(), end.rgb(), t), lerp(start.alpha(), end.alpha(), t));
+    }
+
+    //
+    // Spherical Linear Interpolation
+    //
+
+    /**
+     * Performs spherical linear interpolation between two quaternions.
+     * This assumes that the input quaternions are already normalized.
+     *
+     * @param start The starting quaternion
+     * @param end   The end quaternion
+     * @param t     The interpolation parameter {@code t} ({@code 0-1})
+     * @return The interpolated quaternion
+     */
+    @Nonnull
+    public static Quaternion slerp(@Nonnull Quaternion start, @Nonnull Quaternion end, double t) {
+        // Get the dot product of the two quaternions
+        double dot = start.dot(end);
+
+        // Determine direction and adjust end quaternion if required
+        if (dot < 0) {
+            end = end.negate();
+            dot = -dot;
+        }
+
+        if (1 - dot < Numbers.EPSILON) {
+            // Quaternions are very close, use linear interpolation
+            return lerp(start, end, t);
+        }
+
+        // Calculate the angle between the quaternions
+        final double theta0 = Math.acos(dot);
+        final double theta1 = theta0 * t;
+
+        // Calculate the interpolation coefficients
+        final double s0 = Math.cos(theta1) - dot * Math.sin(theta1) / Math.sin(theta0);
+        final double s1 = Math.sin(theta1) / Math.sin(theta0);
+
+        // Perform spherical linear interpolation
+        return start.multiply(s0).add(end.multiply(s1));
     }
 }
