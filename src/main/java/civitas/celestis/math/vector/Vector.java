@@ -12,6 +12,11 @@ import java.util.function.UnaryOperator;
  * This interface defines the contract of a vector.
  * </p>
  * <p>
+ *     Vectors can not only be used for spacial data, but can be used
+ *     for any application which require the collective use of multiple scalars as one object.
+ *     First-party examples include representing colors using a four-dimensional vector. (RGBA)
+ * </p>
+ * <p>
  * In order to ensure flawless arithmetic operation between vectors or other numbers,
  * the non-finite constraint is enforced in all vectors.
  * Non-finite values (e.g. {@link Double#NaN}, {@link Double#POSITIVE_INFINITY}, {@link Double#NEGATIVE_INFINITY})
@@ -35,6 +40,7 @@ public interface Vector extends Serializable {
             case 2 -> new Vector2(values);
             case 3 -> new Vector3(values);
             case 4 -> new Vector4(values);
+            case 5 -> new Vector5(values);
             default -> new MutableVector(values);
         };
     }
@@ -52,6 +58,7 @@ public interface Vector extends Serializable {
         try {return Vector2.parseVector(input);} catch (final NumberFormatException ignored) {}
         try {return Vector3.parseVector(input);} catch (final NumberFormatException ignored) {}
         try {return Vector4.parseVector(input);} catch (final NumberFormatException ignored) {}
+        try {return Vector5.parseVector(input);} catch (final NumberFormatException ignored) {}
         try {return MutableVector.parseVector(input);} catch (final NumberFormatException ignored) {}
 
         throw new NumberFormatException("Given string is not a vector.");

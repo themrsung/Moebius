@@ -45,6 +45,12 @@ public final class Numbers {
      */
     private static final double QUARTER_MARGIN_OF_SIGNIFICANCE = MARGIN_OF_SIGNIFICANCE / 4;
 
+    /**
+     * {@code 1 / 5} of the {@link Numbers#MARGIN_OF_SIGNIFICANCE}.
+     * This is used to compare the component values of five-dimensional vectors.
+     */
+    private static final double FIFTH_MARGIN_OF_SIGNIFICANCE = MARGIN_OF_SIGNIFICANCE / 5;
+
     //
     // Constraints
     //
@@ -203,6 +209,22 @@ public final class Numbers {
                 isInRange(value.z(), min.z(), max.z());
     }
 
+    /**
+     * Checks if a vector is within the specified range.
+     *
+     * @param value The value to check
+     * @param min   The minimum acceptable value
+     * @param max   The maximum acceptable value
+     * @return {@code true} if the value obeys the bounds
+     */
+    public static boolean isInRange(@Nonnull Vector5 value, @Nonnull Vector5 min, @Nonnull Vector5 max) {
+        return isInRange(value.v(), min.v(), max.v()) &&
+                isInRange(value.w(), min.w(), max.w()) &&
+                isInRange(value.x(), min.x(), max.x()) &&
+                isInRange(value.y(), min.y(), max.y()) &&
+                isInRange(value.z(), min.z(), max.z());
+    }
+
     //
     // Range Adjustment
     //
@@ -328,6 +350,33 @@ public final class Numbers {
             @Nonnull Vector4 fmax
     ) {
         return new Vector4(
+                scale(value.w(), imin.w(), imax.w(), fmin.w(), fmax.w()),
+                scale(value.x(), imin.x(), imax.x(), fmin.x(), fmax.x()),
+                scale(value.y(), imin.y(), imax.y(), fmin.y(), fmax.y()),
+                scale(value.z(), imin.z(), imax.z(), fmin.z(), fmax.z())
+        );
+    }
+
+    /**
+     * Scales a vector from one scale to another.
+     *
+     * @param value The value to scale
+     * @param imin  The initial minimum value
+     * @param imax  The initial maximum value
+     * @param fmin  The final minimum value
+     * @param fmax  The final maximum value
+     * @return The scaled value
+     */
+    @Nonnull
+    public static Vector5 scale(
+            @Nonnull Vector5 value,
+            @Nonnull Vector5 imin,
+            @Nonnull Vector5 imax,
+            @Nonnull Vector5 fmin,
+            @Nonnull Vector5 fmax
+    ) {
+        return new Vector5(
+                scale(value.v(), imin.v(), imax.v(), fmin.v(), fmax.v()),
                 scale(value.w(), imin.w(), imax.w(), fmin.w(), fmax.w()),
                 scale(value.x(), imin.x(), imax.x(), fmin.x(), fmax.x()),
                 scale(value.y(), imin.y(), imax.y(), fmin.y(), fmax.y()),
@@ -600,6 +649,21 @@ public final class Numbers {
     }
 
     /**
+     * Checks for equality between two vectors with regard to the {@link Numbers#MARGIN_OF_SIGNIFICANCE}.
+     *
+     * @param v1 The first vector to compare
+     * @param v2 The second vector to compare
+     * @return {@code true} if the vectors are effectively equal
+     */
+    public static boolean equals(@Nonnull Vector5 v1, @Nonnull Vector5 v2) {
+        return Math.abs(v1.v() - v2.v()) < FIFTH_MARGIN_OF_SIGNIFICANCE &&
+                Math.abs(v1.w() - v2.w()) < FIFTH_MARGIN_OF_SIGNIFICANCE &&
+                Math.abs(v1.x() - v2.x()) < FIFTH_MARGIN_OF_SIGNIFICANCE &&
+                Math.abs(v1.y() - v2.y()) < FIFTH_MARGIN_OF_SIGNIFICANCE &&
+                Math.abs(v1.z() - v2.z()) < FIFTH_MARGIN_OF_SIGNIFICANCE;
+    }
+
+    /**
      * Checks for equality between two matrices with regard to the {@link Numbers#MARGIN_OF_SIGNIFICANCE}.
      *
      * @param m1 The first matrix to compare
@@ -715,7 +779,34 @@ public final class Numbers {
             z += value.z();
         }
 
-        return new Quaternion(w, x, y, z);
+        return new Vector4(w, x, y, z);
+    }
+
+    /**
+     * Returns the sum of the provided vectors.
+     * This is the equivalent of chaining {@link Vector5#add(Vector5)}, but is faster due to the lack of
+     * re-instantiation every iteration.
+     *
+     * @param values The vectors to sum
+     * @return The sum of the provided vectors
+     */
+    @Nonnull
+    public static Vector5 sum(@Nonnull Vector5... values) {
+        double v = 0;
+        double w = 0;
+        double x = 0;
+        double y = 0;
+        double z = 0;
+
+        for (final Vector5 value : values) {
+            v += value.v();
+            w += value.w();
+            x += value.x();
+            y += value.y();
+            z += value.z();
+        }
+
+        return new Vector5(v, w, x, y, z);
     }
 
     /**
@@ -849,6 +940,18 @@ public final class Numbers {
      * @return The average (geometric centroid) of ths provided vectors
      */
     @Nonnull
+    public static Vector5 avg(@Nonnull Vector5... values) {
+        return sum(values).divide(values.length);
+    }
+
+    /**
+     * Returns the average of the provided vectors.
+     * This is equivalent to the geometric centroid of the vectors.
+     *
+     * @param values The vectors to average
+     * @return The average (geometric centroid) of ths provided vectors
+     */
+    @Nonnull
     public static IntVector2 avg(@Nonnull IntVector2... values) {
         return sum(values).divide(values.length);
     }
@@ -958,6 +1061,31 @@ public final class Numbers {
         }
 
         return new Vector4(w, x, y, z);
+    }
+
+    /**
+     * Returns the minimum vector of the provided vectors.
+     *
+     * @param values The vectors to get the minimum of
+     * @return The minimum of the provided vectors
+     */
+    @Nonnull
+    public static Vector5 min(@Nonnull Vector5... values) {
+        double v = Double.MAX_VALUE;
+        double w = Double.MAX_VALUE;
+        double x = Double.MAX_VALUE;
+        double y = Double.MAX_VALUE;
+        double z = Double.MAX_VALUE;
+
+        for (final Vector5 value : values) {
+            v = Math.min(v, value.v());
+            w = Math.min(w, value.w());
+            x = Math.min(x, value.x());
+            y = Math.min(y, value.y());
+            z = Math.min(z, value.z());
+        }
+
+        return new Vector5(v, w, x, y, z);
     }
 
     /**
@@ -1104,6 +1232,31 @@ public final class Numbers {
         }
 
         return new Vector4(w, x, y, z);
+    }
+
+    /**
+     * Returns the maximum vector of the provided vectors.
+     *
+     * @param values The vectors to get the maximum of
+     * @return The maximum of the provided vectors
+     */
+    @Nonnull
+    public static Vector5 max(@Nonnull Vector5... values) {
+        double v = -Double.MAX_VALUE;
+        double w = -Double.MAX_VALUE;
+        double x = -Double.MAX_VALUE;
+        double y = -Double.MAX_VALUE;
+        double z = -Double.MAX_VALUE;
+
+        for (final Vector5 value : values) {
+            v = Math.max(v, value.v());
+            w = Math.max(w, value.w());
+            x = Math.max(x, value.x());
+            y = Math.max(y, value.y());
+            z = Math.max(z, value.z());
+        }
+
+        return new Vector5(v, w, x, y, z);
     }
 
     /**
@@ -1439,6 +1592,57 @@ public final class Numbers {
         }
 
         final Vector4[] weighted = new Vector4[values.length];
+        for (int i = 0; i < values.length; i++) {
+            weighted[i] = values[i].multiply(weights[i]);
+        }
+
+        return sum(weighted).divide(sum(weights));
+    }
+
+    /**
+     * Returns the weighted average of two vectors.
+     *
+     * @param v1 The first vector
+     * @param v2 The second vector
+     * @param w1 The weight of the first vector
+     * @param w2 The weight of the second vector
+     * @return The weighted average of the two vectors
+     */
+    @Nonnull
+    public static Vector5 avgw(@Nonnull Vector5 v1, @Nonnull Vector5 v2, double w1, double w2) {
+        return v1.multiply(w1).add(v2.multiply(w2)).divide(w1 + w2);
+    }
+
+    /**
+     * Returns the weighted average of three vectors.
+     *
+     * @param v1 The first vector
+     * @param v2 The second vector
+     * @param v3 The third vector
+     * @param w1 The weight of the first vector
+     * @param w2 The weight of the second vector
+     * @param w3 The weight of the third vector
+     * @return The weighted average of the three vectors
+     */
+    @Nonnull
+    public static Vector5 avgw(@Nonnull Vector5 v1, @Nonnull Vector5 v2, @Nonnull Vector5 v3, double w1, double w2, double w3) {
+        return v1.multiply(w1).add(v2.multiply(w2)).add(v3.multiply(w3)).divide(w1 + w2 + w3);
+    }
+
+    /**
+     * Returns the weighted average of the given vectors.
+     *
+     * @param values  The vectors to average
+     * @param weights The weights of the vectors to average
+     * @return The weighted average
+     */
+    @Nonnull
+    public static Vector5 avgw(@Nonnull Vector5[] values, @Nonnull double[] weights) {
+        if (values.length != weights.length) {
+            throw new IllegalArgumentException("The length of the values and weights are different.");
+        }
+
+        final Vector5[] weighted = new Vector5[values.length];
         for (int i = 0; i < values.length; i++) {
             weighted[i] = values[i].multiply(weights[i]);
         }

@@ -117,7 +117,7 @@ public class Vector4 implements Vector {
      * @param other The vector to copy values from
      */
     public Vector4(@Nonnull Vector other) {
-        if (other.length() != 2) {
+        if (other.length() != 4) {
             throw new IllegalArgumentException("The provided vector does not have a length of 4.");
         }
 
@@ -334,7 +334,7 @@ public class Vector4 implements Vector {
     @Nonnull
     @Override
     public Vector4 add(@Nonnull Vector v) throws IllegalArgumentException {
-        if (v.length() != 3) {
+        if (v.length() != 4) {
             throw new IllegalArgumentException("The provided vector does not have a length of 4.");
         }
 
@@ -351,7 +351,7 @@ public class Vector4 implements Vector {
     @Nonnull
     @Override
     public Vector4 subtract(@Nonnull Vector v) throws IllegalArgumentException {
-        if (v.length() != 3) {
+        if (v.length() != 4) {
             throw new IllegalArgumentException("The provided vector does not have a length of 4.");
         }
 
@@ -369,7 +369,7 @@ public class Vector4 implements Vector {
     @Nonnull
     @Override
     public Vector4 multiply(@Nonnull Vector v) throws IllegalArgumentException {
-        if (v.length() != 2) {
+        if (v.length() != 4) {
             throw new IllegalArgumentException("The provided vector's length is not 4");
         }
 
@@ -499,13 +499,13 @@ public class Vector4 implements Vector {
      * @param min The minimum allowed values
      * @param max The maximum allowed values
      * @return The clamped vector
-     * @throws IllegalArgumentException When either of the provided vectors {@code min} or {@code max} does not have a length of {@code 2}
+     * @throws IllegalArgumentException When either of the provided vectors {@code min} or {@code max} does not have a length of {@code 4}
      */
     @Nonnull
     @Override
     public Vector4 clamp(@Nonnull Vector min, @Nonnull Vector max) throws IllegalArgumentException {
         if (min.length() != 4 || max.length() != 4) {
-            throw new IllegalArgumentException("The provided vectors do not have a length of 2.");
+            throw new IllegalArgumentException("The provided vectors do not have a length of 4.");
         }
 
         return new Vector4(
@@ -656,7 +656,7 @@ public class Vector4 implements Vector {
     public boolean equals(@Nullable Object obj) {
         if (obj == null) return false;
         if (!(obj instanceof Vector v)) return false;
-        if (v.length() != 2) return false;
+        if (v.length() != 4) return false;
 
         return w == v.valueAt(0) && x == v.valueAt(1) && y == v.valueAt(2) && z == v.valueAt(3);
     }

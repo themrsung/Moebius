@@ -2,10 +2,7 @@ package civitas.celestis.math;
 
 import civitas.celestis.graphics.color.RichColor;
 import civitas.celestis.math.quaternion.Quaternion;
-import civitas.celestis.math.vector.Vector;
-import civitas.celestis.math.vector.Vector2;
-import civitas.celestis.math.vector.Vector3;
-import civitas.celestis.math.vector.Vector4;
+import civitas.celestis.math.vector.*;
 import civitas.celestis.math.vertex.Vertex;
 import jakarta.annotation.Nonnull;
 
@@ -122,6 +119,19 @@ public final class Interpolation {
     @Nonnull
     public static RichColor lerp(@Nonnull RichColor start, @Nonnull RichColor end, double t) {
         return new RichColor(start.add(end.subtract(start).multiply(t)));
+    }
+
+    /**
+     * Performs linear interpolation between two vectors.
+     *
+     * @param start The starting vector
+     * @param end   The end vector
+     * @param t     The interpolation parameter {@code t} ({@code 0-1})
+     * @return The interpolated vector
+     */
+    @Nonnull
+    public static Vector5 lerp(@Nonnull Vector5 start, @Nonnull Vector5 end, double t) {
+        return start.add(end.subtract(start).multiply(t));
     }
 
     //

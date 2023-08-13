@@ -26,58 +26,117 @@ public final class VectorMapper<V extends Vector> implements UnaryOperator<V> {
     /**
      * A mapper which swaps the X and Y components of a two-dimensional vector.
      */
-    public static final VectorMapper<Vector2> V2_SWAP_X_Y = new VectorMapper<>(new int[]{1, 0}, Vector2::new);
+    public static final VectorMapper<Vector2> V2_SWAP_X_Y = new VectorMapper<>(new int[] {1, 0}, Vector2::new);
 
     /**
      * A mapper which swaps the X and Y components of a three-dimensional vector.
      */
-    public static final VectorMapper<Vector3> V3_SWAP_X_Y = new VectorMapper<>(new int[]{1, 0, 2}, Vector3::new);
+    public static final VectorMapper<Vector3> V3_SWAP_X_Y = new VectorMapper<>(new int[] {1, 0, 2}, Vector3::new);
+
     /**
      * A mapper which swaps the X and Z components of a three-dimensional vector.
      */
-    public static final VectorMapper<Vector3> V3_SWAP_X_Z = new VectorMapper<>(new int[]{2, 1, 0}, Vector3::new);
+    public static final VectorMapper<Vector3> V3_SWAP_X_Z = new VectorMapper<>(new int[] {2, 1, 0}, Vector3::new);
+
     /**
      * A mapper which swaps the Y and Z components of a three-dimensional vector.
      */
-    public static final VectorMapper<Vector3> V3_SWAP_Y_Z = new VectorMapper<>(new int[]{0, 2, 1}, Vector3::new);
+    public static final VectorMapper<Vector3> V3_SWAP_Y_Z = new VectorMapper<>(new int[] {0, 2, 1}, Vector3::new);
 
     /**
      * A mapper which swaps the X and Y components of a vertex.
      */
-    public static final VectorMapper<Vertex> VERTEX_SWAP_X_Y = new VectorMapper<>(new int[]{1, 0, 2}, Vertex::new);
+    public static final VectorMapper<Vertex> VERTEX_SWAP_X_Y = new VectorMapper<>(new int[] {1, 0, 2}, Vertex::new);
+
     /**
      * A mapper which swaps the X and Z components of a vertex.
      */
-    public static final VectorMapper<Vertex> VERTEX_SWAP_X_Z = new VectorMapper<>(new int[]{2, 1, 0}, Vertex::new);
+    public static final VectorMapper<Vertex> VERTEX_SWAP_X_Z = new VectorMapper<>(new int[] {2, 1, 0}, Vertex::new);
+
     /**
      * A mapper which swaps the Y and Z components of a vertex.
      */
-    public static final VectorMapper<Vertex> VERTEX_SWAP_Y_Z = new VectorMapper<>(new int[]{0, 2, 1}, Vertex::new);
+    public static final VectorMapper<Vertex> VERTEX_SWAP_Y_Z = new VectorMapper<>(new int[] {0, 2, 1}, Vertex::new);
 
     /**
      * A mapper which swaps the W and X components of a four-dimensional vector.
      */
-    public static final VectorMapper<Vector4> V4_SWAP_W_X = new VectorMapper<>(new int[]{1, 0, 2, 3}, Vector4::new);
+    public static final VectorMapper<Vector4> V4_SWAP_W_X = new VectorMapper<>(new int[] {1, 0, 2, 3}, Vector4::new);
+
     /**
      * A mapper which swaps the W and Y components of a four-dimensional vector.
      */
-    public static final VectorMapper<Vector4> V4_SWAP_W_Y = new VectorMapper<>(new int[]{2, 1, 0, 3}, Vector4::new);
+    public static final VectorMapper<Vector4> V4_SWAP_W_Y = new VectorMapper<>(new int[] {2, 1, 0, 3}, Vector4::new);
+
     /**
      * A mapper which swaps the W and Z components of a four-dimensional vector.
      */
-    public static final VectorMapper<Vector4> V4_SWAP_W_Z = new VectorMapper<>(new int[]{3, 1, 2, 0}, Vector4::new);
+    public static final VectorMapper<Vector4> V4_SWAP_W_Z = new VectorMapper<>(new int[] {3, 1, 2, 0}, Vector4::new);
+
     /**
      * A mapper which swaps the X and Y components of a four-dimensional vector.
      */
-    public static final VectorMapper<Vector4> V4_SWAP_X_Y = new VectorMapper<>(new int[]{0, 2, 1, 3}, Vector4::new);
+    public static final VectorMapper<Vector4> V4_SWAP_X_Y = new VectorMapper<>(new int[] {0, 2, 1, 3}, Vector4::new);
+
     /**
      * A mapper which swaps the X and Z components of a four-dimensional vector.
      */
-    public static final VectorMapper<Vector4> V4_SWAP_X_Z = new VectorMapper<>(new int[]{0, 3, 2, 1}, Vector4::new);
+    public static final VectorMapper<Vector4> V4_SWAP_X_Z = new VectorMapper<>(new int[] {0, 3, 2, 1}, Vector4::new);
+
     /**
      * A mapper which swaps the Y and Z components of a four-dimensional vector.
      */
-    public static final VectorMapper<Vector4> V4_SWAP_Y_Z = new VectorMapper<>(new int[]{0, 1, 3, 2}, Vector4::new);
+    public static final VectorMapper<Vector4> V4_SWAP_Y_Z = new VectorMapper<>(new int[] {0, 1, 3, 2}, Vector4::new);
+
+    /**
+     * A mapper which swaps the V and W components of a five-dimensional vector.
+     */
+    public static final VectorMapper<Vector5> V5_SWAP_V_W = new VectorMapper<>(new int[] {1, 0, 2, 3, 4}, Vector5::new);
+
+    /**
+     * A mapper which swaps the V and X components of a five-dimensional vector.
+     */
+    public static final VectorMapper<Vector5> V5_SWAP_V_X = new VectorMapper<>(new int[] {2, 1, 0, 3, 4}, Vector5::new);
+
+    /**
+     * A mapper which swaps the V and X components of a five-dimensional vector.
+     */
+    public static final VectorMapper<Vector5> V5_SWAP_V_Y = new VectorMapper<>(new int[] {3, 1, 2, 0, 4}, Vector5::new);
+
+    /**
+     * A mapper which swaps the V and Y components of a five-dimensional vector.
+     */
+    public static final VectorMapper<Vector5> V5_SWAP_V_Z = new VectorMapper<>(new int[] {4, 1, 2, 3, 0}, Vector5::new);
+
+    /**
+     * A mapper which swaps the V and Z components of a five-dimensional vector.
+     */
+    public static final VectorMapper<Vector5> V5_SWAP_W_X = new VectorMapper<>(new int[] {0, 2, 1, 3, 4}, Vector5::new);
+
+    /**
+     * A mapper which swaps the W and Y components of a five-dimensional vector.
+     */
+    public static final VectorMapper<Vector5> V5_SWAP_W_Y = new VectorMapper<>(new int[] {0, 3, 2, 1, 4}, Vector5::new);
+
+    /**
+     * A mapper which swaps the W and Z components of a five-dimensional vector.
+     */
+    public static final VectorMapper<Vector5> V5_SWAP_W_Z = new VectorMapper<>(new int[] {0, 4, 2, 3, 1}, Vector5::new);
+
+    /**
+     * A mapper which swaps the X and Y components of a five-dimensional vector.
+     */
+    public static final VectorMapper<Vector5> V5_SWAP_X_Y = new VectorMapper<>(new int[] {0, 4, 2, 3, 1}, Vector5::new);
+
+    /**
+     * A mapper which swaps the X and Z components of a five-dimensional vector.
+     */
+    public static final VectorMapper<Vector5> V5_SWAP_X_Z = new VectorMapper<>(new int[] {0, 4, 2, 3, 1}, Vector5::new);
+
+    /**
+     * A mapper which swaps the Y and Z components of a five-dimensional vector.
+     */
+    public static final VectorMapper<Vector5> V5_SWAP_Y_Z = new VectorMapper<>(new int[] {0, 1, 2, 4, 3}, Vector5::new);
 
     //
     // Constructors
