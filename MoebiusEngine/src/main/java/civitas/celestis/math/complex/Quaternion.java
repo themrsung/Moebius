@@ -1,4 +1,4 @@
-package civitas.celestis.math.quaternion;
+package civitas.celestis.math.complex;
 
 import civitas.celestis.math.Numbers;
 import civitas.celestis.math.vector.Vector;

@@ -1,15 +1,15 @@
 package civitas.celestis;
 
-import civitas.celestis.graphics.color.DeepColor;
-import civitas.celestis.graphics.color.RichColor;
+import civitas.celestis.math.Numbers;
+import civitas.celestis.math.Numeric;
+import civitas.celestis.math.fraction.Fraction;
+import civitas.celestis.math.real.RealNumber;
 
 public class Printer {
     public static void main(String[] args) {
-        final DeepColor c10 = DeepColor.random();
+        final RealNumber n1 = new RealNumber(3.14);
+        final Fraction f = new Fraction(3.14);
 
-        for (int i = 0; i < 1000; i++) {
-            System.out.println(DeepColor.random().to8Bit());
-        }
-
+        System.out.println(n1.equals(f));
     }
 }

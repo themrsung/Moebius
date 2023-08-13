@@ -1,7 +1,7 @@
 package civitas.celestis.math.vector;
 
 import civitas.celestis.math.Numbers;
-import civitas.celestis.math.quaternion.Quaternion;
+import civitas.celestis.math.complex.Quaternion;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 

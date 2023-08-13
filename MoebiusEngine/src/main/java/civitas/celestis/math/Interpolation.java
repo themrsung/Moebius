@@ -1,7 +1,7 @@
 package civitas.celestis.math;
 
 import civitas.celestis.graphics.color.RichColor;
-import civitas.celestis.math.quaternion.Quaternion;
+import civitas.celestis.math.complex.Quaternion;
 import civitas.celestis.math.vector.*;
 import civitas.celestis.math.vertex.Vertex;
 import jakarta.annotation.Nonnull;

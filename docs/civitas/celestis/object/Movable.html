@@ -160,12 +160,12 @@ extends <a href="Placeable.html" title="interface in civitas.celestis.object">Pl
 <div class="block">Moves this object by the specified amount.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#rotate(civitas.celestis.math.quaternion.Quaternion)" class="member-name-link">rotate</a><wbr>(<a href="../math/quaternion/Quaternion.html" title="class in civitas.celestis.math.quaternion">Quaternion</a>&nbsp;amount)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#rotate(civitas.celestis.math.complex.Quaternion)" class="member-name-link">rotate</a><wbr>(<a href="../math/quaternion/Quaternion.html" title="class in civitas.celestis.math.quaternion">Quaternion</a>&nbsp;amount)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Rotates this object by the specified amount.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#rotateRate(civitas.celestis.math.quaternion.Quaternion)" class="member-name-link">rotateRate</a><wbr>(<a href="../math/quaternion/Quaternion.html" title="class in civitas.celestis.math.quaternion">Quaternion</a>&nbsp;amount)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#rotateRate(civitas.celestis.math.complex.Quaternion)" class="member-name-link">rotateRate</a><wbr>(<a href="../math/quaternion/Quaternion.html" title="class in civitas.celestis.math.quaternion">Quaternion</a>&nbsp;amount)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Rotates the rate of rotation by the specified amount.</div>
 </div>
@@ -175,7 +175,7 @@ extends <a href="Placeable.html" title="interface in civitas.celestis.object">Pl
 <div class="block">Sets the acceleration of this object.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#setRotationRate(civitas.celestis.math.quaternion.Quaternion)" class="member-name-link">setRotationRate</a><wbr>(<a href="../math/quaternion/Quaternion.html" title="class in civitas.celestis.math.quaternion">Quaternion</a>&nbsp;rotationRate)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#setRotationRate(civitas.celestis.math.complex.Quaternion)" class="member-name-link">setRotationRate</a><wbr>(<a href="../math/quaternion/Quaternion.html" title="class in civitas.celestis.math.quaternion">Quaternion</a>&nbsp;rotationRate)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Sets the rate of rotation of this object.</div>
 </div>
@@ -184,7 +184,7 @@ extends <a href="Placeable.html" title="interface in civitas.celestis.object">Pl
 </div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-civitas.celestis.object.Placeable">Methods inherited from interface&nbsp;civitas.celestis.object.<a href="Placeable.html" title="interface in civitas.celestis.object">Placeable</a></h3>
-<code><a href="Placeable.html#getLocation()">getLocation</a>, <a href="Placeable.html#getRotation()">getRotation</a>, <a href="Placeable.html#setLocation(civitas.celestis.math.vector.Vector3)">setLocation</a>, <a href="Placeable.html#setRotation(civitas.celestis.math.quaternion.Quaternion)">setRotation</a></code></div>
+<code><a href="Placeable.html#getLocation()">getLocation</a>, <a href="Placeable.html#getRotation()">getRotation</a>, <a href="Placeable.html#setLocation(civitas.celestis.math.vector.Vector3)">setLocation</a>, <a href="Placeable.html#setRotation(civitas.celestis.math.complex.Quaternion)">setRotation</a></code></div>
 </section>
 </li>
 </ul>
@@ -293,7 +293,7 @@ extends <a href="Placeable.html" title="interface in civitas.celestis.object">Pl
 </section>
 </li>
 <li>
-<section class="detail" id="setRotationRate(civitas.celestis.math.quaternion.Quaternion)">
+<section class="detail" id="setRotationRate(civitas.celestis.math.complex.Quaternion)">
 <h3>setRotationRate</h3>
 <div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">setRotationRate</span><wbr><span class="parameters">(@Nonnull
  <a href="../math/quaternion/Quaternion.html" title="class in civitas.celestis.math.quaternion">Quaternion</a>&nbsp;rotationRate)</span></div>
@@ -329,7 +329,7 @@ extends <a href="Placeable.html" title="interface in civitas.celestis.object">Pl
 </section>
 </li>
 <li>
-<section class="detail" id="rotate(civitas.celestis.math.quaternion.Quaternion)">
+<section class="detail" id="rotate(civitas.celestis.math.complex.Quaternion)">
 <h3>rotate</h3>
 <div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">rotate</span><wbr><span class="parameters">(@Nonnull
  <a href="../math/quaternion/Quaternion.html" title="class in civitas.celestis.math.quaternion">Quaternion</a>&nbsp;amount)</span></div>
@@ -341,7 +341,7 @@ extends <a href="Placeable.html" title="interface in civitas.celestis.object">Pl
 </section>
 </li>
 <li>
-<section class="detail" id="rotateRate(civitas.celestis.math.quaternion.Quaternion)">
+<section class="detail" id="rotateRate(civitas.celestis.math.complex.Quaternion)">
 <h3>rotateRate</h3>
 <div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">rotateRate</span><wbr><span class="parameters">(@Nonnull
  <a href="../math/quaternion/Quaternion.html" title="class in civitas.celestis.math.quaternion">Quaternion</a>&nbsp;amount)</span></div>

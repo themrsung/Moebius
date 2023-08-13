@@ -3,7 +3,7 @@ package civitas.celestis.object;
 import civitas.celestis.graphics.face.Face;
 import civitas.celestis.graphics.model.Model;
 import civitas.celestis.math.Numbers;
-import civitas.celestis.math.quaternion.Quaternion;
+import civitas.celestis.math.complex.Quaternion;
 import civitas.celestis.math.vector.Vector3;
 import civitas.celestis.object.component.ObjectComponent;
 import civitas.celestis.physics.profile.PhysicsProfile;

@@ -114,7 +114,7 @@ implements <a href="../util/Unique.html" title="interface in civitas.celestis.ut
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.util.UUID,civitas.celestis.math.vector.Vector3,civitas.celestis.math.quaternion.Quaternion,civitas.celestis.physics.profile.PhysicsProfile,civitas.celestis.graphics.model.Model)" class="member-name-link">BaseObject</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;uniqueId,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.util.UUID,civitas.celestis.math.vector.Vector3,civitas.celestis.math.complex.Quaternion,civitas.celestis.physics.profile.PhysicsProfile,civitas.celestis.graphics.model.Model)" class="member-name-link">BaseObject</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;uniqueId,
  <a href="../math/vector/Vector3.html" title="class in civitas.celestis.math.vector">Vector3</a>&nbsp;location,
  <a href="../math/quaternion/Quaternion.html" title="class in civitas.celestis.math.quaternion">Quaternion</a>&nbsp;rotation,
  <a href="../physics/profile/PhysicsProfile.html" title="interface in civitas.celestis.physics.profile">PhysicsProfile</a>&nbsp;physicsProfile,
@@ -122,7 +122,7 @@ implements <a href="../util/Unique.html" title="interface in civitas.celestis.ut
 <div class="col-last even-row-color">
 <div class="block">Creates a new object.</div>
 </div>
-<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.util.UUID,civitas.celestis.math.vector.Vector3,civitas.celestis.math.vector.Vector3,civitas.celestis.math.quaternion.Quaternion,civitas.celestis.math.quaternion.Quaternion,civitas.celestis.physics.profile.PhysicsProfile,civitas.celestis.graphics.model.Model,java.util.List)" class="member-name-link">BaseObject</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;uniqueId,
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.util.UUID,civitas.celestis.math.vector.Vector3,civitas.celestis.math.vector.Vector3,civitas.celestis.math.complex.Quaternion,civitas.celestis.math.complex.Quaternion,civitas.celestis.physics.profile.PhysicsProfile,civitas.celestis.graphics.model.Model,java.util.List)" class="member-name-link">BaseObject</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;uniqueId,
  <a href="../math/vector/Vector3.html" title="class in civitas.celestis.math.vector">Vector3</a>&nbsp;location,
  <a href="../math/vector/Vector3.html" title="class in civitas.celestis.math.vector">Vector3</a>&nbsp;acceleration,
  <a href="../math/quaternion/Quaternion.html" title="class in civitas.celestis.math.quaternion">Quaternion</a>&nbsp;rotation,
@@ -279,12 +279,12 @@ implements <a href="../util/Unique.html" title="interface in civitas.celestis.ut
 <div class="block">Removes a component from this object.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#rotate(civitas.celestis.math.quaternion.Quaternion)" class="member-name-link">rotate</a><wbr>(<a href="../math/quaternion/Quaternion.html" title="class in civitas.celestis.math.quaternion">Quaternion</a>&nbsp;amount)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#rotate(civitas.celestis.math.complex.Quaternion)" class="member-name-link">rotate</a><wbr>(<a href="../math/quaternion/Quaternion.html" title="class in civitas.celestis.math.quaternion">Quaternion</a>&nbsp;amount)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Rotates this object by the specified amount.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#rotateRate(civitas.celestis.math.quaternion.Quaternion)" class="member-name-link">rotateRate</a><wbr>(<a href="../math/quaternion/Quaternion.html" title="class in civitas.celestis.math.quaternion">Quaternion</a>&nbsp;amount)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#rotateRate(civitas.celestis.math.complex.Quaternion)" class="member-name-link">rotateRate</a><wbr>(<a href="../math/quaternion/Quaternion.html" title="class in civitas.celestis.math.quaternion">Quaternion</a>&nbsp;amount)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Rotates the rate of rotation by the specified amount.</div>
 </div>
@@ -309,12 +309,12 @@ implements <a href="../util/Unique.html" title="interface in civitas.celestis.ut
 <div class="block">Sets the physical profile of this object.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setRotation(civitas.celestis.math.quaternion.Quaternion)" class="member-name-link">setRotation</a><wbr>(<a href="../math/quaternion/Quaternion.html" title="class in civitas.celestis.math.quaternion">Quaternion</a>&nbsp;rotation)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setRotation(civitas.celestis.math.complex.Quaternion)" class="member-name-link">setRotation</a><wbr>(<a href="../math/quaternion/Quaternion.html" title="class in civitas.celestis.math.quaternion">Quaternion</a>&nbsp;rotation)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Sets the rotation of this object.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setRotationRate(civitas.celestis.math.quaternion.Quaternion)" class="member-name-link">setRotationRate</a><wbr>(<a href="../math/quaternion/Quaternion.html" title="class in civitas.celestis.math.quaternion">Quaternion</a>&nbsp;rotationRate)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setRotationRate(civitas.celestis.math.complex.Quaternion)" class="member-name-link">setRotationRate</a><wbr>(<a href="../math/quaternion/Quaternion.html" title="class in civitas.celestis.math.quaternion">Quaternion</a>&nbsp;rotationRate)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Sets the rate of rotation of this object.</div>
 </div>
@@ -341,7 +341,7 @@ implements <a href="../util/Unique.html" title="interface in civitas.celestis.ut
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(java.util.UUID,civitas.celestis.math.vector.Vector3,civitas.celestis.math.quaternion.Quaternion,civitas.celestis.physics.profile.PhysicsProfile,civitas.celestis.graphics.model.Model)">
+<section class="detail" id="&lt;init&gt;(java.util.UUID,civitas.celestis.math.vector.Vector3,civitas.celestis.math.complex.Quaternion,civitas.celestis.physics.profile.PhysicsProfile,civitas.celestis.graphics.model.Model)">
 <h3>BaseObject</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">BaseObject</span><wbr><span class="parameters">(@Nonnull
  <a href="https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;uniqueId,
@@ -365,7 +365,7 @@ implements <a href="../util/Unique.html" title="interface in civitas.celestis.ut
 </section>
 </li>
 <li>
-<section class="detail" id="&lt;init&gt;(java.util.UUID,civitas.celestis.math.vector.Vector3,civitas.celestis.math.vector.Vector3,civitas.celestis.math.quaternion.Quaternion,civitas.celestis.math.quaternion.Quaternion,civitas.celestis.physics.profile.PhysicsProfile,civitas.celestis.graphics.model.Model,java.util.List)">
+<section class="detail" id="&lt;init&gt;(java.util.UUID,civitas.celestis.math.vector.Vector3,civitas.celestis.math.vector.Vector3,civitas.celestis.math.complex.Quaternion,civitas.celestis.math.complex.Quaternion,civitas.celestis.physics.profile.PhysicsProfile,civitas.celestis.graphics.model.Model,java.util.List)">
 <h3>BaseObject</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">BaseObject</span><wbr><span class="parameters">(@Nonnull
  <a href="https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;uniqueId,
@@ -668,28 +668,28 @@ implements <a href="../util/Unique.html" title="interface in civitas.celestis.ut
 </section>
 </li>
 <li>
-<section class="detail" id="setRotation(civitas.celestis.math.quaternion.Quaternion)">
+<section class="detail" id="setRotation(civitas.celestis.math.complex.Quaternion)">
 <h3>setRotation</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setRotation</span><wbr><span class="parameters">(@Nonnull
  <a href="../math/quaternion/Quaternion.html" title="class in civitas.celestis.math.quaternion">Quaternion</a>&nbsp;rotation)</span></div>
 <div class="block">Sets the rotation of this object.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Placeable.html#setRotation(civitas.celestis.math.quaternion.Quaternion)">setRotation</a></code>&nbsp;in interface&nbsp;<code><a href="Placeable.html" title="interface in civitas.celestis.object">Placeable</a></code></dd>
+<dd><code><a href="Placeable.html#setRotation(civitas.celestis.math.complex.Quaternion)">setRotation</a></code>&nbsp;in interface&nbsp;<code><a href="Placeable.html" title="interface in civitas.celestis.object">Placeable</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>rotation</code> - The new rotation of this object</dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="setRotationRate(civitas.celestis.math.quaternion.Quaternion)">
+<section class="detail" id="setRotationRate(civitas.celestis.math.complex.Quaternion)">
 <h3>setRotationRate</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setRotationRate</span><wbr><span class="parameters">(@Nonnull
  <a href="../math/quaternion/Quaternion.html" title="class in civitas.celestis.math.quaternion">Quaternion</a>&nbsp;rotationRate)</span></div>
 <div class="block">Sets the rate of rotation of this object.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Movable.html#setRotationRate(civitas.celestis.math.quaternion.Quaternion)">setRotationRate</a></code>&nbsp;in interface&nbsp;<code><a href="Movable.html" title="interface in civitas.celestis.object">Movable</a></code></dd>
+<dd><code><a href="Movable.html#setRotationRate(civitas.celestis.math.complex.Quaternion)">setRotationRate</a></code>&nbsp;in interface&nbsp;<code><a href="Movable.html" title="interface in civitas.celestis.object">Movable</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>rotationRate</code> - The rate of rotation of this object</dd>
 </dl>
@@ -724,28 +724,28 @@ implements <a href="../util/Unique.html" title="interface in civitas.celestis.ut
 </section>
 </li>
 <li>
-<section class="detail" id="rotate(civitas.celestis.math.quaternion.Quaternion)">
+<section class="detail" id="rotate(civitas.celestis.math.complex.Quaternion)">
 <h3>rotate</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">rotate</span><wbr><span class="parameters">(@Nonnull
  <a href="../math/quaternion/Quaternion.html" title="class in civitas.celestis.math.quaternion">Quaternion</a>&nbsp;amount)</span></div>
 <div class="block">Rotates this object by the specified amount.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Movable.html#rotate(civitas.celestis.math.quaternion.Quaternion)">rotate</a></code>&nbsp;in interface&nbsp;<code><a href="Movable.html" title="interface in civitas.celestis.object">Movable</a></code></dd>
+<dd><code><a href="Movable.html#rotate(civitas.celestis.math.complex.Quaternion)">rotate</a></code>&nbsp;in interface&nbsp;<code><a href="Movable.html" title="interface in civitas.celestis.object">Movable</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>amount</code> - The amount of rotation to apply</dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="rotateRate(civitas.celestis.math.quaternion.Quaternion)">
+<section class="detail" id="rotateRate(civitas.celestis.math.complex.Quaternion)">
 <h3>rotateRate</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">rotateRate</span><wbr><span class="parameters">(@Nonnull
  <a href="../math/quaternion/Quaternion.html" title="class in civitas.celestis.math.quaternion">Quaternion</a>&nbsp;amount)</span></div>
 <div class="block">Rotates the rate of rotation by the specified amount.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Movable.html#rotateRate(civitas.celestis.math.quaternion.Quaternion)">rotateRate</a></code>&nbsp;in interface&nbsp;<code><a href="Movable.html" title="interface in civitas.celestis.object">Movable</a></code></dd>
+<dd><code><a href="Movable.html#rotateRate(civitas.celestis.math.complex.Quaternion)">rotateRate</a></code>&nbsp;in interface&nbsp;<code><a href="Movable.html" title="interface in civitas.celestis.object">Movable</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>amount</code> - The amount of rotation to apply to the rate of rotation</dd>
 </dl>

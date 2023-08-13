@@ -729,7 +729,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns a random normalized unit vector.</div>
 </div>
 <div class="col-first odd-row-color"><code><a href="../Vector3.html" title="class in civitas.celestis.math.vector">Vector3</a></code></div>
-<div class="col-second odd-row-color"><span class="type-name-label">Vector3.</span><code><a href="../Vector3.html#rotate(civitas.celestis.math.quaternion.Quaternion)" class="member-name-link">rotate</a><wbr>(<a href="../../quaternion/Quaternion.html" title="class in civitas.celestis.math.quaternion">Quaternion</a>&nbsp;rq)</code></div>
+<div class="col-second odd-row-color"><span class="type-name-label">Vector3.</span><code><a href="../Vector3.html#rotate(civitas.celestis.math.complex.Quaternion)" class="member-name-link">rotate</a><wbr>(<a href="../../quaternion/Quaternion.html" title="class in civitas.celestis.math.quaternion">Quaternion</a>&nbsp;rq)</code></div>
 <div class="col-last odd-row-color">
 <div class="block">Rotates this vector by a rotation quaternion.</div>
 </div>
@@ -834,7 +834,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code><a href="../../vertex/Vertex.html" title="class in civitas.celestis.math.vertex">Vertex</a></code></div>
-<div class="col-second even-row-color"><span class="type-name-label">Vertex.</span><code><a href="../../vertex/Vertex.html#absolute(civitas.celestis.math.vector.Vector3,civitas.celestis.math.quaternion.Quaternion)" class="member-name-link">absolute</a><wbr>(<a href="../Vector3.html" title="class in civitas.celestis.math.vector">Vector3</a>&nbsp;offset,
+<div class="col-second even-row-color"><span class="type-name-label">Vertex.</span><code><a href="../../vertex/Vertex.html#absolute(civitas.celestis.math.vector.Vector3,civitas.celestis.math.complex.Quaternion)" class="member-name-link">absolute</a><wbr>(<a href="../Vector3.html" title="class in civitas.celestis.math.vector">Vector3</a>&nbsp;offset,
  <a href="../../quaternion/Quaternion.html" title="class in civitas.celestis.math.quaternion">Quaternion</a>&nbsp;rotation)</code></div>
 <div class="col-last even-row-color">
 <div class="block">Transforms this vertex to an absolute coordinate system.</div>
@@ -871,7 +871,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Subtracts a vector from this vertex.</div>
 </div>
 <div class="col-first odd-row-color"><code><a href="../../vertex/Vertex.html" title="class in civitas.celestis.math.vertex">Vertex</a></code></div>
-<div class="col-second odd-row-color"><span class="type-name-label">Vertex.</span><code><a href="../../vertex/Vertex.html#transform(civitas.celestis.math.vector.Vector3,civitas.celestis.math.quaternion.Quaternion,double)" class="member-name-link">transform</a><wbr>(<a href="../Vector3.html" title="class in civitas.celestis.math.vector">Vector3</a>&nbsp;origin,
+<div class="col-second odd-row-color"><span class="type-name-label">Vertex.</span><code><a href="../../vertex/Vertex.html#transform(civitas.celestis.math.vector.Vector3,civitas.celestis.math.complex.Quaternion,double)" class="member-name-link">transform</a><wbr>(<a href="../Vector3.html" title="class in civitas.celestis.math.vector">Vector3</a>&nbsp;origin,
  <a href="../../quaternion/Quaternion.html" title="class in civitas.celestis.math.quaternion">Quaternion</a>&nbsp;rotation,
  double&nbsp;scale)</code></div>
 <div class="col-last odd-row-color">
@@ -993,7 +993,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>&nbsp;</code></div>
-<div class="col-second even-row-color"><code><a href="../../../object/BaseObject.html#%3Cinit%3E(java.util.UUID,civitas.celestis.math.vector.Vector3,civitas.celestis.math.quaternion.Quaternion,civitas.celestis.physics.profile.PhysicsProfile,civitas.celestis.graphics.model.Model)" class="member-name-link">BaseObject</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;uniqueId,
+<div class="col-second even-row-color"><code><a href="../../../object/BaseObject.html#%3Cinit%3E(java.util.UUID,civitas.celestis.math.vector.Vector3,civitas.celestis.math.complex.Quaternion,civitas.celestis.physics.profile.PhysicsProfile,civitas.celestis.graphics.model.Model)" class="member-name-link">BaseObject</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;uniqueId,
  <a href="../Vector3.html" title="class in civitas.celestis.math.vector">Vector3</a>&nbsp;location,
  <a href="../../quaternion/Quaternion.html" title="class in civitas.celestis.math.quaternion">Quaternion</a>&nbsp;rotation,
  <a href="../../../physics/profile/PhysicsProfile.html" title="interface in civitas.celestis.physics.profile">PhysicsProfile</a>&nbsp;physicsProfile,
@@ -1002,7 +1002,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Creates a new object.</div>
 </div>
 <div class="col-first odd-row-color"><code>&nbsp;</code></div>
-<div class="col-second odd-row-color"><code><a href="../../../object/BaseObject.html#%3Cinit%3E(java.util.UUID,civitas.celestis.math.vector.Vector3,civitas.celestis.math.vector.Vector3,civitas.celestis.math.quaternion.Quaternion,civitas.celestis.math.quaternion.Quaternion,civitas.celestis.physics.profile.PhysicsProfile,civitas.celestis.graphics.model.Model,java.util.List)" class="member-name-link">BaseObject</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;uniqueId,
+<div class="col-second odd-row-color"><code><a href="../../../object/BaseObject.html#%3Cinit%3E(java.util.UUID,civitas.celestis.math.vector.Vector3,civitas.celestis.math.vector.Vector3,civitas.celestis.math.complex.Quaternion,civitas.celestis.math.complex.Quaternion,civitas.celestis.physics.profile.PhysicsProfile,civitas.celestis.graphics.model.Model,java.util.List)" class="member-name-link">BaseObject</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;uniqueId,
  <a href="../Vector3.html" title="class in civitas.celestis.math.vector">Vector3</a>&nbsp;location,
  <a href="../Vector3.html" title="class in civitas.celestis.math.vector">Vector3</a>&nbsp;acceleration,
  <a href="../../quaternion/Quaternion.html" title="class in civitas.celestis.math.quaternion">Quaternion</a>&nbsp;rotation,
@@ -1014,7 +1014,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Creates a new object.</div>
 </div>
 <div class="col-first even-row-color"><code>&nbsp;</code></div>
-<div class="col-second even-row-color"><code><a href="../../../object/ImmovableObject.html#%3Cinit%3E(java.util.UUID,civitas.celestis.math.vector.Vector3,civitas.celestis.math.quaternion.Quaternion,civitas.celestis.physics.profile.PhysicsProfile,civitas.celestis.graphics.model.Model)" class="member-name-link">ImmovableObject</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;uniqueId,
+<div class="col-second even-row-color"><code><a href="../../../object/ImmovableObject.html#%3Cinit%3E(java.util.UUID,civitas.celestis.math.vector.Vector3,civitas.celestis.math.complex.Quaternion,civitas.celestis.physics.profile.PhysicsProfile,civitas.celestis.graphics.model.Model)" class="member-name-link">ImmovableObject</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;uniqueId,
  <a href="../Vector3.html" title="class in civitas.celestis.math.vector">Vector3</a>&nbsp;location,
  <a href="../../quaternion/Quaternion.html" title="class in civitas.celestis.math.quaternion">Quaternion</a>&nbsp;rotation,
  <a href="../../../physics/profile/PhysicsProfile.html" title="interface in civitas.celestis.physics.profile">PhysicsProfile</a>&nbsp;physicsProfile,
@@ -1023,7 +1023,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Creates a new immovable object.</div>
 </div>
 <div class="col-first odd-row-color"><code>&nbsp;</code></div>
-<div class="col-second odd-row-color"><code><a href="../../../object/ImmovableObject.html#%3Cinit%3E(java.util.UUID,civitas.celestis.math.vector.Vector3,civitas.celestis.math.vector.Vector3,civitas.celestis.math.quaternion.Quaternion,civitas.celestis.math.quaternion.Quaternion,civitas.celestis.physics.profile.PhysicsProfile,civitas.celestis.graphics.model.Model,java.util.List)" class="member-name-link">ImmovableObject</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;uniqueId,
+<div class="col-second odd-row-color"><code><a href="../../../object/ImmovableObject.html#%3Cinit%3E(java.util.UUID,civitas.celestis.math.vector.Vector3,civitas.celestis.math.vector.Vector3,civitas.celestis.math.complex.Quaternion,civitas.celestis.math.complex.Quaternion,civitas.celestis.physics.profile.PhysicsProfile,civitas.celestis.graphics.model.Model,java.util.List)" class="member-name-link">ImmovableObject</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;uniqueId,
  <a href="../Vector3.html" title="class in civitas.celestis.math.vector">Vector3</a>&nbsp;location,
  <a href="../Vector3.html" title="class in civitas.celestis.math.vector">Vector3</a>&nbsp;acceleration,
  <a href="../../quaternion/Quaternion.html" title="class in civitas.celestis.math.quaternion">Quaternion</a>&nbsp;rotation,
@@ -1046,7 +1046,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>&nbsp;</code></div>
-<div class="col-second even-row-color"><code><a href="../../../object/component/ComponentObject.html#%3Cinit%3E(java.util.UUID,civitas.celestis.math.vector.Vector3,civitas.celestis.math.quaternion.Quaternion,civitas.celestis.physics.profile.PhysicsProfile,civitas.celestis.graphics.model.Model)" class="member-name-link">ComponentObject</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;uniqueId,
+<div class="col-second even-row-color"><code><a href="../../../object/component/ComponentObject.html#%3Cinit%3E(java.util.UUID,civitas.celestis.math.vector.Vector3,civitas.celestis.math.complex.Quaternion,civitas.celestis.physics.profile.PhysicsProfile,civitas.celestis.graphics.model.Model)" class="member-name-link">ComponentObject</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;uniqueId,
  <a href="../Vector3.html" title="class in civitas.celestis.math.vector">Vector3</a>&nbsp;location,
  <a href="../../quaternion/Quaternion.html" title="class in civitas.celestis.math.quaternion">Quaternion</a>&nbsp;rotation,
  <a href="../../../physics/profile/PhysicsProfile.html" title="interface in civitas.celestis.physics.profile">PhysicsProfile</a>&nbsp;physicsProfile,
@@ -1055,7 +1055,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Creates a new component object.</div>
 </div>
 <div class="col-first odd-row-color"><code>&nbsp;</code></div>
-<div class="col-second odd-row-color"><code><a href="../../../object/component/ComponentObject.html#%3Cinit%3E(java.util.UUID,civitas.celestis.math.vector.Vector3,civitas.celestis.math.vector.Vector3,civitas.celestis.math.quaternion.Quaternion,civitas.celestis.math.quaternion.Quaternion,civitas.celestis.physics.profile.PhysicsProfile,civitas.celestis.graphics.model.Model,java.util.List)" class="member-name-link">ComponentObject</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;uniqueId,
+<div class="col-second odd-row-color"><code><a href="../../../object/component/ComponentObject.html#%3Cinit%3E(java.util.UUID,civitas.celestis.math.vector.Vector3,civitas.celestis.math.vector.Vector3,civitas.celestis.math.complex.Quaternion,civitas.celestis.math.complex.Quaternion,civitas.celestis.physics.profile.PhysicsProfile,civitas.celestis.graphics.model.Model,java.util.List)" class="member-name-link">ComponentObject</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;uniqueId,
  <a href="../Vector3.html" title="class in civitas.celestis.math.vector">Vector3</a>&nbsp;location,
  <a href="../Vector3.html" title="class in civitas.celestis.math.vector">Vector3</a>&nbsp;acceleration,
  <a href="../../quaternion/Quaternion.html" title="class in civitas.celestis.math.quaternion">Quaternion</a>&nbsp;rotation,

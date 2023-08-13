@@ -1,4 +1,4 @@
-package civitas.celestis.math.quaternion;
+package civitas.celestis.math.complex;
 
 import jakarta.annotation.Nonnull;
 

@@ -211,7 +211,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Vertex.html" title="class in civitas.celestis.math.vertex">Vertex</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#absolute(civitas.celestis.math.vector.Vector3,civitas.celestis.math.quaternion.Quaternion)" class="member-name-link">absolute</a><wbr>(<a href="../vector/Vector3.html" title="class in civitas.celestis.math.vector">Vector3</a>&nbsp;offset,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#absolute(civitas.celestis.math.vector.Vector3,civitas.celestis.math.complex.Quaternion)" class="member-name-link">absolute</a><wbr>(<a href="../vector/Vector3.html" title="class in civitas.celestis.math.vector">Vector3</a>&nbsp;offset,
  <a href="../quaternion/Quaternion.html" title="class in civitas.celestis.math.quaternion">Quaternion</a>&nbsp;rotation)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Transforms this vertex to an absolute coordinate system.</div>
@@ -319,7 +319,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns a random normalized unit vertex.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Vertex.html" title="class in civitas.celestis.math.vertex">Vertex</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#rotate(civitas.celestis.math.quaternion.Quaternion)" class="member-name-link">rotate</a><wbr>(<a href="../quaternion/Quaternion.html" title="class in civitas.celestis.math.quaternion">Quaternion</a>&nbsp;rq)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#rotate(civitas.celestis.math.complex.Quaternion)" class="member-name-link">rotate</a><wbr>(<a href="../quaternion/Quaternion.html" title="class in civitas.celestis.math.quaternion">Quaternion</a>&nbsp;rq)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Rotates this vertex by a rotation quaternion.</div>
 </div>
@@ -344,7 +344,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Serializes this vector into a string.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Vertex.html" title="class in civitas.celestis.math.vertex">Vertex</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#transform(civitas.celestis.math.vector.Vector3,civitas.celestis.math.quaternion.Quaternion,double)" class="member-name-link">transform</a><wbr>(<a href="../vector/Vector3.html" title="class in civitas.celestis.math.vector">Vector3</a>&nbsp;origin,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#transform(civitas.celestis.math.vector.Vector3,civitas.celestis.math.complex.Quaternion,double)" class="member-name-link">transform</a><wbr>(<a href="../vector/Vector3.html" title="class in civitas.celestis.math.vector">Vector3</a>&nbsp;origin,
  <a href="../quaternion/Quaternion.html" title="class in civitas.celestis.math.quaternion">Quaternion</a>&nbsp;rotation,
  double&nbsp;scale)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
@@ -925,7 +925,7 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="rotate(civitas.celestis.math.quaternion.Quaternion)">
+<section class="detail" id="rotate(civitas.celestis.math.complex.Quaternion)">
 <h3>rotate</h3>
 <div class="member-signature"><span class="annotations">@Nonnull
 </span><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Vertex.html" title="class in civitas.celestis.math.vertex">Vertex</a></span>&nbsp;<span class="element-name">rotate</span><wbr><span class="parameters">(@Nonnull
@@ -933,7 +933,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Rotates this vertex by a rotation quaternion.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
-<dd><code><a href="../vector/Vector3.html#rotate(civitas.celestis.math.quaternion.Quaternion)">rotate</a></code>&nbsp;in class&nbsp;<code><a href="../vector/Vector3.html" title="class in civitas.celestis.math.vector">Vector3</a></code></dd>
+<dd><code><a href="../vector/Vector3.html#rotate(civitas.celestis.math.complex.Quaternion)">rotate</a></code>&nbsp;in class&nbsp;<code><a href="../vector/Vector3.html" title="class in civitas.celestis.math.vector">Vector3</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>rq</code> - The rotation quaternion to use</dd>
 <dt>Returns:</dt>
@@ -942,7 +942,7 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="transform(civitas.celestis.math.vector.Vector3,civitas.celestis.math.quaternion.Quaternion,double)">
+<section class="detail" id="transform(civitas.celestis.math.vector.Vector3,civitas.celestis.math.complex.Quaternion,double)">
 <h3>transform</h3>
 <div class="member-signature"><span class="annotations">@Nonnull
 </span><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Vertex.html" title="class in civitas.celestis.math.vertex">Vertex</a></span>&nbsp;<span class="element-name">transform</span><wbr><span class="parameters">(@Nonnull
@@ -963,7 +963,7 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="absolute(civitas.celestis.math.vector.Vector3,civitas.celestis.math.quaternion.Quaternion)">
+<section class="detail" id="absolute(civitas.celestis.math.vector.Vector3,civitas.celestis.math.complex.Quaternion)">
 <h3>absolute</h3>
 <div class="member-signature"><span class="annotations">@Nonnull
 </span><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Vertex.html" title="class in civitas.celestis.math.vertex">Vertex</a></span>&nbsp;<span class="element-name">absolute</span><wbr><span class="parameters">(@Nonnull

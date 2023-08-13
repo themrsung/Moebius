@@ -1,5 +1,6 @@
 package civitas.celestis.math.vector;
 
+import civitas.celestis.math.Numeric;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
@@ -23,7 +24,7 @@ import java.util.function.UnaryOperator;
  * will trigger an exception in the constructor.
  * </p>
  */
-public interface Vector extends Serializable {
+public interface Vector extends Numeric, Serializable {
     //
     // Factory
     //

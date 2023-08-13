@@ -1,7 +1,7 @@
 package civitas.celestis.math.vertex;
 
 import civitas.celestis.math.Numbers;
-import civitas.celestis.math.quaternion.Quaternion;
+import civitas.celestis.math.complex.Quaternion;
 import civitas.celestis.math.vector.Vector;
 import civitas.celestis.math.vector.Vector3;
 import civitas.celestis.math.vector.VectorMapper;

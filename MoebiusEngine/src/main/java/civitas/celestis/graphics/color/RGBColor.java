@@ -12,7 +12,7 @@ import java.awt.*;
 import java.util.function.UnaryOperator;
 
 /**
- * A color which only has discrete integer RGB components.
+ * A 8-bit color which only has discrete integer RGB components.
  */
 public class RGBColor extends NaturalVector3 {
     //
@@ -27,17 +27,17 @@ public class RGBColor extends NaturalVector3 {
     /**
      * The color light gray.
      */
-    public static final RGBColor LIGHT_GRAY = new RGBColor(192, 192, 192);
+    public static final RGBColor LIGHT_GRAY = RichColor.LIGHT_GRAY.rgbInt();
 
     /**
      * The color gray.
      */
-    public static final RGBColor GRAY = new RGBColor(128, 128, 128);
+    public static final RGBColor GRAY = RichColor.GRAY.rgbInt();
 
     /**
      * The color dark gray.
      */
-    public static final RGBColor DARK_GRAY = new RGBColor(64, 64, 64);
+    public static final RGBColor DARK_GRAY = RichColor.DARK_GRAY.rgbInt();
 
     /**
      * The color black.
@@ -52,12 +52,12 @@ public class RGBColor extends NaturalVector3 {
     /**
      * The color pink.
      */
-    public static final RGBColor PINK = new RGBColor(255, 175, 175);
+    public static final RGBColor PINK = RichColor.PINK.rgbInt();
 
     /**
      * The color orange.
      */
-    public static final RGBColor ORANGE = new RGBColor(255, 200, 0);
+    public static final RGBColor ORANGE = RichColor.ORANGE.rgbInt();
 
     /**
      * The color yellow.
@@ -87,12 +87,12 @@ public class RGBColor extends NaturalVector3 {
     /**
      * The color gold.
      */
-    public static final RGBColor GOLD = new RGBColor(218, 165, 32);
+    public static final RGBColor GOLD = RichColor.GOLD.rgbInt();
 
     /**
      * The color brown.
      */
-    public static final RGBColor BROWN = new RGBColor(139, 69, 19);
+    public static final RGBColor BROWN = RichColor.BROWN.rgbInt();
 
     //
     // Static Utilities

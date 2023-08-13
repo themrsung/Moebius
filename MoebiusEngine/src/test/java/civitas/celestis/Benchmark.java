@@ -2,6 +2,8 @@ package civitas.celestis;
 
 import civitas.celestis.graphics.color.RichColor;
 import civitas.celestis.math.Interpolation;
+import civitas.celestis.math.Numbers;
+import civitas.celestis.math.real.RealNumber;
 
 public class Benchmark {
     public static void main(String[] args) {
@@ -12,7 +14,8 @@ public class Benchmark {
         // Start of benchmark
 
         for (int i = 0; i < 1000000; i++) {
-            Interpolation.lerp(c1, c2, 0.5);
+            new RealNumber(Numbers.random(0, 10000)).sqrt();
+//            Math.sqrt(Numbers.random(0, 10000));
         }
 
         // End of benchmark

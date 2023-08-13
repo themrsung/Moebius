@@ -11,7 +11,7 @@ import java.awt.*;
 import java.util.function.UnaryOperator;
 
 /**
- * A color class with linear transition capability.
+ * An 8-bit color class with linear transition capability.
  * <p><b>
  * While {@link RichColor} and {@link DeepColor} can be used in the same context
  * due to both classes inheriting {@link Vector4},

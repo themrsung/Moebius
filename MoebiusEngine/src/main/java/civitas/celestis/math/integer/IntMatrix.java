@@ -1,5 +1,6 @@
 package civitas.celestis.math.integer;
 
+import civitas.celestis.math.Numeric;
 import civitas.celestis.math.vector.Vector;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
@@ -12,7 +13,7 @@ import java.util.function.UnaryOperator;
  * A two-dimensional array of scalars. Matrices can be used for various purposes.
  * A matrix cannot be resized after creation. Resizing requires re-instantiation.
  */
-public class IntMatrix implements Iterable<Integer> {
+public class IntMatrix implements Numeric, Iterable<Integer> {
     //
     // Constructors
     //

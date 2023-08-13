@@ -1,5 +1,6 @@
 package civitas.celestis.math.integer;
 
+import civitas.celestis.math.Numeric;
 import civitas.celestis.math.vector.Vector;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
@@ -13,7 +14,7 @@ import java.util.function.UnaryOperator;
  * This interface defines the contract of an integer-only vector.
  * </p>
  */
-public interface IntVector extends Serializable {
+public interface IntVector extends Numeric, Serializable {
     //
     // Factory
     //

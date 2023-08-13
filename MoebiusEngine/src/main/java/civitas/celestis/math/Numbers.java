@@ -1728,6 +1728,54 @@ public final class Numbers {
     }
 
     //
+    // Fractional Math
+    //
+
+    /**
+     * Returns the greatest common denominator of the two values.
+     *
+     * @param v1 The first value
+     * @param v2 The second value
+     * @return The greatest common denominator of the two values
+     */
+    public static double gcd(double v1, double v2) {
+        return v2 == 0 ? v1 : gcd(v2, v1 % v2);
+    }
+
+    /**
+     * Returns the least common multiple of the two values.
+     *
+     * @param v1 The first value
+     * @param v2 The second value
+     * @return The least common multiple of the two values
+     */
+    public static double lcm(double v1, double v2) {
+        return (v1 * v2) / gcd(v1, v2);
+    }
+
+    /**
+     * Returns the greatest common denominator of the two values.
+     *
+     * @param v1 The first value
+     * @param v2 The second value
+     * @return The greatest common denominator of the two values
+     */
+    public static long gcd(long v1, long v2) {
+        return v2 == 0 ? v1 : gcd(v2, v1 % v2);
+    }
+
+    /**
+     * Returns the least common multiple of the two values.
+     *
+     * @param v1 The first value
+     * @param v2 The second value
+     * @return The least common multiple of the two values
+     */
+    public static long lcm(long v1, long v2) {
+        return (v1 * v2) / gcd(v1, v2);
+    }
+
+    //
     // Miscellaneous
     //
 
@@ -1752,5 +1800,42 @@ public final class Numbers {
     public static double distance2(double v1, double v2) {
         final double diff = v2 - v1;
         return diff * diff;
+    }
+
+    /**
+     * Returns the sign of the provided value.
+     *
+     * @param value The value of which to get the sign of
+     * @return The sign of the value
+     */
+    @Nonnull
+    public static Sign sign(double value) {
+        if (Double.isNaN(value)) return Sign.NOT_A_NUMBER;
+        if (value == Double.POSITIVE_INFINITY) return Sign.POSITIVE_INFINITY;
+        if (value == Double.NEGATIVE_INFINITY) return Sign.NEGATIVE_INFINITY;
+
+        // Value is finite
+
+        return value == 0 ? Sign.ZERO : (value > 0 ? Sign.POSITIVE : Sign.NEGATIVE);
+    }
+
+    /**
+     * Raises the given value {@code v} to the exponent {@code exp}, but keeps the sign.
+     *
+     * @param v   The value to raise
+     * @param exp The exponent to raise to
+     * @return The signed power of {@code v^exp}
+     * @see Numbers#sign(double)
+     * @see Sign
+     */
+    public static double pows(double v, double exp) {
+        final Sign sign = sign(v);
+        if (!sign.finite()) return Math.pow(v, exp);
+
+        return switch (sign) {
+            case POSITIVE, ZERO -> Math.pow(v, exp);
+            case NEGATIVE -> -Math.pow(v, exp);
+            default -> throw new UnknownError("Unknown error in Numbers#pows(double, double)");
+        };
     }
 }
