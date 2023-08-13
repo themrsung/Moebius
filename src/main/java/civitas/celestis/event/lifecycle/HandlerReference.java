@@ -30,6 +30,7 @@ public record HandlerReference(@Nonnull Listener listener, @Nonnull Method metho
      * Checks if an event can be safely called to this event handler.
      *
      * @param event The event to check for type-safety
+     * @param <E> The type of event to check for type-safety
      * @return {@code true} if the event can be safely called
      */
     public <E extends Event> boolean isCallable(@Nonnull E event) {
