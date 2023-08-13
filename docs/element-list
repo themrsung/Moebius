@@ -13,10 +13,16 @@ civitas.celestis.math.matrix
 civitas.celestis.math.quaternion
 civitas.celestis.math.vector
 civitas.celestis.math.vertex
-civitas.celestis.physics
+civitas.celestis.object
+civitas.celestis.object.component
+civitas.celestis.physics.profile
+civitas.celestis.physics.solid
 civitas.celestis.task
 civitas.celestis.task.lifecycle
+civitas.celestis.util
 civitas.celestis.util.alphabetical
 civitas.celestis.util.collection
 civitas.celestis.util.group
 civitas.celestis.util.string
+civitas.celestis.world
+civitas.celestis.world.lifecycle
