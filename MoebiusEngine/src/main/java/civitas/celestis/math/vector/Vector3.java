@@ -65,13 +65,6 @@ public class Vector3 implements Vector {
     //
 
     /**
-     * Creates a new vector with no direction or magnitude.
-     */
-    public Vector3() {
-        this(ZERO);
-    }
-
-    /**
      * Creates a new vector.
      *
      * @param x The X component of this vector

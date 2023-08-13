@@ -35,6 +35,7 @@ public class NoiseFilter implements ImageFilter {
 
     /**
      * Creates a new noise filter.
+     *
      * @param intensity The intensity of this filter within a range of {@code 0-1}
      */
     public NoiseFilter(double intensity) {
@@ -47,6 +48,7 @@ public class NoiseFilter implements ImageFilter {
 
     /**
      * Returns a noise filter with random intensity.
+     *
      * @return A random intensity noise filter
      */
     @Nonnull
@@ -65,6 +67,7 @@ public class NoiseFilter implements ImageFilter {
 
     /**
      * Applies this filter to the given image.
+     *
      * @param image The image to apply this filter to
      */
     @Override

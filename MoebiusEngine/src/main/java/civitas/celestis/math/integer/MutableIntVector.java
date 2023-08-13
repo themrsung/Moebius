@@ -109,7 +109,7 @@ public class MutableIntVector implements IntVector {
      * @param value Value to set to
      * @throws IndexOutOfBoundsException When the index is out of bounds
      */
-    public final void setValueAt(int i, int value) throws IndexOutOfBoundsException {
+    public void setValueAt(int i, int value) throws IndexOutOfBoundsException {
         values[i] = value;
     }
 
@@ -118,7 +118,7 @@ public class MutableIntVector implements IntVector {
      *
      * @param value Value to append
      */
-    public final void append(int value) {
+    public void append(int value) {
         resize(length + 1);
         values[length++] = value;
     }
@@ -534,7 +534,7 @@ public class MutableIntVector implements IntVector {
      */
     @Nonnull
     public static MutableIntVector parseVector(@Nonnull String input) throws NumberFormatException {
-        if (!input.startsWith("MutableVector{")) {
+        if (!input.startsWith("MutableIntVector{")) {
             throw new NumberFormatException("Given string does not represent a MutableIntVector.");
         }
 

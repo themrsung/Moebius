@@ -75,12 +75,6 @@ public class Vertex extends Vector3 {
     //
 
     /**
-     * Creates a new vertex with values {{@code 0, 0, 0}}.
-     */
-    public Vertex() {
-    }
-
-    /**
      * Creates a new vertex.
      *
      * @param x The X coordinate of this vertex

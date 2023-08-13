@@ -3,6 +3,7 @@ package civitas.celestis.ui.image;
 import civitas.celestis.graphics.color.RichColor;
 import civitas.celestis.math.integer.IntMatrix;
 import civitas.celestis.math.integer.IntVector2;
+import civitas.celestis.math.natural.NaturalVector2;
 import civitas.celestis.math.vector.Vector2;
 import civitas.celestis.ui.filter.ImageFilter;
 import civitas.celestis.ui.shape.Shape;
@@ -10,7 +11,6 @@ import jakarta.annotation.Nonnull;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.function.Consumer;
 import java.util.function.UnaryOperator;
 
 /**
@@ -69,8 +69,8 @@ public class RichImage extends BufferedImage {
      * @return The requested position on this image
      */
     @Nonnull
-    public IntVector2 getPoint(double x, double y) {
-        return new IntVector2((int) (getWidth() * x), (int) (getHeight() * y));
+    public NaturalVector2 getPoint(double x, double y) {
+        return new NaturalVector2((int) (getWidth() * x), (int) (getHeight() * y));
     }
 
     /**
@@ -81,8 +81,8 @@ public class RichImage extends BufferedImage {
      * @return The requested position on this image
      */
     @Nonnull
-    public IntVector2 getPoint(@Nonnull Vector2 scale) {
-        return new IntVector2((int) (getWidth() * scale.x()), (int) (getHeight() * scale.y()));
+    public NaturalVector2 getPoint(@Nonnull Vector2 scale) {
+        return new NaturalVector2((int) (getWidth() * scale.x()), (int) (getHeight() * scale.y()));
     }
 
     /**
@@ -91,8 +91,8 @@ public class RichImage extends BufferedImage {
      * @return The size of this image
      */
     @Nonnull
-    public IntVector2 getSize() {
-        return new IntVector2(getWidth(), getHeight());
+    public NaturalVector2 getSize() {
+        return new NaturalVector2(getWidth(), getHeight());
     }
 
     /**
@@ -228,6 +228,7 @@ public class RichImage extends BufferedImage {
 
     /**
      * Applies given function to this image.
+     *
      * @param filter The function to apply
      */
     public void apply(@Nonnull ImageFilter filter) {

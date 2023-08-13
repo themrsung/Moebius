@@ -214,6 +214,30 @@ public class IntVector2 implements IntVector {
         return 2;
     }
 
+    /**
+     * Given that this vector represents spacial data,
+     * this returns the signed area of this vector.
+     *
+     * @return The signed area of this vector
+     */
+    public final int signedArea() {
+        return x * y;
+    }
+
+    /**
+     * Given that this vector represents spacial data,
+     * this returns the unsigned area of this vector.
+     * <p>
+     * If you are confident that this vector will never contain negative integers,
+     * use {@link IntVector2#signedArea()} for faster computation.
+     * </p>
+     *
+     * @return The unsigned area of this vector
+     */
+    public final int area() {
+        return Math.abs(x * y);
+    }
+
     //
     // Arithmetic
     //
@@ -540,6 +564,17 @@ public class IntVector2 implements IntVector {
      */
     public double distance2(@Nonnull IntVector2 v) {
         return subtract(v).magnitude2();
+    }
+
+    /**
+     * Rotates this vector counter-clockwise by given angle.
+     *
+     * @param rads The angle of rotation to apply in radians
+     * @return The rotated vector
+     */
+    @Nonnull
+    public IntVector2 rotate(double rads) {
+        return new IntVector2(toDouble().rotate(rads));
     }
 
     /**

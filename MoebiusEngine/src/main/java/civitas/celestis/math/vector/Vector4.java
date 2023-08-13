@@ -74,13 +74,6 @@ public class Vector4 implements Vector {
     //
 
     /**
-     * Creates a new vector with no direction or magnitude.
-     */
-    public Vector4() {
-        this(ZERO);
-    }
-
-    /**
      * Creates a new vector.
      *
      * @param w The W component of this vector

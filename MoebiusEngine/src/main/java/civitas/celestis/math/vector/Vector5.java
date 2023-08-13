@@ -84,13 +84,6 @@ public class Vector5 implements Vector {
     //
 
     /**
-     * Creates a new vector with no direction or magnitude.
-     */
-    public Vector5() {
-        this(ZERO);
-    }
-
-    /**
      * Creates a new vector.
      *
      * @param v The V component of this vector

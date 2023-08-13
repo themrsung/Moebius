@@ -27,13 +27,6 @@ public class Quaternion extends Vector4 {
     //
 
     /**
-     * Creates an identity quaternion.
-     */
-    public Quaternion() {
-        super(IDENTITY);
-    }
-
-    /**
      * Creates a new quaternion.
      *
      * @param w The W component of this quaternion
