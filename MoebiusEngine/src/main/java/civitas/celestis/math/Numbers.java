@@ -148,6 +148,18 @@ public final class Numbers {
     }
 
     /**
+     * Checks if an integer is within the specified range.
+     *
+     * @param value The value to check
+     * @param min   The minimum acceptable value
+     * @param max   The maximum acceptable value
+     * @return {@code true} if the value obeys the bounds
+     */
+    public static boolean isInRange(int value, int min, int max) {
+        return value >= min && value <= max;
+    }
+
+    /**
      * Checks if a vector is within the specified range.
      *
      * @param value The value to check
@@ -219,6 +231,48 @@ public final class Numbers {
     public static boolean isInRange(@Nonnull Vector5 value, @Nonnull Vector5 min, @Nonnull Vector5 max) {
         return isInRange(value.v(), min.v(), max.v()) &&
                 isInRange(value.w(), min.w(), max.w()) &&
+                isInRange(value.x(), min.x(), max.x()) &&
+                isInRange(value.y(), min.y(), max.y()) &&
+                isInRange(value.z(), min.z(), max.z());
+    }
+
+    /**
+     * Checks if a vector is within the specified range.
+     *
+     * @param value The value to check
+     * @param min   The minimum acceptable value
+     * @param max   The maximum acceptable value
+     * @return {@code true} if the value obeys the bounds
+     */
+    public static boolean isInRange(@Nonnull IntVector2 value, @Nonnull IntVector2 min, @Nonnull IntVector2 max) {
+        return isInRange(value.x(), min.x(), max.x()) &&
+                isInRange(value.y(), min.y(), max.y());
+    }
+
+    /**
+     * Checks if a vector is within the specified range.
+     *
+     * @param value The value to check
+     * @param min   The minimum acceptable value
+     * @param max   The maximum acceptable value
+     * @return {@code true} if the value obeys the bounds
+     */
+    public static boolean isInRange(@Nonnull IntVector3 value, @Nonnull IntVector3 min, @Nonnull IntVector3 max) {
+        return isInRange(value.x(), min.x(), max.x()) &&
+                isInRange(value.y(), min.y(), max.y()) &&
+                isInRange(value.z(), min.z(), max.z());
+    }
+
+    /**
+     * Checks if a vector is within the specified range.
+     *
+     * @param value The value to check
+     * @param min   The minimum acceptable value
+     * @param max   The maximum acceptable value
+     * @return {@code true} if the value obeys the bounds
+     */
+    public static boolean isInRange(@Nonnull IntVector4 value, @Nonnull IntVector4 min, @Nonnull IntVector4 max) {
+        return isInRange(value.w(), min.w(), max.w()) &&
                 isInRange(value.x(), min.x(), max.x()) &&
                 isInRange(value.y(), min.y(), max.y()) &&
                 isInRange(value.z(), min.z(), max.z());

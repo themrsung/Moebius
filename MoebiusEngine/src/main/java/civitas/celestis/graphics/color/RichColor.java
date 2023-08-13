@@ -740,6 +740,18 @@ public class RichColor extends Vector4 {
         return distance2(c) / 260100.0; // The maximum squared distance two colors can have
     }
 
+    /**
+     * Returns the reverse of this color.
+     * The RGB components are reversed by applying {@code 255 - value},
+     * and the alpha component is preserved as-is.
+     *
+     * @return The reverse of this color
+     */
+    @Nonnull
+    public RichColor reverse() {
+        return new RichColor(255 - x, 255 - y, 255 - z, w);
+    }
+
     //
     // Serialization
     //
