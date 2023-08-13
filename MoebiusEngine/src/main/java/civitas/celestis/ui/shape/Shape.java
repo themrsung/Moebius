@@ -9,6 +9,7 @@ import jakarta.annotation.Nonnull;
 public interface Shape {
     /**
      * Returns an array of points which represent the corners of this shape.
+     *
      * @return The corners of this shape
      */
     @Nonnull
@@ -16,6 +17,7 @@ public interface Shape {
 
     /**
      * Returns the {@code i}th point of this shape.
+     *
      * @param i The index of point to get
      * @return The point at the specified index
      * @throws IndexOutOfBoundsException When the index {@code i} is out of bounds
@@ -25,6 +27,7 @@ public interface Shape {
 
     /**
      * Returns the number of points this shape has.
+     *
      * @return The number of points this shape has
      */
     int getPointCount();

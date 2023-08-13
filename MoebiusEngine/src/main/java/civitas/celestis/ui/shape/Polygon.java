@@ -9,6 +9,7 @@ import jakarta.annotation.Nonnull;
 public class Polygon implements Shape {
     /**
      * Creates a new polygon.
+     *
      * @param points The points to create this polygon from
      */
     public Polygon(@Nonnull IntVector2... points) {
@@ -27,6 +28,7 @@ public class Polygon implements Shape {
 
     /**
      * {@inheritDoc}
+     *
      * @return An array containing the points of this polygon
      */
     @Override
@@ -37,6 +39,7 @@ public class Polygon implements Shape {
 
     /**
      * {@inheritDoc}
+     *
      * @param i The index of point to get
      * @return The point at the specified index
      * @throws IndexOutOfBoundsException When the index is out of bounds
@@ -49,6 +52,7 @@ public class Polygon implements Shape {
 
     /**
      * {@inheritDoc}
+     *
      * @return The number of points this polygon has
      */
     @Override

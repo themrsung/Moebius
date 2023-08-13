@@ -174,6 +174,7 @@ public class RichImage extends BufferedImage {
 
     /**
      * Fills this image with the specified color.
+     *
      * @param color The color to fill this image with
      */
     public void fill(@Nonnull RichColor color) {
@@ -187,6 +188,7 @@ public class RichImage extends BufferedImage {
 
     /**
      * Draws the borders of an object to this image.
+     *
      * @param shape The shape to draw
      * @param color The color to draw with
      */
@@ -207,6 +209,7 @@ public class RichImage extends BufferedImage {
 
     /**
      * Fills the shape with the given color on this image.
+     *
      * @param shape The shape to fill
      * @param color The color to fill with
      */

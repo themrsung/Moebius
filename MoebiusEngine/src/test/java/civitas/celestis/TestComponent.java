@@ -27,5 +27,7 @@ public class TestComponent implements UIComponent {
                 image.getPoint(0.66, 0.4),
                 image.getPoint(0.4, 0.7)
         ), RichColor.random());
+
+        image.modify(c -> Interpolation.lerp(c, RichColor.random(), 0.1));
     }
 }

@@ -12,6 +12,7 @@ import jakarta.annotation.Nonnull;
 public abstract class ComponentEvent implements UIEvent {
     /**
      * Creates a new component event.
+     *
      * @param container The container of this event
      * @param component The component of this event
      */
@@ -27,6 +28,7 @@ public abstract class ComponentEvent implements UIEvent {
 
     /**
      * Returns the container of this event.
+     *
      * @return The container of this event
      */
     @Nonnull
@@ -36,6 +38,7 @@ public abstract class ComponentEvent implements UIEvent {
 
     /**
      * Returns the frame the container is placed in.
+     *
      * @return The frame of this event
      */
     @Nonnull
@@ -45,6 +48,7 @@ public abstract class ComponentEvent implements UIEvent {
 
     /**
      * Returns the component of this event.
+     *
      * @return The component of this event
      */
     @Nonnull

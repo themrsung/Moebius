@@ -14,6 +14,7 @@ public class Line extends AlphabeticalPair<IntVector2> implements Shape {
 
     /**
      * Creates a new line.
+     *
      * @param a The first point of this line
      * @param b The second point of this line
      */
@@ -27,16 +28,18 @@ public class Line extends AlphabeticalPair<IntVector2> implements Shape {
 
     /**
      * {@inheritDoc}
+     *
      * @return An array containing the points of this line
      */
     @Nonnull
     @Override
     public IntVector2[] getPoints() {
-        return new IntVector2[] {a, b};
+        return new IntVector2[]{a, b};
     }
 
     /**
      * {@inheritDoc}
+     *
      * @param i The index of point to get
      * @return The point at the specified index
      * @throws IndexOutOfBoundsException When the index is out of bounds
@@ -49,6 +52,7 @@ public class Line extends AlphabeticalPair<IntVector2> implements Shape {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@code 2}
      */
     @Override
@@ -58,11 +62,12 @@ public class Line extends AlphabeticalPair<IntVector2> implements Shape {
 
     /**
      * {@inheritDoc}
+     *
      * @return An array containing the points of this line
      */
     @Nonnull
     @Override
     public IntVector2[] toArray() {
-        return new IntVector2[] {a, b};
+        return new IntVector2[]{a, b};
     }
 }

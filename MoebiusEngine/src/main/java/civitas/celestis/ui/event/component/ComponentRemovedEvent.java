@@ -10,6 +10,7 @@ import jakarta.annotation.Nonnull;
 public class ComponentRemovedEvent extends ComponentEvent {
     /**
      * Creates a new component removed event.
+     *
      * @param container The container the component was removed from
      * @param component The component which was removed from the container
      */

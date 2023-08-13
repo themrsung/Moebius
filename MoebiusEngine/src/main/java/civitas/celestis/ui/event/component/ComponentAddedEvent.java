@@ -10,6 +10,7 @@ import jakarta.annotation.Nonnull;
 public class ComponentAddedEvent extends ComponentEvent {
     /**
      * Creates a new component added event.
+     *
      * @param container The container the component was added to
      * @param component The component which was added to the container
      */

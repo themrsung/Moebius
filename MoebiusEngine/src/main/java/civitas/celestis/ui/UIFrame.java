@@ -40,6 +40,7 @@ public class UIFrame extends JFrame {
 
     /**
      * Creates a new UI frame.
+     *
      * @param title The title of this frame
      */
     public UIFrame(@Nonnull String title) {
@@ -71,6 +72,7 @@ public class UIFrame extends JFrame {
 
     /**
      * Returns the container of this frame.
+     *
      * @return The {@link UIContainer} instance of this frame
      */
     @Nonnull
@@ -84,6 +86,7 @@ public class UIFrame extends JFrame {
 
     /**
      * Handles painting the rendered image to the screen.
+     *
      * @param g The {@link Graphics} object to use to render the image
      */
     @Override
@@ -119,12 +122,14 @@ public class UIFrame extends JFrame {
 
     /**
      * Called when a component has been added to the container of this frame.
+     *
      * @param event The component event
      */
     public void onComponentAdded(@Nonnull ComponentAddedEvent event) {}
 
     /**
      * Called when a component has been removed from the container of this frame.
+     *
      * @param event The component event
      */
     public void onComponentRemoved(@Nonnull ComponentRemovedEvent event) {}

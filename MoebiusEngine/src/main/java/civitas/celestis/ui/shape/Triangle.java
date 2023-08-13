@@ -14,6 +14,7 @@ public class Triangle extends AlphabeticalTuple<IntVector2> implements Shape {
 
     /**
      * Creates a new triangle.
+     *
      * @param a The first point of this triangle
      * @param b The second point of this triangle
      * @param c The third point of this triangle
@@ -28,16 +29,18 @@ public class Triangle extends AlphabeticalTuple<IntVector2> implements Shape {
 
     /**
      * {@inheritDoc}
+     *
      * @return An array containing the points of this triangle.
      */
     @Nonnull
     @Override
     public IntVector2[] getPoints() {
-        return new IntVector2[] {a, b, c};
+        return new IntVector2[]{a, b, c};
     }
 
     /**
      * {@inheritDoc}
+     *
      * @param i The index of point to get
      * @return The point at the specified index
      * @throws IndexOutOfBoundsException When the index is out of bounds
@@ -50,6 +53,7 @@ public class Triangle extends AlphabeticalTuple<IntVector2> implements Shape {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@code 3}
      */
     @Override
@@ -59,11 +63,12 @@ public class Triangle extends AlphabeticalTuple<IntVector2> implements Shape {
 
     /**
      * {@inheritDoc}
+     *
      * @return An array containing the points of this triangle.
      */
     @Nonnull
     @Override
     public IntVector2[] toArray() {
-        return new IntVector2[] {a, b, c};
+        return new IntVector2[]{a, b, c};
     }
 }

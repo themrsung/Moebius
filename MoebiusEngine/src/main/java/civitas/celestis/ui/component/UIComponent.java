@@ -27,12 +27,14 @@ public interface UIComponent {
 
     /**
      * Called when this component has been added to a container.
+     *
      * @param event The component event
      */
     default void onComponentAdded(@Nonnull ComponentAddedEvent event) {}
 
     /**
      * Called when this component has been removed from a container.
+     *
      * @param event The component event
      */
     default void onComponentRemoved(@Nonnull ComponentRemovedEvent event) {}
