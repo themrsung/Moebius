@@ -7,6 +7,11 @@
     <groupId>civitas.celestis</groupId>
     <artifactId>Moebius</artifactId>
     <version>0.2</version>
+    <packaging>pom</packaging>
+    <modules>
+        <module>MoebiusEngine</module>
+        <module>MoebiusEditor</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>20</maven.compiler.source>
@@ -22,20 +27,6 @@
             <groupId>jakarta.annotation</groupId>
             <artifactId>jakarta.annotation-api</artifactId>
             <version>2.1.1</version>
-        </dependency>
-
-        <!-- Graphics APIs -->
-
-        <dependency>
-            <groupId>de.javagl</groupId>
-            <artifactId>obj</artifactId>
-            <version>0.4.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jocl</groupId>
-            <artifactId>jocl</artifactId>
-            <version>2.0.4</version>
         </dependency>
     </dependencies>
 

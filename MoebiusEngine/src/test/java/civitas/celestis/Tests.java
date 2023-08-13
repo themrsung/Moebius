@@ -12,7 +12,7 @@ import java.io.IOException;
 
 public class Tests {
     public static void main(String[] args) {
-        final File file = new File("src/main/resources/models/bc304/BC304Render.obj");
+        final File file = new File("MoebiusEngine/src/main/resources/models/bc304/BC304Render.obj");
         final FileReader reader;
         final Obj obj;
         try {
