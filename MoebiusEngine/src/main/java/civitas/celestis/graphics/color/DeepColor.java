@@ -1,6 +1,7 @@
 package civitas.celestis.graphics.color;
 
 import civitas.celestis.math.Numbers;
+import civitas.celestis.math.integer.IntVector3;
 import civitas.celestis.math.integer.IntVector4;
 import civitas.celestis.math.vector.Vector;
 import civitas.celestis.math.vector.Vector3;
@@ -11,15 +12,16 @@ import java.awt.*;
 import java.util.function.UnaryOperator;
 
 /**
- * A color class with linear transition capability.
+ * A 10-bit color class with linear transition capability.
  * <p><b>
- * While {@link RichColor} and {@link DeepColor} can be used in the same context
+ * While {@link DeepColor} and {@link RichColor} can be used in the same context
  * due to both classes inheriting {@link Vector4},
  * doing so will result in errors as they use a different scale.
  * </b></p>
- * Color components are stored using {@code double} with a range of {@code 0-255}.
+ * Color components are stored using {@code double} with a range of {@code 0-1023}.
+ * 10-bit colors do not support the conversion to and from hex codes.
  */
-public class RichColor extends Vector4 {
+public class DeepColor extends Vector4 {
     //
     // Constants
     //
@@ -27,97 +29,115 @@ public class RichColor extends Vector4 {
     /**
      * The color white.
      */
-    public static final RichColor WHITE = new RichColor(255, 255, 255);
+    public static final DeepColor WHITE = new DeepColor(1023, 1023, 1023);
 
-    /**
-     * The color light gray.
-     */
-    public static final RichColor LIGHT_GRAY = new RichColor(192, 192, 192);
-
-    /**
-     * The color gray.
-     */
-    public static final RichColor GRAY = new RichColor(128, 128, 128);
-
-    /**
-     * The color dark gray.
-     */
-    public static final RichColor DARK_GRAY = new RichColor(64, 64, 64);
-
-    /**
-     * The color black.
-     */
-    public static final RichColor BLACK = new RichColor(0, 0, 0);
-
-    /**
-     * The color red.
-     */
-    public static final RichColor RED = new RichColor(255, 0, 0);
-
-    /**
-     * The color pink.
-     */
-    public static final RichColor PINK = new RichColor(255, 175, 175);
-
-    /**
-     * The color orange.
-     */
-    public static final RichColor ORANGE = new RichColor(255, 200, 0);
-
-    /**
-     * The color yellow.
-     */
-    public static final RichColor YELLOW = new RichColor(255, 255, 0);
-
-    /**
-     * The color green.
-     */
-    public static final RichColor GREEN = new RichColor(0, 255, 0);
-
-    /**
-     * The color magenta.
-     */
-    public static final RichColor MAGENTA = new RichColor(255, 0, 255);
-
-    /**
-     * The color cyan.
-     */
-    public static final RichColor CYAN = new RichColor(0, 255, 255);
-
-    /**
-     * The color blue.
-     */
-    public static final RichColor BLUE = new RichColor(0, 0, 255);
-
-    /**
-     * The color gold.
-     */
-    public static final RichColor GOLD = new RichColor(218, 165, 32);
-
-    /**
-     * The color brown.
-     */
-    public static final RichColor BROWN = new RichColor(139, 69, 19);
-
-    /**
-     * A transparent color with the base color being white.
-     */
-    public static final RichColor TRANSPARENT_WHITE = new RichColor(255, 255, 255, 0);
+    // Transparent black must be at the top of the list, since from8Bit() requires it to be initialized
 
     /**
      * A transparent color with the base color being black.
      */
-    public static final RichColor TRANSPARENT_BLACK = new RichColor(0, 0, 0, 0);
+    public static final DeepColor TRANSPARENT_BLACK = new DeepColor(0, 0, 0, 0);
+
+    /**
+     * The color light gray.
+     */
+    public static final DeepColor LIGHT_GRAY = from8Bit(RichColor.LIGHT_GRAY);
+
+    /**
+     * The color gray.
+     */
+    public static final DeepColor GRAY = from8Bit(RichColor.GRAY);
+
+    /**
+     * The color dark gray.
+     */
+    public static final DeepColor DARK_GRAY = from8Bit(RichColor.DARK_GRAY);
+
+    /**
+     * The color black.
+     */
+    public static final DeepColor BLACK = new DeepColor(0, 0, 0);
+
+    /**
+     * The color red.
+     */
+    public static final DeepColor RED = new DeepColor(1023, 0, 0);
+
+    /**
+     * The color pink.
+     */
+    public static final DeepColor PINK = from8Bit(RichColor.PINK);
+
+    /**
+     * The color orange.
+     */
+    public static final DeepColor ORANGE = from8Bit(RichColor.ORANGE);
+
+    /**
+     * The color yellow.
+     */
+    public static final DeepColor YELLOW = new DeepColor(1023, 1023, 0);
+
+    /**
+     * The color green.
+     */
+    public static final DeepColor GREEN = new DeepColor(0, 1023, 0);
+
+    /**
+     * The color magenta.
+     */
+    public static final DeepColor MAGENTA = new DeepColor(1023, 0, 1023);
+
+    /**
+     * The color cyan.
+     */
+    public static final DeepColor CYAN = new DeepColor(0, 1023, 1023);
+
+    /**
+     * The color blue.
+     */
+    public static final DeepColor BLUE = new DeepColor(0, 0, 1023);
+
+    /**
+     * The color gold.
+     */
+    public static final DeepColor GOLD = from8Bit(RichColor.GOLD);
+
+    /**
+     * The color brown.
+     */
+    public static final DeepColor BROWN = from8Bit(RichColor.BROWN);
+
+    /**
+     * A transparent color with the base color being white.
+     */
+    public static final DeepColor TRANSPARENT_WHITE = new DeepColor(1023, 1023, 1023, 0);
 
     /**
      * Any value of alpha above this value will be considered opaque by the graphics engine.
      * Higher values will be more realistic, while lower values will offer better performance
      */
-    public static final double TRANSLUCENT_THRESHOLD = 242.25;
+    public static final double TRANSLUCENT_THRESHOLD = 971.85;
 
     //
     // Static Utilities
     //
+
+    /**
+     * Converts an 8-bit {@link RichColor} to a 10-bit {@link DeepColor}.
+     * @param c The color to convert
+     * @return The converted color
+     */
+    @Nonnull
+    public static DeepColor from8Bit(@Nonnull RichColor c) {
+        return new DeepColor(Numbers.scale(
+                c,
+                RichColor.TRANSPARENT_BLACK,
+                RichColor.WHITE,
+                DeepColor.TRANSPARENT_BLACK,
+                DeepColor.WHITE)
+        );
+    }
 
     /**
      * Safely converts a vector to a color by clamping its values.
@@ -127,12 +147,12 @@ public class RichColor extends Vector4 {
      * @throws IllegalArgumentException When the provided vector {@code v}'s length is not {@code 4}
      */
     @Nonnull
-    public static RichColor fromVector(@Nonnull Vector v) {
+    public static DeepColor fromVector(@Nonnull Vector v) {
         if (v.length() != 4) {
             throw new IllegalArgumentException("The provided vector does not have a length of 4.");
         }
 
-        return new RichColor(v.clamp(TRANSPARENT_BLACK, WHITE));
+        return new DeepColor(v.clamp(TRANSPARENT_BLACK, WHITE));
     }
 
     /**
@@ -142,8 +162,8 @@ public class RichColor extends Vector4 {
      * @return The converted color
      */
     @Nonnull
-    public static RichColor fromVector(@Nonnull Vector4 v) {
-        return new RichColor(v.clamp(TRANSPARENT_BLACK, WHITE));
+    public static DeepColor fromVector(@Nonnull Vector4 v) {
+        return new DeepColor(v.clamp(TRANSPARENT_BLACK, WHITE));
     }
 
     /**
@@ -154,10 +174,10 @@ public class RichColor extends Vector4 {
      * @return The converted color
      */
     @Nonnull
-    public static RichColor fromVector(@Nonnull Vector3 rgb, double alpha) {
-        return new RichColor(
-                rgb.clamp(new Vector3(0, 0, 0), new Vector3(255, 255, 255)),
-                Numbers.clamp(alpha, 0, 255)
+    public static DeepColor fromVector(@Nonnull Vector3 rgb, double alpha) {
+        return new DeepColor(
+                rgb.clamp(new Vector3(0, 0, 0), new Vector3(1023, 1023, 1023)),
+                Numbers.clamp(alpha, 0, 1023)
         );
     }
 
@@ -169,7 +189,7 @@ public class RichColor extends Vector4 {
      * @param c2 The second color to compare
      * @return {@code true} if the colors are effectively equal
      */
-    public static boolean equals(@Nonnull RichColor c1, @Nonnull RichColor c2) {
+    public static boolean equals(@Nonnull DeepColor c1, @Nonnull DeepColor c2) {
         return c1.rgbaInt().equals(c2.rgbaInt());
     }
 
@@ -180,7 +200,7 @@ public class RichColor extends Vector4 {
      * @return The simple average of the provided colors
      */
     @Nonnull
-    public static RichColor avg(@Nonnull RichColor... colors) {
+    public static DeepColor avg(@Nonnull DeepColor... colors) {
         if (colors.length == 0) {
             return TRANSPARENT_BLACK; // {0, 0, 0, 0}
         }
@@ -190,7 +210,7 @@ public class RichColor extends Vector4 {
         double b = 0;
         double a = 0;
 
-        for (final RichColor color : colors) {
+        for (final DeepColor color : colors) {
             r += color.x;
             g += color.y;
             b += color.z;
@@ -202,7 +222,7 @@ public class RichColor extends Vector4 {
         b /= colors.length;
         a /= colors.length;
 
-        return new RichColor(r, g, b, a);
+        return new DeepColor(r, g, b, a);
     }
 
     /**
@@ -215,11 +235,11 @@ public class RichColor extends Vector4 {
      * @return The weighted average of the two colors
      */
     @Nonnull
-    public static RichColor avgw(@Nonnull RichColor c1, @Nonnull RichColor c2, double w1, double w2) {
+    public static DeepColor avgw(@Nonnull DeepColor c1, @Nonnull DeepColor c2, double w1, double w2) {
         final Vector4 v1 = c1.multiply(w1);
         final Vector4 v2 = c2.multiply(w2);
 
-        return new RichColor(v1.add(v2).divide(w1 + w2));
+        return new DeepColor(v1.add(v2).divide(w1 + w2));
     }
 
     /**
@@ -230,7 +250,7 @@ public class RichColor extends Vector4 {
      * @return The weighted average of the given colors
      */
     @Nonnull
-    public static RichColor avgw(@Nonnull RichColor[] colors, @Nonnull double[] weights) {
+    public static DeepColor avgw(@Nonnull DeepColor[] colors, @Nonnull double[] weights) {
         if (colors.length != weights.length) {
             throw new IllegalArgumentException("The length of colors and weights are different.");
         }
@@ -249,7 +269,7 @@ public class RichColor extends Vector4 {
             a += weighted.w();
         }
 
-        return new RichColor(new Vector4(a, r, g, b).divide(Numbers.sum(weights)));
+        return new DeepColor(new Vector4(a, r, g, b).divide(Numbers.sum(weights)));
     }
 
     //
@@ -257,73 +277,27 @@ public class RichColor extends Vector4 {
     //
 
     /**
-     * Creates a new color.
-     * The hex string must be in the format {@code #RRGGBB} or {@code RRGGBB}.
-     *
-     * @param hexString The hex string to create this color from
-     */
-    public RichColor(@Nonnull String hexString) {
-        this(hexString, 255);
-    }
-
-    /**
-     * Creates a new color.
-     * The hex string must be in the format {@code #RRGGBB} or {@code RRGGBB}.
-     * The alpha component must be within the range of {@code 0-255}.
-     *
-     * @param hexString The hex string to create this color from
-     * @param alpha     The alpha component of this color
-     */
-    public RichColor(@Nonnull String hexString, double alpha) {
-        super(rgbaFromHex(hexString, alpha));
-        enforceComponentRange();
-    }
-
-    /**
-     * Creates a new color.
-     * The hex integer must be in the format {@code 0xRRGGBB}.
-     *
-     * @param hexInt The hex code as an integer
-     */
-    public RichColor(int hexInt) {
-        this(hexInt, 255);
-    }
-
-    /**
-     * Creates a new color.
-     * The hex integer must be in the format {@code 0xRRGGBB}.
-     * The alpha component must be within the range of {@code 0-255}.
-     *
-     * @param hexInt The hex code as an integer
-     * @param alpha  The alpha component of this color
-     */
-    public RichColor(int hexInt, double alpha) {
-        super(rgbaFromHex(hexInt, alpha));
-        enforceComponentRange();
-    }
-
-    /**
-     * Creates a new opaque color. The alpha will be {@code 255}.
-     * All parameters must be within the range of {@code 0-255}.
+     * Creates a new opaque color. The alpha will be {@code 1023}.
+     * All parameters must be within the range of {@code 0-1023}.
      *
      * @param r The red component of this color
      * @param g The green component of this color
      * @param b The blue component of this color
      */
-    public RichColor(double r, double g, double b) {
-        this(r, g, b, 255);
+    public DeepColor(double r, double g, double b) {
+        this(r, g, b, 1023);
     }
 
     /**
      * Creates a new color.
-     * All parameters must be within the range of {@code 0-255}.
+     * All parameters must be within the range of {@code 0-1023}.
      *
      * @param r The red component of this color
      * @param g The green component of this color
      * @param b The blue component of this color
      * @param a The alpha component of this color
      */
-    public RichColor(double r, double g, double b, double a) {
+    public DeepColor(double r, double g, double b, double a) {
         super(a, r, g, b);
         enforceComponentRange();
     }
@@ -333,8 +307,13 @@ public class RichColor extends Vector4 {
      *
      * @param color An AWT {@link Color} object
      */
-    public RichColor(@Nonnull Color color) {
-        super(color.getAlpha(), color.getRed(), color.getBlue(), color.getGreen());
+    public DeepColor(@Nonnull Color color) {
+        super(
+                Numbers.scale(color.getAlpha(), 0, 255, 0, 1023),
+                Numbers.scale(color.getRed(), 0, 255, 0, 1023),
+                Numbers.scale(color.getGreen(), 0, 255, 0, 1023),
+                Numbers.scale(color.getBlue(), 0, 255, 0, 1023)
+        );
     }
 
     /**
@@ -342,8 +321,8 @@ public class RichColor extends Vector4 {
      *
      * @param color An {@link RGBColor} object
      */
-    public RichColor(@Nonnull RGBColor color) {
-        super(color.doubleValue());
+    public DeepColor(@Nonnull RGBColor color) {
+        super(from8Bit(new RichColor(color)));
     }
 
     /**
@@ -353,7 +332,7 @@ public class RichColor extends Vector4 {
      * @param rgb The RGB components of this color mapped in {@code x, y, z} respectively
      * @param a   The alpha component of this color
      */
-    public RichColor(@Nonnull Vector3 rgb, double a) {
+    public DeepColor(@Nonnull Vector3 rgb, double a) {
         this(rgb.x(), rgb.y(), rgb.z(), a);
     }
 
@@ -363,7 +342,7 @@ public class RichColor extends Vector4 {
      *
      * @param values An array containing the color components
      */
-    public RichColor(@Nonnull double[] values) {
+    public DeepColor(@Nonnull double[] values) {
         super(values);
         enforceComponentRange();
     }
@@ -374,7 +353,7 @@ public class RichColor extends Vector4 {
      *
      * @param v The vector containing the color components
      */
-    public RichColor(@Nonnull Vector v) {
+    public DeepColor(@Nonnull Vector v) {
         super(v);
         enforceComponentRange();
     }
@@ -385,7 +364,7 @@ public class RichColor extends Vector4 {
      *
      * @param v The vector containing the color components
      */
-    public RichColor(@Nonnull Vector4 v) {
+    public DeepColor(@Nonnull Vector4 v) {
         super(v);
         enforceComponentRange();
     }
@@ -400,11 +379,11 @@ public class RichColor extends Vector4 {
      * @return A random color with an alpha of {@code 255}
      */
     @Nonnull
-    public static RichColor random() {
-        return new RichColor(
-                Numbers.random(0, 255),
-                Numbers.random(0, 255),
-                Numbers.random(0, 255)
+    public static DeepColor random() {
+        return new DeepColor(
+                Numbers.random(0, 1023),
+                Numbers.random(0, 1023),
+                Numbers.random(0, 1023)
         );
     }
 
@@ -413,56 +392,13 @@ public class RichColor extends Vector4 {
     //
 
     /**
-     * Converts a hex string to an array of RGBA components.
-     *
-     * @param hexString The hex code string
-     * @param alpha     The alpha component
-     * @return The RGBA components in array form
-     */
-    @Nonnull
-    private static double[] rgbaFromHex(@Nonnull String hexString, double alpha) {
-        final String cleanHex = hexString.replace("#", "");
-        if (cleanHex.length() != 6) {
-            throw new IllegalArgumentException("Given string is not a hex code.");
-        }
-
-        final double[] rgba = new double[4];
-
-        rgba[1] = Integer.parseInt(cleanHex.substring(0, 2), 16);
-        rgba[2] = Integer.parseInt(cleanHex.substring(2, 4), 16);
-        rgba[3] = Integer.parseInt(cleanHex.substring(4, 6), 16);
-        rgba[0] = alpha;
-
-        return rgba;
-    }
-
-    /**
-     * Converts a hex integer to an array of RGBA components.
-     *
-     * @param hexInt The hex integer
-     * @param alpha  The alpha component
-     * @return The RGBA components in array form
-     */
-    @Nonnull
-    private static double[] rgbaFromHex(int hexInt, double alpha) {
-        final double[] rgba = new double[4];
-
-        rgba[1] = (hexInt >> 16) & 0xFF;
-        rgba[2] = (hexInt >> 8) & 0xFF;
-        rgba[3] = hexInt & 0xFF;
-        rgba[0] = alpha;
-
-        return rgba;
-    }
-
-    /**
      * Internal method use to enforce the component range of {@code 0-255}.
      */
     private void enforceComponentRange() {
-        Numbers.requireRange(w, 0, 255);
-        Numbers.requireRange(x, 0, 255);
-        Numbers.requireRange(y, 0, 255);
-        Numbers.requireRange(z, 0, 255);
+        Numbers.requireRange(w, 0, 1023);
+        Numbers.requireRange(x, 0, 1023);
+        Numbers.requireRange(y, 0, 1023);
+        Numbers.requireRange(z, 0, 1023);
     }
 
     //
@@ -531,8 +467,8 @@ public class RichColor extends Vector4 {
      * @return The rounded RGB components of this color
      */
     @Nonnull
-    public final RGBColor rgbInt() {
-        return new RGBColor((int) Math.round(x), (int) Math.round(y), (int) Math.round(z));
+    public final IntVector3 rgbInt() {
+        return new IntVector3((int) Math.round(x), (int) Math.round(y), (int) Math.round(z));
     }
 
     /**
@@ -553,7 +489,12 @@ public class RichColor extends Vector4 {
      */
     @Nonnull
     public final Color awt() {
-        return new Color((int) Math.round(x), (int) Math.round(y), (int) Math.round(z), (int) Math.round(w));
+        return new Color(
+                (int) Math.round(Numbers.scale(x, 0, 1023, 0, 255)),
+                (int) Math.round(Numbers.scale(y, 0, 1023, 0, 255)),
+                (int) Math.round(Numbers.scale(z, 0, 1023, 0, 255)),
+                (int) Math.round(Numbers.scale(w, 0, 1023, 0, 255))
+        );
     }
 
     /**
@@ -564,7 +505,27 @@ public class RichColor extends Vector4 {
      */
     @Nonnull
     public final Color awtRaw() {
-        return new Color((int) x, (int) y, (int) z, (int) w);
+        return new Color(
+                (int) Numbers.scale(x, 0, 1023, 0, 255),
+                (int) Numbers.scale(y, 0, 1023, 0, 255),
+                (int) Numbers.scale(z, 0, 1023, 0, 255),
+                (int) Numbers.scale(w, 0, 1023, 0, 255)
+        );
+    }
+
+    /**
+     * Converts this color into an 8-bit color.
+     * @return The 8-bit representation of this color
+     */
+    @Nonnull
+    public final RichColor to8Bit() {
+        return new RichColor(Numbers.scale(
+                this,
+                DeepColor.TRANSPARENT_BLACK,
+                DeepColor.WHITE,
+                RichColor.TRANSPARENT_BLACK,
+                RichColor.WHITE
+        ));
     }
 
     //
@@ -575,7 +536,7 @@ public class RichColor extends Vector4 {
      * Returns whether this color is translucent.
      *
      * @return {@code true} if this color is translucent
-     * @see RichColor#TRANSLUCENT_THRESHOLD
+     * @see DeepColor#TRANSLUCENT_THRESHOLD
      */
     public boolean translucent() {
         return w <= TRANSLUCENT_THRESHOLD;
@@ -585,7 +546,7 @@ public class RichColor extends Vector4 {
      * Returns whether this color is opaque.
      *
      * @return {@code true} if this color is opaque
-     * @see RichColor#TRANSLUCENT_THRESHOLD
+     * @see DeepColor#TRANSLUCENT_THRESHOLD
      */
     public boolean opaque() {
         return w > TRANSLUCENT_THRESHOLD;
@@ -599,34 +560,7 @@ public class RichColor extends Vector4 {
      * @return The reflectiveness coefficient of this color ({@code 0-1})
      */
     public double reflectiveness() {
-        return ((x + y + z) / 765) * (w / 255);
-    }
-
-    /**
-     * Returns the hex integer of this color.
-     *
-     * @return The hex integer of this color
-     */
-    public final int hexInt() {
-        final int r = (int) Math.round(x);
-        final int g = (int) Math.round(y);
-        final int b = (int) Math.round(z);
-
-        return (r << 16) | (g << 8) | b;
-    }
-
-    /**
-     * Returns the hex string of this color.
-     *
-     * @return The hex string of this color
-     */
-    @Nonnull
-    public final String hexString() {
-        final int r = (int) Math.round(x);
-        final int g = (int) Math.round(y);
-        final int b = (int) Math.round(z);
-
-        return String.format("#%02X%02X%02X", r, g, b);
+        return ((x + y + z) / 3069) * (w / 1023);
     }
 
     //
@@ -640,7 +574,7 @@ public class RichColor extends Vector4 {
      * @return The resulting color
      */
     @Nonnull
-    public RichColor add(@Nonnull RichColor c) {
+    public DeepColor add(@Nonnull DeepColor c) {
         return fromVector(super.add(c));
     }
 
@@ -651,8 +585,8 @@ public class RichColor extends Vector4 {
      * @return The resulting color
      */
     @Nonnull
-    public RichColor subtract(@Nonnull RichColor c) {
-        return new RichColor(super.subtract(c));
+    public DeepColor subtract(@Nonnull DeepColor c) {
+        return new DeepColor(super.subtract(c));
     }
 
     //
@@ -666,8 +600,8 @@ public class RichColor extends Vector4 {
      * @return The minimum color
      */
     @Nonnull
-    public RichColor min(@Nonnull RichColor c) {
-        return new RichColor(super.min(c));
+    public DeepColor min(@Nonnull DeepColor c) {
+        return new DeepColor(super.min(c));
     }
 
     /**
@@ -677,8 +611,8 @@ public class RichColor extends Vector4 {
      * @return The maximum color
      */
     @Nonnull
-    public RichColor max(@Nonnull RichColor c) {
-        return new RichColor(super.max(c));
+    public DeepColor max(@Nonnull DeepColor c) {
+        return new DeepColor(super.max(c));
     }
 
     /**
@@ -689,8 +623,8 @@ public class RichColor extends Vector4 {
      * @return The clamped color
      */
     @Nonnull
-    public RichColor clamp(@Nonnull RichColor min, @Nonnull RichColor max) {
-        return new RichColor(super.clamp(min, max));
+    public DeepColor clamp(@Nonnull DeepColor min, @Nonnull DeepColor max) {
+        return new DeepColor(super.clamp(min, max));
     }
 
     //
@@ -705,8 +639,8 @@ public class RichColor extends Vector4 {
      */
     @Nonnull
     @Override
-    public RichColor apply(@Nonnull UnaryOperator<Double> operator) {
-        return new RichColor(super.apply(operator));
+    public DeepColor apply(@Nonnull UnaryOperator<Double> operator) {
+        return new DeepColor(super.apply(operator));
     }
 
     /**
@@ -716,8 +650,8 @@ public class RichColor extends Vector4 {
      * @return The resulting color
      */
     @Nonnull
-    public RichColor applyRGB(@Nonnull UnaryOperator<Vector3> operator) {
-        return new RichColor(operator.apply(rgb()), w);
+    public DeepColor applyRGB(@Nonnull UnaryOperator<Vector3> operator) {
+        return new DeepColor(operator.apply(rgb()), w);
     }
 
     /**
@@ -743,14 +677,14 @@ public class RichColor extends Vector4 {
      * <p>
      * An index of {@code 0} means the colors are equal, while an index of {@code 1}
      * means that the colors are completely different.
-     * (most likely {@link RichColor#TRANSPARENT_BLACK} and {@link RichColor#WHITE})
+     * (most likely {@link DeepColor#TRANSPARENT_BLACK} and {@link DeepColor#WHITE})
      * </p>
      *
      * @param c The color to compare to
      * @return The proximity index of the two colors
      */
-    public double proximity(@Nonnull RichColor c) {
-        return distance2(c) / 260100.0; // The maximum squared distance two colors can have
+    public double proximity(@Nonnull DeepColor c) {
+        return distance2(c) / 4186116.0; // The maximum squared distance two colors can have
     }
 
     /**
@@ -761,8 +695,8 @@ public class RichColor extends Vector4 {
      * @return The reverse of this color
      */
     @Nonnull
-    public RichColor reverse() {
-        return new RichColor(255 - x, 255 - y, 255 - z, w);
+    public DeepColor reverse() {
+        return new DeepColor(1023 - x, 1023 - y, 1023 - z, w);
     }
 
     //
@@ -770,7 +704,7 @@ public class RichColor extends Vector4 {
     //
 
     /**
-     * Deserializes a string into a {@link RichColor}.
+     * Deserializes a string into a {@link DeepColor}.
      *
      * @param input The input to deserialize
      * @return The parsed vector
@@ -778,12 +712,12 @@ public class RichColor extends Vector4 {
      * @throws IllegalArgumentException When at least one of the component scalars is non-finite
      */
     @Nonnull
-    public static RichColor parseColor(@Nonnull String input) throws IllegalArgumentException {
-        if (!input.startsWith("RichColor{")) {
-            throw new NumberFormatException("The provided string does not represent a RichColor.");
+    public static DeepColor parseColor(@Nonnull String input) throws IllegalArgumentException {
+        if (!input.startsWith("DeepColor{")) {
+            throw new NumberFormatException("The provided string does not represent a DeepColor.");
         }
 
-        final String cleanInput = input.replaceAll("RichColor\\{|}", "");
+        final String cleanInput = input.replaceAll("DeepColor\\{|}", "");
         final String[] valueStrings = cleanInput.split(", ");
         final double[] values = {Double.NaN, Double.NaN, Double.NaN, Double.NaN};
 
@@ -794,11 +728,11 @@ public class RichColor extends Vector4 {
                 case "r" -> 1;
                 case "g" -> 2;
                 case "b" -> 3;
-                default -> throw new NumberFormatException("The provided string does not represent a RichColor.");
+                default -> throw new NumberFormatException("The provided string does not represent a DeepColor.");
             }] = Double.parseDouble(split[1]);
         }
 
-        return new RichColor(values);
+        return new DeepColor(values);
     }
 
     /**
@@ -809,7 +743,7 @@ public class RichColor extends Vector4 {
     @Override
     @Nonnull
     public String toString() {
-        return "RichColor{" +
+        return "DeepColor{" +
                 "r=" + x +
                 ", g=" + y +
                 ", b=" + z +

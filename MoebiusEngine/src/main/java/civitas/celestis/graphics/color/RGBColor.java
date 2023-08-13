@@ -14,7 +14,7 @@ import java.util.function.UnaryOperator;
 /**
  * A color which only has discrete integer RGB components.
  */
-public class RGBColor extends NaturalVector3 implements RGB8 {
+public class RGBColor extends NaturalVector3 {
     //
     // Constants
     //
@@ -291,7 +291,6 @@ public class RGBColor extends NaturalVector3 implements RGB8 {
      *
      * @return The red component of this color ({@code 0-255})
      */
-    @Override
     public final int red() {
         return x;
     }
@@ -301,7 +300,6 @@ public class RGBColor extends NaturalVector3 implements RGB8 {
      *
      * @return The green component of this color ({@code 0-255})
      */
-    @Override
     public final int green() {
         return y;
     }
@@ -311,7 +309,6 @@ public class RGBColor extends NaturalVector3 implements RGB8 {
      *
      * @return The blue component of this color ({@code 0-255})
      */
-    @Override
     public final int blue() {
         return z;
     }
@@ -322,7 +319,6 @@ public class RGBColor extends NaturalVector3 implements RGB8 {
      * @return An AWT {@link Color} object
      */
     @Nonnull
-    @Override
     public Color awt() {
         return new Color(x, y, z);
     }
@@ -336,7 +332,6 @@ public class RGBColor extends NaturalVector3 implements RGB8 {
      *
      * @return The hex integer of this color
      */
-    @Override
     public final int hexInt() {
         return (x << 16) | (y << 8) | z;
     }
@@ -346,7 +341,6 @@ public class RGBColor extends NaturalVector3 implements RGB8 {
      *
      * @return The hex string of this color
      */
-    @Override
     @Nonnull
     public final String hexString() {
         return String.format("#%02X%02X%02X", x, y, z);
@@ -455,7 +449,6 @@ public class RGBColor extends NaturalVector3 implements RGB8 {
      *
      * @return The reverse of this color
      */
-    @Override
     @Nonnull
     public RGBColor reverse() {
         return new RGBColor(255 - x, 255 - y, 255 - z);
