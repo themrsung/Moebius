@@ -5,12 +5,14 @@ import civitas.celestis.graphics.model.Model;
 import civitas.celestis.math.Numbers;
 import civitas.celestis.math.quaternion.Quaternion;
 import civitas.celestis.math.vector.Vector3;
+import civitas.celestis.object.component.ObjectComponent;
 import civitas.celestis.physics.profile.PhysicsProfile;
 import civitas.celestis.physics.solid.Solid;
 import civitas.celestis.util.Tickable;
 import civitas.celestis.util.Unique;
 import jakarta.annotation.Nonnull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -38,7 +40,7 @@ public class BaseObject implements Unique, Movable, Physical, Renderable, Tickab
             @Nonnull PhysicsProfile physicsProfile,
             @Nonnull Model model
     ) {
-        this(uniqueId, location, Vector3.ZERO, rotation, Quaternion.IDENTITY, physicsProfile, model);
+        this(uniqueId, location, Vector3.ZERO, rotation, Quaternion.IDENTITY, physicsProfile, model, new ArrayList<>());
     }
 
     /**
@@ -51,6 +53,7 @@ public class BaseObject implements Unique, Movable, Physical, Renderable, Tickab
      * @param rotationRate   The rate of rotation of this object
      * @param physicsProfile The physical profile of this object
      * @param model          The graphical model of this object
+     * @param components     The list of initial object components
      */
     public BaseObject(
             @Nonnull UUID uniqueId,
@@ -59,7 +62,8 @@ public class BaseObject implements Unique, Movable, Physical, Renderable, Tickab
             @Nonnull Quaternion rotation,
             @Nonnull Quaternion rotationRate,
             @Nonnull PhysicsProfile physicsProfile,
-            @Nonnull Model model
+            @Nonnull Model model,
+            @Nonnull List<ObjectComponent> components
     ) {
         this.uniqueId = uniqueId;
         this.location = location;
@@ -68,6 +72,7 @@ public class BaseObject implements Unique, Movable, Physical, Renderable, Tickab
         this.rotationRate = rotationRate;
         this.physicsProfile = physicsProfile;
         this.model = model;
+        this.components = new ArrayList<>(components);
     }
 
 
@@ -85,6 +90,79 @@ public class BaseObject implements Unique, Movable, Physical, Renderable, Tickab
     private PhysicsProfile physicsProfile;
     @Nonnull
     private Model model;
+    @Nonnull
+    private final List<ObjectComponent> components;
+
+    //
+    // Components
+    //
+
+    /**
+     * Returns a list of components currently registered to this object.
+     *
+     * @return The list of components this object has
+     */
+    @Nonnull
+    public final List<ObjectComponent> getComponents() {
+        return List.copyOf(components);
+    }
+
+    /**
+     * Gets a list of components by class.
+     * @param compClass The class of the component
+     * @return A list of all instances of components of matching class
+     * @param <C> The type of component to get
+     */
+    @Nonnull
+    public final <C extends ObjectComponent> List<C> getComponents(@Nonnull Class<C> compClass) {
+        return components.stream().filter(compClass::isInstance).map(compClass::cast).toList();
+    }
+
+    /**
+     * Gets a component by class.
+     *
+     * @param compClass The class of the component
+     * @param <C>       The type of component to get
+     * @return The first instance of the component of matching class
+     * @throws NullPointerException When the component cannot be found
+     */
+    @Nonnull
+    public final <C extends ObjectComponent> C getComponent(@Nonnull Class<C> compClass) throws NullPointerException {
+        for (final ObjectComponent component : getComponents()) {
+            if (compClass.isInstance(component)) return compClass.cast(component);
+        }
+
+        throw new NullPointerException("Component of class " + compClass.getName() + " cannot be found.");
+    }
+
+    /**
+     * Adds a component to this object.
+     *
+     * @param component The component to add to this object
+     */
+    public final <C extends ObjectComponent> void addComponent(@Nonnull C component) {
+        components.add(component);
+        component.onAdded(this);
+    }
+
+    /**
+     * Removes a component from this object.
+     *
+     * @param component The component to remove from this object
+     */
+    public final <C extends ObjectComponent> void removeComponent(@Nonnull C component) {
+        components.remove(component);
+        component.onRemoved(this);
+    }
+
+    /**
+     * Clears the list of components in this object.
+     * This unregisters every component
+     */
+    public final void clearComponents() {
+        components.forEach(c -> c.onRemoved(this));
+        components.clear();
+    }
 
     //
     // Ticking
@@ -103,6 +181,11 @@ public class BaseObject implements Unique, Movable, Physical, Renderable, Tickab
         // Applies acceleration and rate of rotation
         move(acceleration.multiply(seconds));
         rotate(rotationRate.scale(seconds));
+
+        // Tick components
+        for (final ObjectComponent component : getComponents()) {
+            component.tick(delta);
+        }
     }
 
 

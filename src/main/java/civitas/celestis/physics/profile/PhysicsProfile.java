@@ -30,12 +30,7 @@ public interface PhysicsProfile {
      *
      * @return The density of this profile
      */
-    default double getDensity() {
-        final double volume = getVolume();
-        if (volume == 0) return 0;
-
-        return getMass() / volume;
-    }
+    double getDensity();
 
     /**
      * Builds the discrete solid of this physical profile.
