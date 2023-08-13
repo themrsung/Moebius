@@ -1,12 +1,16 @@
 package civitas.celestis;
 
 import civitas.celestis.graphics.color.RichColor;
-import civitas.celestis.math.Interpolation;
+import civitas.celestis.math.integer.IntMatrix;
 import civitas.celestis.ui.component.UIComponent;
+import civitas.celestis.ui.event.component.ComponentAddedEvent;
 import civitas.celestis.ui.image.RichImage;
 import civitas.celestis.ui.shape.Polygon;
 import civitas.celestis.ui.shape.Triangle;
 import jakarta.annotation.Nonnull;
+
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class TestComponent implements UIComponent {
     @Override
@@ -27,7 +31,15 @@ public class TestComponent implements UIComponent {
                 image.getPoint(0.66, 0.4),
                 image.getPoint(0.4, 0.7)
         ), RichColor.random());
+    }
 
-        image.modify(c -> Interpolation.lerp(c, RichColor.random(), 0.1));
+    @Override
+    public void onComponentAdded(@Nonnull ComponentAddedEvent event) {
+        event.getFrame().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                Moebius.getScheduler().stop(); // Stops the engine without closing it
+            }
+        });
     }
 }

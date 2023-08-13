@@ -2,6 +2,8 @@ package civitas.celestis.util.alphabetical;
 
 import jakarta.annotation.Nonnull;
 
+import java.lang.reflect.Array;
+
 /**
  * A shallowly immutable tuple of objects.
  *

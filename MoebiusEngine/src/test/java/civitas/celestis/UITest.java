@@ -2,6 +2,7 @@ package civitas.celestis;
 
 import civitas.celestis.task.Task;
 import civitas.celestis.ui.UIFrame;
+import civitas.celestis.ui.image.RichImage;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;

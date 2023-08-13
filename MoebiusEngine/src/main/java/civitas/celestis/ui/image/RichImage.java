@@ -4,11 +4,13 @@ import civitas.celestis.graphics.color.RichColor;
 import civitas.celestis.math.integer.IntMatrix;
 import civitas.celestis.math.integer.IntVector2;
 import civitas.celestis.math.vector.Vector2;
+import civitas.celestis.ui.filter.ImageFilter;
 import civitas.celestis.ui.shape.Shape;
 import jakarta.annotation.Nonnull;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.function.Consumer;
 import java.util.function.UnaryOperator;
 
 /**
@@ -40,6 +42,7 @@ public class RichImage extends BufferedImage {
 
     /**
      * Creates a new image.
+     * Note that this constructor can be very slow with large matrices.
      *
      * @param data The matrix containing the RGB integer values
      */
@@ -90,24 +93,6 @@ public class RichImage extends BufferedImage {
     @Nonnull
     public IntVector2 getSize() {
         return new IntVector2(getWidth(), getHeight());
-    }
-
-    /**
-     * Returns a matrix containing every pixel's RGB value of this image.
-     *
-     * @return The matrix representation of this image
-     */
-    @Nonnull
-    public IntMatrix getRGB() {
-        final IntMatrix result = new IntMatrix(getWidth(), getHeight());
-
-        for (int x = 0; x < getWidth(); x++) {
-            for (int y = 0; y < getHeight(); y++) {
-                result.set(x, y, getRGB(x, y));
-            }
-        }
-
-        return result;
     }
 
     /**
@@ -239,5 +224,13 @@ public class RichImage extends BufferedImage {
                 setColor(x, y, operator.apply(getColor(x, y)));
             }
         }
+    }
+
+    /**
+     * Applies given function to this image.
+     * @param filter The function to apply
+     */
+    public void apply(@Nonnull ImageFilter filter) {
+        filter.accept(this);
     }
 }
