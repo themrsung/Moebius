@@ -92,6 +92,7 @@ public class Vector5 implements Vector {
 
     /**
      * Creates a new vector.
+     *
      * @param v The V component of this vector
      * @param w The W component of this vector
      * @param x The X component of this vector
@@ -185,6 +186,7 @@ public class Vector5 implements Vector {
 
     /**
      * Returns the V component of this vector.
+     *
      * @return The V component of this vector
      */
     public final double v() {

@@ -28,8 +28,9 @@ public final class SingleEventManager implements EventManager {
 
     /**
      * {@inheritDoc}
+     *
      * @param event The event to be called
-     * @param <E> THe type of event to be called
+     * @param <E>   THe type of event to be called
      */
     @Override
     public <E extends Event> void call(@Nonnull E event) {
@@ -38,6 +39,7 @@ public final class SingleEventManager implements EventManager {
 
     /**
      * {@inheritDoc}
+     *
      * @param listener The listener to register to this event manager
      */
     @Override
@@ -50,6 +52,7 @@ public final class SingleEventManager implements EventManager {
 
     /**
      * {@inheritDoc}
+     *
      * @param listeners The collection of listeners to register to this event manager
      */
     @Override
@@ -59,6 +62,7 @@ public final class SingleEventManager implements EventManager {
 
     /**
      * {@inheritDoc}
+     *
      * @param listener The listener to unregister from this event manager
      */
     @Override
@@ -68,6 +72,7 @@ public final class SingleEventManager implements EventManager {
 
     /**
      * {@inheritDoc}
+     *
      * @param listeners The collection of listeners to unregister from this event manager
      */
     @Override

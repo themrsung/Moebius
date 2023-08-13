@@ -11,7 +11,7 @@ public class ColorView {
         final SingleColorPanel panel = new SingleColorPanel();
 
         // This color will be displayed
-        panel.color = Interpolation.lerp(RichColor.GOLD, RichColor.WHITE, 0.5);
+        panel.color = Interpolation.lerp(RichColor.GOLD, RichColor.BLUE, 0.5);
 
         frame.add(panel);
 

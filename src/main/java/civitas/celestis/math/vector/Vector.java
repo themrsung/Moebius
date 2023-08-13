@@ -12,9 +12,9 @@ import java.util.function.UnaryOperator;
  * This interface defines the contract of a vector.
  * </p>
  * <p>
- *     Vectors can not only be used for spacial data, but can be used
- *     for any application which require the collective use of multiple scalars as one object.
- *     First-party examples include representing colors using a four-dimensional vector. (RGBA)
+ * Vectors can not only be used for spacial data, but can be used
+ * for any application which require the collective use of multiple scalars as one object.
+ * First-party examples include representing colors using a four-dimensional vector. (RGBA)
  * </p>
  * <p>
  * In order to ensure flawless arithmetic operation between vectors or other numbers,

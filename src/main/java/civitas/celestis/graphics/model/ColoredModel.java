@@ -9,6 +9,7 @@ import de.javagl.obj.ObjFace;
 import jakarta.annotation.Nonnull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -94,6 +95,26 @@ public class ColoredModel implements Model {
     @Override
     public int getFaceCount() {
         return faces.size();
+    }
+
+    /**
+     * {@inheritDoc}
+     * Note that this is an iterative implementation, and is computationally intensive to perform.
+     * @return A list containing every vertex of this model.
+     */
+    @Nonnull
+    @Override
+    public List<Vertex> getVertices() {
+        final List<Vertex> vertices = new ArrayList<>();
+
+        for (final ColoredFace face : faces) {
+            for (final Vertex vertex : face.toArray()) {
+                // Check for duplicate vertices before adding
+                if (!vertices.contains(vertex)) vertices.add(vertex);
+            }
+        }
+
+        return vertices;
     }
 
     //

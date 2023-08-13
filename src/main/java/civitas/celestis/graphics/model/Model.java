@@ -1,6 +1,7 @@
 package civitas.celestis.graphics.model;
 
 import civitas.celestis.graphics.face.Face;
+import civitas.celestis.math.vertex.Vertex;
 import jakarta.annotation.Nonnull;
 
 import java.io.Serializable;
@@ -58,6 +59,13 @@ public interface Model extends Serializable {
      * @return The number of faces this model has
      */
     int getFaceCount();
+
+    /**
+     * Returns a list of all vertices of this model.
+     * @return A list containing all vertices of this model
+     */
+    @Nonnull
+    List<Vertex> getVertices();
 
     //
     // Serialization

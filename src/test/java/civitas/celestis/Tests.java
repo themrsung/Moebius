@@ -2,9 +2,7 @@ package civitas.celestis;
 
 import civitas.celestis.graphics.color.RichColor;
 import civitas.celestis.graphics.model.ColoredModel;
-import civitas.celestis.math.Numbers;
-import civitas.celestis.util.string.RichString;
-import civitas.celestis.util.string.RichText;
+import civitas.celestis.physics.solid.BoundingBox;
 import de.javagl.obj.Obj;
 import de.javagl.obj.ObjReader;
 
@@ -14,7 +12,7 @@ import java.io.IOException;
 
 public class Tests {
     public static void main(String[] args) {
-        final File file = new File("src/main/resources/models/mcx/MCX.obj");
+        final File file = new File("src/main/resources/models/bc304/BC304Render.obj");
         final FileReader reader;
         final Obj obj;
         try {
@@ -25,9 +23,8 @@ public class Tests {
         }
 
         final ColoredModel model = new ColoredModel(obj, RichColor.GRAY, 1);
+        final BoundingBox box = new BoundingBox(model);
 
-        final RichColor color = RichColor.random();
-        System.out.println(color.magnitude());
-        System.out.println(color.magnitude2());
+        System.out.println(box.dimensions());
     }
 }

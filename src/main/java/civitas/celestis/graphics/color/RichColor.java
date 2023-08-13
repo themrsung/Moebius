@@ -1,6 +1,8 @@
 package civitas.celestis.graphics.color;
 
 import civitas.celestis.math.Numbers;
+import civitas.celestis.math.integer.IntVector3;
+import civitas.celestis.math.integer.IntVector4;
 import civitas.celestis.math.vector.Vector;
 import civitas.celestis.math.vector.Vector3;
 import civitas.celestis.math.vector.Vector4;
@@ -153,6 +155,18 @@ public class RichColor extends Vector4 {
                 rgb.clamp(new Vector3(0, 0, 0), new Vector3(255, 255, 255)),
                 Numbers.clamp(alpha, 0, 255)
         );
+    }
+
+    /**
+     * Checks for equality between two colors while accounting for differences in decimal places.
+     * This rounds the RGBA components, then checks them for equality.
+     *
+     * @param c1 The first color to compare
+     * @param c2 The second color to compare
+     * @return {@code true} if the colors are effectively equal
+     */
+    public static boolean equals(@Nonnull RichColor c1, @Nonnull RichColor c2) {
+        return c1.rgbaInt().equals(c2.rgbaInt());
     }
 
     /**
@@ -499,6 +513,26 @@ public class RichColor extends Vector4 {
     }
 
     /**
+     * Returns the RGB components of this color, rounded to the nearest integer value.
+     *
+     * @return The rounded RGB components of this color
+     */
+    @Nonnull
+    public final IntVector3 rgbInt() {
+        return new IntVector3((int) Math.round(x), (int) Math.round(y), (int) Math.round(z));
+    }
+
+    /**
+     * Returns the RGBA components of this color, rounded to the nearest integer value.
+     *
+     * @return The rounded RGBA components of this color
+     */
+    @Nonnull
+    public final IntVector4 rgbaInt() {
+        return new IntVector4((int) Math.round(w), (int) Math.round(x), (int) Math.round(y), (int) Math.round(z));
+    }
+
+    /**
      * Returns an AWT {@link Color} built from this color.
      * Components are rounded to the nearest integer.
      *
@@ -688,6 +722,22 @@ public class RichColor extends Vector4 {
         } catch (final ArithmeticException e) {
             return ZERO; // A magnitude of zero means all components are zero
         }
+    }
+
+    /**
+     * Returns the proximity index of this color and the provided color {@code c}.
+     * This is calculated by normalizing the squared distance of the two colors.
+     * <p>
+     * An index of {@code 0} means the colors are equal, while an index of {@code 1}
+     * means that the colors are completely different.
+     * (most likely {@link RichColor#TRANSPARENT_BLACK} and {@link RichColor#WHITE})
+     * </p>
+     *
+     * @param c The color to compare to
+     * @return The proximity index of the two colors
+     */
+    public double proximity(@Nonnull RichColor c) {
+        return distance2(c) / 260100.0; // The maximum squared distance two colors can have
     }
 
     //

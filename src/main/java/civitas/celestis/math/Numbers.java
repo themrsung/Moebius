@@ -3,7 +3,6 @@ package civitas.celestis.math;
 import civitas.celestis.exception.math.NotIntSafeException;
 import civitas.celestis.math.integer.*;
 import civitas.celestis.math.matrix.Matrix;
-import civitas.celestis.math.quaternion.Quaternion;
 import civitas.celestis.math.vector.*;
 import jakarta.annotation.Nonnull;
 
