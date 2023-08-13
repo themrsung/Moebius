@@ -16,6 +16,7 @@ public interface Solid {
 
     /**
      * Returns the geometric centroid of this solid.
+     *
      * @return The geometric centroid of this solid
      */
     @Nonnull

@@ -13,6 +13,7 @@ public class Sphere implements Solid {
 
     /**
      * Creates a new sphere.
+     *
      * @param center The center of this sphere
      * @param radius The radius of this sphere
      */
@@ -24,6 +25,7 @@ public class Sphere implements Solid {
 
     /**
      * Given a center and a radius, this calculates a sphere's bounding box.
+     *
      * @param center The center of the sphere
      * @param radius The radius of the sphere
      * @return The bounding box of the sphere
@@ -50,6 +52,7 @@ public class Sphere implements Solid {
 
     /**
      * Returns the geometric centroid of this sphere.
+     *
      * @return The geometric centroid of this sphere
      */
     @Nonnull
@@ -60,6 +63,7 @@ public class Sphere implements Solid {
 
     /**
      * Returns the radius of this sphere.
+     *
      * @return The radius of this sphere
      */
     public double radius() {
@@ -68,6 +72,7 @@ public class Sphere implements Solid {
 
     /**
      * Returns the volume of this sphere
+     *
      * @return The volume of this sphere
      */
     @Override
@@ -77,6 +82,7 @@ public class Sphere implements Solid {
 
     /**
      * Since a sphere has no corners, this returns an empty array.
+     *
      * @return An empty array of {@link Vector3}
      */
     @Nonnull
@@ -87,6 +93,7 @@ public class Sphere implements Solid {
 
     /**
      * {@inheritDoc}
+     *
      * @param v The point to check
      * @return {@code true} if the distance between the center of this sphere and {@code v}
      * is equal to or less than this sphere's radius
@@ -98,6 +105,7 @@ public class Sphere implements Solid {
 
     /**
      * {@inheritDoc}
+     *
      * @param f The face to check
      * @return {@code true} if all vertices of the face are within the bounds of this sphere
      */
@@ -112,6 +120,7 @@ public class Sphere implements Solid {
 
     /**
      * {@inheritDoc}
+     *
      * @param s The solid to compare to
      * @return {@code true} if this sphere contains the given solid {@code s}
      */
@@ -133,6 +142,7 @@ public class Sphere implements Solid {
 
     /**
      * {@inheritDoc}
+     *
      * @param f The face to compare to
      * @return {@code true} if this sphere overlaps with the given face {@code f}
      */
@@ -147,6 +157,7 @@ public class Sphere implements Solid {
 
     /**
      * {@inheritDoc}
+     *
      * @param s The solid to compare to
      * @return {@code true} if the two solids overlap
      */
@@ -170,6 +181,7 @@ public class Sphere implements Solid {
 
     /**
      * {@inheritDoc}
+     *
      * @param ray The ray to check for intersection
      * @return {@code true} if this sphere intersect the given ray
      */
@@ -184,6 +196,7 @@ public class Sphere implements Solid {
 
     /**
      * {@inheritDoc}
+     *
      * @return The bounding box of this sphere
      */
     @Nonnull
@@ -198,6 +211,7 @@ public class Sphere implements Solid {
 
     /**
      * Serializes this sphere into a string.
+     *
      * @return The string representation of this sphere
      */
     @Override

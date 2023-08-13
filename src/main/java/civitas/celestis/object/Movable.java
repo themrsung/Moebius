@@ -8,18 +8,10 @@ import jakarta.annotation.Nonnull;
  * A movable object can be placed in a simulated world,
  * and can be moved by the Moebius engine.
  */
-public interface Movable {
+public interface Movable extends Placeable {
     //
     // Properties
     //
-
-    /**
-     * Returns the current location of this object.
-     *
-     * @return The location of this object
-     */
-    @Nonnull
-    Vector3 getLocation();
 
     /**
      * Returns the current acceleration of this object.
@@ -28,14 +20,6 @@ public interface Movable {
      */
     @Nonnull
     Vector3 getAcceleration();
-
-    /**
-     * Returns the rotation of this object.
-     *
-     * @return The rotation of this object
-     */
-    @Nonnull
-    Quaternion getRotation();
 
     /**
      * Returns the rate of rotation of this object.
@@ -76,16 +60,18 @@ public interface Movable {
      */
     boolean isRotating();
 
+    /**
+     * Returns the current direction this object is moving in.
+     * If this object is not moving, this will return {@link Vector3#ZERO}.
+     *
+     * @return The directional unit vector of this object
+     */
+    @Nonnull
+    Vector3 getDirection();
+
     //
     // Setters
     //
-
-    /**
-     * Sets the location of this object.
-     *
-     * @param location The new location of this object
-     */
-    void setLocation(@Nonnull Vector3 location);
 
     /**
      * Sets the acceleration of this object.
@@ -93,13 +79,6 @@ public interface Movable {
      * @param acceleration The new acceleration of this object
      */
     void setAcceleration(@Nonnull Vector3 acceleration);
-
-    /**
-     * Sets the rotation of this object.
-     *
-     * @param rotation The new rotation of this object
-     */
-    void setRotation(@Nonnull Quaternion rotation);
 
     /**
      * Sets the rate of rotation of this object.

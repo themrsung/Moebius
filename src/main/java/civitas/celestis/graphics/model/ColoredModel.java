@@ -9,13 +9,33 @@ import de.javagl.obj.ObjFace;
 import jakarta.annotation.Nonnull;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
  * A model which uses single-color faces.
  */
 public class ColoredModel implements Model {
+    //
+    // Static Utilities
+    //
+
+    /**
+     * Performs a deep copy of a colored model.
+     *
+     * @param original The model to copy
+     * @return The copied model
+     */
+    @Nonnull
+    public static ColoredModel copy(@Nonnull ColoredModel original) {
+        final List<ColoredFace> faces = new ArrayList<>();
+
+        for (final ColoredFace face : original.faces) {
+            faces.add(new ColoredFace(face));
+        }
+
+        return new ColoredModel(faces);
+    }
+
     //
     // Constructors
     //
@@ -100,6 +120,7 @@ public class ColoredModel implements Model {
     /**
      * {@inheritDoc}
      * Note that this is an iterative implementation, and is computationally intensive to perform.
+     *
      * @return A list containing every vertex of this model.
      */
     @Nonnull

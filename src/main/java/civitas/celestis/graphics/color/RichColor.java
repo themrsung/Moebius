@@ -539,7 +539,7 @@ public class RichColor extends Vector4 {
      * @return An AWT {@link Color} object
      */
     @Nonnull
-    public final Color color() {
+    public final Color awt() {
         return new Color((int) Math.round(x), (int) Math.round(y), (int) Math.round(z), (int) Math.round(w));
     }
 
@@ -550,7 +550,7 @@ public class RichColor extends Vector4 {
      * @return An AWT {@link Color} object
      */
     @Nonnull
-    public final Color colorRaw() {
+    public final Color awtRaw() {
         return new Color((int) x, (int) y, (int) z, (int) w);
     }
 

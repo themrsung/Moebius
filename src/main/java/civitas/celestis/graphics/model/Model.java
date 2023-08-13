@@ -62,6 +62,7 @@ public interface Model extends Serializable {
 
     /**
      * Returns a list of all vertices of this model.
+     *
      * @return A list containing all vertices of this model
      */
     @Nonnull

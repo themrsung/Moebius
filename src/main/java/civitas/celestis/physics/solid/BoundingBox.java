@@ -8,9 +8,6 @@ import civitas.celestis.math.vector.Vector3;
 import civitas.celestis.math.vertex.Vertex;
 import jakarta.annotation.Nonnull;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * A non-rotatable cuboid in 3D space.
  * Bounding boxes are used for rough collision and intersection tests.
@@ -296,6 +293,7 @@ public class BoundingBox implements Solid {
 
     /**
      * Serializes this box into a string.
+     *
      * @return The string representation of this box
      */
     @Override

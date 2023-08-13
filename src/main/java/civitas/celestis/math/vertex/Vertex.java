@@ -437,12 +437,12 @@ public class Vertex extends Vector3 {
      * Transforms this vertex to an absolute coordinate system.
      * This is used to translate local coordinates into absolute coordinates.
      *
-     * @param rotation The rotation to apply before translating
      * @param offset   The offset of the local coordinate system's origin relative to absolute zero
+     * @param rotation The rotation to apply before translating
      * @return The absolute coordinates of this vertex
      */
     @Nonnull
-    public Vertex absolute(@Nonnull Quaternion rotation, @Nonnull Vector3 offset) {
+    public Vertex absolute(@Nonnull Vector3 offset, @Nonnull Quaternion rotation) {
         return rotate(rotation).add(offset);
     }
 
