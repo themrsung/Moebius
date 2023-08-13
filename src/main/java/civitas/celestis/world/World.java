@@ -20,6 +20,7 @@ public interface World extends Unique, Tickable {
 
     /**
      * Returns the name of this world.
+     *
      * @return The name of this world
      */
     @Nonnull
@@ -27,6 +28,7 @@ public interface World extends Unique, Tickable {
 
     /**
      * Returns the display name of this world.
+     *
      * @return The display name of this world
      */
     @Nonnull
@@ -39,6 +41,7 @@ public interface World extends Unique, Tickable {
     /**
      * Returns a list of all objects directly contained in this world.
      * This does not include child objects.
+     *
      * @return A list of all objects directly contained in this world
      */
     @Nonnull
@@ -47,6 +50,7 @@ public interface World extends Unique, Tickable {
     /**
      * Returns a list of all objects contained directly or indirectly in this world.
      * This list includes child objects.
+     *
      * @return A list of all objects contained in this world
      */
     @Nonnull
@@ -65,12 +69,14 @@ public interface World extends Unique, Tickable {
 
     /**
      * Adds an object to this world.
+     *
      * @param object The object to add to this world
      */
     void addObject(@Nonnull BaseObject object);
 
     /**
      * Removes an object from this world.
+     *
      * @param object The object to remove from this world
      */
     void removeObject(@Nonnull BaseObject object);

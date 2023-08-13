@@ -65,6 +65,7 @@ public final class Moebius {
 
     /**
      * Returns the world manager instance.
+     *
      * @return The world manager instance
      */
     @Nonnull

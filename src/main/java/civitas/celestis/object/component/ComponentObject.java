@@ -66,6 +66,7 @@ public class ComponentObject extends BaseObject implements ObjectComponent {
      * this will immediately remove itself from the list of components.
      * This ensures that a component object will not be added to itself.
      * </p>
+     *
      * @param parent The parent object this component was added to
      */
     @Override

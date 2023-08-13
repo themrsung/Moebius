@@ -23,6 +23,7 @@ public final class AsyncWorldManager implements WorldManager {
     public void start() {
         cores.forEach(SyncWorldManager::start);
     }
+
     /**
      * {@inheritDoc}
      */
@@ -33,6 +34,7 @@ public final class AsyncWorldManager implements WorldManager {
 
     /**
      * {@inheritDoc}
+     *
      * @return A list of all worlds registered to this world manager
      */
     @Nonnull
@@ -49,6 +51,7 @@ public final class AsyncWorldManager implements WorldManager {
 
     /**
      * {@inheritDoc}
+     *
      * @param uniqueId The unique identifier of the world to get
      * @return The world of matching unique identifier
      * @throws NullPointerException When a world of matching unique ID cannot be found
@@ -65,6 +68,7 @@ public final class AsyncWorldManager implements WorldManager {
 
     /**
      * {@inheritDoc}
+     *
      * @param name The name of the world to get
      * @return The world if found, {@code null} if not
      */
@@ -80,6 +84,7 @@ public final class AsyncWorldManager implements WorldManager {
 
     /**
      * {@inheritDoc}
+     *
      * @param displayName The display name of the world to get
      * @return The world if found, {@code null} if not
      */
@@ -95,6 +100,7 @@ public final class AsyncWorldManager implements WorldManager {
 
     /**
      * {@inheritDoc}
+     *
      * @param world The world to add to this manager
      */
     @Override
@@ -104,6 +110,7 @@ public final class AsyncWorldManager implements WorldManager {
 
     /**
      * {@inheritDoc}
+     *
      * @param world The world to remove from this manager
      */
     @Override
@@ -113,6 +120,7 @@ public final class AsyncWorldManager implements WorldManager {
 
     /**
      * Returns the next available core.
+     *
      * @return The next core
      */
     @Nonnull

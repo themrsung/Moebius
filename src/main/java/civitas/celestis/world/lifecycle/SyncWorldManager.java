@@ -35,6 +35,7 @@ public final class SyncWorldManager implements WorldManager {
 
     /**
      * {@inheritDoc}
+     *
      * @return A list of all worlds registered to this world manager
      */
     @Nonnull
@@ -45,6 +46,7 @@ public final class SyncWorldManager implements WorldManager {
 
     /**
      * {@inheritDoc}
+     *
      * @param uniqueId The unique identifier of the world to get
      * @return The world of matching unique identifier
      * @throws NullPointerException When the world cannot be found
@@ -61,6 +63,7 @@ public final class SyncWorldManager implements WorldManager {
 
     /**
      * {@inheritDoc}
+     *
      * @param name The name of the world to get
      * @return The world if found, {@code null} if not
      */
@@ -76,6 +79,7 @@ public final class SyncWorldManager implements WorldManager {
 
     /**
      * {@inheritDoc}
+     *
      * @param displayName The display name of the world to get
      * @return The world if found, {@code null} if not
      */
@@ -91,6 +95,7 @@ public final class SyncWorldManager implements WorldManager {
 
     /**
      * {@inheritDoc}
+     *
      * @param world The world to add to this manager
      */
     @Override
@@ -100,6 +105,7 @@ public final class SyncWorldManager implements WorldManager {
 
     /**
      * {@inheritDoc}
+     *
      * @param world The world to remove from this manager
      */
     @Override

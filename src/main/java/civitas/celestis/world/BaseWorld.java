@@ -75,10 +75,11 @@ public class BaseWorld implements World {
 
     /**
      * Creates a new world.
-     * @param uniqueId The unique identifier of this world
-     * @param name The name of this world
+     *
+     * @param uniqueId    The unique identifier of this world
+     * @param name        The name of this world
      * @param displayName The display name of this world
-     * @param objects The list of initial objects in this world
+     * @param objects     The list of initial objects in this world
      */
     public BaseWorld(
             @Nonnull UUID uniqueId,
@@ -128,6 +129,7 @@ public class BaseWorld implements World {
 
     /**
      * {@inheritDoc}
+     *
      * @return The unique identifier of this world
      */
     @Override
@@ -138,6 +140,7 @@ public class BaseWorld implements World {
 
     /**
      * {@inheritDoc}
+     *
      * @return The name of this world
      */
     @Override
@@ -148,6 +151,7 @@ public class BaseWorld implements World {
 
     /**
      * {@inheritDoc}
+     *
      * @return The display name of this world
      */
     @Override
@@ -162,6 +166,7 @@ public class BaseWorld implements World {
 
     /**
      * {@inheritDoc}
+     *
      * @return A list of objects in this world
      */
     @Override
@@ -172,6 +177,7 @@ public class BaseWorld implements World {
 
     /**
      * {@inheritDoc}
+     *
      * @return A list of all objects including child objects of objects in this world
      */
     @Nonnull
@@ -188,7 +194,8 @@ public class BaseWorld implements World {
 
     /**
      * Recursively adds all child objects of given object to the list {@code result}.
-     * @param result The list to add object references to
+     *
+     * @param result       The list to add object references to
      * @param parentObject The parent object to search
      */
     private static void addChildObjects(@Nonnull List<BaseObject> result, @Nonnull BaseObject parentObject) {
@@ -199,6 +206,7 @@ public class BaseWorld implements World {
 
     /**
      * {@inheritDoc}
+     *
      * @param uniqueId The unique identifier of the object to get
      * @return The object of matching unique ID
      * @throws NullPointerException When the object cannot be found
@@ -215,6 +223,7 @@ public class BaseWorld implements World {
 
     /**
      * {@inheritDoc}
+     *
      * @param object The object to add to this world
      */
     @Override
@@ -224,6 +233,7 @@ public class BaseWorld implements World {
 
     /**
      * {@inheritDoc}
+     *
      * @param object The object to remove from this world
      */
     @Override

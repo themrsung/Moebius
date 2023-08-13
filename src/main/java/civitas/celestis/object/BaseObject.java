@@ -109,9 +109,10 @@ public class BaseObject implements Unique, Movable, Physical, Renderable, Tickab
 
     /**
      * Gets a list of components by class.
+     *
      * @param compClass The class of the component
+     * @param <C>       The type of component to get
      * @return A list of all instances of components of matching class
-     * @param <C> The type of component to get
      */
     @Nonnull
     public final <C extends ObjectComponent> List<C> getComponents(@Nonnull Class<C> compClass) {
