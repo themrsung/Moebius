@@ -488,7 +488,7 @@ public class MutableIntVector implements IntVector {
      */
     @Nonnull
     @Override
-    public MutableVector toDouble() {
+    public MutableVector doubleValue() {
         final double[] doubleValues = new double[length];
 
         for (int i = 0; i < length; i++) {

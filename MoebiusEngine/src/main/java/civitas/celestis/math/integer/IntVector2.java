@@ -574,7 +574,7 @@ public class IntVector2 implements IntVector {
      */
     @Nonnull
     public IntVector2 rotate(double rads) {
-        return new IntVector2(toDouble().rotate(rads));
+        return new IntVector2(doubleValue().rotate(rads));
     }
 
     /**
@@ -584,7 +584,7 @@ public class IntVector2 implements IntVector {
      */
     @Nonnull
     @Override
-    public Vector2 toDouble() {
+    public Vector2 doubleValue() {
         return new Vector2(x, y);
     }
 

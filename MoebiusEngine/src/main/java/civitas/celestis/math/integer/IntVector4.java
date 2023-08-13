@@ -630,7 +630,7 @@ public class IntVector4 implements IntVector {
      */
     @Nonnull
     @Override
-    public Vector4 toDouble() {
+    public Vector4 doubleValue() {
         return new Vector4(w, x, y, z);
     }
 

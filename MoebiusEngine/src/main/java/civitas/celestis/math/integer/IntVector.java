@@ -273,7 +273,7 @@ public interface IntVector extends Serializable {
      * @return A {@link Vector} derived from {@code this}
      */
     @Nonnull
-    Vector toDouble();
+    Vector doubleValue();
 
     //
     // Equality

@@ -596,7 +596,7 @@ public class IntVector3 implements IntVector {
      */
     @Nonnull
     @Override
-    public Vector3 toDouble() {
+    public Vector3 doubleValue() {
         return new Vector3(x, y, z);
     }
 
