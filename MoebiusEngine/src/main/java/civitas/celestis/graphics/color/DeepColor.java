@@ -13,13 +13,20 @@ import java.util.function.UnaryOperator;
 
 /**
  * A 10-bit color class with linear transition capability.
+ * <p>
+ * Since {@link RichColor} already uses {@code double} to store the RGBA components,
+ * using 10-bit colors has no significant advantage over 8-bit colors when it comes to precision.
+ * <b>This class should only be used to support 10-bit capable hardware.</b>
+ * </p>
  * <p><b>
  * While {@link DeepColor} and {@link RichColor} can be used in the same context
  * due to both classes inheriting {@link Vector4},
  * doing so will result in errors as they use a different scale.
  * </b></p>
+ * <p>
  * Color components are stored using {@code double} with a range of {@code 0-1023}.
  * 10-bit colors do not support the conversion to and from hex codes.
+ * </p>
  */
 public class DeepColor extends Vector4 {
     //
@@ -125,6 +132,7 @@ public class DeepColor extends Vector4 {
 
     /**
      * Converts an 8-bit {@link RichColor} to a 10-bit {@link DeepColor}.
+     *
      * @param c The color to convert
      * @return The converted color
      */
@@ -515,6 +523,7 @@ public class DeepColor extends Vector4 {
 
     /**
      * Converts this color into an 8-bit color.
+     *
      * @return The 8-bit representation of this color
      */
     @Nonnull
