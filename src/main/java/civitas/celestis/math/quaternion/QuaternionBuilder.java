@@ -4,6 +4,10 @@ import jakarta.annotation.Nonnull;
 
 /**
  * A builder class for building rotation quaternions.
+ * <p><b>
+ * Note that this is not a builder in accordance to the builder design pattern,
+ * and building a quaternion using this class should not be done during runtime.
+ * </b></p>
  */
 public final class QuaternionBuilder {
     //

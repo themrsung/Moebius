@@ -23,20 +23,6 @@ public class Quaternion extends Vector4 {
     public static final Quaternion IDENTITY = new Quaternion(1, 0, 0, 0);
 
     //
-    // Builder
-    //
-
-    /**
-     * Creates a new builder instance and returns it.
-     *
-     * @return A new builder instance
-     */
-    @Nonnull
-    public static QuaternionBuilder builder() {
-        return new QuaternionBuilder();
-    }
-
-    //
     // Constructors
     //
 
