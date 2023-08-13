@@ -118,7 +118,7 @@ public final class Interpolation {
      */
     @Nonnull
     public static RichColor lerp(@Nonnull RichColor start, @Nonnull RichColor end, double t) {
-        return new RichColor(start.add(end.subtract(start).multiply(t)));
+        return new RichColor(lerp((Vector4) start, end, t)); // Delegates to Vector4 lerp for optimization
     }
 
     /**
