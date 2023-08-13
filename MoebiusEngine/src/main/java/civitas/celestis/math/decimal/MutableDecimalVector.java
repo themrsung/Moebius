@@ -23,6 +23,7 @@ public class MutableDecimalVector implements DecimalVector {
 
     /**
      * Creates a new vector.
+     *
      * @param initialLength The initial length of this vector
      */
     public MutableDecimalVector(int initialLength) {
@@ -31,6 +32,7 @@ public class MutableDecimalVector implements DecimalVector {
 
     /**
      * Creates a new vector.
+     *
      * @param values The values to use as the components of this vector
      */
     public MutableDecimalVector(@Nonnull BigDecimal... values) {
@@ -50,6 +52,7 @@ public class MutableDecimalVector implements DecimalVector {
 
     /**
      * {@inheritDoc}
+     *
      * @param i Index of component to get
      * @return The value at the specified index
      * @throws IndexOutOfBoundsException When the index {@code i} is out of bounds
@@ -62,6 +65,7 @@ public class MutableDecimalVector implements DecimalVector {
 
     /**
      * {@inheritDoc}
+     *
      * @return The list of values
      */
     @Nonnull
@@ -76,7 +80,8 @@ public class MutableDecimalVector implements DecimalVector {
 
     /**
      * Sets the {@code i}th value of this vector.
-     * @param i The index of value to set
+     *
+     * @param i     The index of value to set
      * @param value The value to set to
      * @throws IndexOutOfBoundsException When the index {@code i} is out of bounds
      */
@@ -86,6 +91,7 @@ public class MutableDecimalVector implements DecimalVector {
 
     /**
      * Appends given value to the end of this vector.
+     *
      * @param value The value to append
      */
     public void append(@Nonnull BigDecimal value) {
@@ -98,8 +104,8 @@ public class MutableDecimalVector implements DecimalVector {
 
     /**
      * {@inheritDoc}
-     * @param context The mathematical context to use in the square root operation
      *
+     * @param context The mathematical context to use in the square root operation
      * @return The magnitude of this vector
      */
     @Nonnull
@@ -110,6 +116,7 @@ public class MutableDecimalVector implements DecimalVector {
 
     /**
      * {@inheritDoc}
+     *
      * @return The squared magnitude of this vector
      */
     @Nonnull
@@ -126,6 +133,7 @@ public class MutableDecimalVector implements DecimalVector {
 
     /**
      * {@inheritDoc}
+     *
      * @return The length of this vector
      */
     @Override
@@ -139,6 +147,7 @@ public class MutableDecimalVector implements DecimalVector {
 
     /**
      * {@inheritDoc}
+     *
      * @param s The scalar to add to this vector
      * @return The resulting vector
      */
@@ -152,6 +161,7 @@ public class MutableDecimalVector implements DecimalVector {
 
     /**
      * {@inheritDoc}
+     *
      * @param s The scalar to subtract this vector by
      * @return The resulting vector
      */
@@ -165,6 +175,7 @@ public class MutableDecimalVector implements DecimalVector {
 
     /**
      * {@inheritDoc}
+     *
      * @param s The scalar to multiply this vector by
      * @return The resulting vector
      */
@@ -178,7 +189,8 @@ public class MutableDecimalVector implements DecimalVector {
 
     /**
      * {@inheritDoc}
-     * @param s The scalar to divide this vector by
+     *
+     * @param s       The scalar to divide this vector by
      * @param context The mathematical context to use in the division operation
      * @return The resulting vector
      * @throws ArithmeticException When the denominator {@code s} is zero
@@ -193,6 +205,7 @@ public class MutableDecimalVector implements DecimalVector {
 
     /**
      * {@inheritDoc}
+     *
      * @param v The vector to add to this vector
      * @return The resulting vector
      * @throws IllegalArgumentException When the provided vector {@code v}'s length is different from this vector
@@ -215,6 +228,7 @@ public class MutableDecimalVector implements DecimalVector {
 
     /**
      * {@inheritDoc}
+     *
      * @param v The vector to subtract from this vector
      * @return The resulting vector
      * @throws IllegalArgumentException When the provided vector {@code v}'s length is different from this vector
@@ -238,6 +252,7 @@ public class MutableDecimalVector implements DecimalVector {
     /**
      * Since there is no default multiplication defined for a mutable vector,
      * this will always throw an exception.
+     *
      * @param v The vector to multiply this vector by
      * @return This method cannot return a value
      * @throws UnsupportedOperationException Always throws an exception
@@ -250,6 +265,7 @@ public class MutableDecimalVector implements DecimalVector {
 
     /**
      * {@inheritDoc}
+     *
      * @param v The vector to get the dot product between
      * @return The resulting vector
      * @throws IllegalArgumentException When the provided vector {@code v}'s length is different from this vector
@@ -276,6 +292,7 @@ public class MutableDecimalVector implements DecimalVector {
 
     /**
      * {@inheritDoc}
+     *
      * @param v The vector to get the minimum vector of
      * @return The resulting vector
      * @throws IllegalArgumentException When the provided vector {@code v}'s length is different from this vector
@@ -298,6 +315,7 @@ public class MutableDecimalVector implements DecimalVector {
 
     /**
      * {@inheritDoc}
+     *
      * @param v The vector to get the maximum vector of
      * @return The resulting vector
      * @throws IllegalArgumentException When the provided vector {@code v}'s length is different from this vector
@@ -320,11 +338,12 @@ public class MutableDecimalVector implements DecimalVector {
 
     /**
      * {@inheritDoc}
+     *
      * @param min The minimum allowed values
      * @param max The minimum allowed values
      * @return The resulting vector
      * @throws IllegalArgumentException When the provided vector {@code min} or {@code max}'s
-     * length is different from this vector
+     *                                  length is different from this vector
      */
     @Nonnull
     @Override
@@ -348,6 +367,7 @@ public class MutableDecimalVector implements DecimalVector {
 
     /**
      * {@inheritDoc}
+     *
      * @param operator The operator to apply to each component of this vector
      * @return The resulting vector
      */
@@ -361,6 +381,7 @@ public class MutableDecimalVector implements DecimalVector {
 
     /**
      * {@inheritDoc}
+     *
      * @param context The mathematical context to use for square root and division
      * @return The normalized vector
      * @throws UnsupportedOperationException When the magnitude of this vector is exactly zero
@@ -378,6 +399,7 @@ public class MutableDecimalVector implements DecimalVector {
 
     /**
      * {@inheritDoc}
+     *
      * @return The negated vector
      */
     @Nonnull
@@ -390,7 +412,8 @@ public class MutableDecimalVector implements DecimalVector {
 
     /**
      * {@inheritDoc}
-     * @param v The vector to get the distance to
+     *
+     * @param v       The vector to get the distance to
      * @param context The mathematical context to use when calculating the magnitude of the difference vector
      * @return The distance between this vector and {@code v}
      * @throws IllegalArgumentException When the provided vector {@code v}'s length is different from this vector
@@ -403,6 +426,7 @@ public class MutableDecimalVector implements DecimalVector {
 
     /**
      * {@inheritDoc}
+     *
      * @param v The vector to get the squared distance to
      * @return The squared distance between this vector and {@code v}
      * @throws IllegalArgumentException When the provided vector {@code v}'s length is different from this vector
@@ -415,6 +439,7 @@ public class MutableDecimalVector implements DecimalVector {
 
     /**
      * {@inheritDoc}
+     *
      * @return The {@code double} value of this vector
      */
     @Nonnull
@@ -435,6 +460,7 @@ public class MutableDecimalVector implements DecimalVector {
 
     /**
      * {@inheritDoc}
+     *
      * @param obj The object to compare to
      * @return {@code true} if the object is a vector, and the components and length are equal
      */
@@ -457,6 +483,7 @@ public class MutableDecimalVector implements DecimalVector {
 
     /**
      * Deserializes a string into a vector.
+     *
      * @param input The input string to parse
      * @return The parsed vector
      * @throws NumberFormatException When the format is invalid
@@ -481,6 +508,7 @@ public class MutableDecimalVector implements DecimalVector {
 
     /**
      * {@inheritDoc}
+     *
      * @return The string representation of this vector
      */
     @Override

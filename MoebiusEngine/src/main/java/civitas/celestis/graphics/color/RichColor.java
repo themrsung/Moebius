@@ -1,7 +1,6 @@
 package civitas.celestis.graphics.color;
 
 import civitas.celestis.math.Numbers;
-import civitas.celestis.math.integer.IntVector3;
 import civitas.celestis.math.integer.IntVector4;
 import civitas.celestis.math.vector.Vector;
 import civitas.celestis.math.vector.Vector3;
@@ -15,7 +14,7 @@ import java.util.function.UnaryOperator;
  * A color class with linear transition capability.
  * Color components are stored using {@code double} with a range of {@code 0-255}
  */
-public class RichColor extends Vector4 {
+public class RichColor extends Vector4 implements RGBA8 {
     //
     // Constants
     //
@@ -335,6 +334,15 @@ public class RichColor extends Vector4 {
 
     /**
      * Creates a new color.
+     *
+     * @param color An {@link RGBColor} object
+     */
+    public RichColor(@Nonnull RGBColor color) {
+        super(color.doubleValue());
+    }
+
+    /**
+     * Creates a new color.
      * All parameters must be within the range of {@code 0-255}.
      *
      * @param rgb The RGB components of this color mapped in {@code x, y, z} respectively
@@ -461,6 +469,7 @@ public class RichColor extends Vector4 {
      *
      * @return The red component of this color
      */
+    @Override
     public final double red() {
         return x;
     }
@@ -470,6 +479,7 @@ public class RichColor extends Vector4 {
      *
      * @return The green component of this color
      */
+    @Override
     public final double green() {
         return y;
     }
@@ -479,6 +489,7 @@ public class RichColor extends Vector4 {
      *
      * @return The blue component of this color
      */
+    @Override
     public final double blue() {
         return z;
     }
@@ -488,6 +499,7 @@ public class RichColor extends Vector4 {
      *
      * @return The alpha component of this color
      */
+    @Override
     public final double alpha() {
         return w;
     }
@@ -497,6 +509,7 @@ public class RichColor extends Vector4 {
      *
      * @return The RGB components of this color
      */
+    @Override
     @Nonnull
     public final Vector3 rgb() {
         return new Vector3(x, y, z);
@@ -507,6 +520,7 @@ public class RichColor extends Vector4 {
      *
      * @return The RGBA components of this color
      */
+    @Override
     @Nonnull
     public final Vector4 rgba() {
         return new Vector4(w, x, y, z);
@@ -517,9 +531,10 @@ public class RichColor extends Vector4 {
      *
      * @return The rounded RGB components of this color
      */
+    @Override
     @Nonnull
-    public final IntVector3 rgbInt() {
-        return new IntVector3((int) Math.round(x), (int) Math.round(y), (int) Math.round(z));
+    public final RGBColor rgbInt() {
+        return new RGBColor((int) Math.round(x), (int) Math.round(y), (int) Math.round(z));
     }
 
     /**
@@ -527,6 +542,7 @@ public class RichColor extends Vector4 {
      *
      * @return The rounded RGBA components of this color
      */
+    @Override
     @Nonnull
     public final IntVector4 rgbaInt() {
         return new IntVector4((int) Math.round(w), (int) Math.round(x), (int) Math.round(y), (int) Math.round(z));
@@ -538,6 +554,7 @@ public class RichColor extends Vector4 {
      *
      * @return An AWT {@link Color} object
      */
+    @Override
     @Nonnull
     public final Color awt() {
         return new Color((int) Math.round(x), (int) Math.round(y), (int) Math.round(z), (int) Math.round(w));
@@ -549,6 +566,7 @@ public class RichColor extends Vector4 {
      *
      * @return An AWT {@link Color} object
      */
+    @Override
     @Nonnull
     public final Color awtRaw() {
         return new Color((int) x, (int) y, (int) z, (int) w);
@@ -564,6 +582,7 @@ public class RichColor extends Vector4 {
      * @return {@code true} if this color is translucent
      * @see RichColor#TRANSLUCENT_THRESHOLD
      */
+    @Override
     public boolean translucent() {
         return w <= TRANSLUCENT_THRESHOLD;
     }
@@ -574,6 +593,7 @@ public class RichColor extends Vector4 {
      * @return {@code true} if this color is opaque
      * @see RichColor#TRANSLUCENT_THRESHOLD
      */
+    @Override
     public boolean opaque() {
         return w > TRANSLUCENT_THRESHOLD;
     }
@@ -585,6 +605,7 @@ public class RichColor extends Vector4 {
      *
      * @return The reflectiveness coefficient of this color ({@code 0-1})
      */
+    @Override
     public double reflectiveness() {
         return ((x + y + z) / 765) * (w / 255);
     }
@@ -594,6 +615,7 @@ public class RichColor extends Vector4 {
      *
      * @return The hex integer of this color
      */
+    @Override
     public final int hexInt() {
         final int r = (int) Math.round(x);
         final int g = (int) Math.round(y);
@@ -607,6 +629,7 @@ public class RichColor extends Vector4 {
      *
      * @return The hex string of this color
      */
+    @Override
     @Nonnull
     public final String hexString() {
         final int r = (int) Math.round(x);
@@ -639,7 +662,7 @@ public class RichColor extends Vector4 {
      */
     @Nonnull
     public RichColor subtract(@Nonnull RichColor c) {
-        return fromVector(super.subtract(c));
+        return new RichColor(super.subtract(c));
     }
 
     //
@@ -702,6 +725,7 @@ public class RichColor extends Vector4 {
      * @param operator The operator to apply on the RGB components
      * @return The resulting color
      */
+    @Override
     @Nonnull
     public RichColor applyRGB(@Nonnull UnaryOperator<Vector3> operator) {
         return new RichColor(operator.apply(rgb()), w);
@@ -747,6 +771,7 @@ public class RichColor extends Vector4 {
      *
      * @return The reverse of this color
      */
+    @Override
     @Nonnull
     public RichColor reverse() {
         return new RichColor(255 - x, 255 - y, 255 - z, w);

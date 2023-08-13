@@ -2,10 +2,9 @@ package civitas.celestis.math.natural;
 
 import civitas.celestis.math.Numbers;
 import civitas.celestis.math.integer.IntVector;
-import civitas.celestis.math.integer.IntVector2;
 import civitas.celestis.math.integer.IntVector4;
 import civitas.celestis.math.vector.Vector;
-import civitas.celestis.math.vector.Vector2;
+import civitas.celestis.math.vector.Vector4;
 import jakarta.annotation.Nonnull;
 
 import java.util.function.UnaryOperator;
@@ -96,7 +95,7 @@ public class NaturalVector4 extends IntVector4 implements NaturalVector {
      *
      * @param v The vector to copy values from
      */
-    public NaturalVector4(@Nonnull Vector2 v) {
+    public NaturalVector4(@Nonnull Vector4 v) {
         super(v);
         enforceNatural();
     }
@@ -116,7 +115,7 @@ public class NaturalVector4 extends IntVector4 implements NaturalVector {
      *
      * @param other The vector to copy values from
      */
-    public NaturalVector4(@Nonnull IntVector2 other) {
+    public NaturalVector4(@Nonnull IntVector4 other) {
         super(other);
         enforceNatural();
     }
@@ -406,5 +405,4 @@ public class NaturalVector4 extends IntVector4 implements NaturalVector {
                 ", z=" + z +
                 '}';
     }
-
 }

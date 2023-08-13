@@ -53,8 +53,8 @@ public interface DecimalVector {
 
     /**
      * Returns the magnitude of this vector.
-     * @param context The mathematical context to use in the square root operation
      *
+     * @param context The mathematical context to use in the square root operation
      * @return The magnitude of this vector
      */
     @Nonnull
@@ -109,7 +109,7 @@ public interface DecimalVector {
     /**
      * Divides this vector by a scalar.
      *
-     * @param s The scalar to divide this vector by
+     * @param s       The scalar to divide this vector by
      * @param context The mathematical context to use in the division operation
      * @return The resulting vector
      * @throws ArithmeticException When the denominator {@code s} is zero
@@ -234,7 +234,7 @@ public interface DecimalVector {
     /**
      * Returns the distance between this vector and the provided vector.
      *
-     * @param v The vector to get the distance to
+     * @param v       The vector to get the distance to
      * @param context The mathematical context to use when calculating the magnitude of the difference vector
      * @return The distance between this vector and {@code v}
      * @throws IllegalArgumentException When the provided vector has a different length compared to this vector

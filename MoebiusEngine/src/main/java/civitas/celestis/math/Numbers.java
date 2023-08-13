@@ -1389,6 +1389,30 @@ public final class Numbers {
      * @param max The maximum acceptable value
      * @return The clamped value
      */
+    public static int clamp(int v, int min, int max) {
+        return Math.max(Math.min(v, max), min);
+    }
+
+    /**
+     * Clamps the value {@code v} to respect the boundaries of {@code min} and {@code max}.
+     *
+     * @param v   The value to clamp
+     * @param min The minimum acceptable value
+     * @param max The maximum acceptable value
+     * @return The clamped value
+     */
+    public static long clamp(long v, long min, long max) {
+        return Math.max(Math.min(v, max), min);
+    }
+
+    /**
+     * Clamps the value {@code v} to respect the boundaries of {@code min} and {@code max}.
+     *
+     * @param v   The value to clamp
+     * @param min The minimum acceptable value
+     * @param max The maximum acceptable value
+     * @return The clamped value
+     */
     public static double clamp(double v, double min, double max) {
         return Math.max(Math.min(v, max), min);
     }

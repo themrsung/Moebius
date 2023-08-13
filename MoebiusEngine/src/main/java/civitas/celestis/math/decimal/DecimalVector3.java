@@ -14,6 +14,7 @@ public /* unfinished */ abstract class DecimalVector3 implements DecimalVector {
 
     /**
      * Creates a new vector.
+     *
      * @param x The X component of this vector
      * @param y The Y component of this vector
      * @param z The Z component of this vector

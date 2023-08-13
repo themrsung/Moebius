@@ -399,5 +399,4 @@ public class NaturalVector2 extends IntVector2 implements NaturalVector {
                 ", y=" + y +
                 '}';
     }
-
 }
