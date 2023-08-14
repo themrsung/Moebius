@@ -5,14 +5,10 @@ import civitas.celestis.graphics.color.RGBColor;
 import civitas.celestis.graphics.color.RichColor;
 import civitas.celestis.math.complex.Complex;
 import civitas.celestis.math.complex.Quaternion;
-import civitas.celestis.math.fraction.Fraction;
 import civitas.celestis.math.integer.IntVector;
 import civitas.celestis.math.matrix.IntMatrix;
 import civitas.celestis.math.matrix.Matrix;
-import civitas.celestis.math.matrix.RealMatrix;
 import civitas.celestis.math.natural.NaturalVector;
-import civitas.celestis.math.real.RealNumber;
-import civitas.celestis.math.real.RealVector;
 import civitas.celestis.math.vector.Vector;
 import civitas.celestis.math.vertex.Vertex;
 import jakarta.annotation.Nonnull;
@@ -27,27 +23,21 @@ public interface Numeric {
     //
 
     /**
-     * Creates a new two-dimensional number.
+     * Creates a new vector.
      *
-     * @param values The values to use to create the number
-     * @return The constructed number
+     * @param values The values to use to create the vector
+     * @return The constructed vector
      */
     @Nonnull
-    static Numeric of(@Nonnull double... values) {
+    static Vector of(@Nonnull double... values) {
         try {return Vector.of(values);} catch (final Exception ignored) {}
         try {return new Complex(values);} catch (final Exception ignored) {}
-        try {return new Fraction(values);} catch (final Exception ignored) {}
         try {return new Vertex(values);} catch (final Exception ignored) {}
         try {return new DeepColor(values);} catch (final Exception ignored) {}
         try {return new Quaternion(values);} catch (final Exception ignored) {}
         try {return new RichColor(values);} catch (final Exception ignored) {}
-        try {return new RealNumber(values);} catch (final Exception ignored) {}
 
-        if (values.length > 0) {
-            return new RealNumber(values[0]);
-        } else {
-            return RealNumber.ZERO;
-        }
+        throw new UnsupportedOperationException("Factory constructor of vector failed.");
     }
 
     /**
@@ -62,10 +52,10 @@ public interface Numeric {
     }
 
     /**
-     * Creates a new number from an array of {@code int}.
+     * Creates a new vector.
      *
-     * @param values The values to use
-     * @return The constructed vector or scalar
+     * @param values The values to use to create the vector
+     * @return The constructed vector
      */
     @Nonnull
     static Numeric of(@Nonnull int... values) {
@@ -73,11 +63,7 @@ public interface Numeric {
         try {return NaturalVector.of(values);} catch (final Exception ignored) {}
         try {return new RGBColor(values);} catch (final Exception ignored) {}
 
-        if (values.length > 0) {
-            return new RealNumber(values[0]);
-        } else {
-            return RealNumber.ZERO;
-        }
+        throw new UnsupportedOperationException("Factory constructor of vector failed.");
     }
 
     /**
@@ -89,34 +75,6 @@ public interface Numeric {
     @Nonnull
     static IntMatrix of(@Nonnull int[][] values) {
         return new IntMatrix(values);
-    }
-
-    /**
-     * Creates a new number from an array of {@link RealNumber}.
-     *
-     * @param values The array to use
-     * @return The constructed vector or scalar
-     */
-    @Nonnull
-    static Numeric of(@Nonnull RealNumber... values) {
-        try {return RealVector.of(values);} catch (final Exception ignored) {}
-
-        if (values.length > 0) {
-            return values[0];
-        } else {
-            return RealNumber.ZERO;
-        }
-    }
-
-    /**
-     * Creates a new matrix.
-     *
-     * @param values The values to use
-     * @return The constructed matrix
-     */
-    @Nonnull
-    static RealMatrix of(@Nonnull RealNumber[][] values) {
-        return new RealMatrix(values);
     }
 
     //
@@ -136,15 +94,11 @@ public interface Numeric {
         try {return IntVector.parseVector(input);} catch (final Exception ignored) {}
         try {return RGBColor.parseColor(input);} catch (final Exception ignored) {}
         try {return Complex.parseComplex(input);} catch (final Exception ignored) {}
-        try {return Fraction.parseFraction(input);} catch (final Exception ignored) {}
         try {return DeepColor.parseColor(input);} catch (final Exception ignored) {}
         try {return Quaternion.parseQuaternion(input);} catch (final Exception ignored) {}
         try {return RichColor.parseColor(input);} catch (final Exception ignored) {}
-        try {return RealNumber.parseNumber(input);} catch (final Exception ignored) {}
-        try {return RealVector.parseVector(input);} catch (final Exception ignored) {}
         try {return Matrix.parseMatrix(input);} catch (final Exception ignored) {}
         try {return IntMatrix.parseMatrix(input);} catch (final Exception ignored) {}
-        try {return RealMatrix.parseMatrix(input);} catch (final Exception ignored) {}
 
         throw new NumberFormatException("The given string is not a Numeric.");
     }
@@ -205,12 +159,6 @@ public interface Numeric {
      * @throws UnsupportedOperationException When the number cannot be represented by a single {@code double}
      */
     static double doubleValue(@Nonnull Numeric n) throws UnsupportedOperationException {
-        // Special case for fractions
-        if (n instanceof Fraction f) return f.doubleValue();
-
-        // Special case for real numbers
-        if (n instanceof RealNumber rn) return rn.doubleValue();
-
         // Magnitudes for vectors
         if (n instanceof Vector v) return v.magnitude();
         if (n instanceof IntVector v) return v.magnitude();
@@ -226,12 +174,6 @@ public interface Numeric {
      * @throws UnsupportedOperationException When the number cannot be represented by a single squared {@code double}
      */
     static double doubleValue2(@Nonnull Numeric n) throws UnsupportedOperationException {
-        // Special case for fractions
-        if (n instanceof Fraction f) return Numbers.pows(f.doubleValue(), 2);
-
-        // Special case for real numbers
-        if (n instanceof RealNumber rn) return Numbers.pows(rn.doubleValue(), 2);
-
         // Squared magnitudes for vectors
         if (n instanceof Vector v) return v.magnitude2();
         if (n instanceof IntVector v) return v.magnitude2();
