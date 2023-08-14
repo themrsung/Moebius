@@ -182,7 +182,7 @@ public class Vector2 implements Vector {
      */
     @Override
     public final double magnitude() {
-        return Math.sqrt(magnitude2());
+        return Math.sqrt(x * x + y * y);
     }
 
     /**
@@ -552,7 +552,10 @@ public class Vector2 implements Vector {
      * @return The distance between this vector and {@code v}
      */
     public double distance(@Nonnull Vector2 v) {
-        return subtract(v).magnitude();
+        final double dx = x - v.x;
+        final double dy = y - v.y;
+
+        return Math.sqrt(dx * dx + dy + dy);
     }
 
     /**
@@ -562,7 +565,10 @@ public class Vector2 implements Vector {
      * @return The squared distance between this vector and {@code v}
      */
     public double distance2(@Nonnull Vector2 v) {
-        return subtract(v).magnitude2();
+        final double dx = x - v.x;
+        final double dy = y - v.y;
+
+        return dx * dx + dy + dy;
     }
 
     /**

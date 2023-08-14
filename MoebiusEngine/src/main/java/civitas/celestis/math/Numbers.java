@@ -8,6 +8,8 @@ import civitas.celestis.math.real.RealVector;
 import civitas.celestis.math.vector.*;
 import jakarta.annotation.Nonnull;
 
+import java.math.BigInteger;
+
 /**
  * Contains utility methods for numbers.
  */
@@ -1827,6 +1829,7 @@ public final class Numbers {
 
     /**
      * Returns the sign of the provided value.
+     * This also works with other types of primitive numbers such as {@code float} or {@code long}.
      *
      * @param value The value of which to get the sign of
      * @return The sign of the value
@@ -1840,6 +1843,17 @@ public final class Numbers {
         // Value is finite
 
         return value == 0 ? Sign.ZERO : (value > 0 ? Sign.POSITIVE : Sign.NEGATIVE);
+    }
+    /**
+     * Returns the sign of the provided value.
+     *
+     * @param value The value of which to get the sign of
+     * @return The sign of the value
+     */
+    @Nonnull
+    public static Sign sign(@Nonnull BigInteger value) {
+        final int s = value.signum();
+        return s == 0 ? Sign.ZERO : (s > 0 ? Sign.POSITIVE : Sign.NEGATIVE);
     }
 
     /**

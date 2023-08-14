@@ -184,7 +184,7 @@ public class RealVector2 implements RealVector {
     @Nonnull
     @Override
     public final RealNumber magnitude() {
-        return magnitude2().sqrt();
+        return x.multiply(x).add(y.multiply(y)).sqrt();
     }
 
     /**

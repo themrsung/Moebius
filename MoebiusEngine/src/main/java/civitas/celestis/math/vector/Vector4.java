@@ -237,7 +237,7 @@ public class Vector4 implements Vector {
      */
     @Override
     public final double magnitude() {
-        return Math.sqrt(magnitude2());
+        return Math.sqrt(w * w + x * x + y * y + z * z);
     }
 
     /**
@@ -622,7 +622,12 @@ public class Vector4 implements Vector {
      * @return The distance between this vector and {@code v}
      */
     public double distance(@Nonnull Vector4 v) {
-        return subtract(v).magnitude();
+        final double dw = w - v.w;
+        final double dx = x - v.x;
+        final double dy = y - v.y;
+        final double dz = z - v.z;
+
+        return Math.sqrt(dw * dw + dx * dx + dy * dy + dz * dz);
     }
 
     /**
@@ -632,7 +637,12 @@ public class Vector4 implements Vector {
      * @return The squared distance between this vector and {@code v}
      */
     public double distance2(@Nonnull Vector4 v) {
-        return subtract(v).magnitude2();
+        final double dw = w - v.w;
+        final double dx = x - v.x;
+        final double dy = y - v.y;
+        final double dz = z - v.z;
+
+        return dw * dw + dx * dx + dy * dy + dz * dz;
     }
 
     //

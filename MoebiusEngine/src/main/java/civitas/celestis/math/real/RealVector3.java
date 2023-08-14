@@ -210,7 +210,7 @@ public class RealVector3 implements RealVector {
     @Nonnull
     @Override
     public final RealNumber magnitude() {
-        return magnitude2().sqrt();
+        return x.multiply(x).add(y.multiply(y)).add(z.multiply(z)).sqrt();
     }
 
     /**

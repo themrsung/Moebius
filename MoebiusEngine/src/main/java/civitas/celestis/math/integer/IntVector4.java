@@ -246,7 +246,7 @@ public class IntVector4 implements IntVector {
      */
     @Override
     public final double magnitude() {
-        return Math.sqrt(magnitude2());
+        return Math.sqrt(w * w + x * x + y * y + z * z);
     }
 
     /**
@@ -610,7 +610,12 @@ public class IntVector4 implements IntVector {
      * @return The distance between this vector and {@code v}
      */
     public double distance(@Nonnull IntVector4 v) {
-        return subtract(v).magnitude();
+        final int dw = w - v.w;
+        final int dx = x - v.x;
+        final int dy = y - v.y;
+        final int dz = z - v.z;
+
+        return Math.sqrt(dw * dw + dx * dx + dy * dy + dz * dz);
     }
 
     /**
@@ -620,7 +625,12 @@ public class IntVector4 implements IntVector {
      * @return The squared distance between this vector and {@code v}
      */
     public double distance2(@Nonnull IntVector4 v) {
-        return subtract(v).magnitude2();
+        final int dw = w - v.w;
+        final int dx = x - v.x;
+        final int dy = y - v.y;
+        final int dz = z - v.z;
+
+        return dw * dw + dx * dx + dy * dy + dz * dz;
     }
 
     /**

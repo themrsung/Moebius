@@ -16,6 +16,15 @@ import java.util.function.UnaryOperator;
  */
 public class Complex extends Vector2 implements Comparable<Vector2> {
     //
+    // Constants
+    //
+
+    /**
+     * The square root of {@code -1}.
+     */
+    public static final Complex I = new Complex(0, 1);
+
+    //
     // Constructors
     //
 

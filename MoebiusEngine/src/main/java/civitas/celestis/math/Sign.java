@@ -82,6 +82,106 @@ public enum Sign {
     );
 
     //
+    // Factory
+    //
+    // These methods use a different algorithm from Numbers#sign(double),
+    // and may be slower or faster depending on the application.
+    //
+    // Benchmark the two algorithms with your expected range of numbers before choosing
+    // one for the final release version of your application.
+    //
+
+    /**
+     * Returns the sign of the given value.
+     *
+     * @param v The value of which to get the sign of
+     * @return The sign of {@code v}
+     */
+    @Nonnull
+    public static Sign of(double v) {
+        for (final Sign value : values()) {
+            if (value.isInRange(v)) return value;
+        }
+
+        throw new UnknownError("Failed to get the sign of number: " + v);
+    }
+
+    /**
+     * Returns the sign of the given value.
+     *
+     * @param v The value of which to get the sign of
+     * @return The sign of {@code v}
+     */
+    @Nonnull
+    public static Sign of(float v) {
+        for (final Sign value : values()) {
+            if (value.isInRange(v)) return value;
+        }
+
+        throw new UnknownError("Failed to get the sign of number: " + v);
+    }
+
+    /**
+     * Returns the sign of the given value.
+     *
+     * @param v The value of which to get the sign of
+     * @return The sign of {@code v}
+     */
+    @Nonnull
+    public static Sign of(long v) {
+        for (final Sign value : values()) {
+            if (value.isInRange(v)) return value;
+        }
+
+        throw new UnknownError("Failed to get the sign of number: " + v);
+    }
+
+    /**
+     * Returns the sign of the given value.
+     *
+     * @param v The value of which to get the sign of
+     * @return The sign of {@code v}
+     */
+    @Nonnull
+    public static Sign of(int v) {
+        for (final Sign value : values()) {
+            if (value.isInRange(v)) return value;
+        }
+
+        throw new UnknownError("Failed to get the sign of number: " + v);
+    }
+
+    /**
+     * Returns the sign of the given value.
+     *
+     * @param v The value of which to get the sign of
+     * @return The sign of {@code v}
+     */
+    @Nonnull
+    public static Sign of(short v) {
+        for (final Sign value : values()) {
+            if (value.isInRange(v)) return value;
+        }
+
+        throw new UnknownError("Failed to get the sign of number: " + v);
+    }
+
+    /**
+     * Returns the sign of the given value.
+     *
+     * @param v The value of which to get the sign of
+     * @return The sign of {@code v}
+     */
+    @Nonnull
+    public static Sign of(byte v) {
+        for (final Sign value : values()) {
+            if (value.isInRange(v)) return value;
+        }
+
+        throw new UnknownError("Failed to get the sign of number: " + v);
+    }
+
+    //
     // Constructors
     //
 

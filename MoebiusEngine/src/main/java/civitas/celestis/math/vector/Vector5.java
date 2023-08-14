@@ -263,7 +263,7 @@ public class Vector5 implements Vector {
      */
     @Override
     public final double magnitude() {
-        return Math.sqrt(magnitude2());
+        return Math.sqrt(v * v + w * w + x * x + y * y + z * z);
     }
 
     /**
@@ -737,21 +737,33 @@ public class Vector5 implements Vector {
     /**
      * Returns the distance between this vector and the provided vector.
      *
-     * @param v The vector to get the distance to
+     * @param vec The vector to get the distance to
      * @return The distance between this vector and {@code v}
      */
-    public double distance(@Nonnull Vector5 v) {
-        return subtract(v).magnitude();
+    public double distance(@Nonnull Vector5 vec) {
+        final double dv = v - vec.v;
+        final double dw = w - vec.w;
+        final double dx = x - vec.x;
+        final double dy = y - vec.y;
+        final double dz = z - vec.z;
+
+        return Math.sqrt(dv * dv + dw * dw + dx * dx + dy * dy + dz * dz);
     }
 
     /**
      * Returns the squared distance between this vector and the provided vector.
      *
-     * @param v The vector to get the squared distance to
+     * @param vec The vector to get the squared distance to
      * @return The squared distance between this vector and {@code v}
      */
-    public double distance2(@Nonnull Vector5 v) {
-        return subtract(v).magnitude2();
+    public double distance2(@Nonnull Vector5 vec) {
+        final double dv = v - vec.v;
+        final double dw = w - vec.w;
+        final double dx = x - vec.x;
+        final double dy = y - vec.y;
+        final double dz = z - vec.z;
+
+        return dv * dv + dw * dw + dx * dx + dy * dy + dz * dz;
     }
 
     //
