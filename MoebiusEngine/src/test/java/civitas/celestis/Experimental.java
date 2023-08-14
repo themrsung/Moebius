@@ -7,11 +7,7 @@ import civitas.celestis.math.real.RealNumber;
 
 public class Experimental {
     public static void main(String[] args) {
-        RealNumber n = RealNumber.MIN_VALUE;
-
-        for (int i = 0; i < 100; i++) {
-            System.out.println(i + ". " + n.toReadableString());
-            n = n.add(RealNumber.MIN_VALUE);
-        }
+        RealNumber n = RealNumber.MAX_VALUE;
+        System.out.println(n.toReadableString());
     }
 }

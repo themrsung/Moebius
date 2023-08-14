@@ -39,7 +39,7 @@ public class RealNumber extends Vector2 implements Comparable<RealNumber> {
     /**
      * The minimum possible positive value a real number can have without being zero.
      */
-    public static final RealNumber MIN_VALUE = new RealNumber(-1023.0, 4.440892098500626E-16);
+    public static final RealNumber MIN_VALUE = new RealNumber(-1.7976931348623157E308, 4.9E-324);
 
     /**
      * The {@link RealNumber} equivalent of {@link Double#MAX_VALUE}.
@@ -49,7 +49,7 @@ public class RealNumber extends Vector2 implements Comparable<RealNumber> {
     /**
      * The maximum possible positive value a real number can safely represent.
      */
-    public static final RealNumber MAX_VALUE = new RealNumber(-1.7976931348623157E308, 1.7976931348623157E308);
+    public static final RealNumber MAX_VALUE = new RealNumber(1.7976931348623157E308, 1.7976931348623157E308);
 
     /**
      * The number {@code 1}.
@@ -687,7 +687,6 @@ public class RealNumber extends Vector2 implements Comparable<RealNumber> {
 
     /**
      * Converts this number into a format "{@code 0.####...}".
-     * This will infinitely calculate the decimal points.
      * This uses the math context {@link MathContext#DECIMAL128}.
      *
      * @return The human-readable string representation of this number
@@ -697,7 +696,6 @@ public class RealNumber extends Vector2 implements Comparable<RealNumber> {
 
     /**
      * Converts this number into a format "{@code 0.####...}".
-     * This will infinitely calculate the decimal points.
      *
      * @param context The mathematical context to use when calculating the value
      * @return The human-readable string representation of this number
@@ -707,12 +705,16 @@ public class RealNumber extends Vector2 implements Comparable<RealNumber> {
      */
     @Nonnull
     public String toReadableString(@Nonnull MathContext context) {
-        final BigDecimal mantissa = BigDecimal.valueOf(y);
-        final BigDecimal exponentiation = BigDecimal.valueOf(2).pow((int) x, context);
+        try {
+            final BigDecimal mantissa = BigDecimal.valueOf(y);
+            final BigDecimal exponentiation = BigDecimal.valueOf(2).pow((int) x, context);
 
-        final BigDecimal result = mantissa.multiply(exponentiation);
+            final BigDecimal result = mantissa.multiply(exponentiation);
 
-        return result.toPlainString();
+            return result.toPlainString();
+        } catch (final ArithmeticException e) {
+            return "OUT_OF_DISPLAYABLE_RANGE";
+        }
     }
 
 }

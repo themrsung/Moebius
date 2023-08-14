@@ -46,7 +46,7 @@ public class Fraction extends Vector2 implements Comparable<Fraction> {
     /**
      * The value equivalent to {@link Double#NaN}.
      */
-    public static final Fraction NAN = new Fraction(0, 0);
+    public static final Fraction NaN = new Fraction(0, 0);
 
     /**
      * The value equivalent to {@link Double#POSITIVE_INFINITY}.
