@@ -42,6 +42,11 @@ public class RealNumber extends Vector2 implements Comparable<RealNumber> {
     public static final RealNumber MIN_VALUE = new RealNumber(-1.7976931348623157E308, 4.9E-324);
 
     /**
+     * The minimum positive value which when added to a number, will change the value of that number.
+     */
+    public static final RealNumber MIN_INCREMENT = new RealNumber(Double.MIN_VALUE);
+
+    /**
      * The {@link RealNumber} equivalent of {@link Double#MAX_VALUE}.
      */
     public static final RealNumber DOUBLE_MAX_VALUE = new RealNumber(Double.MAX_VALUE);
@@ -450,6 +455,40 @@ public class RealNumber extends Vector2 implements Comparable<RealNumber> {
     }
 
     /**
+     * Raises this number to the power of {@code 2}.
+     * @return The squared number of this number
+     */
+    @Nonnull
+    public RealNumber pow() {
+        return multiply(this);
+    }
+
+    /**
+     * Raises this number to the power of {@code exp}.
+     * @param exp The exponent to raise to
+     * @return The {@code exp}th power of {@code this}
+     */
+    @Nonnull
+    public RealNumber pow(long exp) {
+        RealNumber result = ONE;
+
+        for (long i = 0; i < exp; i++) {
+            result = result.multiply(this);
+        }
+
+        return result;
+    }
+
+    /**
+     * Returns the exponential function of this number.
+     * @return The exponential function of this number
+     */
+    @Nonnull
+    public RealNumber exp() {
+        return new RealNumber(x, Math.exp(y));
+    }
+
+    /**
      * Returns the square root of this number.
      * This is an estimation derived by manipulating the exponent of this number.
      *
@@ -482,6 +521,15 @@ public class RealNumber extends Vector2 implements Comparable<RealNumber> {
         }
 
         return root;
+    }
+
+    /**
+     * Returns the logarithm of this number.
+     * @return The logarithm of this number
+     */
+    @Nonnull
+    public RealNumber log() {
+        return new RealNumber(x, Math.log(y));
     }
 
     //
@@ -707,7 +755,7 @@ public class RealNumber extends Vector2 implements Comparable<RealNumber> {
     public String toReadableString(@Nonnull MathContext context) {
         try {
             final BigDecimal mantissa = BigDecimal.valueOf(y);
-            final BigDecimal exponentiation = BigDecimal.valueOf(2).pow((int) x, context);
+            final BigDecimal exponentiation = BigDecimal.TWO.pow((int) x, context);
 
             final BigDecimal result = mantissa.multiply(exponentiation);
 

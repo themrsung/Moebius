@@ -504,6 +504,32 @@ public class RealVector2 implements RealVector {
     }
 
     /**
+     * Returns the distance between this vector and the provided vector {@code v}.
+     * @param v The vector to get the distance to
+     * @return The distance between the two vectors
+     */
+    @Nonnull
+    public RealNumber distance(@Nonnull RealVector2 v) {
+        final RealNumber dx = x.subtract(v.x);
+        final RealNumber dy = y.subtract(v.y);
+
+        return dx.pow().add(dy.pow()).sqrt();
+    }
+
+    /**
+     * Returns the squared distance between this vector and the provided vector {@code v}.
+     * @param v The vector to get the squared distance to
+     * @return The squared distance between the two vectors
+     */
+    @Nonnull
+    public RealNumber distance2(@Nonnull RealVector2 v) {
+        final RealNumber dx = x.subtract(v.x);
+        final RealNumber dy = y.subtract(v.y);
+
+        return dx.pow().add(dy.pow());
+    }
+
+    /**
      * {@inheritDoc}
      *
      * @return The {@link Vector2} representation of this vector

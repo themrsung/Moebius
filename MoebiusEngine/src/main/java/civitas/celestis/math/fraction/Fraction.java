@@ -59,6 +59,27 @@ public class Fraction extends Vector2 implements Comparable<Fraction> {
     public static final Fraction NEGATIVE_INFINITY = new Fraction(-1, 0);
 
     /**
+     * The minimum possible positive value a fraction can have without being zero.
+     */
+    public static final Fraction MAX_VALUE = new Fraction(Double.MAX_VALUE, Double.MIN_VALUE);
+
+    /**
+     * The maximum possible positive value a fraction can have without being infinite.
+     */
+
+    public static final Fraction MIN_VALUE = new Fraction(Double.MIN_VALUE, Double.MAX_VALUE);
+
+    /**
+     * The inverse of {@link Math#PI}.
+     */
+    public static final Fraction INVERSE_PI = new Fraction(1, Math.PI);
+
+    /**
+     * The inverse of {@link Math#E}.
+     */
+    public static final Fraction INVERSE_E = new Fraction(1, Math.E);
+
+    /**
      * {@code 1.0 / 10.0}
      */
     public static final Fraction TENTH = new Fraction(1, 10);

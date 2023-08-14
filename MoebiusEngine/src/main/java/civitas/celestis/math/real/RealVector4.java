@@ -580,6 +580,36 @@ public class RealVector4 implements RealVector {
     }
 
     /**
+     * Returns the distance between this vector and the provided vector {@code v}.
+     * @param v The vector to get the distance to
+     * @return The distance between the two vectors
+     */
+    @Nonnull
+    public RealNumber distance(@Nonnull RealVector4 v) {
+        final RealNumber dw = w.subtract(v.w);
+        final RealNumber dx = x.subtract(v.x);
+        final RealNumber dy = y.subtract(v.y);
+        final RealNumber dz = z.subtract(v.z);
+
+        return dw.pow().add(dx.pow()).add(dy.pow()).add(dz.pow()).sqrt();
+    }
+
+    /**
+     * Returns the squared distance between this vector and the provided vector {@code v}.
+     * @param v The vector to get the squared distance to
+     * @return The squared distance between the two vectors
+     */
+    @Nonnull
+    public RealNumber distance2(@Nonnull RealVector4 v) {
+        final RealNumber dw = w.subtract(v.w);
+        final RealNumber dx = x.subtract(v.x);
+        final RealNumber dy = y.subtract(v.y);
+        final RealNumber dz = z.subtract(v.z);
+
+        return dw.pow().add(dx.pow()).add(dy.pow()).add(dz.pow());
+    }
+
+    /**
      * {@inheritDoc}
      *
      * @return The {@link Vector4} representation of this vector
