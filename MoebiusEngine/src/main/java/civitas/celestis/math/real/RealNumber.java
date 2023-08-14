@@ -380,9 +380,15 @@ public class RealNumber extends Vector2 implements Comparable<RealNumber> {
      *
      * @param n The number to divide this number by
      * @return The resulting number
+     * @throws ArithmeticException When the denominator {@code n} is zero
      */
     @Nonnull
-    public RealNumber divide(@Nonnull RealNumber n) {
+    public RealNumber divide(@Nonnull RealNumber n) throws ArithmeticException {
+        // Check for division by zero
+        if (n.y == 0) {
+            throw new ArithmeticException("Cannot divide by zero.");
+        }
+
         // Divide the mantissas
         double mantissa = y / n.y;
 

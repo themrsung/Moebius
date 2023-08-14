@@ -42,6 +42,7 @@ public class MutableRealVector implements RealVector {
 
     /**
      * Creates a new vector.
+     *
      * @param other The other vector to copy component values from
      */
     public MutableRealVector(@Nonnull RealVector other) {
@@ -71,6 +72,7 @@ public class MutableRealVector implements RealVector {
 
     /**
      * {@inheritDoc}
+     *
      * @param i Index of component to get
      * @return The component value at the given index
      * @throws IndexOutOfBoundsException When the index {@code i} is out of bounds
@@ -87,6 +89,7 @@ public class MutableRealVector implements RealVector {
 
     /**
      * {@inheritDoc}
+     *
      * @return A trimmed copy of the array of values this vector holds
      */
     @Nonnull
@@ -102,7 +105,8 @@ public class MutableRealVector implements RealVector {
 
     /**
      * Sets the value at the specified index to the given value.
-     * @param i The index to set the value of
+     *
+     * @param i     The index to set the value of
      * @param value The value to set to
      * @throws IndexOutOfBoundsException When the index {@code i} is out of bounds ({@code i >= length})
      */
@@ -112,6 +116,7 @@ public class MutableRealVector implements RealVector {
 
     /**
      * Appends a component number to the end of this vector.
+     *
      * @param value The value to append to this vector
      */
     public final void append(@Nonnull RealNumber value) {
@@ -153,6 +158,7 @@ public class MutableRealVector implements RealVector {
 
     /**
      * {@inheritDoc}
+     *
      * @return The collective square root of all components' square in this vector
      */
     @Nonnull
@@ -163,6 +169,7 @@ public class MutableRealVector implements RealVector {
 
     /**
      * {@inheritDoc}
+     *
      * @return The sum of all components' square in this vector
      */
     @Nonnull
@@ -179,6 +186,7 @@ public class MutableRealVector implements RealVector {
 
     /**
      * {@inheritDoc}
+     *
      * @return The current length of this vector
      */
     @Override
@@ -192,6 +200,7 @@ public class MutableRealVector implements RealVector {
 
     /**
      * {@inheritDoc}
+     *
      * @param s Scalar to add to this vector
      * @return The resulting vector
      */
@@ -209,6 +218,7 @@ public class MutableRealVector implements RealVector {
 
     /**
      * {@inheritDoc}
+     *
      * @param s Scalar to subtract from this vector
      * @return The resulting vector
      */
@@ -226,6 +236,7 @@ public class MutableRealVector implements RealVector {
 
     /**
      * {@inheritDoc}
+     *
      * @param s Scalar to multiply this vector by
      * @return The resulting vector
      */
@@ -243,6 +254,7 @@ public class MutableRealVector implements RealVector {
 
     /**
      * {@inheritDoc}
+     *
      * @param s Scalar to divide this vector by
      * @return The resulting vector
      * @throws ArithmeticException When the denominator {@code s} is zero
@@ -261,10 +273,11 @@ public class MutableRealVector implements RealVector {
 
     /**
      * {@inheritDoc}
+     *
      * @param v The vector to add to this vector
      * @return The resulting vector
      * @throws IllegalArgumentException When the provided vector {@code v}'s length
-     * is different from this vector's length
+     *                                  is different from this vector's length
      */
     @Nonnull
     @Override
@@ -284,10 +297,11 @@ public class MutableRealVector implements RealVector {
 
     /**
      * {@inheritDoc}
+     *
      * @param v The vector to subtract from this vector
      * @return The resulting vector
      * @throws IllegalArgumentException When the provided vector {@code v}'s length
-     * is different from this vector's length
+     *                                  is different from this vector's length
      */
     @Nonnull
     @Override
@@ -313,7 +327,7 @@ public class MutableRealVector implements RealVector {
      * caused by the mutability of this vector and the non-primitive nature of {@link RealNumber}.
      * </p>
      * <p>
-     *     Custom behavior can be implemented by extending this class.
+     * Custom behavior can be implemented by extending this class.
      * </p>
      *
      * @param v The vector to multiply this vector by
@@ -328,10 +342,11 @@ public class MutableRealVector implements RealVector {
 
     /**
      * {@inheritDoc}
+     *
      * @param v The vector to get the dot product between
      * @return The dot product of the two vectors
      * @throws IllegalArgumentException When the provided vector {@code v}'s length
-     * is different from this vector's length
+     *                                  is different from this vector's length
      */
     @Nonnull
     @Override
@@ -355,10 +370,11 @@ public class MutableRealVector implements RealVector {
 
     /**
      * {@inheritDoc}
+     *
      * @param v The vector to get the minimum vector of
      * @return The minimum vector
      * @throws IllegalArgumentException When the provided vector {@code v}'s length
-     * is different from this vector's length
+     *                                  is different from this vector's length
      */
     @Nonnull
     @Override
@@ -378,10 +394,11 @@ public class MutableRealVector implements RealVector {
 
     /**
      * {@inheritDoc}
+     *
      * @param v The vector to get the maximum vector of
      * @return The maximum vector
      * @throws IllegalArgumentException When the provided vector {@code v}'s length
-     * is different from this vector's length
+     *                                  is different from this vector's length
      */
     @Nonnull
     @Override
@@ -401,11 +418,12 @@ public class MutableRealVector implements RealVector {
 
     /**
      * {@inheritDoc}
+     *
      * @param min The minimum allowed values
      * @param max The maximum allowed values
      * @return The clamped vector
      * @throws IllegalArgumentException When the provided vector {@code min} or {@code max}'s length
-     * is different from this vector's length
+     *                                  is different from this vector's length
      */
     @Nonnull
     @Override
@@ -429,6 +447,7 @@ public class MutableRealVector implements RealVector {
 
     /**
      * {@inheritDoc}
+     *
      * @param operator The operator to apply to each component of this vector
      * @return The resulting vector
      */
@@ -446,6 +465,7 @@ public class MutableRealVector implements RealVector {
 
     /**
      * {@inheritDoc}
+     *
      * @return The normalized vector
      * @throws UnsupportedOperationException When the magnitude of this vector is zero
      */
@@ -461,6 +481,7 @@ public class MutableRealVector implements RealVector {
 
     /**
      * {@inheritDoc}
+     *
      * @return The negation of this vector
      */
     @Nonnull
@@ -471,10 +492,11 @@ public class MutableRealVector implements RealVector {
 
     /**
      * {@inheritDoc}
+     *
      * @param v The vector to get the distance to
      * @return The distance between the two vectors
      * @throws IllegalArgumentException When the provided vector {@code min} or {@code max}'s length
-     * is different from this vector's length
+     *                                  is different from this vector's length
      */
     @Nonnull
     @Override
@@ -484,10 +506,11 @@ public class MutableRealVector implements RealVector {
 
     /**
      * {@inheritDoc}
+     *
      * @param v The vector to get the squared distance to
      * @return The squared distance between the two vectors
      * @throws IllegalArgumentException When the provided vector {@code min} or {@code max}'s length
-     * is different from this vector's length
+     *                                  is different from this vector's length
      */
     @Nonnull
     @Override
@@ -497,6 +520,7 @@ public class MutableRealVector implements RealVector {
 
     /**
      * {@inheritDoc}
+     *
      * @return The {@link MutableVector} representation of this vector
      */
     @Nonnull
@@ -517,6 +541,7 @@ public class MutableRealVector implements RealVector {
 
     /**
      * {@inheritDoc}
+     *
      * @param obj The object to compare to
      * @return {@code true} if the given object is a vector, and the components and length are equal
      */

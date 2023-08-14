@@ -1,7 +1,6 @@
 package civitas.celestis;
 
 import civitas.celestis.graphics.color.RichColor;
-import civitas.celestis.math.integer.IntMatrix;
 import civitas.celestis.ui.component.UIComponent;
 import civitas.celestis.ui.event.component.ComponentAddedEvent;
 import civitas.celestis.ui.image.RichImage;

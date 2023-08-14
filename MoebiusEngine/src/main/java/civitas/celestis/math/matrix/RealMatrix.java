@@ -1,22 +1,22 @@
 package civitas.celestis.math.matrix;
 
-import civitas.celestis.math.Numbers;
 import civitas.celestis.math.Numeric;
 import civitas.celestis.math.integer.IntVector2;
 import civitas.celestis.math.natural.NaturalVector2;
-import civitas.celestis.math.vector.*;
+import civitas.celestis.math.real.*;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.function.UnaryOperator;
 
 /**
- * A two-dimensional array of scalars. Matrices can be used for various purposes.
+ * A two-dimensional array of {@link RealNumber} scalars. Matrices can be used for various purposes.
  * A matrix cannot be resized after creation. Resizing requires re-instantiation.
  */
-public class Matrix implements Numeric, Iterable<Double> {
+public class RealMatrix implements Numeric, Iterable<RealNumber> {
     //
     // Constructors
     //
@@ -27,18 +27,24 @@ public class Matrix implements Numeric, Iterable<Double> {
      * @param rows    The number of rows
      * @param columns The number of columns
      */
-    public Matrix(int rows, int columns) {
+    public RealMatrix(int rows, int columns) {
         this.rows = rows;
         this.columns = columns;
-        this.values = new double[rows][columns];
+        this.values = new RealNumber[rows][columns];
+
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < columns; c++) {
+                values[r][c] = RealNumber.ZERO; // Ensures that the array is non-null
+            }
+        }
     }
 
     /**
      * Creates a new matrix.
      *
-     * @param values The values to contain in this matrix.
+     * @param values The values to contain in this matrix
      */
-    public Matrix(@Nonnull double[][] values) {
+    public RealMatrix(@Nonnull RealNumber[][] values) {
         if (values.length < 1) {
             this.rows = 0;
             this.columns = 0;
@@ -47,11 +53,11 @@ public class Matrix implements Numeric, Iterable<Double> {
             this.columns = values[0].length;
         }
 
-        this.values = new double[rows][columns];
+        this.values = new RealNumber[rows][columns];
 
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < columns; c++) {
-                this.values[r][c] = Numbers.requireFinite(values[r][c]);
+                this.values[r][c] = Objects.requireNonNull(values[r][c]);
             }
         }
     }
@@ -61,7 +67,7 @@ public class Matrix implements Numeric, Iterable<Double> {
     //
 
     @Nonnull
-    private final double[][] values;
+    private final RealNumber[][] values;
     private final int rows, columns;
 
     //
@@ -75,8 +81,8 @@ public class Matrix implements Numeric, Iterable<Double> {
      * @return An array of values of this matrix
      */
     @Nonnull
-    public final double[] values() {
-        final double[] valueArray = new double[length()];
+    public final RealNumber[] values() {
+        final RealNumber[] valueArray = new RealNumber[length()];
 
         for (int r = 0; r < rows; r++) {
             if (columns >= 0) System.arraycopy(values[r], 0, valueArray, r * columns, columns);
@@ -93,7 +99,8 @@ public class Matrix implements Numeric, Iterable<Double> {
      * @return The value at the position
      * @throws IndexOutOfBoundsException When either of the indexes are out of bounds
      */
-    public final double get(int r, int c) throws IndexOutOfBoundsException {
+    @Nonnull
+    public final RealNumber get(int r, int c) throws IndexOutOfBoundsException {
         return values[r][c];
     }
 
@@ -104,7 +111,7 @@ public class Matrix implements Numeric, Iterable<Double> {
      * @return The value at the position
      * @throws IndexOutOfBoundsException When the index is out of bounds
      */
-    public final double get(@Nonnull IntVector2 i) throws IndexOutOfBoundsException {
+    public final RealNumber get(@Nonnull IntVector2 i) throws IndexOutOfBoundsException {
         return get(i.x(), i.y());
     }
 
@@ -116,8 +123,8 @@ public class Matrix implements Numeric, Iterable<Double> {
      * @param v The value to assign
      * @throws IndexOutOfBoundsException When either of the indexes are out of bounds
      */
-    public final void set(int r, int c, double v) throws IndexOutOfBoundsException {
-        values[r][c] = Numbers.requireFinite(v);
+    public final void set(int r, int c, @Nonnull RealNumber v) throws IndexOutOfBoundsException {
+        values[r][c] = Objects.requireNonNull(v);
     }
 
     /**
@@ -127,8 +134,8 @@ public class Matrix implements Numeric, Iterable<Double> {
      * @param v The value to assign
      * @throws IndexOutOfBoundsException When the index is out of bounds
      */
-    public final void set(@Nonnull IntVector2 i, double v) throws IndexOutOfBoundsException {
-        set(i.x(), i.y(), v);
+    public final void set(@Nonnull IntVector2 i, @Nonnull RealNumber v) throws IndexOutOfBoundsException {
+        set(i.x(), i.y(), Objects.requireNonNull(v));
     }
 
     //
@@ -183,11 +190,9 @@ public class Matrix implements Numeric, Iterable<Double> {
      * @return An iterator of all values of this matrix
      */
     @Override
-    @Nonnull
-    public Iterator<Double> iterator() {
+    public Iterator<RealNumber> iterator() {
         return Arrays.stream(values()).iterator();
     }
-
 
     //
     // Equality
@@ -197,17 +202,17 @@ public class Matrix implements Numeric, Iterable<Double> {
      * Checks for equality between this matrix and the specified object {@code obj}.
      *
      * @param obj The object to compare to
-     * @return {@code true} if the object is an instance of {@link Matrix} and the dimensions and values are equal
+     * @return {@code ture} if ths object is an instance of {@link RealMatrix} and the dimensions and values are equal
      */
     @Override
     public boolean equals(@Nullable Object obj) {
         if (obj == null) return false;
-        if (!(obj instanceof Matrix m)) return false;
+        if (!(obj instanceof RealMatrix m)) return false;
         if (rows != m.rows || columns != m.columns) return false;
 
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < columns; c++) {
-                if (values[r][c] != m.values[r][c]) return false;
+                if (!values[r][c].equals(m.values[r][c])) return false;
             }
         }
 
@@ -225,12 +230,12 @@ public class Matrix implements Numeric, Iterable<Double> {
      * @return The resulting matrix
      */
     @Nonnull
-    public Matrix add(double s) {
-        final Matrix result = new Matrix(rows, columns);
+    public RealMatrix add(@Nonnull RealNumber s) {
+        final RealMatrix result = new RealMatrix(rows, columns);
 
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < columns; c++) {
-                result.values[r][c] = Numbers.requireFinite(values[r][c] + s);
+                result.values[r][c] = values[r][c].add(s);
             }
         }
 
@@ -244,12 +249,12 @@ public class Matrix implements Numeric, Iterable<Double> {
      * @return The resulting matrix
      */
     @Nonnull
-    public Matrix subtract(double s) {
-        final Matrix result = new Matrix(rows, columns);
+    public RealMatrix subtract(@Nonnull RealNumber s) {
+        final RealMatrix result = new RealMatrix(rows, columns);
 
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < columns; c++) {
-                result.values[r][c] = Numbers.requireFinite(values[r][c] - s);
+                result.values[r][c] = values[r][c].subtract(s);
             }
         }
 
@@ -263,12 +268,12 @@ public class Matrix implements Numeric, Iterable<Double> {
      * @return The resulting matrix
      */
     @Nonnull
-    public Matrix multiply(double s) {
-        final Matrix result = new Matrix(rows, columns);
+    public RealMatrix multiply(@Nonnull RealNumber s) {
+        final RealMatrix result = new RealMatrix(rows, columns);
 
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < columns; c++) {
-                result.values[r][c] = Numbers.requireFinite(values[r][c] * s);
+                result.values[r][c] = values[r][c].multiply(s);
             }
         }
 
@@ -283,16 +288,12 @@ public class Matrix implements Numeric, Iterable<Double> {
      * @throws ArithmeticException When the denominator {@code s} is zero
      */
     @Nonnull
-    public Matrix divide(double s) throws ArithmeticException {
-        if (s == 0) {
-            throw new ArithmeticException("Cannot divide by zero.");
-        }
-
-        final Matrix result = new Matrix(rows, columns);
+    public RealMatrix divide(@Nonnull RealNumber s) throws ArithmeticException {
+        final RealMatrix result = new RealMatrix(rows, columns);
 
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < columns; c++) {
-                result.values[r][c] = Numbers.requireFinite(values[r][c] / s);
+                result.values[r][c] = values[r][c].divide(s);
             }
         }
 
@@ -311,7 +312,7 @@ public class Matrix implements Numeric, Iterable<Double> {
      * @throws ArithmeticException When the length of the vector is not equal to the number of columns of this matrix
      */
     @Nonnull
-    public Vector multiply(@Nonnull Vector v) throws ArithmeticException {
+    public RealVector multiply(@Nonnull RealVector v) throws ArithmeticException {
         if (columns != v.length()) {
             throw new ArithmeticException("Cannot perform vector-matrix multiplication when the length of the vector != number of columns.");
         }
@@ -320,19 +321,19 @@ public class Matrix implements Numeric, Iterable<Double> {
             throw new ArithmeticException("This matrix is not a square matrix.");
         }
 
-        final double[] result = new double[v.length()];
+        final RealNumber[] result = new RealNumber[v.length()];
 
         for (int r = 0; r < rows; r++) {
-            double sum = 0;
+            RealNumber sum = RealNumber.ZERO;
 
             for (int c = 0; c < columns; c++) {
-                sum += values[r][c] * v.valueAt(c);
+                sum = sum.add(values[r][c].multiply(v.valueAt(c)));
             }
 
             result[r] = sum;
         }
 
-        return Vector.of(result);
+        return RealVector.of(result);
     }
 
     /**
@@ -343,8 +344,8 @@ public class Matrix implements Numeric, Iterable<Double> {
      * @throws ArithmeticException When the length of the vector is not equal to the number of columns of this matrix
      */
     @Nonnull
-    public Vector2 multiply(@Nonnull Vector2 v) throws ArithmeticException {
-        return (Vector2) multiply((Vector) v);
+    public RealVector2 multiply(@Nonnull RealVector2 v) throws ArithmeticException {
+        return (RealVector2) multiply((RealVector) v);
     }
 
     /**
@@ -355,8 +356,8 @@ public class Matrix implements Numeric, Iterable<Double> {
      * @throws ArithmeticException When the length of the vector is not equal to the number of columns of this matrix
      */
     @Nonnull
-    public Vector3 multiply(@Nonnull Vector3 v) throws ArithmeticException {
-        return (Vector3) multiply((Vector) v);
+    public RealVector3 multiply(@Nonnull RealVector3 v) throws ArithmeticException {
+        return (RealVector3) multiply((RealVector) v);
     }
 
     /**
@@ -367,25 +368,14 @@ public class Matrix implements Numeric, Iterable<Double> {
      * @throws ArithmeticException When the length of the vector is not equal to the number of columns of this matrix
      */
     @Nonnull
-    public Vector4 multiply(@Nonnull Vector4 v) throws ArithmeticException {
-        return (Vector4) multiply((Vector) v);
-    }
-
-    /**
-     * Performs vector-matrix multiplication.
-     *
-     * @param v The vector to multiply with this matrix
-     * @return The product of the operation
-     * @throws ArithmeticException When the length of the vector is not equal to the number of columns of this matrix
-     */
-    @Nonnull
-    public Vector5 multiply(@Nonnull Vector5 v) throws ArithmeticException {
-        return (Vector5) multiply((Vector) v);
+    public RealVector4 multiply(@Nonnull RealVector4 v) throws ArithmeticException {
+        return (RealVector4) multiply((RealVector) v);
     }
 
     //
     // Matrix Arithmetic
     //
+
 
     /**
      * Adds another matrix to this matrix.
@@ -395,16 +385,16 @@ public class Matrix implements Numeric, Iterable<Double> {
      * @throws ArithmeticException When the matrices' dimensions do not match
      */
     @Nonnull
-    public Matrix add(@Nonnull Matrix m) throws ArithmeticException {
+    public RealMatrix add(@Nonnull RealMatrix m) throws ArithmeticException {
         if (!size().equals(m.size())) {
             throw new ArithmeticException("Matrix dimensions must match for this operation.");
         }
 
-        final Matrix result = new Matrix(rows, columns);
+        final RealMatrix result = new RealMatrix(rows, columns);
 
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < columns; c++) {
-                result.values[r][c] = values[r][c] + m.values[r][c];
+                result.values[r][c] = values[r][c].add(m.values[r][c]);
             }
         }
 
@@ -419,16 +409,16 @@ public class Matrix implements Numeric, Iterable<Double> {
      * @throws ArithmeticException When the matrices' dimensions do not match
      */
     @Nonnull
-    public Matrix subtract(@Nonnull Matrix m) throws ArithmeticException {
+    public RealMatrix subtract(@Nonnull RealMatrix m) throws ArithmeticException {
         if (!size().equals(m.size())) {
             throw new ArithmeticException("Matrix dimensions must match for this operation.");
         }
 
-        final Matrix result = new Matrix(rows, columns);
+        final RealMatrix result = new RealMatrix(rows, columns);
 
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < columns; c++) {
-                result.values[r][c] = values[r][c] - m.values[r][c];
+                result.values[r][c] = values[r][c].subtract(m.values[r][c]);
             }
         }
 
@@ -443,19 +433,19 @@ public class Matrix implements Numeric, Iterable<Double> {
      * @throws ArithmeticException When the matrices' dimensions are incompatible
      */
     @Nonnull
-    public Matrix multiply(@Nonnull Matrix m) throws ArithmeticException {
+    public RealMatrix multiply(@Nonnull RealMatrix m) throws ArithmeticException {
         if (columns != m.rows) {
             throw new ArithmeticException("Matrix dimensions are incompatible for multiplication.");
         }
 
-        final Matrix result = new Matrix(rows, columns);
+        final RealMatrix result = new RealMatrix(rows, columns);
 
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < m.columns; c++) {
-                double sum = 0;
+                RealNumber sum = RealNumber.ZERO;
 
                 for (int i = 0; i < columns; i++) {
-                    sum += values[r][i] * m.values[i][c];
+                    sum = sum.add(values[r][i].multiply(m.values[i][c]));
                 }
                 result.values[r][c] = sum;
             }
@@ -475,12 +465,12 @@ public class Matrix implements Numeric, Iterable<Double> {
      * @return The resulting matrix
      */
     @Nonnull
-    public Matrix apply(@Nonnull UnaryOperator<Double> operator) {
-        final Matrix result = new Matrix(rows, columns);
+    public RealMatrix apply(@Nonnull UnaryOperator<RealNumber> operator) {
+        final RealMatrix result = new RealMatrix(rows, columns);
 
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < columns; c++) {
-                result.values[r][c] = Numbers.requireFinite(operator.apply(values[r][c]));
+                result.values[r][c] = Objects.requireNonNull(operator.apply(values[r][c]));
             }
         }
 
@@ -493,8 +483,26 @@ public class Matrix implements Numeric, Iterable<Double> {
      * @return The negation of this matrix
      */
     @Nonnull
-    public Matrix negate() {
-        return multiply(-1);
+    public RealMatrix negate() {
+        return multiply(new RealNumber(-1));
+    }
+
+    /**
+     * Converts this matrix into a {@code double} matrix.
+     *
+     * @return The {@link Matrix} representation of this matrix
+     */
+    @Nonnull
+    public Matrix doubleValue() {
+        final Matrix result = new Matrix(rows, columns);
+
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < columns; c++) {
+                result.set(r, c, values[r][c].doubleValue());
+            }
+        }
+
+        return result;
     }
 
     //
@@ -510,8 +518,8 @@ public class Matrix implements Numeric, Iterable<Double> {
      * @throws IllegalArgumentException When the string contains non-finite values
      */
     @Nonnull
-    public static Matrix parseMatrix(@Nonnull String s) throws IllegalArgumentException {
-        final String[] lines = s.replaceAll("Matrix\\{\n|}", "").split("\n");
+    public static RealMatrix parseMatrix(@Nonnull String s) throws IllegalArgumentException {
+        final String[] lines = s.replaceAll("RealMatrix\\{\n|}", "").split("\n");
 
         final int rows = lines.length;
         final int columns;
@@ -521,18 +529,18 @@ public class Matrix implements Numeric, Iterable<Double> {
             throw new NumberFormatException("String is not a matrix.");
         }
 
-        final double[][] values = new double[rows][columns];
+        final RealNumber[][] values = new RealNumber[rows][columns];
 
         for (int r = 0; r < lines.length; r++) {
             final String cleanLine = lines[r].replaceAll("\\[|]", "").trim();
             final String[] elements = cleanLine.split(", ");
 
             for (int c = 0; c < columns; c++) {
-                values[r][c] = Double.parseDouble(elements[c]);
+                values[r][c] = RealNumber.parseNumber(elements[c]);
             }
         }
 
-        return new Matrix(values);
+        return new RealMatrix(values);
     }
 
     /**
@@ -545,7 +553,7 @@ public class Matrix implements Numeric, Iterable<Double> {
     public String toString() {
         final StringBuilder out = new StringBuilder();
 
-        out.append("Matrix{\n");
+        out.append("RealMatrix{\n");
 
         for (int r = 0; r < rows; r++) {
             out.append("  ").append(Arrays.toString(values[r])).append("\n");

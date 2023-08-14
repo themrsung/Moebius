@@ -1,8 +1,8 @@
 package civitas.celestis.ui.image;
 
 import civitas.celestis.graphics.color.RichColor;
-import civitas.celestis.math.integer.IntMatrix;
 import civitas.celestis.math.integer.IntVector2;
+import civitas.celestis.math.matrix.IntMatrix;
 import civitas.celestis.math.natural.NaturalVector2;
 import civitas.celestis.math.vector.Vector2;
 import civitas.celestis.ui.filter.ImageFilter;

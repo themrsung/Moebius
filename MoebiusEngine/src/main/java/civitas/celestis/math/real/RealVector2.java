@@ -1,7 +1,6 @@
 package civitas.celestis.math.real;
 
 import civitas.celestis.math.vector.Vector2;
-import civitas.celestis.math.vector.Vector3;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
@@ -305,7 +304,7 @@ public class RealVector2 implements RealVector {
      * @param v The vector to multiply this vector by
      * @return The product of the two vectors
      * @throws IllegalArgumentException When the provided vector {@code v}'s length
-     *                                   is different from this vector's length
+     *                                  is different from this vector's length
      */
     @Nonnull
     @Override

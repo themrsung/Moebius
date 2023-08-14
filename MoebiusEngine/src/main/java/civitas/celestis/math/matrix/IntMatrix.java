@@ -1,6 +1,10 @@
-package civitas.celestis.math.integer;
+package civitas.celestis.math.matrix;
 
 import civitas.celestis.math.Numeric;
+import civitas.celestis.math.integer.IntVector;
+import civitas.celestis.math.integer.IntVector2;
+import civitas.celestis.math.integer.IntVector3;
+import civitas.celestis.math.integer.IntVector4;
 import civitas.celestis.math.vector.Vector;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;

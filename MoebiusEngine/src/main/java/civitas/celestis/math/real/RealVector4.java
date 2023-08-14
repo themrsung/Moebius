@@ -1,6 +1,5 @@
 package civitas.celestis.math.real;
 
-import civitas.celestis.math.vector.Vector3;
 import civitas.celestis.math.vector.Vector4;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
@@ -328,7 +327,7 @@ public class RealVector4 implements RealVector {
             throw new IllegalArgumentException("The given vector's length is different from this vector's length.");
         }
 
-        return new RealVector4(w.add(v.valueAt(0)),x.add(v.valueAt(1)), y.add(v.valueAt(2)), z.add(v.valueAt(3)));
+        return new RealVector4(w.add(v.valueAt(0)), x.add(v.valueAt(1)), y.add(v.valueAt(2)), z.add(v.valueAt(3)));
     }
 
     /**
@@ -360,8 +359,8 @@ public class RealVector4 implements RealVector {
      *
      * @param v The vector to multiply this vector by
      * @return This product of the two vectors
-     * @throws IllegalArgumentException  When the provided vector {@code v}'s length
-     *                                   is different from this vector's length
+     * @throws IllegalArgumentException When the provided vector {@code v}'s length
+     *                                  is different from this vector's length
      */
     @Nonnull
     @Override
@@ -420,6 +419,7 @@ public class RealVector4 implements RealVector {
 
     /**
      * Multiplies this vector by the provided vector {@code v}.
+     *
      * @param v The vector of which to multiply this vector by
      * @return The quaternion left-product of the two vectors
      */

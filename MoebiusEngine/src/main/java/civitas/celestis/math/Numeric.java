@@ -6,9 +6,10 @@ import civitas.celestis.graphics.color.RichColor;
 import civitas.celestis.math.complex.Complex;
 import civitas.celestis.math.complex.Quaternion;
 import civitas.celestis.math.fraction.Fraction;
-import civitas.celestis.math.integer.IntMatrix;
 import civitas.celestis.math.integer.IntVector;
+import civitas.celestis.math.matrix.IntMatrix;
 import civitas.celestis.math.matrix.Matrix;
+import civitas.celestis.math.matrix.RealMatrix;
 import civitas.celestis.math.natural.NaturalVector;
 import civitas.celestis.math.real.RealNumber;
 import civitas.celestis.math.real.RealVector;
@@ -107,6 +108,17 @@ public interface Numeric {
         }
     }
 
+    /**
+     * Creates a new matrix.
+     *
+     * @param values The values to use
+     * @return The constructed matrix
+     */
+    @Nonnull
+    static RealMatrix of(@Nonnull RealNumber[][] values) {
+        return new RealMatrix(values);
+    }
+
     //
     // Parser
     //
@@ -130,6 +142,9 @@ public interface Numeric {
         try {return RichColor.parseColor(input);} catch (final Exception ignored) {}
         try {return RealNumber.parseNumber(input);} catch (final Exception ignored) {}
         try {return RealVector.parseVector(input);} catch (final Exception ignored) {}
+        try {return Matrix.parseMatrix(input);} catch (final Exception ignored) {}
+        try {return IntMatrix.parseMatrix(input);} catch (final Exception ignored) {}
+        try {return RealMatrix.parseMatrix(input);} catch (final Exception ignored) {}
 
         throw new NumberFormatException("The given string is not a Numeric.");
     }
