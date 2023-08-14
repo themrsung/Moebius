@@ -10,12 +10,22 @@ public class Benchmark {
         final RichColor c1 = RichColor.TRANSPARENT_BLACK;
         final RichColor c2 = RichColor.WHITE;
 
+        final double[] numbers = new double[1000000];
+        final RealNumber[] rn = new RealNumber[1000000];
+
+        for (int i = 0; i < 1000000; i++) {
+            numbers[i] = Numbers.random(0, 10000);
+        }
+
+        for (int i = 0; i < 1000000; i++) {
+            rn[i] = new RealNumber(Numbers.random(0, 10000));
+        }
+
         final long t1 = System.currentTimeMillis();
         // Start of benchmark
 
         for (int i = 0; i < 1000000; i++) {
-            new RealNumber(Numbers.random(0, 10000)).sqrt();
-//            Math.sqrt(Numbers.random(0, 10000));
+            final RealNumber x = rn[i].multiply(rn[i]);
         }
 
         // End of benchmark

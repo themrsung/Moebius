@@ -8,6 +8,10 @@ import civitas.celestis.math.vector.Vector2;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
+
 /**
  * A scientific notation of a number using two {@code double}s.
  * The format is "{@code 2^x * y}".
@@ -36,6 +40,11 @@ public class RealNumber extends Vector2 implements Comparable<RealNumber> {
      * The minimum possible positive value a real number can have without being zero.
      */
     public static final RealNumber MIN_VALUE = new RealNumber(Double.MIN_VALUE, Double.MIN_VALUE);
+
+    /**
+     * The {@link RealNumber} equivalent of {@link Double#MAX_VALUE}.
+     */
+    public static final RealNumber DOUBLE_MAX_VALUE = new RealNumber(Double.MAX_VALUE);
 
     /**
      * The maximum possible positive value a real number can safely represent.
@@ -91,6 +100,20 @@ public class RealNumber extends Vector2 implements Comparable<RealNumber> {
      * The number {@code 10}.
      */
     public static final RealNumber TEN = new RealNumber(10);
+    /**
+     * A mathematical context object with 100 digits of precision.
+     */
+    public static final MathContext PRECISION_100 = new MathContext(100, RoundingMode.HALF_UP);
+
+    /**
+     * A mathematical context object with 500 digits of precision.
+     */
+    public static final MathContext PRECISION_500 = new MathContext(500, RoundingMode.HALF_UP);
+
+    /**
+     * A mathematical context object with 1,000 digits of precision.
+     */
+    public static final MathContext PRECISION_1000 = new MathContext(1000, RoundingMode.HALF_UP);
 
     //
     // Static Utilities
@@ -130,6 +153,15 @@ public class RealNumber extends Vector2 implements Comparable<RealNumber> {
      */
     public RealNumber(double exp, double mantissa) {
         super(exp, mantissa);
+    }
+
+    /**
+     * Creates a new real number.
+     *
+     * @param f The fraction of which to get the value from
+     */
+    public RealNumber(@Nonnull Fraction f) {
+        this(f.doubleValue());
     }
 
     /**
@@ -206,30 +238,61 @@ public class RealNumber extends Vector2 implements Comparable<RealNumber> {
     // Arithmetic
     //
 
+    /**
+     * Adds a scalar to this number.
+     *
+     * @param s Scalar to add to this number
+     * @return The resulting number
+     */
     @Nonnull
     @Override
     public RealNumber add(double s) {
         return add(new RealNumber(s));
     }
 
+    /**
+     * Subtracts a scalar from this number.
+     *
+     * @param s Scalar to subtract from this number
+     * @return The resulting number
+     */
     @Nonnull
     @Override
     public RealNumber subtract(double s) {
         return subtract(new RealNumber(s));
     }
 
+    /**
+     * Multiplies this number by a scalar.
+     *
+     * @param s Scalar to multiply this number by
+     * @return The resulting number
+     */
     @Nonnull
     @Override
     public RealNumber multiply(double s) {
-        return multiply(new RealNumber(s));
+        return twoFold(Math.log(s) * Numbers.INVERSE_LOG_2);
     }
 
+    /**
+     * Divides this number by a scalar.
+     *
+     * @param s Scalar to divide this number by
+     * @return The resulting number
+     * @throws ArithmeticException When the denominator {@code s} is zero
+     */
     @Nonnull
     @Override
     public RealNumber divide(double s) throws ArithmeticException {
         return divide(new RealNumber(s));
     }
 
+    /**
+     * Adds a number to this number.
+     *
+     * @param n The number to add to this number
+     * @return The resulting number
+     */
     @Nonnull
     public RealNumber add(@Nonnull RealNumber n) {
         // Determine the larger exponent
@@ -256,6 +319,12 @@ public class RealNumber extends Vector2 implements Comparable<RealNumber> {
         return new RealNumber(exponent, mantissa);
     }
 
+    /**
+     * Subtracts a number from this number.
+     *
+     * @param n The number to subtract from this number
+     * @return The resulting number
+     */
     @Nonnull
     public RealNumber subtract(@Nonnull RealNumber n) {
         // Determine the larger exponent
@@ -282,6 +351,12 @@ public class RealNumber extends Vector2 implements Comparable<RealNumber> {
         return new RealNumber(exponent, mantissa);
     }
 
+    /**
+     * Multiplies this number by a number.
+     *
+     * @param n The number to multiply this number by
+     * @return The resulting number
+     */
     @Nonnull
     public RealNumber multiply(@Nonnull RealNumber n) {
         // Product of mantissas
@@ -300,6 +375,12 @@ public class RealNumber extends Vector2 implements Comparable<RealNumber> {
         return new RealNumber(exp, mantissa);
     }
 
+    /**
+     * Divides this number by a number.
+     *
+     * @param n The number to divide this number by
+     * @return The resulting number
+     */
     @Nonnull
     public RealNumber divide(@Nonnull RealNumber n) {
         // Divide the mantissas
@@ -324,7 +405,7 @@ public class RealNumber extends Vector2 implements Comparable<RealNumber> {
      * @return {@code this * 2}
      */
     @Nonnull
-    public RealNumber pow2() {
+    public RealNumber twoFold() {
         return new RealNumber(x + 1, y);
     }
 
@@ -336,7 +417,7 @@ public class RealNumber extends Vector2 implements Comparable<RealNumber> {
      * @return {@code this * 2^n}
      */
     @Nonnull
-    public RealNumber pow2(double n) {
+    public RealNumber twoFold(double n) {
         return new RealNumber(x + n, y);
     }
 
@@ -379,6 +460,85 @@ public class RealNumber extends Vector2 implements Comparable<RealNumber> {
 
         return guess;
     }
+
+    /**
+     * Applies the {@link RealNumber#sqrt()} function {@code n} times.
+     *
+     * @param n The number of times to square root
+     * @return The cumulative square root of this number
+     */
+    @Nonnull
+    public RealNumber sqrt(long n) {
+        RealNumber root = this;
+
+        for (long i = 0; i < n; i++) {
+            root = root.sqrt();
+        }
+
+        return root;
+    }
+
+    //
+    // Clamping
+    //
+
+    /**
+     * Returns the minimum number between this number and {@code n}.
+     *
+     * @param n The number to compare to
+     * @return The smaller number
+     */
+    @Nonnull
+    public RealNumber min(@Nonnull RealNumber n) {
+        return compareTo(n) >= 0 ? this : n;
+    }
+
+    /**
+     * Returns the maximum number between this number and {@code n}.
+     *
+     * @param n The number to compare to
+     * @return The smaller number
+     */
+    @Nonnull
+    public RealNumber max(@Nonnull RealNumber n) {
+        return compareTo(n) <= 0 ? this : n;
+    }
+
+    /**
+     * Clamps this number to respect the given boundaries.
+     *
+     * @param min The minimum allowed value
+     * @param max The maximum allowed value
+     * @return The clamped number
+     */
+    @Nonnull
+    public RealNumber clamp(@Nonnull RealNumber min, @Nonnull RealNumber max) {
+        if (compareTo(min) < 0) {
+            return min;
+        }
+
+        if (compareTo(max) > 0) {
+            return max;
+        }
+
+        return this;
+    }
+
+    //
+    // Utility
+    //
+
+    /**
+     * Negates this number.
+     *
+     * @return The negation of this number
+     */
+    @Nonnull
+    @Override
+    public RealNumber negate() {
+        return new RealNumber(x, -y);
+    }
+
 
     //
     // Comparison
@@ -496,37 +656,62 @@ public class RealNumber extends Vector2 implements Comparable<RealNumber> {
      */
     @Nonnull
     public static RealNumber parseNumber(@Nonnull String input) throws IllegalArgumentException {
-        if (!input.startsWith("RealNumber{")) {
+        if (!input.contains("e")) {
             throw new NumberFormatException("The provided string does not represent a RealNumber.");
         }
 
-        final String cleanInput = input.replaceAll("RealNumber\\{|}", "");
-        final String[] valueStrings = cleanInput.split(", ");
-        final double[] values = {Double.NaN, Double.NaN};
-
-        for (final String valueString : valueStrings) {
-            final String[] split = valueString.split("=");
-            values[switch (split[0]) {
-                case "e" -> 0;
-                case "m" -> 1;
-                default -> throw new NumberFormatException("The provided string does not represent a RealNumber.");
-            }] = Double.parseDouble(split[1]);
+        final String[] valueStrings = input.split("e");
+        if (valueStrings.length != 2) {
+            throw new NumberFormatException("The provided string does not represent a RealNumber.");
         }
 
-        return new RealNumber(values);
+        return new RealNumber(Double.parseDouble(valueStrings[1]), Double.parseDouble(valueStrings[0]));
     }
 
     /**
      * {@inheritDoc}
      *
-     * @return The string representation of this vector
+     * @return The string representation of this number
      */
     @Override
     @Nonnull
     public String toString() {
-        return "RealNumber{" +
-                "e=" + x +
-                ", m=" + y +
-                '}';
+        return y + "e" + x;
     }
+
+    /**
+     * Converts this number into a format "{@code 0.####...}".
+     * This will infinitely calculate the decimal points.
+     * This uses the math context {@link MathContext#DECIMAL128}.
+     *
+     * @return The human-readable string representation of this number
+     */
+    @Nonnull
+    public String toReadableString() {return toReadableString(MathContext.DECIMAL128);}
+
+    /**
+     * Converts this number into a format "{@code 0.####...}".
+     * This will infinitely calculate the decimal points.
+     *
+     * @param context The mathematical context to use when calculating the value
+     * @return The human-readable string representation of this number
+     * @see RealNumber#PRECISION_100
+     * @see RealNumber#PRECISION_500
+     * @see RealNumber#PRECISION_1000
+     */
+    @Nonnull
+    public String toReadableString(@Nonnull MathContext context) {
+        if (compareTo(DOUBLE_MAX_VALUE) <= 0) {
+            // No need to use BigDecimal for these values
+            return Double.toString(doubleValue());
+        }
+
+        final BigDecimal mantissa = BigDecimal.valueOf(y);
+        final BigDecimal exponentiation = BigDecimal.valueOf(2).pow((int) x, context);
+
+        final BigDecimal result = mantissa.multiply(exponentiation);
+
+        return result.toPlainString();
+    }
+
 }

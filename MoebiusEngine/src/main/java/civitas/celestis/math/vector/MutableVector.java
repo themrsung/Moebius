@@ -122,7 +122,7 @@ public class MutableVector implements Vector {
     }
 
     /**
-     * Resizes this vector to hold
+     * Resizes this vector to hold {@code size} amount of values.
      *
      * @param size The new size of this vector
      */

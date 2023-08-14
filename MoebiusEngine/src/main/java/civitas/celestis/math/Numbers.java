@@ -50,6 +50,15 @@ public final class Numbers {
      */
     private static final double FIFTH_MARGIN_OF_SIGNIFICANCE = MARGIN_OF_SIGNIFICANCE / 5;
 
+    /**
+     * The logarithm of two.
+     */
+    public static final double LOG_2 = Math.log(2);
+    /**
+     * The inverse of {@code log(2)}.
+     */
+    public static final double INVERSE_LOG_2 = 1 / LOG_2;
+
     //
     // Constraints
     //

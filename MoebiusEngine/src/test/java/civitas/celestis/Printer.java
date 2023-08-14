@@ -1,15 +1,13 @@
 package civitas.celestis;
 
-import civitas.celestis.math.Numbers;
-import civitas.celestis.math.Numeric;
-import civitas.celestis.math.fraction.Fraction;
+import civitas.celestis.math.real.MutableRealVector;
 import civitas.celestis.math.real.RealNumber;
 
 public class Printer {
     public static void main(String[] args) {
-        final RealNumber n1 = new RealNumber(3.14);
-        final Fraction f = new Fraction(3.14);
+        final MutableRealVector v = new MutableRealVector(RealNumber.ONE, RealNumber.TWO, RealNumber.THREE);
 
-        System.out.println(n1.equals(f));
+        System.out.println(MutableRealVector.parseVector(v.toString()));
+        System.out.println(new RealNumber(2.34, 12.320).toReadableString());
     }
 }

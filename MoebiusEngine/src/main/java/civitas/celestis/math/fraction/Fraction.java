@@ -2,13 +2,13 @@ package civitas.celestis.math.fraction;
 
 import civitas.celestis.math.Numbers;
 import civitas.celestis.math.Sign;
-import civitas.celestis.math.decimal.Decimal;
 import civitas.celestis.math.real.RealNumber;
 import civitas.celestis.math.vector.Vector;
 import civitas.celestis.math.vector.Vector2;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
+import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.HashSet;
@@ -188,6 +188,15 @@ public class Fraction extends Vector2 implements Comparable<Fraction> {
     /**
      * Creates a new fraction.
      *
+     * @param n The number of which to get the value of
+     */
+    public Fraction(@Nonnull RealNumber n) {
+        this(n.divide(Double.MAX_VALUE).doubleValue(), 1 / Double.MAX_VALUE);
+    }
+
+    /**
+     * Creates a new fraction.
+     *
      * @param other The vector of which to copy values from
      */
     public Fraction(@Nonnull Vector other) {
@@ -291,22 +300,22 @@ public class Fraction extends Vector2 implements Comparable<Fraction> {
      * This uses the math context {@link MathContext#UNLIMITED},
      * and may result in throwing an {@link ArithmeticException}.
      *
-     * @return The {@link Decimal} value of this fraction
+     * @return The {@link BigDecimal} value of this fraction
      * @throws ArithmeticException When this value does not have an accurate decimal representation
      */
     @Nonnull
-    public final Decimal decimalValue() throws ArithmeticException {
-        return Decimal.valueOf(x).divide(Decimal.valueOf(y), MathContext.UNLIMITED);
+    public final BigDecimal decimalValue() throws ArithmeticException {
+        return BigDecimal.valueOf(x).divide(BigDecimal.valueOf(y), MathContext.UNLIMITED);
     }
 
     /**
      * Returns the decimal value of this fraction.
      *
      * @param digits The number of digits at which to forcefully terminate the calculation.
-     * @return The {@link Decimal} value of this fraction
+     * @return The {@link BigDecimal} value of this fraction
      */
     @Nonnull
-    public final Decimal decimalValue(int digits) {
+    public final BigDecimal decimalValue(int digits) {
         return decimalValue(new MathContext(digits, RoundingMode.HALF_UP));
     }
 
@@ -314,11 +323,24 @@ public class Fraction extends Vector2 implements Comparable<Fraction> {
      * Returns the decimal value of this fraction.
      *
      * @param context The mathematical context to use when calculating the value
-     * @return The {@link Decimal} value of this fraction
+     * @return The {@link BigDecimal} value of this fraction
      */
     @Nonnull
-    public final Decimal decimalValue(@Nonnull MathContext context) {
-        return Decimal.valueOf(x).divide(Decimal.valueOf(y), context);
+    public final BigDecimal decimalValue(@Nonnull MathContext context) {
+        return BigDecimal.valueOf(x).divide(BigDecimal.valueOf(y), context);
+    }
+
+    /**
+     * Returns the real number value of this fraction.
+     *
+     * @return The {@link RealNumber} value of this fraction
+     */
+    @Nonnull
+    public final RealNumber realValue() {
+        final RealNumber n = new RealNumber(x);
+        final RealNumber d = new RealNumber(y);
+
+        return n.divide(d);
     }
 
     /**
