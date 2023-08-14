@@ -3,6 +3,8 @@ package civitas.celestis.math;
 import civitas.celestis.exception.math.NotIntSafeException;
 import civitas.celestis.math.integer.*;
 import civitas.celestis.math.matrix.Matrix;
+import civitas.celestis.math.real.RealNumber;
+import civitas.celestis.math.real.RealVector;
 import civitas.celestis.math.vector.*;
 import jakarta.annotation.Nonnull;
 
@@ -153,6 +155,18 @@ public final class Numbers {
      * @return {@code true} if the value obeys the bounds
      */
     public static boolean isInRange(double value, double min, double max) {
+        return value >= min && value <= max;
+    }
+
+    /**
+     * Checks if an integer is within the specified range.
+     *
+     * @param value The value to check
+     * @param min   The minimum acceptable value
+     * @param max   The maximum acceptable value
+     * @return {@code true} if the value obeys the bounds
+     */
+    public static boolean isInRange(long value, long min, long max) {
         return value >= min && value <= max;
     }
 
@@ -1846,5 +1860,29 @@ public final class Numbers {
             case NEGATIVE -> -Math.pow(v, exp);
             default -> throw new UnknownError("Unknown error in Numbers#pows(double, double)");
         };
+    }
+
+    /**
+     * Normalizes an array of scalars.
+     *
+     * @param values The values to normalize
+     * @return A vector containing ths normalized values
+     * @throws UnsupportedOperationException When the magnitude of the created vector is zero
+     */
+    @Nonnull
+    public static Vector normalize(@Nonnull double... values) throws UnsupportedOperationException {
+        return Vector.of(values).normalize();
+    }
+
+    /**
+     * Normalizes an array of scalars.
+     *
+     * @param values The values to normalize
+     * @return A vector containing ths normalized values
+     * @throws UnsupportedOperationException When the magnitude of the created vector is zero
+     */
+    @Nonnull
+    public static RealVector normalize(@Nonnull RealNumber... values) throws UnsupportedOperationException {
+        return RealVector.of(values).normalize();
     }
 }
