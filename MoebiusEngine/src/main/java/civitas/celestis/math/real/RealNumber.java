@@ -39,7 +39,7 @@ public class RealNumber extends Vector2 implements Comparable<RealNumber> {
     /**
      * The minimum possible positive value a real number can have without being zero.
      */
-    public static final RealNumber MIN_VALUE = new RealNumber(Double.MIN_VALUE, Double.MIN_VALUE);
+    public static final RealNumber MIN_VALUE = new RealNumber(-1023.0, 4.440892098500626E-16);
 
     /**
      * The {@link RealNumber} equivalent of {@link Double#MAX_VALUE}.
@@ -271,7 +271,7 @@ public class RealNumber extends Vector2 implements Comparable<RealNumber> {
     @Nonnull
     @Override
     public RealNumber multiply(double s) {
-        return twoFold(Math.log(s) * Numbers.INVERSE_LOG_2);
+        return multiply(new RealNumber(s));
     }
 
     /**
@@ -707,11 +707,6 @@ public class RealNumber extends Vector2 implements Comparable<RealNumber> {
      */
     @Nonnull
     public String toReadableString(@Nonnull MathContext context) {
-        if (compareTo(DOUBLE_MAX_VALUE) <= 0) {
-            // No need to use BigDecimal for these values
-            return Double.toString(doubleValue());
-        }
-
         final BigDecimal mantissa = BigDecimal.valueOf(y);
         final BigDecimal exponentiation = BigDecimal.valueOf(2).pow((int) x, context);
 

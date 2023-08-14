@@ -21,7 +21,7 @@ public class IntVector4 implements IntVector {
     public static final IntVector4 ZERO = new IntVector4(0, 0, 0, 0);
 
     /**
-     * The minimum possible positive value a vector can have without being zero.
+     * The minimum possible negative value a vector can have before overflowing.
      */
     public static final IntVector4 MIN_VALUE = new IntVector4(Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE);
 

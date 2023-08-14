@@ -12,7 +12,7 @@ import java.awt.*;
 import java.util.function.UnaryOperator;
 
 /**
- * A 8-bit color which only has discrete integer RGB components.
+ * An 8-bit color which only has discrete integer RGB components.
  */
 public class RGBColor extends NaturalVector3 {
     //

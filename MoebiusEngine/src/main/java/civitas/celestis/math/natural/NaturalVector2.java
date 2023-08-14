@@ -24,11 +24,6 @@ public class NaturalVector2 extends IntVector2 implements NaturalVector {
     public static final NaturalVector2 ZERO = new NaturalVector2(IntVector2.ZERO);
 
     /**
-     * The minimum possible value a vector can have without being zero.
-     */
-    public static final NaturalVector2 MIN_VALUE = new NaturalVector2(IntVector2.MIN_VALUE);
-
-    /**
      * The maximum possible value a vector can have before overflowing.
      */
     public static final NaturalVector2 MAX_VALUE = new NaturalVector2(IntVector2.MAX_VALUE);

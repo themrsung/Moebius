@@ -24,11 +24,6 @@ public class NaturalVector4 extends IntVector4 implements NaturalVector {
     public static final NaturalVector4 ZERO = new NaturalVector4(IntVector4.ZERO);
 
     /**
-     * The minimum possible value a vector can have without being zero.
-     */
-    public static final NaturalVector4 MIN_VALUE = new NaturalVector4(IntVector4.MIN_VALUE);
-
-    /**
      * The maximum possible value a vector can have before overflowing.
      */
     public static final NaturalVector4 MAX_VALUE = new NaturalVector4(IntVector4.MAX_VALUE);
