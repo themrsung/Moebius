@@ -1,10 +1,8 @@
 package civitas.celestis;
 
 import civitas.celestis.graphics.color.RichColor;
-import civitas.celestis.math.Interpolation;
 import civitas.celestis.math.Numbers;
 import civitas.celestis.math.Sign;
-import civitas.celestis.math.real.RealNumber;
 
 public class Benchmark {
     public static void main(String[] args) {

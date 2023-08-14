@@ -5,6 +5,7 @@ import civitas.celestis.graphics.color.RGBColor;
 import civitas.celestis.graphics.color.RichColor;
 import civitas.celestis.math.complex.Complex;
 import civitas.celestis.math.complex.Quaternion;
+import civitas.celestis.math.fraction.Fraction;
 import civitas.celestis.math.integer.IntVector;
 import civitas.celestis.math.matrix.IntMatrix;
 import civitas.celestis.math.matrix.Matrix;
@@ -42,13 +43,12 @@ public interface Numeric {
 
     /**
      * Creates a new matrix.
-     *
      * @param values The values to use
      * @return The constructed matrix
      */
     @Nonnull
     static Matrix of(@Nonnull double[][] values) {
-        return new Matrix(values);
+        return Matrix.of(values); // Uses the factory constructor to avoid reflection issues
     }
 
     /**
@@ -97,8 +97,8 @@ public interface Numeric {
         try {return DeepColor.parseColor(input);} catch (final Exception ignored) {}
         try {return Quaternion.parseQuaternion(input);} catch (final Exception ignored) {}
         try {return RichColor.parseColor(input);} catch (final Exception ignored) {}
-        try {return Matrix.parseMatrix(input);} catch (final Exception ignored) {}
         try {return IntMatrix.parseMatrix(input);} catch (final Exception ignored) {}
+        try {return Fraction.parseFraction(input);} catch (final Exception ignored) {}
 
         throw new NumberFormatException("The given string is not a Numeric.");
     }

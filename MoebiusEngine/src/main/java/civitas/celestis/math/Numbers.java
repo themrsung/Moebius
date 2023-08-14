@@ -2,9 +2,6 @@ package civitas.celestis.math;
 
 import civitas.celestis.exception.math.NotIntSafeException;
 import civitas.celestis.math.integer.*;
-import civitas.celestis.math.matrix.Matrix;
-import civitas.celestis.math.real.RealNumber;
-import civitas.celestis.math.real.RealVector;
 import civitas.celestis.math.vector.*;
 import jakarta.annotation.Nonnull;
 
@@ -635,25 +632,6 @@ public final class Numbers {
         return new MutableIntVector(v.values());
     }
 
-    /**
-     * Deep copies a matrix.
-     *
-     * @param m The matrix to copy
-     * @return The copied matrix
-     */
-    @Nonnull
-    public static Matrix copy(@Nonnull Matrix m) {
-        final Matrix result = new Matrix(m.rows(), m.columns());
-
-        for (int r = 0; r < m.rows(); r++) {
-            for (int c = 0; c < m.rows(); c++) {
-                result.set(r, c, m.get(r, c));
-            }
-        }
-
-        return result;
-    }
-
     //
     // Loose Equality
     //
@@ -739,25 +717,6 @@ public final class Numbers {
                 Math.abs(v1.x() - v2.x()) < FIFTH_MARGIN_OF_SIGNIFICANCE &&
                 Math.abs(v1.y() - v2.y()) < FIFTH_MARGIN_OF_SIGNIFICANCE &&
                 Math.abs(v1.z() - v2.z()) < FIFTH_MARGIN_OF_SIGNIFICANCE;
-    }
-
-    /**
-     * Checks for equality between two matrices with regard to the {@link Numbers#MARGIN_OF_SIGNIFICANCE}.
-     *
-     * @param m1 The first matrix to compare
-     * @param m2 The second matrix to compare
-     * @return {@code true} if the matrices are effectively equal
-     */
-    public static boolean equals(@Nonnull Matrix m1, @Nonnull Matrix m2) {
-        if (!m1.size().equals(m2.size())) return false;
-
-        for (int r = 0; r < m1.rows(); r++) {
-            for (int c = 0; c < m1.columns(); c++) {
-                if (!equals(m1.get(r, c), m2.get(r, c))) return false;
-            }
-        }
-
-        return true;
     }
 
     /**
@@ -1844,6 +1803,7 @@ public final class Numbers {
 
         return value == 0 ? Sign.ZERO : (value > 0 ? Sign.POSITIVE : Sign.NEGATIVE);
     }
+
     /**
      * Returns the sign of the provided value.
      *
@@ -1886,17 +1846,5 @@ public final class Numbers {
     @Nonnull
     public static Vector normalize(@Nonnull double... values) throws UnsupportedOperationException {
         return Vector.of(values).normalize();
-    }
-
-    /**
-     * Normalizes an array of scalars.
-     *
-     * @param values The values to normalize
-     * @return A vector containing ths normalized values
-     * @throws UnsupportedOperationException When the magnitude of the created vector is zero
-     */
-    @Nonnull
-    public static RealVector normalize(@Nonnull RealNumber... values) throws UnsupportedOperationException {
-        return RealVector.of(values).normalize();
     }
 }
