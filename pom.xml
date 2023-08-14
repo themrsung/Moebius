@@ -10,7 +10,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>MoebiusEngine</module>
-        <module>MoebiusEditor</module>
     </modules>
 
     <properties>
