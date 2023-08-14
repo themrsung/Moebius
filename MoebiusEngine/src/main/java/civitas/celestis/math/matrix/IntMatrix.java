@@ -480,6 +480,24 @@ public class IntMatrix implements Numeric, Iterable<Integer> {
         return multiply(-1);
     }
 
+    /**
+     * Transposes this matrix. (swaps the rows and columns)
+     *
+     * @return The transpose of this matrix
+     */
+    @Nonnull
+    public IntMatrix transpose() {
+        final IntMatrix result = new IntMatrix(columns, rows);
+
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < columns; c++) {
+                result.values[c][r] = values[r][c];
+            }
+        }
+
+        return result;
+    }
+
     //
     // Serialization
     //

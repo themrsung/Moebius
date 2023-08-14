@@ -488,6 +488,24 @@ public class RealMatrix implements Numeric, Iterable<RealNumber> {
     }
 
     /**
+     * Transposes this matrix. (swaps the rows and columns)
+     *
+     * @return The transpose of this matrix
+     */
+    @Nonnull
+    public RealMatrix transpose() {
+        final RealMatrix result = new RealMatrix(columns, rows);
+
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < columns; c++) {
+                result.values[c][r] = values[r][c];
+            }
+        }
+
+        return result;
+    }
+
+    /**
      * Converts this matrix into a {@code double} matrix.
      *
      * @return The {@link Matrix} representation of this matrix

@@ -16,8 +16,8 @@ import java.math.RoundingMode;
  * A scientific notation of a number using two {@code double}s.
  * The format is "{@code 2^x * y}".
  * <p>
- * The minimum possible value of a real number is<br>"{@code Math.pow(Double.MIN_VALUE, 2) * Double.MIN_VALUE}",<br>
- * and the maximum possible value of a real number is<br>"{@code Math.pow(Double.MAX_VALUE, 2) * Double.MAX_VALUE}".<br>
+ * The minimum possible value of a real number is<br>"{@code 4.9E-324e-1.7976931348623157E308}",<br>
+ * and the maximum possible value of a real number is<br>"{@code 1.7976931348623157E308e1.7976931348623157E308}".<br>
  * </p>
  * <p>
  * A real number can be used to represent numbers beyond the limits of {@code double}.
@@ -49,7 +49,7 @@ public class RealNumber extends Vector2 implements Comparable<RealNumber> {
     /**
      * The maximum possible positive value a real number can safely represent.
      */
-    public static final RealNumber MAX_VALUE = new RealNumber(Double.MAX_VALUE, Double.MAX_VALUE);
+    public static final RealNumber MAX_VALUE = new RealNumber(-1.7976931348623157E308, 1.7976931348623157E308);
 
     /**
      * The number {@code 1}.
