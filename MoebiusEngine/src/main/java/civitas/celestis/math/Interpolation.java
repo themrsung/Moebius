@@ -130,6 +130,6 @@ public final class Interpolation {
         final double s1 = Math.sin(theta1) / Math.sin(theta0);
 
         // Perform spherical linear interpolation
-        return start.multiply(s0).add(end.multiply(s1));
+        return new Quaternion(start.multiply(s0).add(end.multiply(s1)));
     }
 }

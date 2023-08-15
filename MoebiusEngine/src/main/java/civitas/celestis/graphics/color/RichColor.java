@@ -12,8 +12,8 @@ import java.util.function.UnaryOperator;
  * An 8-bit color class with linear transition capability.
  * Color components are stored using {@code double} with a range of {@code 0-255}.
  * <p>
- *     Colors can be packed into 64 bits by {@link RichColor#pack()}, and unpacked by calling the
- *     {@link RichColor#RichColor(long) constructor}. This uses the {@code long} format.
+ * Colors can be packed into 64 bits by {@link RichColor#pack()}, and unpacked by calling the
+ * {@link RichColor#RichColor(long) constructor}. This uses the {@code long} format.
  * </p>
  */
 public class RichColor extends Vector4 {
@@ -181,6 +181,7 @@ public class RichColor extends Vector4 {
 
     /**
      * Creates a new color.
+     *
      * @param packedValue The RGBA components packed into a single {@code long}
      */
     public RichColor(long packedValue) {
@@ -326,13 +327,14 @@ public class RichColor extends Vector4 {
 
     /**
      * Unpacks the RGBA components from a packed {@code long}.
+     *
      * @param packed The packed value
      * @return The unpacked RGBA components in array form
      * @see RichColor#pack()
      */
     @Nonnull
     private static double[] rgbaUnpack(long packed) {
-        return new double[] {
+        return new double[]{
                 (packed & 0xFFFF) * COMPONENT_UNPACK_FACTOR,
                 ((packed >> R_COMPONENT_SHIFT) & 0xFFFF) * COMPONENT_UNPACK_FACTOR,
                 ((packed >> G_COMPONENT_SHIFT) & 0xFFFF) * COMPONENT_UNPACK_FACTOR,
@@ -513,10 +515,11 @@ public class RichColor extends Vector4 {
     /**
      * Packs the RGBA components into a single {@code long}.
      * <p>
-     *     The first 16 bits are used as an unsigned integer to represent the red component,
-     *     the next 16 bits are used in the same manner to represent the green component,
-     *     the next 16 bits for the blue, and the final 16 bits for the alpha component.
+     * The first 16 bits are used as an unsigned integer to represent the red component,
+     * the next 16 bits are used in the same manner to represent the green component,
+     * the next 16 bits for the blue, and the final 16 bits for the alpha component.
      * </p>
+     *
      * @return The packed {@code long}
      * @see RichColor#RichColor(long)
      * @see RichColor#rgbaUnpack(long)

@@ -95,6 +95,7 @@ public class Vector3 extends Number implements DoubleVector<Vector3> {
 
     /**
      * Creates a new vector.
+     *
      * @param v The vector of which to copy component values from
      */
     public Vector3(@Nonnull Float3 v) {
@@ -105,6 +106,7 @@ public class Vector3 extends Number implements DoubleVector<Vector3> {
 
     /**
      * Creates a new vector.
+     *
      * @param v The vector of which to copy component values from
      */
     public Vector3(@Nonnull Int3 v) {
@@ -537,6 +539,7 @@ public class Vector3 extends Number implements DoubleVector<Vector3> {
 
     /**
      * Converts this vector into a pure quaternion.
+     *
      * @return A quaternion with the values {@code {0, x, y, z}}
      */
     @Nonnull
@@ -546,6 +549,7 @@ public class Vector3 extends Number implements DoubleVector<Vector3> {
 
     /**
      * Rotates this vector by a rotation quaternion.
+     *
      * @param rq The rotation quaternion to apply
      * @return The rotated vector
      */

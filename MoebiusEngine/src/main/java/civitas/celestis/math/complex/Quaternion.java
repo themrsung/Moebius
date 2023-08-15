@@ -28,6 +28,7 @@ public class Quaternion extends Vector4 {
 
     /**
      * Creates a new quaternion.
+     *
      * @param w The W component of this quaternion
      * @param x The X component of this quaternion
      * @param y The Y component of this quaternion
@@ -56,6 +57,7 @@ public class Quaternion extends Vector4 {
 
     /**
      * Returns the scalar part of this quaternion.
+     *
      * @return The scalar part of this quaternion
      */
     public final double scalar() {
@@ -64,6 +66,7 @@ public class Quaternion extends Vector4 {
 
     /**
      * Returns the vector part of this quaternion.
+     *
      * @return The vector part of this quaternion
      */
     @Nonnull
@@ -73,6 +76,7 @@ public class Quaternion extends Vector4 {
 
     /**
      * Returns the conjugate of this quaternion.
+     *
      * @return The conjugate of this quaternion
      */
     @Nonnull
@@ -82,6 +86,7 @@ public class Quaternion extends Vector4 {
 
     /**
      * Returns the inverse of this quaternion.
+     *
      * @return The inverse of this quaternion
      */
     @Nonnull
@@ -102,6 +107,7 @@ public class Quaternion extends Vector4 {
 
     /**
      * Adds a scalar to this quaternion.
+     *
      * @param s The scalar to add to this quaternion
      * @return The resulting quaternion
      */
@@ -113,6 +119,7 @@ public class Quaternion extends Vector4 {
 
     /**
      * Subtracts a scalar from this quaternion.
+     *
      * @param s The scalar to subtract from this quaternion
      * @return The resulting quaternion
      */
@@ -124,6 +131,7 @@ public class Quaternion extends Vector4 {
 
     /**
      * Multiplies this quaternion by a scalar.
+     *
      * @param s The scalar to multiply to this quaternion
      * @return The resulting quaternion
      */
@@ -135,6 +143,7 @@ public class Quaternion extends Vector4 {
 
     /**
      * Divides this quaternion by a scalar.
+     *
      * @param s The scalar to divide this quaternion by
      * @return The resulting quaternion
      */
@@ -147,6 +156,7 @@ public class Quaternion extends Vector4 {
     /**
      * Performs quaternion multiplication where this quaternion is on the left,
      * and the provided quaternion {@code q} is on the right.
+     *
      * @param q The quaternion on the right of this operation
      * @return The left-product of the two quaternions
      */
@@ -167,6 +177,7 @@ public class Quaternion extends Vector4 {
     /**
      * Normalizes this quaternion into a unit quaternion.
      * When the magnitude is zero, this returns the identity quaternion.
+     *
      * @return The normalized quaternion of this quaternion
      */
     @Nonnull
@@ -185,6 +196,7 @@ public class Quaternion extends Vector4 {
 
     /**
      * Negates this quaternion.
+     *
      * @return The negation of this quaternion
      */
     @Nonnull

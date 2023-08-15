@@ -539,6 +539,7 @@ public class Float3 extends Number implements FloatVector<Float3> {
 
     /**
      * Converts this vector into a pure quaternion.
+     *
      * @return A quaternion with the values {@code {0, x, y, z}}
      */
     @Nonnull
@@ -548,6 +549,7 @@ public class Float3 extends Number implements FloatVector<Float3> {
 
     /**
      * Rotates this vector by a rotation quaternion.
+     *
      * @param rq The rotation quaternion to apply
      * @return The rotated vector
      */

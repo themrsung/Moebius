@@ -108,6 +108,7 @@ public class Vector4 extends Number implements DoubleVector<Vector4> {
 
     /**
      * Creates a new vector.
+     *
      * @param v The vector of which to copy component values from
      */
     public Vector4(@Nonnull Float4 v) {
@@ -119,6 +120,7 @@ public class Vector4 extends Number implements DoubleVector<Vector4> {
 
     /**
      * Creates a new vector.
+     *
      * @param v The vector of which to copy component values from
      */
     public Vector4(@Nonnull Int4 v) {

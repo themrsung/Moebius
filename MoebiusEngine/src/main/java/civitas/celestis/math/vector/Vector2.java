@@ -85,6 +85,7 @@ public class Vector2 extends Number implements DoubleVector<Vector2> {
 
     /**
      * Creates a new vector.
+     *
      * @param v The vector of which to copy component values from
      */
     public Vector2(@Nonnull Float2 v) {
@@ -94,6 +95,7 @@ public class Vector2 extends Number implements DoubleVector<Vector2> {
 
     /**
      * Creates a new vector.
+     *
      * @param v The vector from which to copy component values from
      */
     public Vector2(@Nonnull Int2 v) {

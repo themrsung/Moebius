@@ -4,7 +4,6 @@ import civitas.celestis.math.Numbers;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
-import java.util.Iterator;
 import java.util.function.UnaryOperator;
 
 /**
