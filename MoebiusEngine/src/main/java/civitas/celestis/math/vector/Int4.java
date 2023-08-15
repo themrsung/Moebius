@@ -345,7 +345,7 @@ public class Int4 extends Number implements IntVector<Int4> {
      * @return The dot product of the two vectors
      */
     @Override
-    public final int dot(@Nonnull Int4 v) {
+    public int dot(@Nonnull Int4 v) {
         return w * v.w + x * v.x + y * v.y + z * v.z;
     }
 

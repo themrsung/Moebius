@@ -14,16 +14,45 @@ public class SimpleColor implements Color8 {
     //
     // Constants
     //
-
+    /**
+     * The color white.
+     */
     public static final SimpleColor WHITE = new SimpleColor(255, 255, 255, 255);
+
+    /**
+     * The color red.
+     */
     public static final SimpleColor RED = new SimpleColor(255, 0, 0, 255);
+
+    /**
+     * The color green.
+     */
     public static final SimpleColor GREEN = new SimpleColor(0, 255, 0, 255);
+
+    /**
+     * The color blue.
+     */
     public static final SimpleColor BLUE = new SimpleColor(0, 0, 255, 255);
+
+    /**
+     * The color cyan.
+     */
     public static final SimpleColor CYAN = new SimpleColor(0, 255, 255, 255);
+
+    /**
+     * The color magenta.
+     */
     public static final SimpleColor MAGENTA = new SimpleColor(255, 0, 255, 255);
+
+    /**
+     * The color yellow.
+     */
     public static final SimpleColor YELLOW = new SimpleColor(255, 255, 0, 255);
+
+    /**
+     * The color black.
+     */
     public static final SimpleColor BLACK = new SimpleColor(0, 0, 0, 255);
-    public static final SimpleColor TRANSPARENT_BLACK = new SimpleColor(0, 0, 0, 0);
 
     //
     // Constructors

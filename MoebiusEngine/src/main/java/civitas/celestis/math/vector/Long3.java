@@ -325,7 +325,7 @@ public class Long3 extends Number implements LongVector<Long3> {
      * @return The dot product of the two vectors
      */
     @Override
-    public final long dot(@Nonnull Long3 v) {
+    public long dot(@Nonnull Long3 v) {
         return x * v.x + y * v.y + z * v.z;
     }
 

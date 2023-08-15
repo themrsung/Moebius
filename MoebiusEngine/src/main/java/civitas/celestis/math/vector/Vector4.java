@@ -374,7 +374,7 @@ public class Vector4 extends Number implements DoubleVector<Vector4> {
      * @return The dot product of the two vectors
      */
     @Override
-    public final double dot(@Nonnull Vector4 v) {
+    public double dot(@Nonnull Vector4 v) {
         return w * v.w + x * v.x + y * v.y + z * v.z;
     }
 

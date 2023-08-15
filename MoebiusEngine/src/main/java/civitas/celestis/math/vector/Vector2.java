@@ -365,7 +365,7 @@ public class Vector2 extends Number implements DoubleVector<Vector2>, Packable {
      * @return The dot product of the two vectors
      */
     @Override
-    public final double dot(@Nonnull Vector2 v) {
+    public double dot(@Nonnull Vector2 v) {
         return x * v.x + y * v.y;
     }
 

@@ -22,14 +22,51 @@ public class LinearColor extends Float4 implements Color8 {
     // Constants
     //
 
+    /**
+     * The color white.
+     */
     public static final LinearColor WHITE = new LinearColor(255, 255, 255, 255);
+
+    /**
+     * The color red.
+     */
     public static final LinearColor RED = new LinearColor(255, 0, 0, 255);
+
+    /**
+     * The color green.
+     */
     public static final LinearColor GREEN = new LinearColor(0, 255, 0, 255);
+
+    /**
+     * The color blue.
+     */
     public static final LinearColor BLUE = new LinearColor(0, 0, 255, 255);
+
+    /**
+     * The color cyan.
+     */
     public static final LinearColor CYAN = new LinearColor(0, 255, 255, 255);
+
+    /**
+     * The color magenta.
+     */
     public static final LinearColor MAGENTA = new LinearColor(255, 0, 255, 255);
+
+    /**
+     * The color yellow.
+     */
     public static final LinearColor YELLOW = new LinearColor(255, 255, 0, 255);
+
+    /**
+     * The color black.
+     */
     public static final LinearColor BLACK = new LinearColor(0, 0, 0, 255);
+
+    /**
+     * Transparent black.
+     * Since the values are ({@code 0, 0, 0, 0}), this is often used for clamping operations
+     * in tandem with {@link LinearColor#WHITE} (which has values of ({@code 255, 255, 255, 255})).
+     */
     public static final LinearColor TRANSPARENT_BLACK = new LinearColor(0, 0, 0, 0);
 
     //

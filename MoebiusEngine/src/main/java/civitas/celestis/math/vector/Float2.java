@@ -367,7 +367,7 @@ public class Float2 extends Number implements FloatVector<Float2>, Packable {
      * @return The dot product of the two vectors
      */
     @Override
-    public final float dot(@Nonnull Float2 v) {
+    public float dot(@Nonnull Float2 v) {
         return x * v.x + y * v.y;
     }
 

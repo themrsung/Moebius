@@ -374,7 +374,7 @@ public class Float4 extends Number implements FloatVector<Float4> {
      * @return The dot product of the two vectors
      */
     @Override
-    public final float dot(@Nonnull Float4 v) {
+    public float dot(@Nonnull Float4 v) {
         return w * v.w + x * v.x + y * v.y + z * v.z;
     }
 

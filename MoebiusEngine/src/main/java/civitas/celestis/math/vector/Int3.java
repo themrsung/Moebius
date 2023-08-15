@@ -326,7 +326,7 @@ public class Int3 extends Number implements IntVector<Int3> {
      * @return The dot product of the two vectors
      */
     @Override
-    public final int dot(@Nonnull Int3 v) {
+    public int dot(@Nonnull Int3 v) {
         return x * v.x + y * v.y + z * v.z;
     }
 

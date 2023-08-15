@@ -355,7 +355,7 @@ public class Float3 extends Number implements FloatVector<Float3> {
      * @return The dot product of the two vectors
      */
     @Override
-    public final float dot(@Nonnull Float3 v) {
+    public float dot(@Nonnull Float3 v) {
         return x * v.x + y * v.y + z * v.z;
     }
 

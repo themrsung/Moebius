@@ -329,7 +329,7 @@ public class Int2 extends Number implements IntVector<Int2>, Packable {
      * @return The dot product of the two vectors
      */
     @Override
-    public final int dot(@Nonnull Int2 v) {
+    public int dot(@Nonnull Int2 v) {
         return x * v.x + y * v.y;
     }
 
