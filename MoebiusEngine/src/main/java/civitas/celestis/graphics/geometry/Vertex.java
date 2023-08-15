@@ -354,7 +354,7 @@ public class Vertex extends Vector3 {
      * @throws NumberFormatException When the format is invalid
      */
     @Nonnull
-    public static Vertex parseVector(@Nonnull String input) throws NumberFormatException {
+    public static Vertex parseVertex(@Nonnull String input) throws NumberFormatException {
         if (!input.startsWith("Vertex{")) {
             throw new NumberFormatException("The provided string does not represent a Vertex.");
         }

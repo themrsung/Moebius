@@ -4,6 +4,7 @@ import civitas.celestis.event.Event;
 import civitas.celestis.event.Listener;
 import jakarta.annotation.Nonnull;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Queue;
 
@@ -84,7 +85,11 @@ public class EventThread extends Thread implements EventManager {
      */
     @Override
     public void register(@Nonnull Listener listener) {
+        // Register the handler references
         handlers.addAll(listener.getHandlerReferences());
+
+        // Preemptively sort the handler list by priority
+        handlers.sort(Comparator.comparing(HandlerReference::priority));
     }
 
     /**

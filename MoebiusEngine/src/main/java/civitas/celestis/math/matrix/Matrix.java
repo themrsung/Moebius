@@ -1,5 +1,6 @@
 package civitas.celestis.math.matrix;
 
+import civitas.celestis.math.Numeric;
 import civitas.celestis.util.grid.Grid;
 import jakarta.annotation.Nonnull;
 
@@ -15,7 +16,7 @@ import java.io.Serializable;
  * @param <N> The type of number this matrix contains
  * @param <M> This matrix (the result of arithmetic operations)
  */
-public interface Matrix<N extends Number, M extends Matrix<N, M>> extends Grid<N, M>, Iterable<N>, Serializable {
+public interface Matrix<N extends Number, M extends Matrix<N, M>> extends Numeric, Grid<N, M>, Iterable<N>, Serializable {
     //
     // Arithmetic
     //

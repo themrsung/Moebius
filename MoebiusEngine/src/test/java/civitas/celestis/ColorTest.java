@@ -1,12 +1,11 @@
 package civitas.celestis;
 
-import civitas.celestis.event.Event;
-import civitas.celestis.event.Listener;
 import civitas.celestis.event.lifecycle.EventManager;
-import civitas.celestis.event.lifecycle.SyncEventManager;
 import civitas.celestis.graphics.color.Color8;
 import civitas.celestis.graphics.color.LinearColor;
 import civitas.celestis.graphics.color.SimpleColor;
+import civitas.celestis.task.Task;
+import civitas.celestis.util.grid.Grid;
 
 public class ColorTest {
     public static void main(String[] args) {
@@ -17,8 +16,7 @@ public class ColorTest {
         manager.start();
 
         manager.register(new TestListener());
-        manager.call(new Event() {});
     }
 
-    static EventManager manager = new SyncEventManager();
+    static EventManager manager = Moebius.getEventManager();
 }

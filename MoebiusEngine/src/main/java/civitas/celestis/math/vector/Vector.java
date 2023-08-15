@@ -1,5 +1,6 @@
 package civitas.celestis.math.vector;
 
+import civitas.celestis.math.Numeric;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
@@ -10,7 +11,7 @@ import java.io.Serializable;
  *
  * @param <V> This vector (the result of arithmetic operations)
  */
-public interface Vector<V extends Vector<V>> extends Comparable<V>, Serializable {
+public interface Vector<V extends Vector<V>> extends Numeric, Comparable<V>, Serializable {
     //
     // Arithmetic
     //

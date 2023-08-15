@@ -313,7 +313,7 @@ public class Complex extends Vector2 {
      * @throws NumberFormatException When the format is invalid
      */
     @Nonnull
-    public static Complex parseVector(@Nonnull String input) throws NumberFormatException {
+    public static Complex parseComplex(@Nonnull String input) throws NumberFormatException {
         if (!input.startsWith("Vector2{")) {
             throw new NumberFormatException("The provided string does not represent a Complex.");
         }

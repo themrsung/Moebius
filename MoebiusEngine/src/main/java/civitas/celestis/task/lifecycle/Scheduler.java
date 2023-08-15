@@ -15,7 +15,7 @@ public interface Scheduler {
     void start();
 
     /**
-     * Interrupts this scheduler core, instructing it
+     * Interrupts this scheduler, instructing it
      * to terminate after it has finished the current iteration.
      */
     void interrupt();
