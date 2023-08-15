@@ -7,6 +7,8 @@ import java.io.Serializable;
 
 /**
  * A two-dimensional array of numbers.
+ *
+ * @param <V> This vector (the result of arithmetic operations)
  */
 public interface Vector<V extends Vector<V>> extends Comparable<V>, Serializable {
     //
