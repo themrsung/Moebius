@@ -11,6 +11,7 @@ import java.util.function.UnaryOperator;
 
 /**
  * A matrix of {@code long}s.
+ * This matrix can be used to store any value which can be packed into 64 bits.
  */
 public class LongMatrix implements Matrix<Long, LongMatrix> {
     //
@@ -57,9 +58,9 @@ public class LongMatrix implements Matrix<Long, LongMatrix> {
     /**
      * Creates a new matrix.
      *
-     * @param m The matrix to copy values from
+     * @param m The grid to copy values from
      */
-    public LongMatrix(@Nonnull Matrix<Long, ?> m) {
+    public LongMatrix(@Nonnull Grid<Long, ?> m) {
         this.rows = m.rows();
         this.columns = m.columns();
 
@@ -365,6 +366,7 @@ public class LongMatrix implements Matrix<Long, LongMatrix> {
                 for (int k = 0; k < columns; k++) {
                     sum += values[r][k] * m.values[k][c];
                 }
+
                 result.values[r][c] = sum;
             }
         }

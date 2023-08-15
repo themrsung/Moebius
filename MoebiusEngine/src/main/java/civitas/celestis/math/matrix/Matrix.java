@@ -7,6 +7,10 @@ import java.io.Serializable;
 
 /**
  * A two-dimensional array of numbers.
+ * <p>
+ * Since both {@code double} and {@code long} have 64 bits,
+ * this class can be used to contain two-dimensional data of up to 64 bits per element.
+ * </p>
  *
  * @param <N> The type of number this matrix contains
  * @param <M> This matrix (the result of arithmetic operations)

@@ -124,7 +124,6 @@ public interface Grid<V, G extends Grid<V, G>> extends Iterable<V> {
      * @return The value at the specified index
      * @throws IndexOutOfBoundsException When the index is out of bounds
      */
-    @Nonnull
     V get(int r, int c) throws IndexOutOfBoundsException;
 
     /**
@@ -134,7 +133,6 @@ public interface Grid<V, G extends Grid<V, G>> extends Iterable<V> {
      * @return The value at the specified point
      * @throws IndexOutOfBoundsException When the point is out of bounds
      */
-    @Nonnull
     V get(@Nonnull Int2 p) throws IndexOutOfBoundsException;
 
     /**
@@ -145,7 +143,7 @@ public interface Grid<V, G extends Grid<V, G>> extends Iterable<V> {
      * @param v The value to set to
      * @throws IndexOutOfBoundsException When the index is out of bounds
      */
-    void set(int r, int c, @Nonnull V v) throws IndexOutOfBoundsException;
+    void set(int r, int c, V v) throws IndexOutOfBoundsException;
 
     /**
      * Sets the {@code p}th value to the provided value {@code v}.
@@ -154,7 +152,7 @@ public interface Grid<V, G extends Grid<V, G>> extends Iterable<V> {
      * @param v The value to set to
      * @throws IndexOutOfBoundsException When the point is out of bounds
      */
-    void set(@Nonnull Int2 p, @Nonnull V v) throws IndexOutOfBoundsException;
+    void set(@Nonnull Int2 p, V v) throws IndexOutOfBoundsException;
 
     //
     // Bulk-operation
@@ -165,7 +163,7 @@ public interface Grid<V, G extends Grid<V, G>> extends Iterable<V> {
      *
      * @param v The value to fill this grid with
      */
-    void fill(@Nonnull V v);
+    void fill(V v);
 
     //
     // Sub-operation

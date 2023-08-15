@@ -57,9 +57,9 @@ public class DoubleMatrix implements Matrix<Double, DoubleMatrix> {
     /**
      * Creates a new matrix.
      *
-     * @param m The matrix to copy values from
+     * @param m The grid to copy values from
      */
-    public DoubleMatrix(@Nonnull Matrix<Double, ?> m) {
+    public DoubleMatrix(@Nonnull Grid<Double, ?> m) {
         this.rows = m.rows();
         this.columns = m.columns();
 
@@ -197,12 +197,12 @@ public class DoubleMatrix implements Matrix<Double, DoubleMatrix> {
     /**
      * {@inheritDoc}
      *
-     * @param c The iterable to check for
+     * @param i The iterable to check for
      * @return {@code true} if this matrix contains the iterable
      */
     @Override
-    public boolean containsAll(@Nonnull Iterable<Double> c) {
-        for (final double v : c) {
+    public boolean containsAll(@Nonnull Iterable<Double> i) {
+        for (final double v : i) {
             if (!contains(v)) return false;
         }
 
@@ -365,6 +365,7 @@ public class DoubleMatrix implements Matrix<Double, DoubleMatrix> {
                 for (int k = 0; k < columns; k++) {
                     sum += values[r][k] * m.values[k][c];
                 }
+
                 result.values[r][c] = sum;
             }
         }
@@ -668,7 +669,6 @@ public class DoubleMatrix implements Matrix<Double, DoubleMatrix> {
      * @param s String to parse
      * @return Matrix parsed from given string
      * @throws NumberFormatException    When the string is not parsable to a matrix
-     * @throws IllegalArgumentException When the string contains non-finite values
      */
     @Nonnull
     public static DoubleMatrix parseMatrix(@Nonnull String s) throws IllegalArgumentException {

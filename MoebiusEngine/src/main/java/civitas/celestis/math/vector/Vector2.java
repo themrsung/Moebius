@@ -1,6 +1,8 @@
 package civitas.celestis.math.vector;
 
 import civitas.celestis.math.Numbers;
+import civitas.celestis.math.complex.Complex;
+import civitas.celestis.util.packing.Packable;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
@@ -9,7 +11,7 @@ import java.util.function.UnaryOperator;
 /**
  * An immutable two-dimensional vector which uses {@code double}s to represent its components.
  */
-public class Vector2 extends Number implements DoubleVector<Vector2> {
+public class Vector2 extends Number implements DoubleVector<Vector2>, Packable {
     //
     // Constants
     //
@@ -101,6 +103,40 @@ public class Vector2 extends Number implements DoubleVector<Vector2> {
     public Vector2(@Nonnull Int2 v) {
         this.x = v.x;
         this.y = v.y;
+    }
+
+    //
+    // Packing
+    //
+
+    /**
+     * Unpacks a packed value of a {@link Vector2}.
+     * @param packed The packed {@code long}
+     * @return The unpacked value
+     * @see Vector2#pack()
+     */
+    @Nonnull
+    public static Vector2 unpack(long packed) {
+        final int xBits = (int) (packed >> 32);
+        final int yBits = (int) packed;
+
+        final float x = Float.intBitsToFloat(xBits);
+        final float y = Float.intBitsToFloat(yBits);
+
+        return new Vector2(x, y);
+    }
+
+    /**
+     * Packs this number into 64 bits.
+     * @return The packed number in {@code long} format
+     * @see Vector2#pack()
+     */
+    @Override
+    public long pack() {
+        final int xBits = Float.floatToIntBits((float) x);
+        final int yBits = Float.floatToIntBits((float) y);
+
+        return ((long) xBits << 32) | (yBits & 0xFFFFFFFFL);
     }
 
     //

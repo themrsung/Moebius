@@ -1,6 +1,5 @@
 package civitas.celestis.math;
 
-import civitas.celestis.graphics.color.RichColor;
 import civitas.celestis.math.complex.Quaternion;
 import civitas.celestis.math.vector.Vector2;
 import civitas.celestis.math.vector.Vector3;
@@ -87,10 +86,10 @@ public final class Interpolation {
      * @param t     The interpolation parameter {@code t} ({@code 0-1})
      * @return The interpolated color
      */
-    @Nonnull
-    public static RichColor lerp(@Nonnull RichColor start, @Nonnull RichColor end, double t) {
-        return new RichColor(lerp((Vector4) start, end, t)); // Delegates to Vector4 lerp for optimization
-    }
+//    @Nonnull
+//    public static RichColor lerp(@Nonnull RichColor start, @Nonnull RichColor end, double t) {
+//        return new RichColor(lerp((Vector4) start, end, t)); // Delegates to Vector4 lerp for optimization
+//    }
 
     //
     // Spherical Linear Interpolation

@@ -1,6 +1,7 @@
 package civitas.celestis.math.vector;
 
 import civitas.celestis.math.Numbers;
+import civitas.celestis.util.packing.Packable;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
@@ -8,8 +9,12 @@ import java.util.function.UnaryOperator;
 
 /**
  * An immutable two-dimensional vector which uses {@code float}s to represent its components.
+ * <p>
+ * 2D {@code float} vectors can be packed into a single {@code long} for easier storage.
+ * No precision is lost in the process.
+ * </p>
  */
-public class Float2 extends Number implements FloatVector<Float2> {
+public class Float2 extends Number implements FloatVector<Float2>, Packable {
     //
     // Constants
     //
@@ -101,6 +106,39 @@ public class Float2 extends Number implements FloatVector<Float2> {
     public Float2(@Nonnull Int2 v) {
         this.x = v.x;
         this.y = v.y;
+    }
+
+    //
+    // Packing
+    //
+
+    /**
+     * Unpacks a packed value of a {@link Float2}.
+     * @param packed The packed {@code long}
+     * @return The unpacked vector
+     * @see Float2#pack()
+     */
+    @Nonnull
+    public static Float2 unpack(long packed) {
+        final int xBits = (int) (packed >> 32);
+        final int yBits = (int) packed;
+
+        return new Float2(Float.intBitsToFloat(xBits), Float.intBitsToFloat(yBits));
+    }
+
+    /**
+     * Packs this vector into a single {@code long} for easier storage.
+     * Since both formats have 64 bits, no precision is lost.
+     *
+     * @return The packed {@code long}
+     * @see Float2#unpack(long) 
+     */
+    @Override
+    public long pack() {
+        final int xBits = Float.floatToIntBits(x);
+        final int yBits = Float.floatToIntBits(y);
+
+        return ((long) xBits << 32) | (yBits & 0xFFFFFFFFL);
     }
 
     //

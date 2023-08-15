@@ -3,6 +3,7 @@ package civitas.celestis.graphics.color;
 import civitas.celestis.math.Numbers;
 import civitas.celestis.math.vector.Vector3;
 import civitas.celestis.math.vector.Vector4;
+import civitas.celestis.util.packing.Packable;
 import jakarta.annotation.Nonnull;
 
 import java.awt.*;
@@ -13,10 +14,10 @@ import java.util.function.UnaryOperator;
  * Color components are stored using {@code double} with a range of {@code 0-255}.
  * <p>
  * Colors can be packed into 64 bits by {@link RichColor#pack()}, and unpacked by calling the
- * {@link RichColor#RichColor(long) constructor}. This uses the {@code long} format.
+ * {@link RichColor#unpack(long)}. Very little precision is lost in the process.
  * </p>
  */
-public class RichColor extends Vector4 {
+public class RichColor extends Vector4 implements Packable {
     //
     // Constants
     //
@@ -112,38 +113,6 @@ public class RichColor extends Vector4 {
      */
     public static final double TRANSLUCENT_THRESHOLD = 242.25;
 
-
-    //
-    // Color Packing
-    //
-    // DO NOT modify these parameters after deployment
-    //
-
-    /**
-     * The shift of the red component in {@link RichColor#pack()}.
-     */
-    private static final long R_COMPONENT_SHIFT = 48;
-
-    /**
-     * The shift of the green component in {@link RichColor#pack()}.
-     */
-    private static final long G_COMPONENT_SHIFT = 32;
-
-    /**
-     * The shift of the blue component in {@link RichColor#pack()}.
-     */
-    private static final long B_COMPONENT_SHIFT = 16;
-
-    /**
-     * The scale factor used to pack RGBA components.
-     */
-    private static final double COMPONENT_PACK_FACTOR = (Math.pow(2, 16) - 1) / 255;
-
-    /**
-     * The scale factor used to unpack RGBA components.
-     */
-    private static final double COMPONENT_UNPACK_FACTOR = 1 / COMPONENT_PACK_FACTOR;
-
     //
     // Static Utilities
     //
@@ -178,16 +147,6 @@ public class RichColor extends Vector4 {
     //
     // Constructors
     //
-
-    /**
-     * Creates a new color.
-     *
-     * @param packedValue The RGBA components packed into a single {@code long}
-     */
-    public RichColor(long packedValue) {
-        super(rgbaUnpack(packedValue));
-        enforceComponentRange();
-    }
 
     /**
      * Creates a new color.
@@ -322,25 +281,54 @@ public class RichColor extends Vector4 {
     }
 
     //
-    // Internal
+    // Packing
     //
+
+    private static final long R_COMPONENT_SHIFT = 48;
+    private static final long G_COMPONENT_SHIFT = 32;
+    private static final long B_COMPONENT_SHIFT = 16;
+    private static final double COMPONENT_PACK_FACTOR = (Math.pow(2, 16) - 1) / 255;
+    private static final double COMPONENT_UNPACK_FACTOR = 1 / COMPONENT_PACK_FACTOR;
 
     /**
      * Unpacks the RGBA components from a packed {@code long}.
      *
      * @param packed The packed value
-     * @return The unpacked RGBA components in array form
+     * @return The unpacked color
      * @see RichColor#pack()
      */
     @Nonnull
-    private static double[] rgbaUnpack(long packed) {
-        return new double[]{
+    public static RichColor unpack(long packed) {
+        return new RichColor(
                 (packed & 0xFFFF) * COMPONENT_UNPACK_FACTOR,
                 ((packed >> R_COMPONENT_SHIFT) & 0xFFFF) * COMPONENT_UNPACK_FACTOR,
                 ((packed >> G_COMPONENT_SHIFT) & 0xFFFF) * COMPONENT_UNPACK_FACTOR,
                 ((packed >> B_COMPONENT_SHIFT) & 0xFFFF) * COMPONENT_UNPACK_FACTOR
-        };
+        );
     }
+
+    /**
+     * Packs the RGBA components into a single {@code long}.
+     * <p>
+     * The first 16 bits are used as an unsigned integer to represent the red component,
+     * the next 16 bits are used in the same manner to represent the green component,
+     * the next 16 bits for the blue, and the final 16 bits for the alpha component.
+     * </p>
+     *
+     * @return The packed {@code long}
+     * @see RichColor#unpack(long)
+     */
+    @Override
+    public final long pack() {
+        return (((long) (x * COMPONENT_PACK_FACTOR)) << R_COMPONENT_SHIFT)
+                | (((long) (y * COMPONENT_PACK_FACTOR)) << G_COMPONENT_SHIFT)
+                | (((long) (z * COMPONENT_PACK_FACTOR)) << B_COMPONENT_SHIFT)
+                | ((long) (w * COMPONENT_PACK_FACTOR));
+    }
+
+    //
+    // Internal
+    //
 
     /**
      * Converts a hex string to an array of RGBA components.
@@ -510,25 +498,6 @@ public class RichColor extends Vector4 {
      */
     public double reflectiveness() {
         return ((x + y + z) / 765) * (w / 255);
-    }
-
-    /**
-     * Packs the RGBA components into a single {@code long}.
-     * <p>
-     * The first 16 bits are used as an unsigned integer to represent the red component,
-     * the next 16 bits are used in the same manner to represent the green component,
-     * the next 16 bits for the blue, and the final 16 bits for the alpha component.
-     * </p>
-     *
-     * @return The packed {@code long}
-     * @see RichColor#RichColor(long)
-     * @see RichColor#rgbaUnpack(long)
-     */
-    public final long pack() {
-        return (((long) (x * COMPONENT_PACK_FACTOR)) << R_COMPONENT_SHIFT)
-                | (((long) (y * COMPONENT_PACK_FACTOR)) << G_COMPONENT_SHIFT)
-                | (((long) (z * COMPONENT_PACK_FACTOR)) << B_COMPONENT_SHIFT)
-                | ((long) (w * COMPONENT_PACK_FACTOR));
     }
 
     /**

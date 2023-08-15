@@ -1,6 +1,7 @@
 package civitas.celestis.math.vector;
 
 import civitas.celestis.math.Numbers;
+import civitas.celestis.util.packing.Packable;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
@@ -9,7 +10,7 @@ import java.util.function.UnaryOperator;
 /**
  * An immutable two-dimensional vector which uses {@code float}s to represent its components.
  */
-public class Int2 extends Number implements IntVector<Int2> {
+public class Int2 extends Number implements IntVector<Int2>, Packable {
     //
     // Constants
     //
@@ -102,6 +103,33 @@ public class Int2 extends Number implements IntVector<Int2> {
         this.x = (int) v.x;
         this.y = (int) v.y;
     }
+
+    //
+    // Packing
+    //
+
+    /**
+     * Unpacks a packed value of {@link Int2}.
+     * @param packed The packed value
+     * @return The unpacked vector
+     * @see Int2#pack()
+     */
+    @Nonnull
+    public static Int2 unpack(long packed) {
+        return new Int2((int) (packed >> 32), (int) packed);
+    }
+
+
+    /**
+     * Packs this vector into 64 bits.
+     * @return The packed {@code long}
+     * @see Int2#unpack(long)
+     */
+    @Override
+    public long pack() {
+        return ((long) x << 32) | (y & 0xFFFFFFFFL);
+    }
+
 
     //
     // Variables
