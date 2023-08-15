@@ -285,6 +285,100 @@ public class LinearColor extends Float4 implements Color8 {
     }
 
     //
+    // Comparison
+    //
+
+    /**
+     * Compares this color to a vector by the Manhattan magnitude.
+     * (the sum of each component's absolutes)
+     * <p>
+     * If the other vector is a color or represents one in vector form,
+     * This will effectively compare the sum of the RGBA components.
+     * </p>
+     *
+     * @param v The vector to compare to
+     * @return {@code 0} if the Manhattan magnitudes are equal, {@code 1} if this is larger, {@code -1} otherwise
+     */
+    @Override
+    public int compareTo(@Nonnull Float4 v) {
+        return Double.compare(normManhattan(), v.normManhattan());
+    }
+
+
+    //
+    // Numeric conversion
+    //
+
+    /*
+     * These methods are only implemented to respect the contract of Vector.
+     * They should not be used under normal circumstances.
+     */
+
+    /**
+     * This method is not supported.
+     *
+     * @return Cannot return a value
+     * @throws UnsupportedOperationException Always throws an exception
+     */
+    @Override
+    public byte byteValue() {
+        throw new UnsupportedOperationException("A color cannot be represented as a byte.");
+    }
+
+    /**
+     * This method is not supported.
+     *
+     * @return Cannot return a value
+     * @throws UnsupportedOperationException Always throws an exception
+     */
+    @Override
+    public short shortValue() {
+        throw new UnsupportedOperationException("A color cannot be represented as a short.");
+    }
+
+    /**
+     * Returns the value of {@link LinearColor#rgba()}.
+     *
+     * @return The RGB hex value of this color
+     */
+    @Override
+    public int intValue() {
+        return rgba();
+    }
+
+    /**
+     * Returns the value of {@link LinearColor#pack()}.
+     *
+     * @return The 64 bit RGBA representation of this color
+     */
+    @Override
+    public long longValue() {
+        return pack();
+    }
+
+    /**
+     * Returns the value of {@link LinearColor#rgba()} converted to float.
+     *
+     * @return The 32 bit representation of this color in {@code float} form
+     * @see Float#intBitsToFloat(int)
+     */
+    @Override
+    public float floatValue() {
+        return Float.intBitsToFloat(rgba());
+    }
+
+    /**
+     * Returns the value of {@link LinearColor#pack()} converted to double.
+     *
+     * @return The 64 bit representation of this color in {@code double} form
+     * @see Double#longBitsToDouble(long)
+     */
+    @Override
+    public double doubleValue() {
+        return Double.longBitsToDouble(pack());
+    }
+
+    //
     // Equality
     //
 

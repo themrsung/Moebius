@@ -8,7 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * A shallowly immutable tuple of objects. This is similar to the Python tuples.
+ * A shallowly immutable tuple of objects. This is similar to Python tuples.
  * <p>
  * Similarly to arrays, tuples have a fixed size which cannot be changed after instantiation.
  * Unlike arrays, the value of a tuple's element cannot be changed.

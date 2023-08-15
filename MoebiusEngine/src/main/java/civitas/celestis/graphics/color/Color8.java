@@ -41,6 +41,25 @@ public interface Color8 extends Packable {
     }
 
     //
+    // Parsing
+    //
+
+    /**
+     * Deserializes a string into a color.
+     *
+     * @param input The input string to parse
+     * @return The parsed color
+     * @throws IllegalArgumentException When the format is invalid
+     */
+    @Nonnull
+    static Color8 parseColor(@Nonnull String input) throws IllegalArgumentException {
+        try {return SimpleColor.parseColor(input);} catch (final Exception ignored) {}
+        try {return LinearColor.parseColor(input);} catch (final Exception ignored) {}
+
+        throw new IllegalArgumentException("The string does not represent a color.");
+    }
+
+    //
     // Packing
     //
 

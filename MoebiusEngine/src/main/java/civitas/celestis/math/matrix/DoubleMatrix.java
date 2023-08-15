@@ -630,12 +630,12 @@ public class DoubleMatrix implements Matrix<Double, DoubleMatrix> {
      */
     @Override
     public boolean equals(@Nullable Object obj) {
-        if (!(obj instanceof Grid<?, ?> a)) return false;
-        if (rows != a.rows() || columns != a.columns()) return false;
+        if (!(obj instanceof Grid<?, ?> g)) return false;
+        if (rows != g.rows() || columns != g.columns()) return false;
 
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < columns; c++) {
-                if (!Objects.equals(values[r][c], a.get(r, c))) return false;
+                if (!Objects.equals(values[r][c], g.get(r, c))) return false;
             }
         }
 
@@ -650,6 +650,8 @@ public class DoubleMatrix implements Matrix<Double, DoubleMatrix> {
      */
     @Override
     public boolean equals(@Nonnull DoubleMatrix m) {
+        if (rows != m.rows || columns != m.columns) return false;
+
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < columns; c++) {
                 if (values[r][c] != m.values[r][c]) return false;
