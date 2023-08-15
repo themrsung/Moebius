@@ -4,6 +4,8 @@ import civitas.celestis.util.packing.Packable;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
+import java.awt.*;
+
 /**
  * An 8-bit color.
  * The component values have a range of {@code 0-255}.
@@ -13,21 +15,29 @@ import jakarta.annotation.Nullable;
  */
 public interface Color8 extends Packable {
     //
-    // Equality
+    // Static Utilities
     //
 
     /**
-     * Checks for equality between two colors.
-     * This is a null-safe operation.
+     * Converts a {@link Color8} to an AWT {@link Color}.
      *
-     * @param c1 The first color to compare
-     * @param c2 The second color to compare
-     * @return {@code true} if the colors are equal
-     * @see Color8#equals(Object)
+     * @param color The color to convert
+     * @return The converted color
      */
-    static boolean equals(@Nullable Color8 c1, @Nullable Color8 c2) {
-        if (c1 == null || c2 == null) return false;
-        return c1.equals(c2);
+    @Nonnull
+    static Color toAWT(@Nonnull Color8 color) {
+        return new Color(color.red(), color.green(), color.blue(), color.alpha());
+    }
+
+    /**
+     * Converts an AWT {@link Color} to a {@link Color8}.
+     *
+     * @param color The color to convert
+     * @return The converted color
+     */
+    @Nonnull
+    static Color8 fromAWT(@Nonnull Color color) {
+        return new SimpleColor(hexToRgba(color.getRGB(), color.getAlpha()));
     }
 
     //

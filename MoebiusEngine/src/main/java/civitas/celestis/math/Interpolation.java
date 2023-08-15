@@ -1,5 +1,6 @@
 package civitas.celestis.math;
 
+import civitas.celestis.graphics.color.Color8;
 import civitas.celestis.graphics.color.LinearColor;
 import civitas.celestis.math.complex.Quaternion;
 import civitas.celestis.math.vector.*;
@@ -127,6 +128,25 @@ public final class Interpolation {
     @Nonnull
     public static LinearColor lerp(@Nonnull LinearColor start, @Nonnull LinearColor end, float t) {
         return new LinearColor(start.add(end.subtract(start).multiply(t)));
+    }
+
+    /**
+     * Performs linear interpolation between two colors.
+     *
+     * @param start The starting color
+     * @param end   The end color
+     * @param t     The interpolation parameter {@code t} ({@code 0-1})
+     * @return The interpolated color
+     */
+    @Nonnull
+    public static Color8 lerp(@Nonnull Color8 start, @Nonnull Color8 end, float t) {
+        if (start instanceof Float4 f1 && end instanceof Float4 f2) {
+            // LERP directly if native support is available
+            return new LinearColor(f1.add(f2.subtract(f1).multiply(t)));
+        }
+
+        // Convert to linear color, then LERP
+        return lerp(new LinearColor(start), new LinearColor(end), t);
     }
 
     //
