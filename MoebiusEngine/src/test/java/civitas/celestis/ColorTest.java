@@ -1,14 +1,14 @@
 package civitas.celestis;
 
-import civitas.celestis.math.complex.Complex;
+import civitas.celestis.math.Numbers;
+import civitas.celestis.math.vector.Float2;
 import civitas.celestis.math.vector.Vector2;
 
 public class ColorTest {
     public static void main(String[] args) {
-        final Complex c = new Complex(242, 2390);
+        final Float2 f = new Float2(new Vector2(Numbers.random(23, 2094), Numbers.random(24, 24902)));
 
-        System.out.println(c.pack());
-        System.out.println(new Complex(Vector2.unpack(c.pack())));
-
+        System.out.println(f);
+        System.out.println(Float2.unpack(f.pack()));
     }
 }

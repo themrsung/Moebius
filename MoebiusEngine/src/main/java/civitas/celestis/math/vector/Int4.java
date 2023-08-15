@@ -311,7 +311,7 @@ public class Int4 extends Number implements IntVector<Int4> {
     @Nonnull
     @Override
     public Int4 add(@Nonnull Int4 v) {
-        return new Int4(w * v.w, x + v.x, y + v.y, z + v.z);
+        return new Int4(w + v.w, x + v.x, y + v.y, z + v.z);
     }
 
     /**
@@ -593,11 +593,10 @@ public class Int4 extends Number implements IntVector<Int4> {
      *
      * @param input The input to deserialize
      * @return The parsed vector
-     * @throws NumberFormatException    When the format is invalid
-     * @throws IllegalArgumentException When at least one of the component scalars is non-finite
+     * @throws NumberFormatException When the format is invalid
      */
     @Nonnull
-    public static Int4 parseVector(@Nonnull String input) throws IllegalArgumentException {
+    public static Int4 parseVector(@Nonnull String input) throws NumberFormatException {
         if (!input.startsWith("Int4{")) {
             throw new NumberFormatException("The provided string does not represent a Int4.");
         }

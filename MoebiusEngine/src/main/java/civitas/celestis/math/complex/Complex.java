@@ -15,6 +15,7 @@ public class Complex extends Vector2 {
 
     /**
      * Creates a new complex number.
+     *
      * @param r The real part of this number
      * @param i The imaginary part of this number
      */
@@ -24,6 +25,7 @@ public class Complex extends Vector2 {
 
     /**
      * Creates a new complex number.
+     *
      * @param values A 2-element array with the first element being the real part,
      *               and the second element being the imaginary part
      */
@@ -33,6 +35,7 @@ public class Complex extends Vector2 {
 
     /**
      * Creates a new complex number.
+     *
      * @param v The vector to copy values from
      */
     public Complex(@Nonnull Vector2 v) {
@@ -41,6 +44,7 @@ public class Complex extends Vector2 {
 
     /**
      * Creates a new complex number.
+     *
      * @param v The vector to copy values from
      */
     public Complex(@Nonnull Float2 v) {
@@ -49,6 +53,7 @@ public class Complex extends Vector2 {
 
     /**
      * Creates a new complex number.
+     *
      * @param v The vector to copy values from
      */
     public Complex(@Nonnull Int2 v) {
@@ -61,6 +66,7 @@ public class Complex extends Vector2 {
 
     /**
      * Adds a scalar to this number.
+     *
      * @param s The scalar to add to this number
      * @return The resulting number
      */
@@ -72,6 +78,7 @@ public class Complex extends Vector2 {
 
     /**
      * Subtracts a scalar from this number.
+     *
      * @param s The scalar to subtract from this number
      * @return The resulting number
      */
@@ -83,6 +90,7 @@ public class Complex extends Vector2 {
 
     /**
      * Multiplies this number by a scalar.
+     *
      * @param s The scalar to multiply to this number
      * @return The resulting number
      */
@@ -94,6 +102,7 @@ public class Complex extends Vector2 {
 
     /**
      * Divides this number by a scalar.
+     *
      * @param s The scalar to divide this number by
      * @return The resulting number
      */
@@ -105,6 +114,7 @@ public class Complex extends Vector2 {
 
     /**
      * Adds another complex number to this number.
+     *
      * @param c The complex number to add to this number
      * @return The sum of the two numbers
      */
@@ -115,6 +125,7 @@ public class Complex extends Vector2 {
 
     /**
      * Subtracts another complex number from this number.
+     *
      * @param c The complex number to subtract from this number
      * @return The resulting number
      */
@@ -137,6 +148,7 @@ public class Complex extends Vector2 {
 
     /**
      * Divides this number by another complex number.
+     *
      * @param c The complex number to divide this complex number by
      * @return The quotient of the two numbers
      * @throws ArithmeticException When the squared norm of the provided number {@code c} is zero
@@ -160,6 +172,7 @@ public class Complex extends Vector2 {
 
     /**
      * Returns the inverse of this number.
+     *
      * @return The inverse of this number
      * @throws ArithmeticException When the squared norm of this number is zero
      */
@@ -176,6 +189,7 @@ public class Complex extends Vector2 {
 
     /**
      * Rotates this number counter-clockwise by given angle.
+     *
      * @param angRads Angle in radians to rotate this vector by
      * @return The rotated number
      */
@@ -214,6 +228,7 @@ public class Complex extends Vector2 {
 
     /**
      * This operation is not supported.
+     *
      * @return This method cannot return a value
      * @throws UnsupportedOperationException Always throws an exception
      */
@@ -224,6 +239,7 @@ public class Complex extends Vector2 {
 
     /**
      * This operation is not supported.
+     *
      * @return This method cannot return a value
      * @throws UnsupportedOperationException Always throws an exception
      */
@@ -234,6 +250,7 @@ public class Complex extends Vector2 {
 
     /**
      * This operation is not supported.
+     *
      * @return This method cannot return a value
      * @throws UnsupportedOperationException Always throws an exception
      */
@@ -244,6 +261,7 @@ public class Complex extends Vector2 {
 
     /**
      * Returns the packed value of this complex number.
+     *
      * @return The packed value
      * @see Complex#pack()
      */
@@ -254,6 +272,7 @@ public class Complex extends Vector2 {
 
     /**
      * This operation is not supported.
+     *
      * @return This method cannot return a value
      * @throws UnsupportedOperationException Always throws an exception
      */
@@ -264,6 +283,7 @@ public class Complex extends Vector2 {
 
     /**
      * Returns the packed value of this complex number in the format of {@code double}.
+     *
      * @return The packed value as a {@code double}
      * @see Complex#pack()
      */
@@ -281,11 +301,10 @@ public class Complex extends Vector2 {
      *
      * @param input The input to deserialize
      * @return The parsed vector
-     * @throws NumberFormatException    When the format is invalid
-     * @throws IllegalArgumentException When at least one of the component scalars is non-finite
+     * @throws NumberFormatException When the format is invalid
      */
     @Nonnull
-    public static Complex parseVector(@Nonnull String input) throws IllegalArgumentException {
+    public static Complex parseVector(@Nonnull String input) throws NumberFormatException {
         if (!input.startsWith("Vector2{")) {
             throw new NumberFormatException("The provided string does not represent a Complex.");
         }

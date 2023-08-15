@@ -340,7 +340,7 @@ public class Vector4 extends Number implements DoubleVector<Vector4> {
     @Nonnull
     @Override
     public Vector4 add(@Nonnull Vector4 v) {
-        return new Vector4(w * v.w, x + v.x, y + v.y, z + v.z);
+        return new Vector4(w + v.w, x + v.x, y + v.y, z + v.z);
     }
 
     /**
@@ -622,11 +622,10 @@ public class Vector4 extends Number implements DoubleVector<Vector4> {
      *
      * @param input The input to deserialize
      * @return The parsed vector
-     * @throws NumberFormatException    When the format is invalid
-     * @throws IllegalArgumentException When at least one of the component scalars is non-finite
+     * @throws NumberFormatException When the format is invalid
      */
     @Nonnull
-    public static Vector4 parseVector(@Nonnull String input) throws IllegalArgumentException {
+    public static Vector4 parseVector(@Nonnull String input) throws NumberFormatException {
         if (!input.startsWith("Vector4{")) {
             throw new NumberFormatException("The provided string does not represent a Vector4.");
         }

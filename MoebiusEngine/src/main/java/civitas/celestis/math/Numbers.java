@@ -36,6 +36,24 @@ public final class Numbers {
     }
 
     /**
+     * Explicitly denotes that a given {@code double} must be finite.
+     * This is determined by the static method {@link Float#isFinite(float)}.
+     * If the value is finite, this will simply pass through the value to the return value.
+     * If not, this will throw an {@link IllegalArgumentException}.
+     *
+     * @param value The value to validate
+     * @return The value given as the parameter
+     * @throws IllegalArgumentException When the given field is non-finite
+     */
+    public static float requireFinite(float value) {
+        if (!Float.isFinite(value)) {
+            throw new IllegalArgumentException("This field requires a finite value as an input. The provided value was " + value + ".");
+        }
+
+        return value;
+    }
+
+    /**
      * Explicitly denotes that the provided value requires to be within the given boundaries.
      *
      * @param value The value to validate
@@ -46,7 +64,7 @@ public final class Numbers {
      */
     public static double requireRange(double value, double min, double max) {
         if (value < min || value > max) {
-            throw new IllegalArgumentException("The provided value required to be within the range of " + min + "-" + max + ".");
+            throw new IllegalArgumentException("The provided value requires to be within the range of " + min + "-" + max + ".");
         }
 
         return value;
@@ -85,6 +103,193 @@ public final class Numbers {
      * @throws IllegalArgumentException When {@code value == 0}
      */
     public static double requireNonZero(double value) {
+        if (value == 0) {
+            throw new IllegalArgumentException("This value cannot be zero.");
+        }
+
+        return value;
+    }
+
+    /**
+     * Explicitly denotes that the provided value requires to be within the given boundaries.
+     *
+     * @param value The value to validate
+     * @param min   The minimum allowed value
+     * @param max   The maximum allowed value
+     * @return The value provided as the {@code value} parameter
+     * @throws IllegalArgumentException When the value is out of range
+     */
+    public static float requireRange(float value, float min, float max) {
+        if (value < min || value > max) {
+            throw new IllegalArgumentException("The provided value requires to be within the range of " + min + "-" + max + ".");
+        }
+
+        return value;
+    }
+
+    /**
+     * Explicitly denotes that a given {@code double} must be either zero or positive.
+     * Non-finite values are also not allowed.
+     *
+     * @param value The value to validate
+     * @return The value given as the parameter
+     * @throws IllegalArgumentException When {@code value < 0}
+     */
+    public static float requireNonNegative(float value) {
+        return requireRange(value, 0, Float.MAX_VALUE);
+    }
+
+    /**
+     * Explicitly denotes that a given {@code double} must have a positive sign.
+     * Non-finite values are also not allowed.
+     *
+     * @param value The value to validate
+     * @return The value given as the parameter
+     * @throws IllegalArgumentException When {@code value < Double.MIN_VALUE}
+     */
+    public static float requirePositive(float value) {
+        return requireRange(value, Float.MIN_VALUE, Float.MAX_VALUE);
+    }
+
+    /**
+     * Explicitly denotes that a given {@code double} must not be zero.
+     * This only checks for {@code value != 0} and does not filter out non-finite values.
+     *
+     * @param value The value to validate
+     * @return The value given as the parameter
+     * @throws IllegalArgumentException When {@code value == 0}
+     */
+    public static float requireNonZero(float value) {
+        if (value == 0) {
+            throw new IllegalArgumentException("This value cannot be zero.");
+        }
+
+        return value;
+    }
+
+    /**
+     * Explicitly denotes that the provided value requires to be within the given boundaries.
+     *
+     * @param value The value to validate
+     * @param min   The minimum allowed value
+     * @param max   The maximum allowed value
+     * @return The value provided as the {@code value} parameter
+     * @throws IllegalArgumentException When the value is out of range
+     */
+    public static long requireRange(long value, long min, long max) {
+        if (value < min || value > max) {
+            throw new IllegalArgumentException("The provided value requires to be within the range of " + min + "-" + max + ".");
+        }
+
+        return value;
+    }
+
+    /**
+     * Explicitly denotes that a given {@code double} must be either zero or positive.
+     * Non-finite values are also not allowed.
+     *
+     * @param value The value to validate
+     * @return The value given as the parameter
+     * @throws IllegalArgumentException When {@code value < 0}
+     */
+    public static long requireNonNegative(long value) {
+        if (value < 0) {
+            throw new IllegalArgumentException("The provided value requires to be non-negative.");
+        }
+
+        return value;
+    }
+
+    /**
+     * Explicitly denotes that a given {@code double} must have a positive sign.
+     * Non-finite values are also not allowed.
+     *
+     * @param value The value to validate
+     * @return The value given as the parameter
+     * @throws IllegalArgumentException When {@code value < Double.MIN_VALUE}
+     */
+    public static long requirePositive(long value) {
+        if (value <= 0) {
+            throw new IllegalArgumentException("The provided value requires to be positive.");
+        }
+
+        return value;
+    }
+
+    /**
+     * Explicitly denotes that a given {@code double} must not be zero.
+     * This only checks for {@code value != 0} and does not filter out non-finite values.
+     *
+     * @param value The value to validate
+     * @return The value given as the parameter
+     * @throws IllegalArgumentException When {@code value == 0}
+     */
+    public static long requireNonZero(long value) {
+        if (value == 0) {
+            throw new IllegalArgumentException("This value cannot be zero.");
+        }
+
+        return value;
+    }
+
+    /**
+     * Explicitly denotes that the provided value requires to be within the given boundaries.
+     *
+     * @param value The value to validate
+     * @param min   The minimum allowed value
+     * @param max   The maximum allowed value
+     * @return The value provided as the {@code value} parameter
+     * @throws IllegalArgumentException When the value is out of range
+     */
+    public static int requireRange(int value, int min, int max) {
+        if (value < min || value > max) {
+            throw new IllegalArgumentException("The provided value requires to be within the range of " + min + "-" + max + ".");
+        }
+
+        return value;
+    }
+
+    /**
+     * Explicitly denotes that a given {@code double} must be either zero or positive.
+     * Non-finite values are also not allowed.
+     *
+     * @param value The value to validate
+     * @return The value given as the parameter
+     * @throws IllegalArgumentException When {@code value < 0}
+     */
+    public static int requireNonNegative(int value) {
+        if (value < 0) {
+            throw new IllegalArgumentException("The provided value requires to be non-negative.");
+        }
+
+        return value;
+    }
+
+    /**
+     * Explicitly denotes that a given {@code double} must have a positive sign.
+     * Non-finite values are also not allowed.
+     *
+     * @param value The value to validate
+     * @return The value given as the parameter
+     * @throws IllegalArgumentException When {@code value < Double.MIN_VALUE}
+     */
+    public static int requirePositive(int value) {
+        if (value <= 0) {
+            throw new IllegalArgumentException("The provided value requires to be positive.");
+        }
+
+        return value;
+    }
+
+    /**
+     * Explicitly denotes that a given {@code double} must not be zero.
+     * This only checks for {@code value != 0} and does not filter out non-finite values.
+     *
+     * @param value The value to validate
+     * @return The value given as the parameter
+     * @throws IllegalArgumentException When {@code value == 0}
+     */
+    public static int requireNonZero(int value) {
         if (value == 0) {
             throw new IllegalArgumentException("This value cannot be zero.");
         }

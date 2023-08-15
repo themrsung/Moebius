@@ -215,11 +215,10 @@ public class Quaternion extends Vector4 {
      *
      * @param input The input to deserialize
      * @return The parsed vector
-     * @throws NumberFormatException    When the format is invalid
-     * @throws IllegalArgumentException When at least one of the component scalars is non-finite
+     * @throws NumberFormatException When the format is invalid
      */
     @Nonnull
-    public static Quaternion parseQuaternion(@Nonnull String input) throws IllegalArgumentException {
+    public static Quaternion parseQuaternion(@Nonnull String input) throws NumberFormatException {
         if (!input.startsWith("Quaternion{")) {
             throw new NumberFormatException("The provided string does not represent a Quaternion.");
         }

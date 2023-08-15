@@ -114,6 +114,7 @@ public class Float2 extends Number implements FloatVector<Float2>, Packable {
 
     /**
      * Unpacks a packed value of a {@link Float2}.
+     *
      * @param packed The packed {@code long}
      * @return The unpacked vector
      * @see Float2#pack()
@@ -131,7 +132,7 @@ public class Float2 extends Number implements FloatVector<Float2>, Packable {
      * Since both formats have 64 bits, no precision is lost.
      *
      * @return The packed {@code long}
-     * @see Float2#unpack(long) 
+     * @see Float2#unpack(long)
      */
     @Override
     public long pack() {
@@ -626,11 +627,10 @@ public class Float2 extends Number implements FloatVector<Float2>, Packable {
      *
      * @param input The input to deserialize
      * @return The parsed vector
-     * @throws NumberFormatException    When the format is invalid
-     * @throws IllegalArgumentException When at least one of the component scalars is non-finite
+     * @throws NumberFormatException When the format is invalid
      */
     @Nonnull
-    public static Float2 parseVector(@Nonnull String input) throws IllegalArgumentException {
+    public static Float2 parseVector(@Nonnull String input) throws NumberFormatException {
         if (!input.startsWith("Float2{")) {
             throw new NumberFormatException("The provided string does not represent a Float2.");
         }

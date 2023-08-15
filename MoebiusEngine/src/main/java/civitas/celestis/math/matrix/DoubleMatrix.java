@@ -668,7 +668,7 @@ public class DoubleMatrix implements Matrix<Double, DoubleMatrix> {
      *
      * @param s String to parse
      * @return Matrix parsed from given string
-     * @throws NumberFormatException    When the string is not parsable to a matrix
+     * @throws NumberFormatException When the string is not parsable to a matrix
      */
     @Nonnull
     public static DoubleMatrix parseMatrix(@Nonnull String s) throws IllegalArgumentException {

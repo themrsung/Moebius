@@ -10,6 +10,7 @@ public interface Packable {
 
     /**
      * Packs this object into 64 bits.
+     *
      * @return The packed object
      */
     long pack();

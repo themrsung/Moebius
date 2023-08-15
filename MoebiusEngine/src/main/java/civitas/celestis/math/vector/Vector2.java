@@ -1,7 +1,6 @@
 package civitas.celestis.math.vector;
 
 import civitas.celestis.math.Numbers;
-import civitas.celestis.math.complex.Complex;
 import civitas.celestis.util.packing.Packable;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
@@ -111,6 +110,7 @@ public class Vector2 extends Number implements DoubleVector<Vector2>, Packable {
 
     /**
      * Unpacks a packed value of a {@link Vector2}.
+     *
      * @param packed The packed {@code long}
      * @return The unpacked value
      * @see Vector2#pack()
@@ -128,6 +128,7 @@ public class Vector2 extends Number implements DoubleVector<Vector2>, Packable {
 
     /**
      * Packs this number into 64 bits.
+     *
      * @return The packed number in {@code long} format
      * @see Vector2#pack()
      */
@@ -624,11 +625,10 @@ public class Vector2 extends Number implements DoubleVector<Vector2>, Packable {
      *
      * @param input The input to deserialize
      * @return The parsed vector
-     * @throws NumberFormatException    When the format is invalid
-     * @throws IllegalArgumentException When at least one of the component scalars is non-finite
+     * @throws NumberFormatException When the format is invalid
      */
     @Nonnull
-    public static Vector2 parseVector(@Nonnull String input) throws IllegalArgumentException {
+    public static Vector2 parseVector(@Nonnull String input) throws NumberFormatException {
         if (!input.startsWith("Vector2{")) {
             throw new NumberFormatException("The provided string does not represent a Vector2.");
         }

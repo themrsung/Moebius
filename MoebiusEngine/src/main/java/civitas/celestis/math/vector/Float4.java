@@ -118,6 +118,18 @@ public class Float4 extends Number implements FloatVector<Float4> {
         this.z = (float) v.z;
     }
 
+    /**
+     * Creates a new vector.
+     *
+     * @param v The vector of which to copy component values from
+     */
+    public Float4(@Nonnull Int4 v) {
+        this.w = v.w;
+        this.x = v.x;
+        this.y = v.y;
+        this.z = v.z;
+    }
+
     //
     // Variables
     //
@@ -328,7 +340,7 @@ public class Float4 extends Number implements FloatVector<Float4> {
     @Nonnull
     @Override
     public Float4 add(@Nonnull Float4 v) {
-        return new Float4(w * v.w, x + v.x, y + v.y, z + v.z);
+        return new Float4(w + v.w, x + v.x, y + v.y, z + v.z);
     }
 
     /**
@@ -610,11 +622,10 @@ public class Float4 extends Number implements FloatVector<Float4> {
      *
      * @param input The input to deserialize
      * @return The parsed vector
-     * @throws NumberFormatException    When the format is invalid
-     * @throws IllegalArgumentException When at least one of the component scalars is non-finite
+     * @throws NumberFormatException When the format is invalid
      */
     @Nonnull
-    public static Float4 parseVector(@Nonnull String input) throws IllegalArgumentException {
+    public static Float4 parseVector(@Nonnull String input) throws NumberFormatException {
         if (!input.startsWith("Float4{")) {
             throw new NumberFormatException("The provided string does not represent a Float4.");
         }

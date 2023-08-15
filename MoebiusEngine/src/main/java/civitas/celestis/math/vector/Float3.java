@@ -625,11 +625,10 @@ public class Float3 extends Number implements FloatVector<Float3> {
      *
      * @param input The input to deserialize
      * @return The parsed vector
-     * @throws NumberFormatException    When the format is invalid
-     * @throws IllegalArgumentException When at least one of the component scalars is non-finite
+     * @throws NumberFormatException When the format is invalid
      */
     @Nonnull
-    public static Float3 parseVector(@Nonnull String input) throws IllegalArgumentException {
+    public static Float3 parseVector(@Nonnull String input) throws NumberFormatException {
         if (!input.startsWith("Float3{")) {
             throw new NumberFormatException("The provided string does not represent a Float3.");
         }

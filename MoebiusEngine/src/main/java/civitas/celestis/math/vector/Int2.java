@@ -110,6 +110,7 @@ public class Int2 extends Number implements IntVector<Int2>, Packable {
 
     /**
      * Unpacks a packed value of {@link Int2}.
+     *
      * @param packed The packed value
      * @return The unpacked vector
      * @see Int2#pack()
@@ -122,6 +123,7 @@ public class Int2 extends Number implements IntVector<Int2>, Packable {
 
     /**
      * Packs this vector into 64 bits.
+     *
      * @return The packed {@code long}
      * @see Int2#unpack(long)
      */
@@ -587,11 +589,10 @@ public class Int2 extends Number implements IntVector<Int2>, Packable {
      *
      * @param input The input to deserialize
      * @return The parsed vector
-     * @throws NumberFormatException    When the format is invalid
-     * @throws IllegalArgumentException When at least one of the component scalars is non-finite
+     * @throws NumberFormatException When the format is invalid
      */
     @Nonnull
-    public static Int2 parseVector(@Nonnull String input) throws IllegalArgumentException {
+    public static Int2 parseVector(@Nonnull String input) throws NumberFormatException {
         if (!input.startsWith("Int2{")) {
             throw new NumberFormatException("The provided string does not represent a Int2.");
         }

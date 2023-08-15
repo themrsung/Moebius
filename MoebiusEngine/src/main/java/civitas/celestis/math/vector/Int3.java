@@ -596,11 +596,10 @@ public class Int3 extends Number implements IntVector<Int3> {
      *
      * @param input The input to deserialize
      * @return The parsed vector
-     * @throws NumberFormatException    When the format is invalid
-     * @throws IllegalArgumentException When at least one of the component scalars is non-finite
+     * @throws NumberFormatException When the format is invalid
      */
     @Nonnull
-    public static Int3 parseVector(@Nonnull String input) throws IllegalArgumentException {
+    public static Int3 parseVector(@Nonnull String input) throws NumberFormatException {
         if (!input.startsWith("Int3{")) {
             throw new NumberFormatException("The provided string does not represent a Int3.");
         }

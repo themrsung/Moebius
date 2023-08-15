@@ -1,9 +1,8 @@
 package civitas.celestis.math;
 
+import civitas.celestis.graphics.color.LinearColor;
 import civitas.celestis.math.complex.Quaternion;
-import civitas.celestis.math.vector.Vector2;
-import civitas.celestis.math.vector.Vector3;
-import civitas.celestis.math.vector.Vector4;
+import civitas.celestis.math.vector.*;
 import jakarta.annotation.Nonnull;
 
 /**
@@ -79,6 +78,45 @@ public final class Interpolation {
     }
 
     /**
+     * Performs linear interpolation between two vectors.
+     *
+     * @param start The starting vector
+     * @param end   The end vector
+     * @param t     The interpolation parameter {@code t} ({@code 0-1})
+     * @return The interpolated vector
+     */
+    @Nonnull
+    public static Float2 lerp(@Nonnull Float2 start, @Nonnull Float2 end, float t) {
+        return start.add(end.subtract(start).multiply(t));
+    }
+
+    /**
+     * Performs linear interpolation between two vectors.
+     *
+     * @param start The starting vector
+     * @param end   The end vector
+     * @param t     The interpolation parameter {@code t} ({@code 0-1})
+     * @return The interpolated vector
+     */
+    @Nonnull
+    public static Float3 lerp(@Nonnull Float3 start, @Nonnull Float3 end, float t) {
+        return start.add(end.subtract(start).multiply(t));
+    }
+
+    /**
+     * Performs linear interpolation between two vectors.
+     *
+     * @param start The starting vector
+     * @param end   The end vector
+     * @param t     The interpolation parameter {@code t} ({@code 0-1})
+     * @return The interpolated vector
+     */
+    @Nonnull
+    public static Float4 lerp(@Nonnull Float4 start, @Nonnull Float4 end, float t) {
+        return start.add(end.subtract(start).multiply(t));
+    }
+
+    /**
      * Performs linear interpolation between two colors.
      *
      * @param start The starting color
@@ -86,10 +124,10 @@ public final class Interpolation {
      * @param t     The interpolation parameter {@code t} ({@code 0-1})
      * @return The interpolated color
      */
-//    @Nonnull
-//    public static RichColor lerp(@Nonnull RichColor start, @Nonnull RichColor end, double t) {
-//        return new RichColor(lerp((Vector4) start, end, t)); // Delegates to Vector4 lerp for optimization
-//    }
+    @Nonnull
+    public static LinearColor lerp(@Nonnull LinearColor start, @Nonnull LinearColor end, float t) {
+        return new LinearColor(start.add(end.subtract(start).multiply(t)));
+    }
 
     //
     // Spherical Linear Interpolation
