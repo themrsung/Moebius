@@ -10,6 +10,15 @@ import jakarta.annotation.Nonnull;
  */
 public class Complex extends Vector2 {
     //
+    // Constants
+    //
+
+    /**
+     * The square root of {@code -1}.
+     */
+    public static final Complex I = new Complex(0, 1);
+
+    //
     // Constructors
     //
 

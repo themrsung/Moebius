@@ -927,6 +927,75 @@ public final class Numbers {
 
     /**
      * Returns the sum of the provided vectors.
+     * This is the equivalent of chaining {@link Long2#add(Long2)}, but is faster due to the lack of
+     * re-instantiation every iteration.
+     *
+     * @param values The vectors to sum
+     * @return The sum of the provided vectors
+     */
+    @Nonnull
+    public static Long2 sum(@Nonnull Long2... values) {
+        long x = 0;
+        long y = 0;
+
+        for (final Long2 value : values) {
+            x += value.x();
+            y += value.y();
+        }
+
+        return new Long2(x, y);
+    }
+
+    /**
+     * Returns the sum of the provided vectors.
+     * This is the equivalent of chaining {@link Long3#add(Long3)}, but is faster due to the lack of
+     * re-instantiation every iteration.
+     *
+     * @param values The vectors to sum
+     * @return The sum of the provided vectors
+     */
+    @Nonnull
+    public static Long3 sum(@Nonnull Long3... values) {
+        long x = 0;
+        long y = 0;
+        long z = 0;
+
+        for (final Long3 value : values) {
+            x += value.x();
+            y += value.y();
+            z += value.z();
+        }
+
+        return new Long3(x, y, z);
+    }
+
+    /**
+     * Returns the sum of the provided vectors.
+     * This is the equivalent of chaining {@link Long4#add(Long4)}, but is faster due to the lack of
+     * re-instantiation every iteration.
+     *
+     * @param values The vectors to sum
+     * @return The sum of the provided vectors
+     */
+    @Nonnull
+    public static Long4 sum(@Nonnull Long4... values) {
+        long w = 0;
+        long x = 0;
+        long y = 0;
+        long z = 0;
+
+        for (final Long4 value : values) {
+            w += value.w();
+            x += value.x();
+            y += value.y();
+            z += value.z();
+        }
+
+        return new Long4(w, x, y, z);
+    }
+
+    /**
+     * Returns the sum of the provided vectors.
      * This is the equivalent of chaining {@link Int2#add(Int2)}, but is faster due to the lack of
      * re-instantiation every iteration.
      *
@@ -1134,6 +1203,42 @@ public final class Numbers {
      * @return The average (geometric centroid) of ths provided vectors
      */
     @Nonnull
+    public static Long2 avg(@Nonnull Long2... values) {
+        return sum(values).divide(values.length);
+    }
+
+    /**
+     * Returns the average of the provided vectors.
+     * This is equivalent to the geometric centroid of the vectors.
+     *
+     * @param values The vectors to average
+     * @return The average (geometric centroid) of ths provided vectors
+     */
+    @Nonnull
+    public static Long3 avg(@Nonnull Long3... values) {
+        return sum(values).divide(values.length);
+    }
+
+    /**
+     * Returns the average of the provided vectors.
+     * This is equivalent to the geometric centroid of the vectors.
+     *
+     * @param values The vectors to average
+     * @return The average (geometric centroid) of ths provided vectors
+     */
+    @Nonnull
+    public static Long4 avg(@Nonnull Long4... values) {
+        return sum(values).divide(values.length);
+    }
+
+    /**
+     * Returns the average of the provided vectors.
+     * This is equivalent to the geometric centroid of the vectors.
+     *
+     * @param values The vectors to average
+     * @return The average (geometric centroid) of ths provided vectors
+     */
+    @Nonnull
     public static Int2 avg(@Nonnull Int2... values) {
         return sum(values).divide(values.length);
     }
@@ -1306,6 +1411,69 @@ public final class Numbers {
         }
 
         return new Float4(w, x, y, z);
+    }
+
+    /**
+     * Returns the minimum vector of the provided vectors.
+     *
+     * @param values The vectors to get the minimum of
+     * @return The minimum of the provided vectors
+     */
+    @Nonnull
+    public static Long2 min(@Nonnull Long2... values) {
+        long x = Integer.MAX_VALUE;
+        long y = Integer.MAX_VALUE;
+
+        for (final Long2 value : values) {
+            x = Math.min(x, value.x());
+            y = Math.min(y, value.y());
+        }
+
+        return new Long2(x, y);
+    }
+
+    /**
+     * Returns the minimum vector of the provided vectors.
+     *
+     * @param values The vectors to get the minimum of
+     * @return The minimum of the provided vectors
+     */
+    @Nonnull
+    public static Long3 min(@Nonnull Long3... values) {
+        long x = Integer.MAX_VALUE;
+        long y = Integer.MAX_VALUE;
+        long z = Integer.MAX_VALUE;
+
+        for (final Long3 value : values) {
+            x = Math.min(x, value.x());
+            y = Math.min(y, value.y());
+            z = Math.min(z, value.z());
+        }
+
+        return new Long3(x, y, z);
+    }
+
+    /**
+     * Returns the minimum vector of the provided vectors.
+     *
+     * @param values The vectors to get the minimum of
+     * @return The minimum of the provided vectors
+     */
+    @Nonnull
+    public static Long4 min(@Nonnull Long4... values) {
+        long w = Integer.MAX_VALUE;
+        long x = Integer.MAX_VALUE;
+        long y = Integer.MAX_VALUE;
+        long z = Integer.MAX_VALUE;
+
+        for (final Long4 value : values) {
+            w = Math.min(w, value.w());
+            x = Math.min(x, value.x());
+            y = Math.min(y, value.y());
+            z = Math.min(z, value.z());
+        }
+
+        return new Long4(w, x, y, z);
     }
 
     /**
@@ -1515,6 +1683,69 @@ public final class Numbers {
         }
 
         return new Float4(w, x, y, z);
+    }
+
+    /**
+     * Returns the maximum vector of the provided vectors.
+     *
+     * @param values The vectors to get the minimum of
+     * @return The maximum of the provided vectors
+     */
+    @Nonnull
+    public static Long2 max(@Nonnull Long2... values) {
+        long x = -Integer.MAX_VALUE;
+        long y = -Integer.MAX_VALUE;
+
+        for (final Long2 value : values) {
+            x = Math.max(x, value.x());
+            y = Math.max(y, value.y());
+        }
+
+        return new Long2(x, y);
+    }
+
+    /**
+     * Returns the maximum vector of the provided vectors.
+     *
+     * @param values The vectors to get the minimum of
+     * @return The maximum of the provided vectors
+     */
+    @Nonnull
+    public static Long3 max(@Nonnull Long3... values) {
+        long x = -Integer.MAX_VALUE;
+        long y = -Integer.MAX_VALUE;
+        long z = -Integer.MAX_VALUE;
+
+        for (final Long3 value : values) {
+            x = Math.max(x, value.x());
+            y = Math.max(y, value.y());
+            z = Math.max(z, value.z());
+        }
+
+        return new Long3(x, y, z);
+    }
+
+    /**
+     * Returns the maximum vector of the provided vectors.
+     *
+     * @param values The vectors to get the minimum of
+     * @return The maximum of the provided vectors
+     */
+    @Nonnull
+    public static Long4 max(@Nonnull Long4... values) {
+        long w = -Integer.MAX_VALUE;
+        long x = -Integer.MAX_VALUE;
+        long y = -Integer.MAX_VALUE;
+        long z = -Integer.MAX_VALUE;
+
+        for (final Long4 value : values) {
+            w = Math.max(w, value.w());
+            x = Math.max(x, value.x());
+            y = Math.max(y, value.y());
+            z = Math.max(z, value.z());
+        }
+
+        return new Long4(w, x, y, z);
     }
 
     /**
