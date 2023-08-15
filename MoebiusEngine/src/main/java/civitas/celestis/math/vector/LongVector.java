@@ -5,7 +5,7 @@ import jakarta.annotation.Nonnull;
 import java.util.function.UnaryOperator;
 
 /**
- * A two-dimensional array of {@code long}s.
+ * A one-dimensional array of {@code long}s.
  *
  * @param <V> Itself (The return value of arithmetic results)
  */

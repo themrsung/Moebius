@@ -7,7 +7,7 @@ import jakarta.annotation.Nullable;
 import java.io.Serializable;
 
 /**
- * A two-dimensional array of numbers.
+ * A one-dimensional array of numbers.
  *
  * @param <V> This vector (the result of arithmetic operations)
  */

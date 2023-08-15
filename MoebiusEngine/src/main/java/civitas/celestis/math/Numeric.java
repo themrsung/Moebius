@@ -11,6 +11,8 @@ import jakarta.annotation.Nonnull;
 
 /**
  * A superinterface for numeric data types.
+ * @see Vector
+ * @see civitas.celestis.math.matrix.Matrix Matrix
  */
 public interface Numeric {
     //
