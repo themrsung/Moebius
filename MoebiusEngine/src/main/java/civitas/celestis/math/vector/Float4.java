@@ -130,6 +130,18 @@ public class Float4 extends Number implements FloatVector<Float4> {
         this.z = v.z;
     }
 
+    /**
+     * Creates a new vector.
+     *
+     * @param v The vector of which to copy component values from
+     */
+    public Float4(@Nonnull Long4 v) {
+        this.w = v.w;
+        this.x = v.x;
+        this.y = v.y;
+        this.z = v.z;
+    }
+
     //
     // Variables
     //

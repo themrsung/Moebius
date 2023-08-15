@@ -8,7 +8,7 @@ import jakarta.annotation.Nullable;
 import java.util.function.UnaryOperator;
 
 /**
- * An immutable three-dimensional vector which uses {@code float}s to represent its components.
+ * An immutable three-dimensional vector which uses {@code int}s to represent its components.
  */
 public class Int3 extends Number implements IntVector<Int3> {
     //
@@ -91,6 +91,17 @@ public class Int3 extends Number implements IntVector<Int3> {
         this.x = v.x;
         this.y = v.y;
         this.z = v.z;
+    }
+
+    /**
+     * Creates a new vector.
+     *
+     * @param v The vector of which to copy component values from
+     */
+    public Int3(@Nonnull Long3 v) {
+        this.x = (int) v.x;
+        this.y = (int) v.y;
+        this.z = (int) v.z;
     }
 
     /**
@@ -216,7 +227,7 @@ public class Int3 extends Number implements IntVector<Int3> {
      * @return The Manhattan magnitude of this vector
      */
     @Override
-    public final float normManhattan() {
+    public final int normManhattan() {
         return Math.abs(x) + Math.abs(y) + Math.abs(z);
     }
 
@@ -360,10 +371,10 @@ public class Int3 extends Number implements IntVector<Int3> {
      * @return The Manhattan distance between this vector and the provided vector {@code v}
      */
     @Override
-    public float distanceManhattan(@Nonnull Int3 v) {
-        final float dx = Math.abs(x - v.x);
-        final float dy = Math.abs(y - v.y);
-        final float dz = Math.abs(z - v.z);
+    public int distanceManhattan(@Nonnull Int3 v) {
+        final int dx = Math.abs(x - v.x);
+        final int dy = Math.abs(y - v.y);
+        final int dz = Math.abs(z - v.z);
 
         return dx + dy + dz;
     }

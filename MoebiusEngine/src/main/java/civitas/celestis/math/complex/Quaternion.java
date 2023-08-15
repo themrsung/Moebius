@@ -1,7 +1,6 @@
 package civitas.celestis.math.complex;
 
-import civitas.celestis.math.vector.Vector3;
-import civitas.celestis.math.vector.Vector4;
+import civitas.celestis.math.vector.*;
 import jakarta.annotation.Nonnull;
 
 /**
@@ -47,7 +46,39 @@ public class Quaternion extends Vector4 {
         super(values);
     }
 
+    /**
+     * Creates a new quaternion.
+     *
+     * @param v The vector of which to copy component values from
+     */
     public Quaternion(@Nonnull Vector4 v) {
+        super(v);
+    }
+
+    /**
+     * Creates a new quaternion.
+     *
+     * @param v The vector of which to copy component values from
+     */
+    public Quaternion(@Nonnull Float4 v) {
+        super(v);
+    }
+
+    /**
+     * Creates a new quaternion.
+     *
+     * @param v The vector of which to copy component values from
+     */
+    public Quaternion(@Nonnull Long4 v) {
+        super(v);
+    }
+
+    /**
+     * Creates a new quaternion.
+     *
+     * @param v The vector of which to copy component values from
+     */
+    public Quaternion(@Nonnull Int4 v) {
         super(v);
     }
 

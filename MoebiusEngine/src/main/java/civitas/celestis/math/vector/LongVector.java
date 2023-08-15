@@ -5,11 +5,11 @@ import jakarta.annotation.Nonnull;
 import java.util.function.UnaryOperator;
 
 /**
- * A two-dimensional array of {@code int}s.
+ * A two-dimensional array of {@code long}s.
  *
  * @param <V> Itself (The return value of arithmetic results)
  */
-public interface IntVector<V extends IntVector<V>> extends Vector<V> {
+public interface LongVector<V extends LongVector<V>> extends Vector<V> {
     //
     // Properties
     //
@@ -20,28 +20,28 @@ public interface IntVector<V extends IntVector<V>> extends Vector<V> {
      * @return The array representation of this vector
      */
     @Nonnull
-    int[] values();
+    long[] values();
 
     /**
      * Returns the Euclidean norm (the magnitude) of this vector.
      *
      * @return The Euclidean norm of this vector
      */
-    float norm();
+    double norm();
 
     /**
      * Returns the squared Euclidean norm (the squared magnitude) of this vector.
      *
      * @return The squared Euclidean norm of this vector
      */
-    float norm2();
+    double norm2();
 
     /**
      * Returns the Manhattan norm of this vector.
      *
      * @return The Manhattan norm of this vector
      */
-    int normManhattan();
+    long normManhattan();
 
     //
     // Arithmetic
@@ -54,7 +54,7 @@ public interface IntVector<V extends IntVector<V>> extends Vector<V> {
      * @return The resulting vector
      */
     @Nonnull
-    V add(int s);
+    V add(long s);
 
     /**
      * Subtracts a scalar from each component of this vector.
@@ -63,7 +63,7 @@ public interface IntVector<V extends IntVector<V>> extends Vector<V> {
      * @return The resulting vector
      */
     @Nonnull
-    V subtract(int s);
+    V subtract(long s);
 
     /**
      * Multiplies a scalar to each component of this vector.
@@ -72,7 +72,7 @@ public interface IntVector<V extends IntVector<V>> extends Vector<V> {
      * @return The resulting vector
      */
     @Nonnull
-    V multiply(int s);
+    V multiply(long s);
 
     /**
      * Divides each component of this vector by a scalar.
@@ -82,7 +82,7 @@ public interface IntVector<V extends IntVector<V>> extends Vector<V> {
      * @throws ArithmeticException When the denominator {@code s} is zero
      */
     @Nonnull
-    V divide(int s);
+    V divide(long s);
 
     /**
      * Returns the dot product between this vector and the provided vector {@code v}.
@@ -90,27 +90,27 @@ public interface IntVector<V extends IntVector<V>> extends Vector<V> {
      * @param v The vector of which to get the dot product between
      * @return The dot product of the two vectors
      */
-    int dot(@Nonnull V v);
+    long dot(@Nonnull V v);
 
     //
     // Distance
     //
 
     /**
-     * Returns the distance between this vector and the provided vector {@code v}.
+     * Returns the Euclidean distance between this vector and the provided vector {@code v}.
      *
      * @param v The vector of which to get the distance between
-     * @return The distance between this vector and the provided vector {@code v}
+     * @return The Euclidean distance between this vector and the provided vector {@code v}
      */
-    float distance(@Nonnull V v);
+    double distance(@Nonnull V v);
 
     /**
-     * Returns the squared distance between this vector and the provided vector {@code v}.
+     * Returns the squared Euclidean distance between this vector and the provided vector {@code v}.
      *
      * @param v The vector of which to get the squared distance between
-     * @return The squared distance between this vector and the provided vector {@code v}
+     * @return The squared Euclidean distance between this vector and the provided vector {@code v}
      */
-    float distance2(@Nonnull V v);
+    double distance2(@Nonnull V v);
 
     /**
      * Returns the Manhattan distance between this vector and the provided vector {@code v}.
@@ -118,7 +118,7 @@ public interface IntVector<V extends IntVector<V>> extends Vector<V> {
      * @param v The vector of which to get the Manhattan distance between
      * @return The Manhattan distance between this vector and the provided vector {@code v}
      */
-    int distanceManhattan(@Nonnull V v);
+    long distanceManhattan(@Nonnull V v);
 
     //
     // Normalization
@@ -133,7 +133,7 @@ public interface IntVector<V extends IntVector<V>> extends Vector<V> {
      *                             magnitude vectors, and the magnitude of this vector is zero
      */
     @Nonnull
-    FloatVector<?> normalize();
+    Vector<?> normalize();
 
     //
     // Transformation
@@ -147,17 +147,5 @@ public interface IntVector<V extends IntVector<V>> extends Vector<V> {
      * @return The resulting vector
      */
     @Nonnull
-    V transform(@Nonnull UnaryOperator<Integer> transformer);
-
-    //
-    // Serialization
-    //
-
-    /**
-     * Serializes this vector into a string.
-     *
-     * @return The string representation of this vector
-     */
-    @Nonnull
-    String toString();
+    V transform(@Nonnull UnaryOperator<Long> transformer);
 }

@@ -108,6 +108,16 @@ public class Float2 extends Number implements FloatVector<Float2>, Packable {
         this.y = v.y;
     }
 
+    /**
+     * Creates a new vector.
+     *
+     * @param v The vector of which to copy component values from
+     */
+    public Float2(@Nonnull Long2 v) {
+        this.x = v.x;
+        this.y = v.y;
+    }
+
     //
     // Packing
     //

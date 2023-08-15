@@ -109,6 +109,17 @@ public class Vector3 extends Number implements DoubleVector<Vector3> {
      *
      * @param v The vector of which to copy component values from
      */
+    public Vector3(@Nonnull Long3 v) {
+        this.x = v.x;
+        this.y = v.y;
+        this.z = v.z;
+    }
+
+    /**
+     * Creates a new vector.
+     *
+     * @param v The vector of which to copy component values from
+     */
     public Vector3(@Nonnull Int3 v) {
         this.x = v.x;
         this.y = v.y;

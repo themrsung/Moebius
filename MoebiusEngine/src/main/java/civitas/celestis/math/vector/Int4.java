@@ -111,6 +111,18 @@ public class Int4 extends Number implements IntVector<Int4> {
      *
      * @param v The vector of which to copy component values from
      */
+    public Int4(@Nonnull Long4 v) {
+        this.w = (int) v.w;
+        this.x = (int) v.x;
+        this.y = (int) v.y;
+        this.z = (int) v.z;
+    }
+
+    /**
+     * Creates a new vector.
+     *
+     * @param v The vector of which to copy component values from
+     */
     public Int4(@Nonnull Float4 v) {
         this.w = (int) v.w;
         this.x = (int) v.x;
@@ -245,7 +257,7 @@ public class Int4 extends Number implements IntVector<Int4> {
      * @return The Manhattan magnitude of this vector
      */
     @Override
-    public final float normManhattan() {
+    public final int normManhattan() {
         return Math.abs(w) + Math.abs(x) + Math.abs(y) + Math.abs(z);
     }
 
@@ -380,11 +392,11 @@ public class Int4 extends Number implements IntVector<Int4> {
      * @return The Manhattan distance between this vector and the provided vector {@code v}
      */
     @Override
-    public float distanceManhattan(@Nonnull Int4 v) {
-        final float dw = Math.abs(w - v.w);
-        final float dx = Math.abs(x - v.x);
-        final float dy = Math.abs(y - v.y);
-        final float dz = Math.abs(z - v.z);
+    public int distanceManhattan(@Nonnull Int4 v) {
+        final int dw = Math.abs(w - v.w);
+        final int dx = Math.abs(x - v.x);
+        final int dy = Math.abs(y - v.y);
+        final int dz = Math.abs(z - v.z);
 
         return dw + dx + dy + dz;
     }

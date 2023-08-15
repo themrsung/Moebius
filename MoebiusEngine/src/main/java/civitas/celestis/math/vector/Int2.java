@@ -8,7 +8,7 @@ import jakarta.annotation.Nullable;
 import java.util.function.UnaryOperator;
 
 /**
- * An immutable two-dimensional vector which uses {@code float}s to represent its components.
+ * An immutable two-dimensional vector which uses {@code int}s to represent its components.
  */
 public class Int2 extends Number implements IntVector<Int2>, Packable {
     //
@@ -82,6 +82,16 @@ public class Int2 extends Number implements IntVector<Int2>, Packable {
     public Int2(@Nonnull Int2 v) {
         this.x = v.x;
         this.y = v.y;
+    }
+
+    /**
+     * Creates a new vector.
+     *
+     * @param v The vector of which to copy component values from
+     */
+    public Int2(@Nonnull Long2 v) {
+        this.x = (int) v.x;
+        this.y = (int) v.y;
     }
 
     /**
@@ -220,7 +230,7 @@ public class Int2 extends Number implements IntVector<Int2>, Packable {
      * @return The Manhattan magnitude of this vector
      */
     @Override
-    public final float normManhattan() {
+    public final int normManhattan() {
         return Math.abs(x) + Math.abs(y);
     }
 
@@ -362,9 +372,9 @@ public class Int2 extends Number implements IntVector<Int2>, Packable {
      * @return The Manhattan distance between this vector and the provided vector {@code v}
      */
     @Override
-    public float distanceManhattan(@Nonnull Int2 v) {
-        final float dx = Math.abs(x - v.x);
-        final float dy = Math.abs(y - v.y);
+    public int distanceManhattan(@Nonnull Int2 v) {
+        final int dx = Math.abs(x - v.x);
+        final int dy = Math.abs(y - v.y);
 
         return dx + dy;
     }

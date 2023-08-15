@@ -1,16 +1,16 @@
 package civitas.celestis.math.vector;
 
 import civitas.celestis.math.Numbers;
-import civitas.celestis.util.packing.Packable;
+import civitas.celestis.math.complex.Quaternion;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
 import java.util.function.UnaryOperator;
 
 /**
- * An immutable two-dimensional vector which uses {@code double}s to represent its components.
+ * An immutable three-dimensional vector which uses {@code long}s to represent its components.
  */
-public class Vector2 extends Number implements DoubleVector<Vector2>, Packable {
+public class Long3 extends Number implements LongVector<Long3> {
     //
     // Constants
     //
@@ -18,32 +18,37 @@ public class Vector2 extends Number implements DoubleVector<Vector2>, Packable {
     /**
      * Absolute zero. This vector represents origin.
      */
-    public static final Vector2 ZERO = new Vector2(0, 0);
+    public static final Long3 ZERO = new Long3(0, 0, 0);
 
     /**
      * The positive X unit vector.
      */
-    public static final Vector2 POSITIVE_X = new Vector2(1, 0);
+    public static final Long3 POSITIVE_X = new Long3(1, 0, 0);
 
     /**
      * The positive Y unit vector.
      */
-    public static final Vector2 POSITIVE_Y = new Vector2(0, 1);
+    public static final Long3 POSITIVE_Y = new Long3(0, 1, 0);
 
     /**
      * The positive Z unit vector.
      */
-    public static final Vector2 POSITIVE_Z = new Vector2(0, 0);
+    public static final Long3 POSITIVE_Z = new Long3(0, 0, 1);
 
     /**
      * The negative X unit vector.
      */
-    public static final Vector2 NEGATIVE_X = new Vector2(-1, 0);
+    public static final Long3 NEGATIVE_X = new Long3(-1, 0, 0);
 
     /**
      * The negative Y unit vector.
      */
-    public static final Vector2 NEGATIVE_Y = new Vector2(0, -1);
+    public static final Long3 NEGATIVE_Y = new Long3(0, -1, 0);
+
+    /**
+     * The negative Z unit vector.
+     */
+    public static final Long3 NEGATIVE_Z = new Long3(0, 0, -1);
 
     //
     // Constructors
@@ -54,24 +59,27 @@ public class Vector2 extends Number implements DoubleVector<Vector2>, Packable {
      *
      * @param x The X component of this vector
      * @param y The Y component of this vector
+     * @param z The Z component of this vector
      */
-    public Vector2(double x, double y) {
+    public Long3(long x, long y, long z) {
         this.x = x;
         this.y = y;
+        this.z = z;
     }
 
     /**
      * Creates a new vector.
      *
-     * @param values An array of length {@code 2} which contains the component os this vector in XY order
+     * @param values An array of length {@code 3} which contains the component os this vector in XYZ order
      */
-    public Vector2(@Nonnull double[] values) {
-        if (values.length != 2) {
-            throw new IllegalArgumentException("The provided array does not have a length of 2.");
+    public Long3(@Nonnull long[] values) {
+        if (values.length != 3) {
+            throw new IllegalArgumentException("The provided array does not have a length of 3.");
         }
 
         this.x = values[0];
         this.y = values[1];
+        this.z = values[2];
     }
 
     /**
@@ -79,9 +87,10 @@ public class Vector2 extends Number implements DoubleVector<Vector2>, Packable {
      *
      * @param v The vector of which to copy component values from
      */
-    public Vector2(@Nonnull Vector2 v) {
-        this.x = v.x;
-        this.y = v.y;
+    public Long3(@Nonnull Vector3 v) {
+        this.x = (long) v.x;
+        this.y = (long) v.y;
+        this.z = (long) v.z;
     }
 
     /**
@@ -89,9 +98,10 @@ public class Vector2 extends Number implements DoubleVector<Vector2>, Packable {
      *
      * @param v The vector of which to copy component values from
      */
-    public Vector2(@Nonnull Float2 v) {
+    public Long3(@Nonnull Long3 v) {
         this.x = v.x;
         this.y = v.y;
+        this.z = v.z;
     }
 
     /**
@@ -99,55 +109,21 @@ public class Vector2 extends Number implements DoubleVector<Vector2>, Packable {
      *
      * @param v The vector of which to copy component values from
      */
-    public Vector2(@Nonnull Long2 v) {
-        this.x = v.x;
-        this.y = v.y;
+    public Long3(@Nonnull Float3 v) {
+        this.x = (long) v.x;
+        this.y = (long) v.y;
+        this.z = (long) v.z;
     }
 
     /**
      * Creates a new vector.
      *
-     * @param v The vector from which to copy component values from
+     * @param v The vector of which to copy component values from
      */
-    public Vector2(@Nonnull Int2 v) {
+    public Long3(@Nonnull Int3 v) {
         this.x = v.x;
         this.y = v.y;
-    }
-
-    //
-    // Packing
-    //
-
-    /**
-     * Unpacks a packed value of a {@link Vector2}.
-     *
-     * @param packed The packed {@code long}
-     * @return The unpacked value
-     * @see Vector2#pack()
-     */
-    @Nonnull
-    public static Vector2 unpack(long packed) {
-        final int xBits = (int) (packed >> 32);
-        final int yBits = (int) packed;
-
-        final float x = Float.intBitsToFloat(xBits);
-        final float y = Float.intBitsToFloat(yBits);
-
-        return new Vector2(x, y);
-    }
-
-    /**
-     * Packs this number into 64 bits.
-     *
-     * @return The packed number in {@code long} format
-     * @see Vector2#pack()
-     */
-    @Override
-    public long pack() {
-        final int xBits = Float.floatToIntBits((float) x);
-        final int yBits = Float.floatToIntBits((float) y);
-
-        return ((long) xBits << 32) | (yBits & 0xFFFFFFFFL);
+        this.z = v.z;
     }
 
     //
@@ -157,12 +133,17 @@ public class Vector2 extends Number implements DoubleVector<Vector2>, Packable {
     /**
      * The X component of this vector.
      */
-    protected final double x;
+    protected final long x;
 
     /**
      * The Y component of this vector.
      */
-    protected final double y;
+    protected final long y;
+
+    /**
+     * The Z component of this vector
+     */
+    protected final long z;
 
     //
     // Getters
@@ -173,7 +154,7 @@ public class Vector2 extends Number implements DoubleVector<Vector2>, Packable {
      *
      * @return The X component of this vector
      */
-    public final double x() {
+    public final long x() {
         return x;
     }
 
@@ -182,8 +163,17 @@ public class Vector2 extends Number implements DoubleVector<Vector2>, Packable {
      *
      * @return The Y component of this vector
      */
-    public final double y() {
+    public final long y() {
         return y;
+    }
+
+    /**
+     * Returns the Z component of this vector.
+     *
+     * @return The Z component of this vector
+     */
+    public final long z() {
+        return z;
     }
 
     //
@@ -197,37 +187,7 @@ public class Vector2 extends Number implements DoubleVector<Vector2>, Packable {
      */
     @Override
     public final boolean isZero() {
-        return x == 0 && y == 0;
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @return {@code true} if this vector is not a number
-     */
-    @Override
-    public final boolean isNaN() {
-        return Double.isNaN(x) || Double.isNaN(y);
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @return {@code true} if this vector is finite
-     */
-    @Override
-    public final boolean isFinite() {
-        return Double.isFinite(x) && Double.isFinite(y);
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @return {@code true} if this vector is infinite
-     */
-    @Override
-    public final boolean isInfinite() {
-        return Double.isInfinite(x) || Double.isInfinite(y);
+        return x == 0 && y == 0 && z == 0;
     }
 
     /**
@@ -237,8 +197,8 @@ public class Vector2 extends Number implements DoubleVector<Vector2>, Packable {
      */
     @Nonnull
     @Override
-    public final double[] values() {
-        return new double[]{x, y};
+    public final long[] values() {
+        return new long[]{x, y, z};
     }
 
     /**
@@ -248,7 +208,7 @@ public class Vector2 extends Number implements DoubleVector<Vector2>, Packable {
      */
     @Override
     public final double norm() {
-        return Math.sqrt(x * x + y * y);
+        return Math.sqrt(x * x + y * y + z * z);
     }
 
     /**
@@ -258,7 +218,7 @@ public class Vector2 extends Number implements DoubleVector<Vector2>, Packable {
      */
     @Override
     public final double norm2() {
-        return x * x + y * y;
+        return x * x + y * y + z * z;
     }
 
     /**
@@ -267,8 +227,8 @@ public class Vector2 extends Number implements DoubleVector<Vector2>, Packable {
      * @return The Manhattan magnitude of this vector
      */
     @Override
-    public final double normManhattan() {
-        return Math.abs(x) + Math.abs(y);
+    public final long normManhattan() {
+        return Math.abs(x) + Math.abs(y) + Math.abs(z);
     }
 
     //
@@ -283,8 +243,8 @@ public class Vector2 extends Number implements DoubleVector<Vector2>, Packable {
      */
     @Nonnull
     @Override
-    public Vector2 add(double s) {
-        return new Vector2(x + s, y + s);
+    public Long3 add(long s) {
+        return new Long3(x + s, y + s, z + s);
     }
 
     /**
@@ -295,8 +255,8 @@ public class Vector2 extends Number implements DoubleVector<Vector2>, Packable {
      */
     @Nonnull
     @Override
-    public Vector2 subtract(double s) {
-        return new Vector2(x - s, y - s);
+    public Long3 subtract(long s) {
+        return new Long3(x - s, y - s, z - s);
     }
 
     /**
@@ -307,8 +267,8 @@ public class Vector2 extends Number implements DoubleVector<Vector2>, Packable {
      */
     @Nonnull
     @Override
-    public Vector2 multiply(double s) {
-        return new Vector2(x * s, y * s);
+    public Long3 multiply(long s) {
+        return new Long3(x * s, y * s, z * s);
     }
 
     /**
@@ -319,8 +279,8 @@ public class Vector2 extends Number implements DoubleVector<Vector2>, Packable {
      */
     @Nonnull
     @Override
-    public Vector2 divide(double s) {
-        return new Vector2(x - s, y - s);
+    public Long3 divide(long s) {
+        return new Long3(x - s, y - s, z - s);
     }
 
     /**
@@ -331,8 +291,8 @@ public class Vector2 extends Number implements DoubleVector<Vector2>, Packable {
      */
     @Nonnull
     @Override
-    public Vector2 add(@Nonnull Vector2 v) {
-        return new Vector2(x + v.x, y + v.y);
+    public Long3 add(@Nonnull Long3 v) {
+        return new Long3(x + v.x, y + v.y, z + v.z);
     }
 
     /**
@@ -343,19 +303,19 @@ public class Vector2 extends Number implements DoubleVector<Vector2>, Packable {
      */
     @Nonnull
     @Override
-    public Vector2 subtract(@Nonnull Vector2 v) {
-        return new Vector2(x - v.x, y - v.y);
+    public Long3 subtract(@Nonnull Long3 v) {
+        return new Long3(x - v.x, y - v.y, z - v.z);
     }
 
     /**
-     * Multiplies this vector by another vector using complex number multiplication.
+     * Returns the cross product of this vector and the provided vector {@code v}.
      *
-     * @param v The vector to multiply this vector with
-     * @return The resulting vector
+     * @param v The vector of which to get the cross product between
+     * @return The cross product of the two vectors
      */
     @Nonnull
-    public Vector2 multiply(@Nonnull Vector2 v) {
-        return new Vector2(x * v.x - y * v.y, x * v.y + y * v.x);
+    public Long3 cross(@Nonnull Long3 v) {
+        return new Long3(y * v.z - z * v.y, z * v.x - x * v.z, x * v.y - y * v.x);
     }
 
     /**
@@ -365,8 +325,8 @@ public class Vector2 extends Number implements DoubleVector<Vector2>, Packable {
      * @return The dot product of the two vectors
      */
     @Override
-    public final double dot(@Nonnull Vector2 v) {
-        return x * v.x + y * v.y;
+    public final long dot(@Nonnull Long3 v) {
+        return x * v.x + y * v.y + z * v.z;
     }
 
     //
@@ -380,11 +340,12 @@ public class Vector2 extends Number implements DoubleVector<Vector2>, Packable {
      * @return The Euclidean distance between this vector and the provided vector {@code v}
      */
     @Override
-    public double distance(@Nonnull Vector2 v) {
+    public double distance(@Nonnull Long3 v) {
         final double dx = x - v.x;
         final double dy = y - v.y;
+        final double dz = z - v.z;
 
-        return Math.sqrt(dx * dx + dy * dy);
+        return Math.sqrt(dx * dx + dy * dy + dz * dz);
     }
 
     /**
@@ -394,11 +355,12 @@ public class Vector2 extends Number implements DoubleVector<Vector2>, Packable {
      * @return The squared Euclidean distance between this vector and the provided vector {@code v}
      */
     @Override
-    public double distance2(@Nonnull Vector2 v) {
+    public double distance2(@Nonnull Long3 v) {
         final double dx = x - v.x;
         final double dy = y - v.y;
+        final double dz = z - v.z;
 
-        return dx * dx + dy * dy;
+        return dx * dx + dy * dy + dz * dz;
     }
 
     /**
@@ -408,11 +370,12 @@ public class Vector2 extends Number implements DoubleVector<Vector2>, Packable {
      * @return The Manhattan distance between this vector and the provided vector {@code v}
      */
     @Override
-    public double distanceManhattan(@Nonnull Vector2 v) {
-        final double dx = Math.abs(x - v.x);
-        final double dy = Math.abs(y - v.y);
+    public long distanceManhattan(@Nonnull Long3 v) {
+        final long dx = Math.abs(x - v.x);
+        final long dy = Math.abs(y - v.y);
+        final long dz = Math.abs(z - v.z);
 
-        return dx + dy;
+        return dx + dy + dz;
     }
 
     //
@@ -426,9 +389,9 @@ public class Vector2 extends Number implements DoubleVector<Vector2>, Packable {
      */
     @Nonnull
     @Override
-    public Vector2 normalize() {
+    public Vector3 normalize() {
         final double n = norm();
-        return new Vector2(x / n, y / n);
+        return new Vector3(x / n, y / n, z / n);
     }
 
     //
@@ -442,8 +405,8 @@ public class Vector2 extends Number implements DoubleVector<Vector2>, Packable {
      */
     @Nonnull
     @Override
-    public Vector2 negate() {
-        return new Vector2(-x, -y);
+    public Long3 negate() {
+        return new Long3(-x, -y, -z);
     }
 
     //
@@ -458,8 +421,8 @@ public class Vector2 extends Number implements DoubleVector<Vector2>, Packable {
      */
     @Nonnull
     @Override
-    public Vector2 transform(@Nonnull UnaryOperator<Double> transformer) {
-        return new Vector2(transformer.apply(x), transformer.apply(y));
+    public Long3 transform(@Nonnull UnaryOperator<Long> transformer) {
+        return new Long3(transformer.apply(x), transformer.apply(y), transformer.apply(z));
     }
 
     //
@@ -474,8 +437,8 @@ public class Vector2 extends Number implements DoubleVector<Vector2>, Packable {
      */
     @Nonnull
     @Override
-    public Vector2 min(@Nonnull Vector2 v) {
-        return new Vector2(Math.min(x, v.x), Math.min(y, v.y));
+    public Long3 min(@Nonnull Long3 v) {
+        return new Long3(Math.min(x, v.x), Math.min(y, v.y), Math.min(z, v.z));
     }
 
     /**
@@ -486,8 +449,8 @@ public class Vector2 extends Number implements DoubleVector<Vector2>, Packable {
      */
     @Nonnull
     @Override
-    public Vector2 max(@Nonnull Vector2 v) {
-        return new Vector2(Math.max(x, v.x), Math.max(y, v.y));
+    public Long3 max(@Nonnull Long3 v) {
+        return new Long3(Math.max(x, v.x), Math.max(y, v.y), Math.max(z, v.z));
     }
 
     /**
@@ -499,10 +462,11 @@ public class Vector2 extends Number implements DoubleVector<Vector2>, Packable {
      */
     @Nonnull
     @Override
-    public Vector2 clamp(@Nonnull Vector2 min, @Nonnull Vector2 max) {
-        return new Vector2(
+    public Long3 clamp(@Nonnull Long3 min, @Nonnull Long3 max) {
+        return new Long3(
                 Numbers.clamp(x, min.x, max.x),
-                Numbers.clamp(y, min.y, max.y)
+                Numbers.clamp(y, min.y, max.y),
+                Numbers.clamp(z, min.z, max.z)
         );
     }
 
@@ -555,17 +519,24 @@ public class Vector2 extends Number implements DoubleVector<Vector2>, Packable {
     //
 
     /**
-     * Rotates this vector counter-clockwise by given angle.
+     * Converts this vector into a pure quaternion.
      *
-     * @param angRads Angle in radians to rotate this vector by
+     * @return A quaternion with the values {@code {0, x, y, z}}
+     */
+    @Nonnull
+    public Quaternion quaternion() {
+        return new Quaternion(0, x, y, z);
+    }
+
+    /**
+     * Rotates this vector by a rotation quaternion.
+     *
+     * @param rq The rotation quaternion to apply
      * @return The rotated vector
      */
     @Nonnull
-    public Vector2 rotate(double angRads) {
-        final double cos = Math.cos(angRads);
-        final double sin = Math.sin(angRads);
-
-        return new Vector2(x * cos - y * sin, x * sin + y * cos);
+    public Long3 rotate(@Nonnull Quaternion rq) {
+        return new Long3(rq.multiply(quaternion()).multiply(rq.conjugate()).vector());
     }
 
     //
@@ -579,8 +550,8 @@ public class Vector2 extends Number implements DoubleVector<Vector2>, Packable {
      */
     @Nonnull
     @Override
-    public Vector2 copy() {
-        return new Vector2(this);
+    public Long3 copy() {
+        return new Long3(this);
     }
 
     //
@@ -591,12 +562,12 @@ public class Vector2 extends Number implements DoubleVector<Vector2>, Packable {
      * {@inheritDoc}
      *
      * @param obj The object to compare to
-     * @return {@code true} if the other object is a {@link Vector2}, and the component values are equal
+     * @return {@code true} if the other object is a {@link Long3}, and the component values are equal
      */
     @Override
     public boolean equals(@Nullable Object obj) {
-        if (!(obj instanceof Vector2 v)) return false;
-        return x == v.x && y == v.y;
+        if (!(obj instanceof Long3 v)) return false;
+        return x == v.x && y == v.y && z == v.z;
     }
 
     /**
@@ -606,8 +577,8 @@ public class Vector2 extends Number implements DoubleVector<Vector2>, Packable {
      * @return {@code true} if all components are equal
      */
     @Override
-    public boolean equals(@Nonnull Vector2 v) {
-        return x == v.x && y == v.y;
+    public boolean equals(@Nonnull Long3 v) {
+        return x == v.x && y == v.y && z == v.z;
     }
 
     //
@@ -622,7 +593,7 @@ public class Vector2 extends Number implements DoubleVector<Vector2>, Packable {
      * {@code -1} otherwise
      */
     @Override
-    public int compareTo(@Nonnull Vector2 v) {
+    public int compareTo(@Nonnull Long3 v) {
         return Double.compare(norm2(), v.norm2());
     }
 
@@ -631,32 +602,33 @@ public class Vector2 extends Number implements DoubleVector<Vector2>, Packable {
     //
 
     /**
-     * Deserializes a string into a {@link Vector2}.
+     * Deserializes a string into a {@link Long3}.
      *
      * @param input The input to deserialize
      * @return The parsed vector
      * @throws NumberFormatException When the format is invalid
      */
     @Nonnull
-    public static Vector2 parseVector(@Nonnull String input) throws NumberFormatException {
-        if (!input.startsWith("Vector2{")) {
-            throw new NumberFormatException("The provided string does not represent a Vector2.");
+    public static Long3 parseVector(@Nonnull String input) throws NumberFormatException {
+        if (!input.startsWith("Long3{")) {
+            throw new NumberFormatException("The provided string does not represent a Long3.");
         }
 
-        final String cleanInput = input.replaceAll("Vector2\\{|}", "");
+        final String cleanInput = input.replaceAll("Long3\\{|}", "");
         final String[] valueStrings = cleanInput.split(", ");
-        final double[] values = new double[2];
+        final long[] values = new long[3];
 
         for (final String valueString : valueStrings) {
             final String[] split = valueString.split("=");
             values[switch (split[0]) {
                 case "x" -> 0;
                 case "y" -> 1;
-                default -> throw new NumberFormatException("The provided string does not represent a Vector2.");
-            }] = Double.parseDouble(split[1]);
+                case "z" -> 2;
+                default -> throw new NumberFormatException("The provided string does not represent a Long3.");
+            }] = Long.parseLong(split[1]);
         }
 
-        return new Vector2(values);
+        return new Long3(values);
     }
 
     /**
@@ -667,9 +639,10 @@ public class Vector2 extends Number implements DoubleVector<Vector2>, Packable {
     @Override
     @Nonnull
     public String toString() {
-        return "Vector2{" +
+        return "Long3{" +
                 "x=" + x +
                 ", y=" + y +
+                ", z=" + z +
                 '}';
     }
 }

@@ -3,6 +3,7 @@ package civitas.celestis.graphics.color;
 import civitas.celestis.math.Numbers;
 import civitas.celestis.math.vector.Float4;
 import civitas.celestis.math.vector.Int4;
+import civitas.celestis.math.vector.Long4;
 import civitas.celestis.math.vector.Vector4;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
@@ -107,6 +108,16 @@ public class LinearColor extends Float4 implements Color8 {
      * @param v The vector of which to copy component values from
      */
     public LinearColor(@Nonnull Vector4 v) {
+        super(v);
+        enforceComponentRange();
+    }
+
+    /**
+     * Creates a new color.
+     *
+     * @param v The vector of which to copy component values from
+     */
+    public LinearColor(@Nonnull Long4 v) {
         super(v);
         enforceComponentRange();
     }
