@@ -1,6 +1,5 @@
 package civitas.celestis.util.collection;
 
-import civitas.celestis.util.group.Group;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 

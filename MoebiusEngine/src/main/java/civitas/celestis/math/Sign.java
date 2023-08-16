@@ -3,6 +3,8 @@ package civitas.celestis.math;
 import civitas.celestis.util.data.Packable8;
 import jakarta.annotation.Nonnull;
 
+import javax.print.attribute.standard.MediaSize;
+
 /**
  * The sign of a number.
  */
@@ -151,6 +153,22 @@ public enum Sign implements Packable8 {
      */
     public boolean isInfinite() {
         return this == POSITIVE_INFINITY || this == NEGATIVE_INFINITY;
+    }
+
+    /**
+     * Returns the inverse of this sign.
+     * @return The inverse of this sign
+     */
+    @Nonnull
+    public Sign inverse() {
+        return switch (this) {
+            case NaN -> NaN;
+            case POSITIVE_INFINITY -> NEGATIVE_INFINITY;
+            case NEGATIVE_INFINITY -> NEGATIVE_INFINITY;
+            case POSITIVE -> NEGATIVE;
+            case NEGATIVE -> POSITIVE;
+            case ZERO -> ZERO;
+        };
     }
 
     //
