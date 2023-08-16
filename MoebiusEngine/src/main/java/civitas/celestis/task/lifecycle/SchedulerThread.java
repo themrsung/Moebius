@@ -17,6 +17,7 @@ public class SchedulerThread extends Thread implements Scheduler {
 
     /**
      * The scheduler thread logic.
+     *
      * @param tasks The list of allocated tasks
      * @param times The map of execution times
      * @return A new instance of {@link Runnable} containing

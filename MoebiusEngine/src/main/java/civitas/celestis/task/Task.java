@@ -2,6 +2,7 @@ package civitas.celestis.task;
 
 /**
  * Tasks can be regularly executed by a scheduler.
+ *
  * @see civitas.celestis.task.lifecycle.Scheduler Scheduler
  */
 public interface Task {

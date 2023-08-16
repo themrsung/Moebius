@@ -11,14 +11,17 @@ import java.lang.reflect.Method;
 
 /**
  * A reference to an event handler.
+ *
  * @param listener The listener object
- * @param method The method reference
+ * @param method   The method reference
  * @see Listener
  * @see EventHandler
- * */
-public record HandlerReference(@Nonnull Listener listener, @Nonnull Method method) implements Comparable<HandlerReference> {
+ */
+public record HandlerReference(@Nonnull Listener listener,
+                               @Nonnull Method method) implements Comparable<HandlerReference> {
     /**
      * Returns the priority of this handler.
+     *
      * @return The priority of this handler
      */
     @Nonnull
@@ -28,9 +31,10 @@ public record HandlerReference(@Nonnull Listener listener, @Nonnull Method metho
 
     /**
      * Returns whether this handler listens to the provided event {@code e}.
-     * @param e The event to check
-     * @return {@code true} if this handler handles the event {@code e}
+     *
+     * @param e   The event to check
      * @param <E> The type of event to check
+     * @return {@code true} if this handler handles the event {@code e}
      */
     public <E extends Event> boolean accepts(@Nonnull E e) {
         return method.getParameterTypes()[0].isAssignableFrom(e.getClass());
@@ -38,9 +42,10 @@ public record HandlerReference(@Nonnull Listener listener, @Nonnull Method metho
 
     /**
      * Called to handle an event.
-     * @param e The event to handle
+     *
+     * @param e   The event to handle
      * @param <E> The type of event to handle
-     * @throws IllegalAccessException When the method cannot be accessed
+     * @throws IllegalAccessException    When the method cannot be accessed
      * @throws InvocationTargetException When the event handler throws an exception
      */
     public <E extends Event> void handle(@Nonnull E e) throws IllegalAccessException, InvocationTargetException {
@@ -53,7 +58,7 @@ public record HandlerReference(@Nonnull Listener listener, @Nonnull Method metho
      *
      * @param r The reference to compare to
      * @return {@code 0} if the priorities are equal, {@code 1} if this handler's priority is higher,
-     *  {@code -1} otherwise
+     * {@code -1} otherwise
      */
     @Override
     public int compareTo(@Nonnull HandlerReference r) {

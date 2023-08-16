@@ -3,8 +3,6 @@ package civitas.celestis.math;
 import civitas.celestis.util.data.Packable8;
 import jakarta.annotation.Nonnull;
 
-import javax.print.attribute.standard.MediaSize;
-
 /**
  * The sign of a number.
  */
@@ -157,6 +155,7 @@ public enum Sign implements Packable8 {
 
     /**
      * Returns the inverse of this sign.
+     *
      * @return The inverse of this sign
      */
     @Nonnull

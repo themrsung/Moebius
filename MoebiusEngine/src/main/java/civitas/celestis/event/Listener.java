@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * An event listener. This is a marker interface which marks a class as an event listener.
+ *
  * @see Event
  * @see EventHandler
  * @see HandlerPriority
@@ -17,9 +18,10 @@ public interface Listener {
     /**
      * Returns a list of references to all valid event handlers of this listener.
      * <p>
-     *     Modifying or overriding this method will change the behavior of the event manager.
-     *     Change this at your own risk.
+     * Modifying or overriding this method will change the behavior of the event manager.
+     * Change this at your own risk.
      * </p>
+     *
      * @return The list of valid handler references of this listener
      */
     @Nonnull

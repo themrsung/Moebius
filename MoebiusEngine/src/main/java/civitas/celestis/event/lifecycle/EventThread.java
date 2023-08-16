@@ -18,7 +18,8 @@ public class EventThread extends Thread implements EventManager {
 
     /**
      * The event thread logic.
-     * @param queue The queue of events this thread is polling from
+     *
+     * @param queue    The queue of events this thread is polling from
      * @param handlers The list of handlers allocated to this thread
      * @return A new instance of {@link Runnable} containing
      * the logic of an event thread
@@ -68,8 +69,9 @@ public class EventThread extends Thread implements EventManager {
 
     /**
      * Creates a new event thread.
-     * @param name The name of this thread
-     * @param queue The queue of events this thread should poll from
+     *
+     * @param name     The name of this thread
+     * @param queue    The queue of events this thread should poll from
      * @param handlers The list of handlers allocated to this thread
      */
     public EventThread(@Nonnull String name, @Nonnull Queue<Event> queue, @Nonnull List<HandlerReference> handlers) {
@@ -101,7 +103,8 @@ public class EventThread extends Thread implements EventManager {
 
     /**
      * {@inheritDoc}
-     * @param e The event being called
+     *
+     * @param e   The event being called
      * @param <E> {@inheritDoc}
      */
     @Override
@@ -111,6 +114,7 @@ public class EventThread extends Thread implements EventManager {
 
     /**
      * {@inheritDoc}
+     *
      * @param l The listener to register to this manager
      */
     @Override
@@ -123,6 +127,7 @@ public class EventThread extends Thread implements EventManager {
 
     /**
      * {@inheritDoc}
+     *
      * @param i The iterable object containing the listeners to register
      */
     @Override
@@ -132,6 +137,7 @@ public class EventThread extends Thread implements EventManager {
 
     /**
      * {@inheritDoc}
+     *
      * @param l The listener to unregister from this manager
      */
     @Override
@@ -141,6 +147,7 @@ public class EventThread extends Thread implements EventManager {
 
     /**
      * {@inheritDoc}
+     *
      * @param i The iterable object containing the listeners to register
      */
     @Override
