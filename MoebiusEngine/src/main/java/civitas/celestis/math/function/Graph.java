@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 /**
- * A mathematical graph
+ * A mathematical graph.
  *
  * @param <I> The input parameter (any object)
  * @param <O> The output parameter (a {@link Number})
