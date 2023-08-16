@@ -224,6 +224,7 @@ public class Float2 implements FloatVector<Float2> {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -233,6 +234,7 @@ public class Float2 implements FloatVector<Float2> {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -242,6 +244,7 @@ public class Float2 implements FloatVector<Float2> {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -450,6 +453,7 @@ public class Float2 implements FloatVector<Float2> {
 
     /**
      * Rotates this vector counter-clockwise by given angle.
+     *
      * @param angRads The angle of rotation to apply in radians
      */
     @Nonnull

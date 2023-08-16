@@ -258,6 +258,7 @@ public class Int4 implements IntVector<Int4, Float4> {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -267,6 +268,7 @@ public class Int4 implements IntVector<Int4, Float4> {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -276,6 +278,7 @@ public class Int4 implements IntVector<Int4, Float4> {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

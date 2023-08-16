@@ -19,6 +19,7 @@ public class Quaternion extends Double4 {
 
     /**
      * Creates a new quaternion.
+     *
      * @param w The W component of this quaternion
      * @param x The X component of this quaternion
      * @param y The Y component of this quaternion
@@ -30,6 +31,7 @@ public class Quaternion extends Double4 {
 
     /**
      * Creates a new quaternion.
+     *
      * @param s The scalar part of this quaternion
      * @param v The vector part of this quaternion
      */
@@ -39,6 +41,7 @@ public class Quaternion extends Double4 {
 
     /**
      * Creates a new quaternion.
+     *
      * @param values An array containing the WXYZ components o this quaternion
      */
     public Quaternion(@Nonnull double[] values) {
@@ -47,6 +50,7 @@ public class Quaternion extends Double4 {
 
     /**
      * Creates a new quaternion.
+     *
      * @param v The vector of which to copy component values from
      */
     public Quaternion(@Nonnull DoubleVector<?> v) {
@@ -55,6 +59,7 @@ public class Quaternion extends Double4 {
 
     /**
      * Creates a new quaternion.
+     *
      * @param v The vector of which to copy component values from
      */
     public Quaternion(@Nonnull Double4 v) {
@@ -67,6 +72,7 @@ public class Quaternion extends Double4 {
 
     /**
      * Returns the scalar part of this quaternion.
+     *
      * @return The scalar part of this quaternion
      */
     public final double scalar() {
@@ -75,6 +81,7 @@ public class Quaternion extends Double4 {
 
     /**
      * Returns the vector part of this quaternion.
+     *
      * @return The vector part of this quaternion
      */
     @Nonnull
@@ -88,6 +95,7 @@ public class Quaternion extends Double4 {
 
     /**
      * Returns the conjugate of this quaternion.
+     *
      * @return The conjugate of this quaternion
      */
     @Nonnull
@@ -117,6 +125,7 @@ public class Quaternion extends Double4 {
 
     /**
      * Adds a scalar to this quaternion.
+     *
      * @param s The scalar to add to this quaternion
      * @return The resulting quaternion
      */
@@ -128,6 +137,7 @@ public class Quaternion extends Double4 {
 
     /**
      * Subtracts a scalar from this quaternion.
+     *
      * @param s The scalar to subtract from this quaternion
      * @return The resulting quaternion
      */
@@ -139,6 +149,7 @@ public class Quaternion extends Double4 {
 
     /**
      * Multiplies this quaternion by a scalar.
+     *
      * @param s The scalar to multiply this quaternion by
      * @return The resulting quaternion
      */
@@ -150,6 +161,7 @@ public class Quaternion extends Double4 {
 
     /**
      * Divides this quaternion by a scalar.
+     *
      * @param s The scalar to divide this quaternion by
      * @return The resulting quaternion
      */
@@ -161,6 +173,7 @@ public class Quaternion extends Double4 {
 
     /**
      * Multiplies this quaternion by another quaternion.
+     *
      * @param q The quaternion of which to multiply this quaternion by
      * @return The left-product of the two quaternions
      */
@@ -178,6 +191,7 @@ public class Quaternion extends Double4 {
      * Scales the rotation of this quaternion.
      * This will only work properly if this quaternion is a rotation quaternion.
      * (a quaternion with a Euclidean norm of {@code 1})
+     *
      * @param s The scale factor to apply to the rotation
      * @return The scaled quaternion
      */
@@ -210,6 +224,7 @@ public class Quaternion extends Double4 {
 
     /**
      * Deserializes a string into a quaternion.
+     *
      * @param input The input string to parse
      * @return The parsed quaternion
      * @throws NumberFormatException When the format is invalid

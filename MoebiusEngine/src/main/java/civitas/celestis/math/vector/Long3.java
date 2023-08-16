@@ -227,6 +227,7 @@ public class Long3 implements LongVector<Long3, Double3> {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -246,6 +247,7 @@ public class Long3 implements LongVector<Long3, Double3> {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -471,6 +473,7 @@ public class Long3 implements LongVector<Long3, Double3> {
 
     /**
      * Rotates this vector by the provided rotation quaternion.
+     *
      * @param rq The quaternion to rotate this vector by
      * @return The resulting vector
      */

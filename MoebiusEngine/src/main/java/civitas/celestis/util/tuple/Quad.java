@@ -1,10 +1,12 @@
 package civitas.celestis.util.tuple;
 
+import civitas.celestis.util.Group;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.function.UnaryOperator;
 
@@ -31,6 +33,41 @@ public class Quad<E> implements Tuple<E, Quad<E>> {
         this.b = b;
         this.c = c;
         this.d = d;
+    }
+
+    /**
+     * Creates a new quad.
+     *
+     * @param i The iterable object of which to copy values from
+     */
+    public Quad(@Nonnull Iterable<E> i) {
+        final Iterator<E> it = i.iterator();
+
+        try {
+            this.a = it.next();
+            this.b = it.next();
+            this.c = it.next();
+            this.d = it.next();
+        } catch (final NoSuchElementException e) {
+            throw new IllegalArgumentException("The iterable object is too small.");
+        }
+    }
+
+    /**
+     * Creates a new quad.
+     *
+     * @param g The group of which to copy values from
+     */
+    public Quad(@Nonnull Group<E> g) {
+        final List<E> list = g.list();
+        if (list.size() != 4) {
+            throw new IllegalArgumentException("The provided group's size is not 4.");
+        }
+
+        this.a = list.get(0);
+        this.b = list.get(1);
+        this.c = list.get(2);
+        this.d = list.get(3);
     }
 
     /**

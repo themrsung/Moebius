@@ -258,6 +258,7 @@ public class Long4 implements LongVector<Long4, Double4> {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -267,6 +268,7 @@ public class Long4 implements LongVector<Long4, Double4> {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -276,6 +278,7 @@ public class Long4 implements LongVector<Long4, Double4> {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

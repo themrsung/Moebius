@@ -108,6 +108,7 @@ public class Float3 implements FloatVector<Float3> {
 
     /**
      * Creates a new vector.
+     *
      * @param v The vector of which to copy component values from
      */
     public Float3(@Nonnull Double3 v) {
@@ -118,6 +119,7 @@ public class Float3 implements FloatVector<Float3> {
 
     /**
      * Creates a new vector.
+     *
      * @param v The vector of which to copy component values from
      */
     public Float3(@Nonnull Long3 v) {
@@ -128,6 +130,7 @@ public class Float3 implements FloatVector<Float3> {
 
     /**
      * Creates a new vector.
+     *
      * @param v The vector of which to copy component values from
      */
     public Float3(@Nonnull Int3 v) {
@@ -254,6 +257,7 @@ public class Float3 implements FloatVector<Float3> {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -263,6 +267,7 @@ public class Float3 implements FloatVector<Float3> {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -272,6 +277,7 @@ public class Float3 implements FloatVector<Float3> {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -497,6 +503,7 @@ public class Float3 implements FloatVector<Float3> {
 
     /**
      * Rotates this vector by the provided rotation quaternion.
+     *
      * @param rq The quaternion to rotate this vector by
      * @return The resulting vector
      */

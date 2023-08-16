@@ -1,10 +1,12 @@
 package civitas.celestis.util.tuple;
 
+import civitas.celestis.util.Group;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.function.UnaryOperator;
 
@@ -27,6 +29,37 @@ public class Pair<E> implements Tuple<E, Pair<E>> {
     public Pair(@Nonnull E a, @Nonnull E b) {
         this.a = a;
         this.b = b;
+    }
+
+    /**
+     * Creates a new pair.
+     *
+     * @param i The iterable object of which to copy values from
+     */
+    public Pair(@Nonnull Iterable<E> i) {
+        final Iterator<E> it = i.iterator();
+
+        try {
+            this.a = it.next();
+            this.b = it.next();
+        } catch (final NoSuchElementException e) {
+            throw new IllegalArgumentException("The iterable object is too small.");
+        }
+    }
+
+    /**
+     * Creates a new pair.
+     *
+     * @param g The group of which to copy values from
+     */
+    public Pair(@Nonnull Group<E> g) {
+        final List<E> list = g.list();
+        if (list.size() != 2) {
+            throw new IllegalArgumentException("The provided group's size is not 2.");
+        }
+
+        this.a = list.get(0);
+        this.b = list.get(1);
     }
 
     /**

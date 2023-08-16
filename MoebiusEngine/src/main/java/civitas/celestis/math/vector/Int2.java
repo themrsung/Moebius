@@ -194,6 +194,7 @@ public class Int2 implements IntVector<Int2, Float2> {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -213,6 +214,7 @@ public class Int2 implements IntVector<Int2, Float2> {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -421,6 +423,7 @@ public class Int2 implements IntVector<Int2, Float2> {
 
     /**
      * Rotates this vector counter-clockwise by given angle.
+     *
      * @param angRads The angle of rotation to apply in radians
      */
     @Nonnull

@@ -288,6 +288,7 @@ public class Float4 implements FloatVector<Float4> {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -297,6 +298,7 @@ public class Float4 implements FloatVector<Float4> {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -306,6 +308,7 @@ public class Float4 implements FloatVector<Float4> {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

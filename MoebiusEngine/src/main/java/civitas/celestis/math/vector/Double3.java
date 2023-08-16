@@ -257,6 +257,7 @@ public class Double3 implements DoubleVector<Double3> {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -266,6 +267,7 @@ public class Double3 implements DoubleVector<Double3> {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -275,6 +277,7 @@ public class Double3 implements DoubleVector<Double3> {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -500,6 +503,7 @@ public class Double3 implements DoubleVector<Double3> {
 
     /**
      * Rotates this vector by the provided rotation quaternion.
+     *
      * @param rq The quaternion to rotate this vector by
      * @return The resulting vector
      */
