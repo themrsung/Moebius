@@ -6,11 +6,12 @@ import civitas.celestis.util.ThreadedModule;
 import jakarta.annotation.Nonnull;
 
 /**
- * An event manager. Handles the lifecycle of events and event managers.
+ * An event manager. Handles the lifecycle of events and event listeners.
  *
  * @see Event
  * @see civitas.celestis.event.EventHandler EventHandler
  * @see Listener
+ * @see SyncEventManager
  */
 public interface EventManager extends ThreadedModule {
     //

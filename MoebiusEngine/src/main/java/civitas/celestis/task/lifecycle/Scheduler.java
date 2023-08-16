@@ -12,6 +12,8 @@ import java.util.NoSuchElementException;
  *
  * @see Task
  * @see ThreadedModule
+ * @see SyncScheduler
+ * @see AsyncScheduler
  */
 public interface Scheduler extends ThreadedModule {
     //
