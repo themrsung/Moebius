@@ -90,6 +90,36 @@ public class Int2 implements IntVector<Int2, Float2> {
         this.y = v.y;
     }
 
+    /**
+     * Creates a new vector.
+     *
+     * @param v The vector of which to copy component values from
+     */
+    public Int2(@Nonnull Double2 v) {
+        this.x = (int) v.x;
+        this.y = (int) v.y;
+    }
+
+    /**
+     * Creates a new vector.
+     *
+     * @param v The vector of which to copy component values from
+     */
+    public Int2(@Nonnull Float2 v) {
+        this.x = (int) v.x;
+        this.y = (int) v.y;
+    }
+
+    /**
+     * Creates a new vector.
+     *
+     * @param v The vector of which to copy component values from
+     */
+    public Int2(@Nonnull Long2 v) {
+        this.x = (int) v.x;
+        this.y = (int) v.y;
+    }
+
     //
     // Variables
     //

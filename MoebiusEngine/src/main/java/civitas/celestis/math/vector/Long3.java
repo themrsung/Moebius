@@ -117,6 +117,28 @@ public class Long3 implements LongVector<Long3, Double3> {
         this.z = (long) v.z;
     }
 
+    /**
+     * Creates a new vector.
+     *
+     * @param v The vector of which to copy component values from
+     */
+    public Long3(@Nonnull Float3 v) {
+        this.x = (long) v.x;
+        this.y = (long) v.y;
+        this.z = (long) v.z;
+    }
+
+    /**
+     * Creates a new vector.
+     *
+     * @param v The vector of which to copy component values from
+     */
+    public Long3(@Nonnull Int3 v) {
+        this.x = v.x;
+        this.y = v.y;
+        this.z = v.z;
+    }
+
     //
     // Variables
     //

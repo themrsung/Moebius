@@ -120,6 +120,42 @@ public class Long4 implements LongVector<Long4, Double4> {
         this.z = v.z;
     }
 
+    /**
+     * Creates a new vector.
+     *
+     * @param v The vector of which to copy component values from
+     */
+    public Long4(@Nonnull Double4 v) {
+        this.w = (long) v.w;
+        this.x = (long) v.x;
+        this.y = (long) v.y;
+        this.z = (long) v.z;
+    }
+
+    /**
+     * Creates a new vector.
+     *
+     * @param v The vector of which to copy component values from
+     */
+    public Long4(@Nonnull Float4 v) {
+        this.w = (long) v.w;
+        this.x = (long) v.x;
+        this.y = (long) v.y;
+        this.z = (long) v.z;
+    }
+
+    /**
+     * Creates a new vector.
+     *
+     * @param v The vector of which to copy component values from
+     */
+    public Long4(@Nonnull Int4 v) {
+        this.w = v.w;
+        this.x = v.x;
+        this.y = v.y;
+        this.z = v.z;
+    }
+
     //
     // Variables
     //

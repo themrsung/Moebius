@@ -116,6 +116,26 @@ public class Float3 implements FloatVector<Float3> {
         this.z = (float) v.z();
     }
 
+    /**
+     * Creates a new vector.
+     * @param v The vector of which to copy component values from
+     */
+    public Float3(@Nonnull Long3 v) {
+        this.x = v.x;
+        this.y = v.y;
+        this.z = v.z;
+    }
+
+    /**
+     * Creates a new vector.
+     * @param v The vector of which to copy component values from
+     */
+    public Float3(@Nonnull Int3 v) {
+        this.x = v.x;
+        this.y = v.y;
+        this.z = v.z;
+    }
+
     //
     // Variables
     //

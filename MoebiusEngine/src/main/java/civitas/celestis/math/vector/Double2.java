@@ -90,6 +90,36 @@ public class Double2 implements DoubleVector<Double2> {
         this.y = v.y;
     }
 
+    /**
+     * Creates a new vector.
+     *
+     * @param v The vector of which to copy component values from
+     */
+    public Double2(@Nonnull Float2 v) {
+        this.x = v.x;
+        this.y = v.y;
+    }
+
+    /**
+     * Creates a new vector.
+     *
+     * @param v The vector of which to copy component values from
+     */
+    public Double2(@Nonnull Long2 v) {
+        this.x = v.x;
+        this.y = v.y;
+    }
+
+    /**
+     * Creates a new vector.
+     *
+     * @param v The vector of which to copy component values from
+     */
+    public Double2(@Nonnull Int2 v) {
+        this.x = v.x;
+        this.y = v.y;
+    }
+
     //
     // Variables
     //

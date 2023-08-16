@@ -90,6 +90,36 @@ public class Float2 implements FloatVector<Float2> {
         this.y = v.y;
     }
 
+    /**
+     * Creates a new vector.
+     *
+     * @param v The vector of which to copy component values from
+     */
+    public Float2(@Nonnull Double2 v) {
+        this.x = (float) v.x;
+        this.y = (float) v.y;
+    }
+
+    /**
+     * Creates a new vector.
+     *
+     * @param v The vector of which to copy component values from
+     */
+    public Float2(@Nonnull Long2 v) {
+        this.x = v.x;
+        this.y = v.y;
+    }
+
+    /**
+     * Creates a new vector.
+     *
+     * @param v The vector of which to copy component values from
+     */
+    public Float2(@Nonnull Int2 v) {
+        this.x = v.x;
+        this.y = v.y;
+    }
+
     //
     // Variables
     //

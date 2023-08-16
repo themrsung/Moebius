@@ -120,6 +120,42 @@ public class Int4 implements IntVector<Int4, Float4> {
         this.z = v.z;
     }
 
+    /**
+     * Creates a new vector.
+     *
+     * @param v The vector of which to copy component values from
+     */
+    public Int4(@Nonnull Double4 v) {
+        this.w = (int) v.w;
+        this.x = (int) v.x;
+        this.y = (int) v.y;
+        this.z = (int) v.z;
+    }
+
+    /**
+     * Creates a new vector.
+     *
+     * @param v The vector of which to copy component values from
+     */
+    public Int4(@Nonnull Float4 v) {
+        this.w = (int) v.w;
+        this.x = (int) v.x;
+        this.y = (int) v.y;
+        this.z = (int) v.z;
+    }
+
+    /**
+     * Creates a new vector.
+     *
+     * @param v The vector of which to copy component values from
+     */
+    public Int4(@Nonnull Long4 v) {
+        this.w = (int) v.w;
+        this.x = (int) v.x;
+        this.y = (int) v.y;
+        this.z = (int) v.z;
+    }
+
     //
     // Variables
     //

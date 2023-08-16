@@ -90,6 +90,36 @@ public class Long2 implements LongVector<Long2, Double2> {
         this.y = v.y;
     }
 
+    /**
+     * Creates a new vector.
+     *
+     * @param v The vector of which to copy component values from
+     */
+    public Long2(@Nonnull Double2 v) {
+        this.x = (long) v.x;
+        this.y = (long) v.y;
+    }
+
+    /**
+     * Creates a new vector.
+     *
+     * @param v The vector of which to copy component values from
+     */
+    public Long2(@Nonnull Float2 v) {
+        this.x = (long) v.x;
+        this.y = (long) v.y;
+    }
+
+    /**
+     * Creates a new vector.
+     *
+     * @param v The vector of which to copy component values from
+     */
+    public Long2(@Nonnull Int2 v) {
+        this.x = v.x;
+        this.y = v.y;
+    }
+
     //
     // Variables
     //

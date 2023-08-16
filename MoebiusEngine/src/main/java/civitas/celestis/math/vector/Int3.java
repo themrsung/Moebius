@@ -117,6 +117,28 @@ public class Int3 implements IntVector<Int3, Float3> {
         this.z = (int) v.z;
     }
 
+    /**
+     * Creates a new vector.
+     *
+     * @param v The vector of which to copy component values from
+     */
+    public Int3(@Nonnull Float3 v) {
+        this.x = (int) v.x;
+        this.y = (int) v.y;
+        this.z = (int) v.z;
+    }
+
+    /**
+     * Creates a new vector.
+     *
+     * @param v The vector of which to copy component values from
+     */
+    public Int3(@Nonnull Long3 v) {
+        this.x = (int) v.x;
+        this.y = (int) v.y;
+        this.z = (int) v.z;
+    }
+
     //
     // Variables
     //
