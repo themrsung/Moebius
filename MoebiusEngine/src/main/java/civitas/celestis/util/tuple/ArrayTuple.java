@@ -5,7 +5,6 @@ import jakarta.annotation.Nullable;
 
 import java.util.*;
 import java.util.function.Function;
-import java.util.function.UnaryOperator;
 
 /**
  * An immutable array of elements.
@@ -148,7 +147,7 @@ public class ArrayTuple<E> implements Tuple<E, ArrayTuple<E>> {
      */
     @Nonnull
     @Override
-    public ArrayTuple<E> transform(@Nonnull UnaryOperator<E> f) {
+    public ArrayTuple<E> transform(@Nonnull Function<? super E, E> f) {
         final E[] copy = Arrays.copyOf(values, values.length);
 
         for (int i = 0; i < values.length; i++) {

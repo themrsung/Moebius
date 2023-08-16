@@ -9,7 +9,6 @@ import jakarta.annotation.Nullable;
 import java.util.*;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
-import java.util.function.UnaryOperator;
 
 /**
  * A matrix of {@code double}s.

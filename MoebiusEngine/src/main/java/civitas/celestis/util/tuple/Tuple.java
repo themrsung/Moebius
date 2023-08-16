@@ -6,7 +6,6 @@ import jakarta.annotation.Nullable;
 
 import java.io.Serializable;
 import java.util.function.Function;
-import java.util.function.UnaryOperator;
 
 /**
  * An immutable group of elements.
@@ -90,7 +89,7 @@ public interface Tuple<E, T extends Tuple<E, T>> extends Group<E>, Iterable<E>, 
      * @return The resulting tuple
      */
     @Nonnull
-    T transform(@Nonnull UnaryOperator<E> f);
+    T transform(@Nonnull Function<? super E, E> f);
 
     /**
      * Maps this tuple into another tuple of a different type.

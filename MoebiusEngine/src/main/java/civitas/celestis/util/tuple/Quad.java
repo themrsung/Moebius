@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.function.Function;
-import java.util.function.UnaryOperator;
 
 /**
  * A quad of elements.
@@ -259,7 +258,7 @@ public class Quad<E> implements Tuple<E, Quad<E>> {
      */
     @Nonnull
     @Override
-    public Quad<E> transform(@Nonnull UnaryOperator<E> f) {
+    public Quad<E> transform(@Nonnull Function<? super E, E> f) {
         return new Quad<>(f.apply(a), f.apply(b), f.apply(c), f.apply(d));
     }
 

@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.function.Function;
-import java.util.function.UnaryOperator;
 
 /**
  * A triple of elements.
@@ -236,7 +235,7 @@ public class Triple<E> implements Tuple<E, Triple<E>> {
      */
     @Nonnull
     @Override
-    public Triple<E> transform(@Nonnull UnaryOperator<E> f) {
+    public Triple<E> transform(@Nonnull Function<? super E, E> f) {
         return new Triple<>(f.apply(a), f.apply(b), f.apply(c));
     }
 

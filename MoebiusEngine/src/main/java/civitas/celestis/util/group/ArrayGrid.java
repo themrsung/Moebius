@@ -8,7 +8,6 @@ import jakarta.annotation.Nullable;
 import java.util.*;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
-import java.util.function.UnaryOperator;
 
 /**
  * A grid which uses a two-dimensional array to store its values.

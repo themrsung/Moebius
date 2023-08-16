@@ -8,7 +8,6 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
-import java.util.function.UnaryOperator;
 
 /**
  * A two-dimensional grid of elements.

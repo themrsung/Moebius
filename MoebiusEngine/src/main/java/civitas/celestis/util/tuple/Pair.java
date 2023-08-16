@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.function.Function;
-import java.util.function.UnaryOperator;
 
 /**
  * A pair of elements.
@@ -213,7 +212,7 @@ public class Pair<E> implements Tuple<E, Pair<E>> {
      */
     @Nonnull
     @Override
-    public Pair<E> transform(@Nonnull UnaryOperator<E> f) {
+    public Pair<E> transform(@Nonnull Function<? super E, E> f) {
         return new Pair<>(f.apply(a), f.apply(b));
     }
 
