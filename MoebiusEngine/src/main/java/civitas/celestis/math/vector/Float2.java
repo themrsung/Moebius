@@ -445,12 +445,12 @@ public class Float2 implements FloatVector<Float2> {
      */
     @Override
     public boolean equals(@Nullable Object obj) {
-        if (obj instanceof Float2 dv2) {
-            return x == dv2.x && y == dv2.y;
+        if (obj instanceof Float2 fv2) {
+            return x == fv2.x && y == fv2.y;
         }
 
-        if (obj instanceof FloatVector<?> dv) {
-            final float[] array = dv.array();
+        if (obj instanceof FloatVector<?> fv) {
+            final float[] array = fv.array();
             return Arrays.equals(array(), array);
         }
 
@@ -461,7 +461,7 @@ public class Float2 implements FloatVector<Float2> {
             if (l1.size() != l2.size()) return false;
 
             for (int i = 0; i < l2.size(); i++) {
-                if (l1.get(i) != l2.get(i)) return false;
+                if (l1.get(i).equals(l2.get(i))) return false;
             }
 
             return true;
