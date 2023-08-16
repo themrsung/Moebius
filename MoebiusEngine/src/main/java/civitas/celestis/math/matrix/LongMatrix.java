@@ -8,6 +8,7 @@ import jakarta.annotation.Nullable;
 
 import java.util.*;
 import java.util.function.BinaryOperator;
+import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
 /**
@@ -486,7 +487,7 @@ public class LongMatrix implements Matrix<Long, LongMatrix> {
      */
     @Nonnull
     @Override
-    public LongMatrix transform(@Nonnull UnaryOperator<? super Long> f) {
+    public LongMatrix transform(@Nonnull Function<? super Long, Long> f) {
         final LongMatrix result = new LongMatrix(rows, columns);
 
         for (int r = 0; r < rows; r++) {

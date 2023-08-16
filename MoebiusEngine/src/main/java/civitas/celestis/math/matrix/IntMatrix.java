@@ -8,6 +8,7 @@ import jakarta.annotation.Nullable;
 
 import java.util.*;
 import java.util.function.BinaryOperator;
+import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
 /**
@@ -486,7 +487,7 @@ public class IntMatrix implements Matrix<Integer, IntMatrix> {
      */
     @Nonnull
     @Override
-    public IntMatrix transform(@Nonnull UnaryOperator<? super Integer> f) {
+    public IntMatrix transform(@Nonnull Function<? super Integer, Integer> f) {
         final IntMatrix result = new IntMatrix(rows, columns);
 
         for (int r = 0; r < rows; r++) {

@@ -8,6 +8,7 @@ import jakarta.annotation.Nullable;
 
 import java.util.*;
 import java.util.function.BinaryOperator;
+import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
 /**
@@ -492,7 +493,7 @@ public class FloatMatrix implements Matrix<Float, FloatMatrix> {
      */
     @Nonnull
     @Override
-    public FloatMatrix transform(@Nonnull UnaryOperator<? super Float> f) {
+    public FloatMatrix transform(@Nonnull Function<? super Float, Float> f) {
         final FloatMatrix result = new FloatMatrix(rows, columns);
 
         for (int r = 0; r < rows; r++) {

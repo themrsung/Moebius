@@ -7,6 +7,7 @@ import jakarta.annotation.Nullable;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.function.BinaryOperator;
+import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
 /**
@@ -220,7 +221,7 @@ public interface Grid<E> extends Group<E>, Iterable<E>, Serializable {
      * @return The resulting grid
      */
     @Nonnull
-    Grid<E> transform(@Nonnull UnaryOperator<? super E> f);
+    Grid<E> transform(@Nonnull Function<? super E, E> f);
 
     /**
      * Returns a new grid where the rows and columns are inverted.
