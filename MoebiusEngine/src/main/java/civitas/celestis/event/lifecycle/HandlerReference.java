@@ -17,8 +17,10 @@ import java.lang.reflect.Method;
  * @see Listener
  * @see EventHandler
  */
-public record HandlerReference(@Nonnull Listener listener,
-                               @Nonnull Method method) implements Comparable<HandlerReference> {
+public record HandlerReference(
+        @Nonnull Listener listener,
+        @Nonnull Method method
+) implements Comparable<HandlerReference> {
     /**
      * Returns the priority of this handler.
      *
