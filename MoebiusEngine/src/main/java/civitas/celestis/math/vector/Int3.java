@@ -1,7 +1,7 @@
 package civitas.celestis.math.vector;
 
 import civitas.celestis.math.Numbers;
-import civitas.celestis.math.complex.Quaternion;
+import civitas.celestis.math.complex.FloatQuaternion;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
@@ -467,8 +467,8 @@ public class Int3 implements IntVector<Int3, Float3> {
      * @return The pure quaternion representation of this vector
      */
     @Nonnull
-    public Quaternion quaternion() {
-        return new Quaternion(0, x, y, z);
+    public FloatQuaternion quaternion() {
+        return new FloatQuaternion(0, x, y, z);
     }
 
     /**
@@ -478,7 +478,7 @@ public class Int3 implements IntVector<Int3, Float3> {
      * @return The resulting vector
      */
     @Nonnull
-    public Int3 rotate(@Nonnull Quaternion rq) {
+    public Int3 rotate(@Nonnull FloatQuaternion rq) {
         return new Int3(rq.multiply(quaternion()).multiply(rq.conjugate()).vector());
     }
 

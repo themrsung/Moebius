@@ -1,6 +1,6 @@
 package civitas.celestis.util.tuple;
 
-import civitas.celestis.util.Group;
+import civitas.celestis.util.group.Group;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
@@ -10,6 +10,14 @@ import java.util.function.UnaryOperator;
 /**
  * An immutable group of elements.
  * A tuple's length or component values cannot be changed after instantiation.
+ * <p>
+ * Moebius tuples are very similar to Python tuples in that they are shallowly immutable.
+ * Tuples can be iterated by a for-each loop, or by a for-i loop. (using {@link Tuple#get(int)})
+ * </p>
+ * <p>
+ * Since tuples cannot be resized or modified, nested tuples can effectively create an unmodifiable
+ * n-dimensional matrix. (although this is not very efficient, and lacks the functionality of dedicated matrices)
+ * </p>
  *
  * @param <E> The type of element to hold in this tuple
  * @param <T> Itself (the parameter or result of type-specific operations)

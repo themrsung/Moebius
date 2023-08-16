@@ -1,6 +1,6 @@
 package civitas.celestis.math.vector;
 
-import civitas.celestis.util.Group;
+import civitas.celestis.util.group.Group;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 

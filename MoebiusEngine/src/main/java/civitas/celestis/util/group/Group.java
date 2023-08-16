@@ -1,4 +1,4 @@
-package civitas.celestis.util;
+package civitas.celestis.util.group;
 
 import civitas.celestis.math.vector.*;
 import civitas.celestis.util.tuple.ArrayTuple;
@@ -45,7 +45,7 @@ public interface Group<E> {
      * @return The constructed group
      */
     @Nonnull
-    static Group<Double> of(@Nonnull double... values) {
+    static Group<Double> ofDouble(@Nonnull double... values) {
         return switch (values.length) {
             case 2 -> new Double2(values);
             case 3 -> new Double3(values);
@@ -61,7 +61,7 @@ public interface Group<E> {
      * @return The constructed group
      */
     @Nonnull
-    static Group<Float> of(@Nonnull float... values) {
+    static Group<Float> ofFloat(@Nonnull float... values) {
         return switch (values.length) {
             case 2 -> new Float2(values);
             case 3 -> new Float3(values);
@@ -85,7 +85,7 @@ public interface Group<E> {
      * @return The constructed group
      */
     @Nonnull
-    static Group<Long> of(@Nonnull long... values) {
+    static Group<Long> ofLong(@Nonnull long... values) {
         return switch (values.length) {
             case 2 -> new Long2(values);
             case 3 -> new Long3(values);
@@ -101,7 +101,7 @@ public interface Group<E> {
      * @return The constructed group
      */
     @Nonnull
-    static Group<Integer> of(@Nonnull int... values) {
+    static Group<Integer> ofInt(@Nonnull int... values) {
         return switch (values.length) {
             case 2 -> new Int2(values);
             case 3 -> new Int3(values);
