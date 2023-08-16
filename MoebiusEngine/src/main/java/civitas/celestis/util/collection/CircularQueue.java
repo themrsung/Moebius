@@ -11,7 +11,7 @@ import java.util.*;
  *
  * @param <E> The type of element to contain in this queue
  */
-public class CircularQueue<E> extends ArrayList<E> implements Queue<E>, Group<E> {
+public class CircularQueue<E> extends ArrayList<E> implements Queue<E> {
     //
     // Static Initializers
     //
@@ -193,21 +193,5 @@ public class CircularQueue<E> extends ArrayList<E> implements Queue<E>, Group<E>
     @Nullable
     public E peek() {
         return get(getAndIncrementI());
-    }
-
-    //
-    // List Conversion
-    //
-
-    /**
-     * A circular queue is already a list.
-     * This returns a reference to itself.
-     *
-     * @return {@code this}
-     */
-    @Nonnull
-    @Override
-    public List<E> list() {
-        return this;
     }
 }
