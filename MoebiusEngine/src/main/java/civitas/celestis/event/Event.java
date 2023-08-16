@@ -1,6 +1,5 @@
 package civitas.celestis.event;
 
-import civitas.celestis.util.Unique;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
@@ -9,12 +8,13 @@ import java.util.UUID;
 /**
  * An event. Events can be called to an event manager in order to be processed.
  *
+ * @see Handleable
  * @see Listener
  * @see EventHandler
  * @see HandlerPriority
  * @see Cancellable
  */
-public class Event implements Unique<UUID> {
+public abstract class Event implements Handleable {
     //
     // Constructors
     //
@@ -41,9 +41,8 @@ public class Event implements Unique<UUID> {
      * Creates a new event with a random unique identifier.
      *
      * @param cause The cause of this event
-     * @param <E>   The type of cause of this event
      */
-    public <E extends Event> Event(@Nullable E cause) {
+    public Event(@Nullable Handleable cause) {
         this.uniqueId = UUID.randomUUID();
         this.cause = cause;
     }
@@ -54,7 +53,7 @@ public class Event implements Unique<UUID> {
      * @param uniqueId The unique identifier of this event
      * @param cause    The cause of this event
      */
-    public Event(@Nonnull UUID uniqueId, @Nullable Event cause) {
+    public Event(@Nonnull UUID uniqueId, @Nullable Handleable cause) {
         this.uniqueId = uniqueId;
         this.cause = cause;
     }
@@ -73,7 +72,7 @@ public class Event implements Unique<UUID> {
      * The cause of this event.
      */
     @Nullable
-    protected final Event cause;
+    protected final Handleable cause;
 
     //
     // Getters
@@ -96,8 +95,9 @@ public class Event implements Unique<UUID> {
      *
      * @return The cause of this event if specified, {@code null} if not
      */
+    @Override
     @Nullable
-    public final Event getCause() {
+    public final Handleable getCause() {
         return cause;
     }
 
@@ -106,6 +106,7 @@ public class Event implements Unique<UUID> {
      *
      * @return {@code true} if the cause of this event has been specified
      */
+    @Override
     public final boolean hasCause() {
         return cause != null;
     }

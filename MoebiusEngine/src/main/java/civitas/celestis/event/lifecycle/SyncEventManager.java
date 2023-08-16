@@ -5,6 +5,8 @@ import java.util.LinkedList;
 
 /**
  * A single-threaded synchronous event manager.
+ *
+ * @see EventManager
  */
 public class SyncEventManager extends EventThread {
     /**

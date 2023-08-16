@@ -1,6 +1,7 @@
 package civitas.celestis.event.lifecycle;
 
 import civitas.celestis.event.Event;
+import civitas.celestis.event.Handleable;
 import civitas.celestis.event.Listener;
 import civitas.celestis.util.ThreadedModule;
 import jakarta.annotation.Nonnull;
@@ -8,6 +9,7 @@ import jakarta.annotation.Nonnull;
 /**
  * An event manager. Handles the lifecycle of events and event listeners.
  *
+ * @see Handleable
  * @see Event
  * @see civitas.celestis.event.EventHandler EventHandler
  * @see Listener
@@ -24,7 +26,7 @@ public interface EventManager extends ThreadedModule {
      * @param e   The event being called
      * @param <E> The type of event being called
      */
-    <E extends Event> void call(@Nonnull E e);
+    <E extends Handleable> void call(@Nonnull E e);
 
     //
     // Listener Registration

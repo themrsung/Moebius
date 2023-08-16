@@ -16,7 +16,7 @@ import java.util.UUID;
  *
  * @see Event
  */
-public class Cancellable extends Event {
+public abstract class Cancellable extends Event {
     //
     // Constructors
     //
@@ -42,9 +42,8 @@ public class Cancellable extends Event {
      * Creates a new event.
      *
      * @param cause The cause of this event
-     * @param <E>   The type of cause of this event
      */
-    public <E extends Event> Cancellable(@Nullable E cause) {
+    public Cancellable(@Nullable Handleable cause) {
         super(cause);
         this.cancelled = false;
     }
@@ -55,7 +54,7 @@ public class Cancellable extends Event {
      * @param uniqueId The unique identifier of this event
      * @param cause    The cause of this event
      */
-    public Cancellable(@Nonnull UUID uniqueId, @Nullable Event cause) {
+    public Cancellable(@Nonnull UUID uniqueId, @Nullable Handleable cause) {
         super(uniqueId, cause);
         this.cancelled = false;
     }

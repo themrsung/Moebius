@@ -10,6 +10,7 @@ import java.lang.annotation.Target;
 /**
  * A marker annotation which marks a method as an event handler.
  *
+ * @see Handleable
  * @see Event
  * @see Listener
  */

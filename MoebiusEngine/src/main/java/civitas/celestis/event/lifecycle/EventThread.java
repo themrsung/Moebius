@@ -1,6 +1,6 @@
 package civitas.celestis.event.lifecycle;
 
-import civitas.celestis.event.Event;
+import civitas.celestis.event.Handleable;
 import civitas.celestis.event.Listener;
 import jakarta.annotation.Nonnull;
 
@@ -25,7 +25,7 @@ public class EventThread extends Thread implements EventManager {
      * the logic of an event thread
      */
     @Nonnull
-    private static Runnable getNewRunnable(@Nonnull Queue<Event> queue, @Nonnull List<HandlerReference> handlers) {
+    private static Runnable getNewRunnable(@Nonnull Queue<Handleable> queue, @Nonnull List<HandlerReference> handlers) {
         return () -> {
             //
             // Event Thread
@@ -36,7 +36,7 @@ public class EventThread extends Thread implements EventManager {
             while (!Thread.interrupted()) {
 
                 // Poll next event
-                final Event e = queue.poll();
+                final Handleable e = queue.poll();
 
                 // Check for null
                 if (e == null) continue;
@@ -74,7 +74,7 @@ public class EventThread extends Thread implements EventManager {
      * @param queue    The queue of events this thread should poll from
      * @param handlers The list of handlers allocated to this thread
      */
-    public EventThread(@Nonnull String name, @Nonnull Queue<Event> queue, @Nonnull List<HandlerReference> handlers) {
+    public EventThread(@Nonnull String name, @Nonnull Queue<Handleable> queue, @Nonnull List<HandlerReference> handlers) {
         super(getNewRunnable(queue, handlers), name);
         this.queue = queue;
         this.handlers = handlers;
@@ -89,7 +89,7 @@ public class EventThread extends Thread implements EventManager {
      * The queue of events.
      */
     @Nonnull
-    private final Queue<Event> queue;
+    private final Queue<Handleable> queue;
 
     /**
      * The list of handlers.
@@ -108,7 +108,7 @@ public class EventThread extends Thread implements EventManager {
      * @param <E> {@inheritDoc}
      */
     @Override
-    public <E extends Event> void call(@Nonnull E e) {
+    public <E extends Handleable> void call(@Nonnull E e) {
         queue.add(e);
     }
 

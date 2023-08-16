@@ -10,6 +10,7 @@ import java.util.List;
 /**
  * An event listener. This is a marker interface which marks a class as an event listener.
  *
+ * @see Handleable
  * @see Event
  * @see EventHandler
  * @see HandlerPriority

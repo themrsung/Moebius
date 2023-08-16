@@ -1,7 +1,7 @@
 package civitas.celestis.event.lifecycle;
 
-import civitas.celestis.event.Event;
 import civitas.celestis.event.EventHandler;
+import civitas.celestis.event.Handleable;
 import civitas.celestis.event.HandlerPriority;
 import civitas.celestis.event.Listener;
 import jakarta.annotation.Nonnull;
@@ -38,7 +38,7 @@ public record HandlerReference(
      * @param <E> The type of event to check
      * @return {@code true} if this handler handles the event {@code e}
      */
-    public <E extends Event> boolean accepts(@Nonnull E e) {
+    public <E extends Handleable> boolean accepts(@Nonnull E e) {
         return method.getParameterTypes()[0].isAssignableFrom(e.getClass());
     }
 
@@ -50,7 +50,7 @@ public record HandlerReference(
      * @throws IllegalAccessException    When the method cannot be accessed
      * @throws InvocationTargetException When the event handler throws an exception
      */
-    public <E extends Event> void handle(@Nonnull E e) throws IllegalAccessException, InvocationTargetException {
+    public <E extends Handleable> void handle(@Nonnull E e) throws IllegalAccessException, InvocationTargetException {
         method.invoke(listener, e);
     }
 
