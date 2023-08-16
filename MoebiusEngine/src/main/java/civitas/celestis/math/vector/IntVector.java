@@ -7,6 +7,9 @@ import jakarta.annotation.Nonnull;
  *
  * @param <V> Itself (the parameter and result of various operations)
  * @param <F> The {@code float} vector corresponding to the size of this vector
+ * @see Int2
+ * @see Int3
+ * @see Int4
  */
 public interface IntVector<V extends IntVector<V, F>, F extends FloatVector<F>> extends Vector<Integer, V> {
     //

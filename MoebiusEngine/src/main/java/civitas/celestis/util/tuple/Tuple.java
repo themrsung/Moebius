@@ -21,6 +21,10 @@ import java.util.function.UnaryOperator;
  *
  * @param <E> The type of element to hold in this tuple
  * @param <T> Itself (the parameter or result of type-specific operations)
+ * @see Pair
+ * @see Triple
+ * @see Quad
+ * @see ArrayTuple
  */
 public interface Tuple<E, T extends Tuple<E, T>> extends Group<E>, Iterable<E>, Serializable {
     //

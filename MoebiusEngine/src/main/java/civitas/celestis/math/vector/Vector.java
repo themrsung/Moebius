@@ -12,6 +12,10 @@ import java.util.function.UnaryOperator;
  *
  * @param <N> The type of number this vector uses
  * @param <V> Itself (the parameter and result of various operations)
+ * @see DoubleVector
+ * @see FloatVector
+ * @see LongVector
+ * @see IntVector
  */
 public interface Vector<N extends Number, V extends Vector<N, V>> extends Group<N>, Serializable {
     //

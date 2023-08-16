@@ -6,6 +6,9 @@ import jakarta.annotation.Nonnull;
  * A vector which uses the type {@code double}.
  *
  * @param <V> Itself (the parameter and result of various operations)
+ * @see Double2
+ * @see Double3
+ * @see Double4
  */
 public interface DoubleVector<V extends DoubleVector<V>> extends Vector<Double, V> {
     //

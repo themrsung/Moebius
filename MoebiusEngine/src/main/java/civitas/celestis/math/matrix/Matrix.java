@@ -8,6 +8,10 @@ import jakarta.annotation.Nonnull;
  *
  * @param <N> The type of number to contain
  * @param <M> Itself (the parameter and return value of certain operations)
+ * @see DoubleMatrix
+ * @see FloatMatrix
+ * @see LongMatrix
+ * @see IntMatrix
  */
 public interface Matrix<N extends Number, M extends Matrix<N, M>> extends Grid<N> {
     //

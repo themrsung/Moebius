@@ -7,6 +7,9 @@ import jakarta.annotation.Nonnull;
  *
  * @param <V> Itself (the parameter and result of various operations)
  * @param <D> The {@code double} vector corresponding to this vector's size
+ * @see Long2
+ * @see Long3
+ * @see Long4
  */
 public interface LongVector<V extends LongVector<V, D>, D extends DoubleVector<D>> extends Vector<Long, V> {
     //

@@ -15,6 +15,8 @@ import java.util.function.UnaryOperator;
  * there are no exceptions or null-checks. Use at your own risk.
  *
  * @param <E> The type of element to contain in this grid
+ * @see ArrayGrid
+ * @see civitas.celestis.math.matrix.Matrix Matrix
  */
 public interface Grid<E> extends Group<E>, Iterable<E>, Serializable {
     //

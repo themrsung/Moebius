@@ -6,6 +6,9 @@ import jakarta.annotation.Nonnull;
  * A vector which uses the type {@code float}.
  *
  * @param <V> Itself (the parameter and result of various operations)
+ * @see Float2
+ * @see Float3
+ * @see Float4
  */
 public interface FloatVector<V extends FloatVector<V>> extends Vector<Float, V> {
     //

@@ -3,10 +3,7 @@ package civitas.celestis.util.tuple;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.UnaryOperator;
 
 /**
@@ -46,6 +43,21 @@ public class ArrayTuple<E> implements Tuple<E, ArrayTuple<E>> {
      */
     public ArrayTuple(@Nonnull ArrayTuple<E> t) {
         this.values = t.values;
+    }
+
+    /**
+     * Creates a new tuple.
+     *
+     * @param c The collection of which to copy values from
+     */
+    @SuppressWarnings("unchecked")
+    public ArrayTuple(@Nonnull Collection<E> c) {
+        final List<E> l = List.copyOf(c);
+        this.values = (E[]) new Object[l.size()];
+
+        for (int i = 0; i < l.size(); i++) {
+            values[i] = l.get(i);
+        }
     }
 
     //
