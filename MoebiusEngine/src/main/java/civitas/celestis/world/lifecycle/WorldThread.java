@@ -128,7 +128,6 @@ public class WorldThread<W extends World<?, ?, ?>> extends Thread implements Wor
      * The tick interval. If ticking every world takes shorter than this interval,
      * the thread will sleep to ensure that the tick delta is at least this interval.
      */
-    @Nonnull
     protected final long tickInterval;
 
     //
@@ -171,6 +170,7 @@ public class WorldThread<W extends World<?, ?, ?>> extends Thread implements Wor
     @Override
     public void addWorld(@Nonnull W world) {
         worlds.add(world);
+        times.put(world, System.currentTimeMillis());
     }
 
     /**
@@ -181,5 +181,6 @@ public class WorldThread<W extends World<?, ?, ?>> extends Thread implements Wor
     @Override
     public void removeWorld(@Nonnull W world) {
         worlds.remove(world);
+        times.remove(world);
     }
 }
