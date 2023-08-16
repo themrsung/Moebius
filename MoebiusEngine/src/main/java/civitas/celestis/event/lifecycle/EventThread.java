@@ -5,6 +5,8 @@ import civitas.celestis.event.Listener;
 import jakarta.annotation.Nonnull;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
@@ -66,6 +68,15 @@ public class EventThread extends Thread implements EventManager {
     //
     // Constructors
     //
+
+    /**
+     * Creates a new event thread.
+     *
+     * @param name The name of this thread
+     */
+    public EventThread(@Nonnull String name) {
+        this(name, new LinkedList<>(), new ArrayList<>());
+    }
 
     /**
      * Creates a new event thread.

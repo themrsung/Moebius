@@ -2,6 +2,7 @@ package civitas.celestis.world;
 
 import civitas.celestis.object.Movable;
 import civitas.celestis.util.Nameable;
+import civitas.celestis.util.Tickable;
 import civitas.celestis.util.Unique;
 import jakarta.annotation.Nonnull;
 
@@ -17,8 +18,14 @@ import java.util.function.Predicate;
  * @param <L> The datatype used to represent location in this world
  * @param <R> The datatype used to represent rotation in this world
  * @param <M> The type of movable object this world contains
+ * @see civitas.celestis.world.lifecycle.WorldManager WorldManager
+ * @see World2
+ * @see World3
+ * @see SingleWorld2
+ * @see SingleWorld3
  */
-public interface World<L, R, M extends Movable<L, R>> extends Iterable<M>, Unique<UUID>, Nameable<String> {
+public interface World<L, R, M extends Movable<L, R> & Tickable>
+        extends Iterable<M>, Unique<UUID>, Nameable<String>, Tickable {
     //
     // Objects
     //

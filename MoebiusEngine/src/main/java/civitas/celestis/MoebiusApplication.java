@@ -7,6 +7,8 @@ import civitas.celestis.event.notification.ApplicationStoppingEvent;
 import civitas.celestis.listener.notification.NotificationListener;
 import civitas.celestis.task.lifecycle.AsyncScheduler;
 import civitas.celestis.task.lifecycle.Scheduler;
+import civitas.celestis.world.lifecycle.SyncWorldManager;
+import civitas.celestis.world.lifecycle.WorldManager;
 import jakarta.annotation.Nonnull;
 
 import java.util.logging.Logger;
@@ -40,6 +42,7 @@ public class MoebiusApplication {
 
         this.eventManager = new SyncEventManager();
         this.scheduler = new AsyncScheduler();
+        this.worldManager = new SyncWorldManager<>();
         this.logger = Logger.getLogger(name);
     }
 
@@ -50,6 +53,7 @@ public class MoebiusApplication {
      * @param version      The version of this application
      * @param eventManager The event manager of this application
      * @param scheduler    The scheduler of this application
+     * @param worldManager The world manager of this application
      * @param logger       The logger instance of this application
      */
     public MoebiusApplication(
@@ -57,12 +61,14 @@ public class MoebiusApplication {
             @Nonnull String version,
             @Nonnull EventManager eventManager,
             @Nonnull Scheduler scheduler,
+            @Nonnull WorldManager<?> worldManager,
             @Nonnull Logger logger
     ) {
         this.name = name;
         this.version = version;
         this.eventManager = eventManager;
         this.scheduler = scheduler;
+        this.worldManager = worldManager;
         this.logger = logger;
     }
 
@@ -81,6 +87,7 @@ public class MoebiusApplication {
         // Start the modules
         eventManager.start();
         scheduler.start();
+        worldManager.start();
 
         // Notify classes that the application has started
         eventManager.call(new ApplicationStartedEvent(name + " " + version + " has started."));
@@ -102,6 +109,7 @@ public class MoebiusApplication {
         // Interrupt the modules
         eventManager.interrupt();
         scheduler.interrupt();
+        worldManager.interrupt();
     }
 
     //
@@ -151,6 +159,20 @@ public class MoebiusApplication {
     }
 
     /**
+     * Returns the world manager instance.
+     *
+     * @return The world manager instance
+     * @see WorldManager
+     */
+    @Nonnull
+    public WorldManager<?> getWorldManager() {
+        // Override this method's signature to return your specific type of world manager,
+        // then cast worldManager to your custom type by overriding this method.
+
+        return worldManager;
+    }
+
+    /**
      * Returns the logger instance.
      *
      * @return The logger instance
@@ -192,6 +214,12 @@ public class MoebiusApplication {
      */
     @Nonnull
     protected final Scheduler scheduler;
+
+    /**
+     * The world manager instance.
+     */
+    @Nonnull
+    protected final WorldManager<?> worldManager;
 
     /**
      * The logger instance.

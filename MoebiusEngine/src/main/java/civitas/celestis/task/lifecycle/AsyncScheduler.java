@@ -5,7 +5,6 @@ import civitas.celestis.util.collection.CircularQueue;
 import jakarta.annotation.Nonnull;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -23,20 +22,33 @@ public class AsyncScheduler implements Scheduler {
     public AsyncScheduler() {
 
         //
-        // The asynchronous scheduler currently has 8 cores.
+        // The asynchronous scheduler currently has 8 cores by default.
         // Last update: v0.3
         //
 
         this.threads = CircularQueue.of(
-                new SchedulerThread("AsyncScheduler-1", new ArrayList<>(), new HashMap<>()),
-                new SchedulerThread("AsyncScheduler-2", new ArrayList<>(), new HashMap<>()),
-                new SchedulerThread("AsyncScheduler-3", new ArrayList<>(), new HashMap<>()),
-                new SchedulerThread("AsyncScheduler-4", new ArrayList<>(), new HashMap<>()),
-                new SchedulerThread("AsyncScheduler-5", new ArrayList<>(), new HashMap<>()),
-                new SchedulerThread("AsyncScheduler-6", new ArrayList<>(), new HashMap<>()),
-                new SchedulerThread("AsyncScheduler-7", new ArrayList<>(), new HashMap<>()),
-                new SchedulerThread("AsyncScheduler-8", new ArrayList<>(), new HashMap<>())
+                new SchedulerThread("AsyncScheduler-1"),
+                new SchedulerThread("AsyncScheduler-2"),
+                new SchedulerThread("AsyncScheduler-3"),
+                new SchedulerThread("AsyncScheduler-4"),
+                new SchedulerThread("AsyncScheduler-5"),
+                new SchedulerThread("AsyncScheduler-6"),
+                new SchedulerThread("AsyncScheduler-7"),
+                new SchedulerThread("AsyncScheduler-8")
         );
+    }
+
+    /**
+     * Creates a new asynchronous scheduler.
+     *
+     * @param n The number of threads to construct
+     */
+    public AsyncScheduler(int n) {
+        this.threads = new CircularQueue<>(n);
+
+        for (int i = 0; i < n; i++) {
+            threads.add(new SchedulerThread("AsyncScheduler-" + (i + 1)));
+        }
     }
 
     //

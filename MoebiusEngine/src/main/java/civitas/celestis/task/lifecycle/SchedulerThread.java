@@ -3,9 +3,7 @@ package civitas.celestis.task.lifecycle;
 import civitas.celestis.task.Task;
 import jakarta.annotation.Nonnull;
 
-import java.util.List;
-import java.util.Map;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 /**
  * A scheduler thread. This can also be used as a single-core scheduler.
@@ -63,6 +61,15 @@ public class SchedulerThread extends Thread implements Scheduler {
     //
     // Constructors
     //
+
+    /**
+     * Creates a new scheduler thread.
+     *
+     * @param name The name of this thread
+     */
+    public SchedulerThread(@Nonnull String name) {
+        this(name, new ArrayList<>(), new HashMap<>());
+    }
 
     /**
      * Creates a new scheduler thread.
