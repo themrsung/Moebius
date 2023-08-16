@@ -281,7 +281,6 @@ public interface Grid<E> extends Group<E>, Iterable<E>, Serializable {
     @Nonnull
     Iterator<E> iterator();
 
-
     //
     // Equality
     //

@@ -1,5 +1,9 @@
 package civitas.celestis.util.group;
 
+import civitas.celestis.math.matrix.DoubleMatrix;
+import civitas.celestis.math.matrix.FloatMatrix;
+import civitas.celestis.math.matrix.IntMatrix;
+import civitas.celestis.math.matrix.LongMatrix;
 import civitas.celestis.math.vector.*;
 import civitas.celestis.util.tuple.ArrayTuple;
 import civitas.celestis.util.tuple.Pair;
@@ -108,6 +112,62 @@ public interface Group<E> {
             case 4 -> new Int4(values);
             default -> new ArrayTuple<>(Arrays.stream(values).boxed().toArray(Integer[]::new));
         };
+    }
+
+    /**
+     * Creates a new group of objects.
+     *
+     * @param values The values to contain
+     * @param <E>    The type of element to contain
+     * @return The constructed group
+     */
+    @Nonnull
+    static <E> Group<E> of(@Nonnull E[][] values) {
+        return new ArrayGrid<>(values);
+    }
+
+    /**
+     * Creates a new group of {@code double}s.
+     *
+     * @param values The values to contain
+     * @return The constructed group
+     */
+    @Nonnull
+    static Group<Double> of(@Nonnull double[][] values) {
+        return new DoubleMatrix(values);
+    }
+
+    /**
+     * Creates a new group of {@code float}s.
+     *
+     * @param values The values to contain
+     * @return The constructed group
+     */
+    @Nonnull
+    static Group<Float> of(@Nonnull float[][] values) {
+        return new FloatMatrix(values);
+    }
+
+    /**
+     * Creates a new group of {@code long}s.
+     *
+     * @param values The values to contain
+     * @return The constructed group
+     */
+    @Nonnull
+    static Group<Long> of(@Nonnull long[][] values) {
+        return new LongMatrix(values);
+    }
+
+    /**
+     * Creates a new group of {@code int}s.
+     *
+     * @param values The values to contain
+     * @return The constructed group
+     */
+    @Nonnull
+    static Group<Integer> of(@Nonnull int[][] values) {
+        return new IntMatrix(values);
     }
 
     //
