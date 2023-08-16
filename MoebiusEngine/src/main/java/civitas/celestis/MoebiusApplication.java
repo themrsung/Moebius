@@ -30,7 +30,8 @@ public class MoebiusApplication {
 
     /**
      * Creates a new application.
-     * @param name The name of this application
+     *
+     * @param name    The name of this application
      * @param version The version of this application
      */
     public MoebiusApplication(@Nonnull String name, @Nonnull String version) {
@@ -44,11 +45,12 @@ public class MoebiusApplication {
 
     /**
      * Creates a new application.
-     * @param name The name of this application
-     * @param version The version of this application
+     *
+     * @param name         The name of this application
+     * @param version      The version of this application
      * @param eventManager The event manager of this application
-     * @param scheduler The scheduler of this application
-     * @param logger The logger instance of this application
+     * @param scheduler    The scheduler of this application
+     * @param logger       The logger instance of this application
      */
     public MoebiusApplication(
             @Nonnull String name,
@@ -81,7 +83,7 @@ public class MoebiusApplication {
         scheduler.start();
 
         // Notify classes that the application has started
-        eventManager.call(new ApplicationStartedEvent(name  + " " + version + " has started."));
+        eventManager.call(new ApplicationStartedEvent(name + " " + version + " has started."));
     }
 
     /**
@@ -108,6 +110,7 @@ public class MoebiusApplication {
 
     /**
      * Returns the name of this application.
+     *
      * @return The name of this application
      */
     @Nonnull
@@ -117,6 +120,7 @@ public class MoebiusApplication {
 
     /**
      * Returns the version of this application.
+     *
      * @return The version of this application
      */
     @Nonnull
@@ -126,6 +130,7 @@ public class MoebiusApplication {
 
     /**
      * Returns the event manager instance.
+     *
      * @return The event manager instance
      * @see EventManager
      */
@@ -136,6 +141,7 @@ public class MoebiusApplication {
 
     /**
      * Returns the scheduler instance.
+     *
      * @return The scheduler instance
      * @see Scheduler
      */
@@ -146,6 +152,7 @@ public class MoebiusApplication {
 
     /**
      * Returns the logger instance.
+     *
      * @return The logger instance
      * @see Logger
      */

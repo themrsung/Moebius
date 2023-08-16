@@ -10,6 +10,7 @@ import java.util.function.Consumer;
 
 /**
  * An event listener which listens to notifications.
+ *
  * @see NotificationEvent
  */
 public final class NotificationListener implements Listener {
@@ -27,6 +28,7 @@ public final class NotificationListener implements Listener {
 
     /**
      * Creates a new notification listener with a custom printer function.
+     *
      * @param printer The function to call when this listener
      *                has received a notification
      */
@@ -41,6 +43,7 @@ public final class NotificationListener implements Listener {
 
     /**
      * Called when a notification event has been called to the event manager.
+     *
      * @param event The event which was called
      */
     @EventHandler(priority = HandlerPriority.PREEMPTIVE)

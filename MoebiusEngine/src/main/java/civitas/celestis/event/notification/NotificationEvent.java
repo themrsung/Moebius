@@ -7,6 +7,7 @@ import jakarta.annotation.Nullable;
 
 /**
  * An event which notifies the console that a certain operation has been performed.
+ *
  * @see civitas.celestis.listener.notification.NotificationListener NotificationListener
  */
 public class NotificationEvent extends Event {
@@ -23,6 +24,7 @@ public class NotificationEvent extends Event {
 
     /**
      * Creates a new notification event.
+     *
      * @param content The content of the notification
      */
     public NotificationEvent(@Nonnull String content) {
@@ -31,8 +33,9 @@ public class NotificationEvent extends Event {
 
     /**
      * Creates a new notification event.
+     *
      * @param content The content of the notification
-     * @param cause The cause of this notification
+     * @param cause   The cause of this notification
      */
     public NotificationEvent(@Nonnull String content, @Nullable Handleable cause) {
         super(cause);
@@ -56,6 +59,7 @@ public class NotificationEvent extends Event {
 
     /**
      * Returns the content of this notification.
+     *
      * @return The content of this notification
      */
     @Nonnull

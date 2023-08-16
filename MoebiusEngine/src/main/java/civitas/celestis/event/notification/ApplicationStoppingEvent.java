@@ -20,6 +20,7 @@ public class ApplicationStoppingEvent extends NotificationEvent {
 
     /**
      * Creates a new event.
+     *
      * @param content The content of this event
      */
     public ApplicationStoppingEvent(@Nonnull String content) {
@@ -28,8 +29,9 @@ public class ApplicationStoppingEvent extends NotificationEvent {
 
     /**
      * Creates a new event.
+     *
      * @param content The content of this event
-     * @param cause The cause of this event
+     * @param cause   The cause of this event
      */
     public ApplicationStoppingEvent(@Nonnull String content, @Nullable Handleable cause) {
         super(content, cause);

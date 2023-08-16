@@ -16,6 +16,7 @@ public interface Handleable extends Unique<UUID> {
 
     /**
      * Returns the cause of this handleable object.
+     *
      * @return The cause of this handleable object
      */
     @Nullable
@@ -23,6 +24,7 @@ public interface Handleable extends Unique<UUID> {
 
     /**
      * Returns whether this handleable object has a cause.
+     *
      * @return {@code true} if the cause of this handleable has been specified
      */
     default boolean hasCause() {
