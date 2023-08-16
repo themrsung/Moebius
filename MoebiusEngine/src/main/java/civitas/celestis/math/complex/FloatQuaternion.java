@@ -6,11 +6,17 @@ import civitas.celestis.math.vector.Float4;
 import civitas.celestis.math.vector.FloatVector;
 import jakarta.annotation.Nonnull;
 
+/**
+ * A quaternion is used to represent the rotation of a three-dimensional vector.
+ */
 public class FloatQuaternion extends Float4 {
     //
     // Constants
     //
 
+    /**
+     * The identity quaternion. This represents no rotation.
+     */
     public static final FloatQuaternion IDENTITY = new FloatQuaternion(1, 0, 0, 0);
 
     //

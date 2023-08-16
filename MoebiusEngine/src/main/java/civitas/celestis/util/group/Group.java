@@ -231,8 +231,8 @@ public interface Group<E> {
     static <E> Group<E> copyOf(@Nonnull Group<E> g) {
         if (g instanceof Grid<E> grid) return new ArrayGrid<>(grid);
 
-        // Vector constructors must be called in descending order to prevent
-        // inter-type copying.
+        // Vector constructors must be called in this specific order to prevent
+        // inter-type copying and to prevent loss of precision.
 
         // 1. new Double3(Float3) will be harmless, while the other way around would lose precision.
         // 2. new Double2(Double4) will work, while new Double4(Double2) won't.
