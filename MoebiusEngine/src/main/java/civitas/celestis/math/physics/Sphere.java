@@ -22,6 +22,16 @@ public class Sphere implements Solid {
         this.radius = radius;
     }
 
+    /**
+     * Creates a new sphere.
+     *
+     * @param other The sphere of which to copy properties from
+     */
+    public Sphere(@Nonnull Sphere other) {
+        this.center = other.center;
+        this.radius = other.radius;
+    }
+
     //
     // Variables
     //
@@ -80,5 +90,62 @@ public class Sphere implements Solid {
     @Override
     public int getNumCorners() {
         return 0;
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @return {@inheritDoc}
+     */
+    @Override
+    public double getVolume() {
+        return (4d / 3d) * Math.PI * radius * radius * radius;
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @return {@inheritDoc}
+     */
+    @Nonnull
+    @Override
+    public BoundingBox getBoundingBox() {
+        return new BoundingBox(center.subtract(radius), center.add(radius));
+    }
+
+    //
+    // Containment
+    //
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param v The vertex to check for containment
+     * @return {@inheritDoc}
+     */
+    @Override
+    public boolean contains(@Nonnull Double3 v) {
+        return center.distance2(v) <= (radius * radius);
+    }
+
+    //
+    // Overlapping
+    //
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param s The solid to compare to
+     * @return {@inheritDoc}
+     */
+    @Override
+    public boolean overlaps(@Nonnull Solid s) {
+        // Special case for spheres
+        if (s instanceof Sphere sphere) {
+            return center.distance2(sphere.center) <= Math.pow(radius + sphere.radius, 2);
+        }
+
+        // Use bounding box as fallback
+        return getBoundingBox().overlaps(s);
     }
 }
