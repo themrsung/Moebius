@@ -564,7 +564,7 @@ public class Long2 implements LongVector<Long2, Double2> {
             values[switch (split[0]) {
                 case "x" -> 0;
                 case "y" -> 1;
-                default -> throw new NumberFormatException("The provided string has a non-XYZ component.");
+                default -> throw new NumberFormatException("The provided string has a non-XY component.");
             }] = Long.parseLong(split[1]);
         }
 

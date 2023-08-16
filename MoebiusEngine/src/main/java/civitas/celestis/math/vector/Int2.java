@@ -564,7 +564,7 @@ public class Int2 implements IntVector<Int2, Float2> {
             values[switch (split[0]) {
                 case "x" -> 0;
                 case "y" -> 1;
-                default -> throw new NumberFormatException("The provided string has a non-XYZ component.");
+                default -> throw new NumberFormatException("The provided string has a non-XY component.");
             }] = Integer.parseInt(split[1]);
         }
 
