@@ -33,6 +33,43 @@ import java.io.Serializable;
  */
 public interface Color8 extends Packable32, Packable64, Serializable {
     //
+    // Validation
+    //
+
+    /**
+     * Checks if given color is a valid color.
+     * (the components are within the range of {@code 0-255})
+     *
+     * @param c The color to validate
+     * @return {@code true} if the provided color {@code c} is a valid color
+     */
+    static boolean isValid(@Nonnull Color8 c) {
+        if (c instanceof LinearColor lc) {
+            return lc.isValid();
+        }
+
+        return true;
+    }
+
+    /**
+     * Checks if given color is a valid color (the components are within the range of {@code 0-255}),
+     * then returns a reference to the color. If the color is invalid,
+     * this will throw an {@link IllegalStateException}.
+     *
+     * @param c The color to validate
+     * @return A reference to the provided color {@code c}
+     * @throws IllegalStateException When the color is invalid
+     */
+    @Nonnull
+    static Color8 requireValid(@Nonnull Color8 c) throws IllegalStateException {
+        if (c instanceof LinearColor lc) {
+            return lc.requireValid();
+        }
+
+        return c;
+    }
+
+    //
     // RGBA
     //
 

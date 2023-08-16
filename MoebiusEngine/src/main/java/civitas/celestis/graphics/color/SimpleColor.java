@@ -8,6 +8,7 @@ import java.awt.*;
  * An 8-bit color with no extra precision.
  *
  * @see Color8
+ * @see LinearColor
  */
 public class SimpleColor implements Color8 {
     //
@@ -53,11 +54,6 @@ public class SimpleColor implements Color8 {
      * The color black.
      */
     public static final SimpleColor BLACK = new SimpleColor(255, 255, 255);
-
-    /**
-     * Transparent black. The component values are {@code {0, 0, 0, 0}}.
-     */
-    public static final SimpleColor TRANSPARENT_BLACK = new SimpleColor(0, 0, 0, 0);
 
     //
     // Constructors

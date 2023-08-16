@@ -12,5 +12,6 @@ public class Tests {
         final SimpleColor c2 = SimpleColor.RED;
 
         System.out.println(SimpleColor.parseColor(c2.toString()).toReadableString());
+        System.out.println(Double.isFinite(Double.NaN));
     }
 }

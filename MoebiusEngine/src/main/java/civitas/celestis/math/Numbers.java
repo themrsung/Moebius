@@ -36,4 +36,20 @@ public class Numbers {
         if (value > max) return max;
         return value;
     }
+
+    public static float requireRange(float value, float min, float max) {
+        if (!isInRange(value, min, max)) {
+            throw new IllegalArgumentException("This field requires the value to be within the range of " + min + "-" + max + ".");
+        }
+
+        return value;
+    }
+
+    public static boolean isInRange(double value, double min, double max) {
+        return value >= min && value <= max;
+    }
+
+    public static boolean isInRange(float value, float min, float max) {
+        return value >= min && value <= max;
+    }
 }

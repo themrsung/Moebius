@@ -9,7 +9,7 @@ package civitas.celestis.util.data;
  * <p>
  * Unpacking the packed bits is not defined in this interface, and requires
  * a custom implementation, which is usually achieved by a static method
- * {@code YourClass#unpack(long)}.
+ * {@code YourClass#unpack64(long)}.
  * </p>
  */
 public interface Packable64 {

@@ -1,5 +1,6 @@
 package civitas.celestis.graphics.color;
 
+import civitas.celestis.math.Numbers;
 import civitas.celestis.math.vector.*;
 import jakarta.annotation.Nonnull;
 
@@ -7,10 +8,81 @@ import java.awt.*;
 
 /**
  * An 8-bit color with 32 bits of precision.
+ * <p>
+ * The allowed component range of {@code 0-255} is not enforced by throwing an exception.
+ * This is due to the fact that this class is immutable, and arithmetic operations such as
+ * linear interpolation (LERP) require re-instantiation.
+ * Validating all four components in every constructor call would be very inefficient.
+ * </p>
+ * <p>
+ * Instead, whether this color is a valid color can be checked by calling {@link LinearColor#isValid()},
+ * and should be checked before using this color to render an object.
+ * Values are automatically clamped to be within the range when converting it to an AWT color.
+ * </p>
+ * <p>
+ * When copying a linear color using the copy constructor, (which should never be done; this class
+ * is immutable and copying it achieves nothing) make sure to cast it to {@link Float4} for optimal
+ * performance.<br>
+ * <code>
+ * final LinearColor colorToCopy;<br>
+ * new LinearColor((Float4) colorToCopy);
+ * </code>
+ * </p>
  *
  * @see Color8
+ * @see SimpleColor
  */
 public class LinearColor extends Float4 implements Color8 {
+    //
+    // Constants
+    //
+
+    /**
+     * The color white.
+     */
+    public static final LinearColor WHITE = new LinearColor(255, 255, 255);
+
+    /**
+     * The color red.
+     */
+    public static final LinearColor RED = new LinearColor(255, 0, 0);
+
+    /**
+     * The color green.
+     */
+    public static final LinearColor GREEN = new LinearColor(0, 255, 0);
+
+    /**
+     * The color blue.
+     */
+    public static final LinearColor BLUE = new LinearColor(0, 0, 255);
+
+    /**
+     * The color cyan.
+     */
+    public static final LinearColor CYAN = new LinearColor(0, 255, 255);
+
+    /**
+     * The color magenta.
+     */
+    public static final LinearColor MAGENTA = new LinearColor(255, 0, 255);
+
+    /**
+     * The color yellow.
+     */
+    public static final LinearColor YELLOW = new LinearColor(255, 255, 0);
+
+    /**
+     * The color black.
+     */
+    public static final LinearColor BLACK = new LinearColor(255, 255, 255);
+
+    /**
+     * Transparent black. The component values are {@code {0, 0, 0, 0}}.
+     */
+    public static final LinearColor TRANSPARENT_BLACK = new LinearColor(0, 0, 0, 0);
+
+
     //
     // Constructors
     //
@@ -63,6 +135,15 @@ public class LinearColor extends Float4 implements Color8 {
 
     /**
      * Creates a new color.
+     *
+     * @param c The color of which to copy component values from
+     */
+    public LinearColor(@Nonnull Color8 c) {
+        super(extractComponentsFromColor(c));
+    }
+
+    /**
+     * Creates a new color.
      * All components should respect the range of {@code 0-255}.
      *
      * @param v The vector of which to copy component values from
@@ -109,6 +190,58 @@ public class LinearColor extends Float4 implements Color8 {
      */
     public LinearColor(@Nonnull Int4 v) {
         super(v);
+    }
+
+    /**
+     * Internal method used in {@link LinearColor#LinearColor(Color8)}.
+     *
+     * @param c The color to extract component values from
+     * @return The extracted components in RGBA (WXYZ) order
+     */
+    @Nonnull
+    private static float[] extractComponentsFromColor(@Nonnull Color8 c) {
+        if (c instanceof Float4 f4) {
+            // No need to perform manual extraction; Color already has its components defined as floats
+            return f4.array();
+        }
+
+        return new float[]{c.red(), c.green(), c.blue(), c.alpha()};
+    }
+
+    //
+    // Validation
+    //
+
+    /**
+     * Returns whether this color is a valid color.
+     * (the components are within the range of {@code 0-255})
+     *
+     * @return {@code true} if all components are within the range of {@code 0-255}
+     * @see LinearColor#requireValid()
+     */
+    public boolean isValid() {
+        // Checking the Manhattan norm will guarantee the success of this method,
+        // while optimizing it to not call isInRange() four times.
+
+        return Numbers.isInRange(normManhattan(), 0, 255 * 4);
+    }
+
+    /**
+     * Validates this color, then returns a reference to itself.
+     *
+     * @return {@code this}
+     * @throws IllegalStateException When the color not valid
+     * @see LinearColor#isValid()
+     */
+    @Nonnull
+    public LinearColor requireValid() throws IllegalStateException {
+        try {
+            Numbers.requireRange(normManhattan(), 0, 255 * 4);
+        } catch (final IllegalArgumentException e) {
+            throw new IllegalStateException("This color is not a valid color.");
+        }
+
+        return this;
     }
 
     //
@@ -201,7 +334,13 @@ public class LinearColor extends Float4 implements Color8 {
     @Nonnull
     @Override
     public Color awt32() {
-        return new Color(pack32(), true);
+        // Not clamping the numbers here will produce an exception in the constructor of Color
+        return new Color(Color8.pack32(
+                (int) Numbers.clamp(w, 0, 255),
+                (int) Numbers.clamp(x, 0, 255),
+                (int) Numbers.clamp(y, 0, 255),
+                (int) Numbers.clamp(z, 0, 255)
+        ), true);
     }
 
     /**
@@ -212,7 +351,12 @@ public class LinearColor extends Float4 implements Color8 {
     @Nonnull
     @Override
     public Color awt24() {
-        return new Color(pack24());
+        // Not clamping the numbers here will produce an exception in the constructor of Color
+        return new Color(Color8.pack24(
+                (int) Numbers.clamp(w, 0, 255),
+                (int) Numbers.clamp(x, 0, 255),
+                (int) Numbers.clamp(y, 0, 255)
+        ));
     }
 
     //
