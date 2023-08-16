@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
+import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
 /**
@@ -214,6 +215,19 @@ public class Pair<E> implements Tuple<E, Pair<E>> {
     @Override
     public Pair<E> transform(@Nonnull UnaryOperator<E> f) {
         return new Pair<>(f.apply(a), f.apply(b));
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param mapper The mapper function to apply to each element of this tuple
+     * @param <F>    {@inheritDoc}
+     * @return {@inheritDoc}
+     */
+    @Nonnull
+    @Override
+    public <F> Pair<F> map(@Nonnull Function<? super E, ? extends F> mapper) {
+        return new Pair<>(mapper.apply(a), mapper.apply(b));
     }
 
     //

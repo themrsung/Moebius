@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
+import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
 /**
@@ -237,6 +238,19 @@ public class Triple<E> implements Tuple<E, Triple<E>> {
     @Override
     public Triple<E> transform(@Nonnull UnaryOperator<E> f) {
         return new Triple<>(f.apply(a), f.apply(b), f.apply(c));
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param mapper The mapper function to apply to each element of this tuple
+     * @param <F>    {@inheritDoc}
+     * @return {@inheritDoc}
+     */
+    @Nonnull
+    @Override
+    public <F> Triple<F> map(@Nonnull Function<? super E, ? extends F> mapper) {
+        return new Triple<>(mapper.apply(a), mapper.apply(b), mapper.apply(c));
     }
 
     //

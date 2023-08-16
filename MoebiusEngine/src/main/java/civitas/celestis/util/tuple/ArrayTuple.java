@@ -4,6 +4,7 @@ import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
 /**
@@ -155,6 +156,20 @@ public class ArrayTuple<E> implements Tuple<E, ArrayTuple<E>> {
         }
 
         return new ArrayTuple<>(copy);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param mapper The mapper function to apply to each element of this tuple
+     * @param <F>    {@inheritDoc}
+     * @return {@inheritDoc}
+     */
+    @Nonnull
+    @Override
+    @SuppressWarnings("unchecked")
+    public <F> ArrayTuple<F> map(@Nonnull Function<? super E, ? extends F> mapper) {
+        return new ArrayTuple<>((F[]) Arrays.stream(values).map(mapper).toArray(Object[]::new));
     }
 
     //

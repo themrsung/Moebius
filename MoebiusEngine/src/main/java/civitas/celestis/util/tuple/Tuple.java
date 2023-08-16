@@ -5,6 +5,7 @@ import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
 import java.io.Serializable;
+import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
 /**
@@ -87,6 +88,16 @@ public interface Tuple<E, T extends Tuple<E, T>> extends Group<E>, Iterable<E>, 
      */
     @Nonnull
     T transform(@Nonnull UnaryOperator<E> f);
+
+    /**
+     * Maps this tuple into another tuple of a different type.
+     *
+     * @param mapper The mapper function to apply to each element of this tuple
+     * @param <F>    The type of element to contain in the new tuple
+     * @return The mapped tuple
+     */
+    @Nonnull
+    <F> Tuple<F, ?> map(@Nonnull Function<? super E, ? extends F> mapper);
 
     //
     // Equality
