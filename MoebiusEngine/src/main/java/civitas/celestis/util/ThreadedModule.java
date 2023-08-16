@@ -4,6 +4,8 @@ package civitas.celestis.util;
  * The superinterface for threaded modules.
  *
  * @see civitas.celestis.task.lifecycle.Scheduler Scheduler
+ * @see civitas.celestis.event.lifecycle.EventManager EventManager
+ * @see civitas.celestis.world.lifecycle.WorldManager WorldManager
  */
 public interface ThreadedModule {
     /**
