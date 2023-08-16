@@ -21,6 +21,10 @@ public class Complex extends Double2 implements Comparable<Complex>, Packable64 
 
     /**
      * The square root of {@code -1}.
+     * <p>
+     * Multiplying a complex number by {@code i} will rotate the number 90 degrees counter-clockwise
+     * along the real-complex number plane.
+     * </p>
      */
     public static final Complex I = new Complex(0, 1);
 
@@ -148,6 +152,28 @@ public class Complex extends Double2 implements Comparable<Complex>, Packable64 
 
         // Pack the two integers into a single long
         return ((long) packedR << 32) | (packedI & 0xFFFFFFFFL);
+    }
+
+    //
+    // Getters
+    //
+
+    /**
+     * Returns the real part of this complex number.
+     *
+     * @return The real part of this complex number
+     */
+    public final double real() {
+        return x;
+    }
+
+    /**
+     * Returns the imaginary part of this complex number.
+     *
+     * @return The imaginary part of this complex number
+     */
+    public final double imaginary() {
+        return y;
     }
 
     //
@@ -283,6 +309,30 @@ public class Complex extends Double2 implements Comparable<Complex>, Packable64 
 
         return new Complex(x / n2, -y / n2);
     }
+
+    //
+    // Rotation
+    //
+
+    /**
+     * Rotates this complex number along the complex plane counter-clockwise
+     * by the provided angle of rotation.
+     *
+     * @param angRads The angle of rotation to apply in radians
+     * @return The rotated number
+     */
+    @Nonnull
+    @Override
+    public Complex rotate(double angRads) {
+        double cos = Math.cos(angRads);
+        double sin = Math.sin(angRads);
+
+        return new Complex(
+                cos * x - sin * y,
+                sin * x + cos * y
+        );
+    }
+
 
     //
     // Comparison
