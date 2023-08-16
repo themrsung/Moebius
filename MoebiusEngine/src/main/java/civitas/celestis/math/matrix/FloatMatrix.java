@@ -492,12 +492,12 @@ public class FloatMatrix implements Matrix<Float, FloatMatrix> {
      */
     @Nonnull
     @Override
-    public FloatMatrix transform(@Nonnull UnaryOperator<Float> f) {
+    public FloatMatrix transform(@Nonnull UnaryOperator<? super Float> f) {
         final FloatMatrix result = new FloatMatrix(rows, columns);
 
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < columns; c++) {
-                result.values[r][c] = f.apply(values[r][c]);
+                result.values[r][c] = (float) f.apply(values[r][c]);
             }
         }
 

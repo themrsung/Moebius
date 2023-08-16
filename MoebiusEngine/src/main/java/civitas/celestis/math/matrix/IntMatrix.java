@@ -486,12 +486,12 @@ public class IntMatrix implements Matrix<Integer, IntMatrix> {
      */
     @Nonnull
     @Override
-    public IntMatrix transform(@Nonnull UnaryOperator<Integer> f) {
+    public IntMatrix transform(@Nonnull UnaryOperator<? super Integer> f) {
         final IntMatrix result = new IntMatrix(rows, columns);
 
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < columns; c++) {
-                result.values[r][c] = f.apply(values[r][c]);
+                result.values[r][c] = (int) f.apply(values[r][c]);
             }
         }
 

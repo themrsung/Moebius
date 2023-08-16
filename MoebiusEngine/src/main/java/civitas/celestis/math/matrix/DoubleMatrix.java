@@ -486,12 +486,12 @@ public class DoubleMatrix implements Matrix<Double, DoubleMatrix> {
      */
     @Nonnull
     @Override
-    public DoubleMatrix transform(@Nonnull UnaryOperator<Double> f) {
+    public DoubleMatrix transform(@Nonnull UnaryOperator<? super Double> f) {
         final DoubleMatrix result = new DoubleMatrix(rows, columns);
 
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < columns; c++) {
-                result.values[r][c] = f.apply(values[r][c]);
+                result.values[r][c] = (double) f.apply(values[r][c]);
             }
         }
 

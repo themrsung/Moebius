@@ -1,28 +1,20 @@
 package civitas.celestis;
 
-import civitas.celestis.event.notification.NotificationEvent;
-import civitas.celestis.math.DecimalMath;
-import civitas.celestis.math.Numbers;
-import civitas.celestis.math.function.Graph;
-import civitas.celestis.task.Task;
-import civitas.celestis.util.tuple.ArrayTuple;
+import civitas.celestis.math.vector.Double3;
+import civitas.celestis.util.group.ArrayGrid;
+import civitas.celestis.util.group.Grid;
+import civitas.celestis.util.tuple.QuaternaryQuad;
+import civitas.celestis.util.tuple.Triple;
 
 public class Test2 {
     public static void main(String[] args) {
-        MoebiusApplication.TEST_APP.start();
+        final QuaternaryQuad<Grid<Double>, Double3, Triple<Double>, Double> quad = new QuaternaryQuad<>(
+                new ArrayGrid<>(2, 2),
+                Double3.ZERO,
+                new Triple<>(0d, 0d, 0d),
+                3d
+        );
 
-        MoebiusApplication.TEST_APP.getEventManager().call(new NotificationEvent("Hello world!"));
 
-        MoebiusApplication.TEST_APP.getScheduler().register(new Task() {
-            @Override
-            public void execute(long delta) {
-                MoebiusApplication.TEST_APP.stop();
-            }
-
-            @Override
-            public long interval() {
-                return 5000;
-            }
-        });
     }
 }

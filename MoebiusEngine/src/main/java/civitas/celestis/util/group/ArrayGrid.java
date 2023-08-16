@@ -382,7 +382,7 @@ public class ArrayGrid<E> implements Grid<E> {
      */
     @Nonnull
     @Override
-    public ArrayGrid<E> transform(@Nonnull UnaryOperator<E> f) {
+    public ArrayGrid<E> transform(@Nonnull UnaryOperator<? super E> f) {
         final ArrayGrid<E> result = new ArrayGrid<>(rows, columns);
 
         for (int r = 0; r < rows; r++) {

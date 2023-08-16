@@ -486,12 +486,12 @@ public class LongMatrix implements Matrix<Long, LongMatrix> {
      */
     @Nonnull
     @Override
-    public LongMatrix transform(@Nonnull UnaryOperator<Long> f) {
+    public LongMatrix transform(@Nonnull UnaryOperator<? super Long> f) {
         final LongMatrix result = new LongMatrix(rows, columns);
 
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < columns; c++) {
-                result.values[r][c] = f.apply(values[r][c]);
+                result.values[r][c] = (long) f.apply(values[r][c]);
             }
         }
 

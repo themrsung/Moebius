@@ -220,7 +220,7 @@ public interface Grid<E> extends Group<E>, Iterable<E>, Serializable {
      * @return The resulting grid
      */
     @Nonnull
-    Grid<E> transform(@Nonnull UnaryOperator<E> f);
+    Grid<E> transform(@Nonnull UnaryOperator<? super E> f);
 
     /**
      * Returns a new grid where the rows and columns are inverted.

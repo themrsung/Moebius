@@ -25,6 +25,9 @@ import java.util.function.UnaryOperator;
  * @see Pair
  * @see Triple
  * @see Quad
+ * @see BinaryPair
+ * @see TernaryTriple
+ * @see QuaternaryQuad
  * @see ArrayTuple
  */
 public interface Tuple<E, T extends Tuple<E, T>> extends Group<E>, Iterable<E>, Serializable {
