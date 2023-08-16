@@ -3,6 +3,7 @@ package civitas.celestis.graphics.color;
 import civitas.celestis.util.data.Packable32;
 import civitas.celestis.util.data.Packable64;
 import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import java.awt.*;
 import java.io.Serializable;
@@ -431,6 +432,21 @@ public interface Color8 extends Packable32, Packable64, Serializable {
      */
     @Nonnull
     Color awt24();
+
+    //
+    // Equality
+    //
+
+    /**
+     * Checks for equality between this color and the provided object {@code obj}.
+     * This compares the 32-bit RGBA representation of the colors, and any precision
+     * beyond the representable range will be ignored.
+     *
+     * @param obj The object to compare to
+     * @return {@code true} if the object is also a color, and the two colors represent
+     * the same color (the 32-bit RGBA representation is equal)
+     */
+    boolean equals(@Nullable Object obj);
 
     //
     // Serialization

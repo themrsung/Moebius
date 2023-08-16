@@ -269,6 +269,23 @@ public class SimpleColor implements Color8 {
     }
 
     //
+    // Equality
+    //
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param obj The object to compare to
+     * @return {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Color8 c)) return false;
+        return rgba32 == c.pack32();
+    }
+
+
+    //
     // Serialization
     //
 

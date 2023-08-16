@@ -403,6 +403,55 @@ public class Float3 implements FloatVector<Float3> {
     }
 
     //
+    // Distance
+    //
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param v The vector of which to get the distance to
+     * @return {@inheritDoc}
+     */
+    @Override
+    public float distance(@Nonnull Float3 v) {
+        final float dx = x - v.x;
+        final float dy = y - v.y;
+        final float dz = z - v.z;
+
+        return (float) Math.sqrt(dx * dx + dy * dy + dz * dz);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param v The vector of which to get the squared distance to
+     * @return {@inheritDoc}
+     */
+    @Override
+    public float distance2(@Nonnull Float3 v) {
+        final float dx = x - v.x;
+        final float dy = y - v.y;
+        final float dz = z - v.z;
+
+        return dx * dx + dy * dy + dz * dz;
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param v The vector of which to get the distance to
+     * @return {@inheritDoc}
+     */
+    @Override
+    public float distanceManhattan(@Nonnull Float3 v) {
+        final float dx = x - v.x;
+        final float dy = y - v.y;
+        final float dz = z - v.z;
+
+        return Math.abs(dx) + Math.abs(dy) + Math.abs(dz);
+    }
+
+    //
     // Normalization
     //
 

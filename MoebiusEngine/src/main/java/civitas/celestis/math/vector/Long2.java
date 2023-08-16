@@ -336,6 +336,52 @@ public class Long2 implements LongVector<Long2, Double2> {
     }
 
     //
+    // Distance
+    //
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param v The vector of which to get the distance to
+     * @return {@inheritDoc}
+     */
+    @Override
+    public double distance(@Nonnull Long2 v) {
+        final double dx = x - v.x;
+        final double dy = y - v.y;
+
+        return Math.sqrt(dx * dx + dy * dy);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param v The vector of which to get the squared distance to
+     * @return {@inheritDoc}
+     */
+    @Override
+    public long distance2(@Nonnull Long2 v) {
+        final long dx = x - v.x;
+        final long dy = y - v.y;
+
+        return dx * dx + dy * dy;
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param v The vector of which to get the distance to
+     * @return {@inheritDoc}
+     */
+    @Override
+    public long distanceManhattan(@Nonnull Long2 v) {
+        final long dx = x - v.x;
+        final long dy = y - v.y;
+
+        return Math.abs(dx) + Math.abs(dy);
+    }
+
+    //
     // Normalization
     //
 

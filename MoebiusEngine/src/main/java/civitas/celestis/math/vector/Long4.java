@@ -405,6 +405,58 @@ public class Long4 implements LongVector<Long4, Double4> {
     }
 
     //
+    // Distance
+    //
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param v The vector of which to get the distance to
+     * @return {@inheritDoc}
+     */
+    @Override
+    public double distance(@Nonnull Long4 v) {
+        final double dw = w - v.w;
+        final double dx = x - v.x;
+        final double dy = y - v.y;
+        final double dz = z - v.z;
+
+        return Math.sqrt(dw * dw + dx * dx + dy * dy + dz * dz);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param v The vector of which to get the squared distance to
+     * @return {@inheritDoc}
+     */
+    @Override
+    public long distance2(@Nonnull Long4 v) {
+        final long dw = w - v.w;
+        final long dx = x - v.x;
+        final long dy = y - v.y;
+        final long dz = z - v.z;
+
+        return dw * dw + dx * dx + dy * dy + dz * dz;
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param v The vector of which to get the distance to
+     * @return {@inheritDoc}
+     */
+    @Override
+    public long distanceManhattan(@Nonnull Long4 v) {
+        final long dw = w - v.w;
+        final long dx = x - v.x;
+        final long dy = y - v.y;
+        final long dz = z - v.z;
+
+        return Math.abs(dw) + Math.abs(dx) + Math.abs(dy) + Math.abs(dz);
+    }
+
+    //
     // Normalization
     //
 

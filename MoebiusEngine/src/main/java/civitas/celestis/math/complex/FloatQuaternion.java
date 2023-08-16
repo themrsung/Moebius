@@ -223,6 +223,20 @@ public class FloatQuaternion extends Float4 {
         );
     }
 
+    //
+    // Negation
+    //
+
+    /**
+     * Negates this quaternion.
+     *
+     * @return The negation of this quaternion
+     */
+    @Nonnull
+    @Override
+    public FloatQuaternion negate() {
+        return new FloatQuaternion(-w, -x, -y, -z);
+    }
 
     //
     // Serialization

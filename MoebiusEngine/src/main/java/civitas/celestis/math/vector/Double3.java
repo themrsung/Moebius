@@ -403,6 +403,55 @@ public class Double3 implements DoubleVector<Double3> {
     }
 
     //
+    // Distance
+    //
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param v The vector of which to get the distance to
+     * @return {@inheritDoc}
+     */
+    @Override
+    public double distance(@Nonnull Double3 v) {
+        final double dx = x - v.x;
+        final double dy = y - v.y;
+        final double dz = z - v.z;
+
+        return Math.sqrt(dx * dx + dy * dy + dz * dz);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param v The vector of which to get the squared distance to
+     * @return {@inheritDoc}
+     */
+    @Override
+    public double distance2(@Nonnull Double3 v) {
+        final double dx = x - v.x;
+        final double dy = y - v.y;
+        final double dz = z - v.z;
+
+        return dx * dx + dy * dy + dz * dz;
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param v The vector of which to get the distance to
+     * @return {@inheritDoc}
+     */
+    @Override
+    public double distanceManhattan(@Nonnull Double3 v) {
+        final double dx = x - v.x;
+        final double dy = y - v.y;
+        final double dz = z - v.z;
+
+        return Math.abs(dx) + Math.abs(dy) + Math.abs(dz);
+    }
+
+    //
     // Normalization
     //
 

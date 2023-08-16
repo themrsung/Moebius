@@ -366,6 +366,52 @@ public class Float2 implements FloatVector<Float2> {
     }
 
     //
+    // Distance
+    //
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param v The vector of which to get the distance to
+     * @return {@inheritDoc}
+     */
+    @Override
+    public float distance(@Nonnull Float2 v) {
+        final double dx = x - v.x;
+        final double dy = y - v.y;
+
+        return (float) Math.sqrt(dx * dx + dy * dy);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param v The vector of which to get the squared distance to
+     * @return {@inheritDoc}
+     */
+    @Override
+    public float distance2(@Nonnull Float2 v) {
+        final float dx = x - v.x;
+        final float dy = y - v.y;
+
+        return dx * dx + dy * dy;
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param v The vector of which to get the distance to
+     * @return {@inheritDoc}
+     */
+    @Override
+    public float distanceManhattan(@Nonnull Float2 v) {
+        final float dx = x - v.x;
+        final float dy = y - v.y;
+
+        return Math.abs(dx) + Math.abs(dy);
+    }
+
+    //
     // Normalization
     //
 

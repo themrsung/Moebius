@@ -336,6 +336,52 @@ public class Int2 implements IntVector<Int2, Float2> {
     }
 
     //
+    // Distance
+    //
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param v The vector of which to get the distance to
+     * @return {@inheritDoc}
+     */
+    @Override
+    public float distance(@Nonnull Int2 v) {
+        final double dx = x - v.x;
+        final double dy = y - v.y;
+
+        return (float) Math.sqrt(dx * dx + dy * dy);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param v The vector of which to get the squared distance to
+     * @return {@inheritDoc}
+     */
+    @Override
+    public int distance2(@Nonnull Int2 v) {
+        final int dx = x - v.x;
+        final int dy = y - v.y;
+
+        return dx * dx + dy * dy;
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param v The vector of which to get the distance to
+     * @return {@inheritDoc}
+     */
+    @Override
+    public int distanceManhattan(@Nonnull Int2 v) {
+        final int dx = x - v.x;
+        final int dy = y - v.y;
+
+        return Math.abs(dx) + Math.abs(dy);
+    }
+
+    //
     // Normalization
     //
 

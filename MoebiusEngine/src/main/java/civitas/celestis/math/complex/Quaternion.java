@@ -223,6 +223,21 @@ public class Quaternion extends Double4 {
         );
     }
 
+    //
+    // Negation
+    //
+
+    /**
+     * Negates this quaternion.
+     *
+     * @return The negation of this quaternion
+     */
+    @Nonnull
+    @Override
+    public Quaternion negate() {
+        return new Quaternion(-w, -x, -y, -z);
+    }
+
 
     //
     // Serialization

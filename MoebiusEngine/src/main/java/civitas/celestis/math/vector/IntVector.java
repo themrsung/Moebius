@@ -100,6 +100,37 @@ public interface IntVector<V extends IntVector<V, F>, F extends FloatVector<F>> 
     int dot(@Nonnull V v);
 
     //
+    // Distance
+    //
+
+    /**
+     * Returns the Euclidean distance between this vector and the provided vector {@code v}.
+     * This does not create an intermediate vector instance, but inlines the calculations.
+     *
+     * @param v The vector of which to get the distance to
+     * @return The Euclidean distance to the provided vector {@code v}
+     */
+    float distance(@Nonnull V v);
+
+    /**
+     * Returns the squared Euclidean distance between this vector and the provided vector {@code v}.
+     * This does not create an intermediate vector instance, but inlines the calculations.
+     *
+     * @param v The vector of which to get the squared distance to
+     * @return The squared Euclidean distance to the provided vector {@code v}
+     */
+    int distance2(@Nonnull V v);
+
+    /**
+     * Returns the Manhattan distance between this vector and the provided vector {@code v}.
+     * This does not create an intermediate vector instance, but inlines the calculations.
+     *
+     * @param v The vector of which to get the distance to
+     * @return The Manhattan distance to the provided vector {@code v}
+     */
+    int distanceManhattan(@Nonnull V v);
+
+    //
     // Normalization
     //
 

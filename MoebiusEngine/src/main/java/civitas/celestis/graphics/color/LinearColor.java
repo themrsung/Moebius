@@ -3,6 +3,7 @@ package civitas.celestis.graphics.color;
 import civitas.celestis.math.Numbers;
 import civitas.celestis.math.vector.*;
 import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import java.awt.*;
 
@@ -17,7 +18,9 @@ import java.awt.*;
  * <p>
  * Instead, whether this color is a valid color can be checked by calling {@link LinearColor#isValid()},
  * and should be checked before using this color to render an object.
- * Values are automatically clamped to be within the range when converting it to an AWT color.
+ * Alternatively, the exception throwing {@link LinearColor#requireValid()} can be used as part of
+ * a method call chain. Values are automatically clamped to be within the range when
+ * converting it to an AWT color, as AWT colors throw exceptions when the components are out of range.
  * </p>
  * <p>
  * When copying a linear color using the copy constructor, (which should never be done; this class
@@ -357,6 +360,25 @@ public class LinearColor extends Float4 implements Color8 {
                 (int) Numbers.clamp(x, 0, 255),
                 (int) Numbers.clamp(y, 0, 255)
         ));
+    }
+
+    //
+    // Equality
+    //
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param obj The object to compare to
+     * @return {@inheritDoc}
+     */
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if (obj instanceof Color8 c) {
+            return pack32() == c.pack32();
+        }
+
+        return super.equals(obj);
     }
 
     //

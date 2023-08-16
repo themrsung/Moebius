@@ -33,6 +33,7 @@ import java.util.List;
  * @see IntVector
  * @see Grid
  * @see civitas.celestis.math.matrix.Matrix Matrix
+ * @see civitas.celestis.util.collection.CircularQueue CircularQueue
  */
 public interface Group<E> {
     //

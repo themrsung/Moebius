@@ -405,6 +405,58 @@ public class Int4 implements IntVector<Int4, Float4> {
     }
 
     //
+    // Distance
+    //
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param v The vector of which to get the distance to
+     * @return {@inheritDoc}
+     */
+    @Override
+    public float distance(@Nonnull Int4 v) {
+        final float dw = w - v.w;
+        final float dx = x - v.x;
+        final float dy = y - v.y;
+        final float dz = z - v.z;
+
+        return (float) Math.sqrt(dw * dw + dx * dx + dy * dy + dz * dz);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param v The vector of which to get the squared distance to
+     * @return {@inheritDoc}
+     */
+    @Override
+    public int distance2(@Nonnull Int4 v) {
+        final int dw = w - v.w;
+        final int dx = x - v.x;
+        final int dy = y - v.y;
+        final int dz = z - v.z;
+
+        return dw * dw + dx * dx + dy * dy + dz * dz;
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param v The vector of which to get the distance to
+     * @return {@inheritDoc}
+     */
+    @Override
+    public int distanceManhattan(@Nonnull Int4 v) {
+        final int dw = w - v.w;
+        final int dx = x - v.x;
+        final int dy = y - v.y;
+        final int dz = z - v.z;
+
+        return Math.abs(dw) + Math.abs(dx) + Math.abs(dy) + Math.abs(dz);
+    }
+
+    //
     // Normalization
     //
 
