@@ -3,7 +3,6 @@ package civitas.celestis.util.collection;
 import jakarta.annotation.Nonnull;
 
 import java.util.Collection;
-import java.util.List;
 
 /**
  * An interface for objects which are not a collection, but can be converted to a collection.
@@ -16,7 +15,7 @@ public interface Collectable<E> {
      * Converts this object into a collection.
      *
      * @return The collection representation of this object
-     * @see List
+     * @see Collection
      */
     @Nonnull
     Collection<E> collection();
