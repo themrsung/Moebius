@@ -596,7 +596,7 @@ public class Decimal2 extends Pair<BigDecimal> implements DecimalVector<Decimal2
 
         final String[] valueStrings = input.replaceAll("Vector\\{|}", "").split(", ");
         if (valueStrings.length != 2) {
-            throw new NumberFormatException("The provided string does not have teo components.");
+            throw new NumberFormatException("The provided string does not have two components.");
         }
 
         final BigDecimal[] values = new BigDecimal[2];
