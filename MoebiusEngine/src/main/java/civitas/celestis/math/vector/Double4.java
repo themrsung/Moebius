@@ -6,6 +6,7 @@ import jakarta.annotation.Nullable;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
 /**
@@ -520,7 +521,7 @@ public class Double4 implements DoubleVector<Double4> {
      */
     @Nonnull
     @Override
-    public Double4 transform(@Nonnull UnaryOperator<Double> f) {
+    public Double4 transform(@Nonnull Function<? super Double, Double> f) {
         return new Double4(f.apply(w), f.apply(x), f.apply(y), f.apply(z));
     }
 

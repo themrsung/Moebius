@@ -6,6 +6,7 @@ import jakarta.annotation.Nullable;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
 /**
@@ -445,7 +446,7 @@ public class Float2 implements FloatVector<Float2> {
      */
     @Nonnull
     @Override
-    public Float2 transform(@Nonnull UnaryOperator<Float> f) {
+    public Float2 transform(@Nonnull Function<? super Float, Float> f) {
         return new Float2(f.apply(x), f.apply(y));
     }
 

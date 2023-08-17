@@ -8,6 +8,7 @@ import civitas.celestis.math.vector.*;
 import civitas.celestis.util.tuple.*;
 import jakarta.annotation.Nonnull;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -34,7 +35,7 @@ import java.util.List;
  * @see Grid
  * @see civitas.celestis.math.matrix.Matrix Matrix
  */
-public interface Group<E> {
+public interface Group<E> extends Serializable {
     //
     // Factory
     //
@@ -275,4 +276,16 @@ public interface Group<E> {
      */
     @Nonnull
     List<E> list();
+
+    //
+    // Serialization
+    //
+
+    /**
+     * Serializes this group into a string.
+     *
+     * @return The string representation of this group
+     */
+    @Nonnull
+    String toString();
 }

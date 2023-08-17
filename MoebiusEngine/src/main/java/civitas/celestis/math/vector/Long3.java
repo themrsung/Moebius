@@ -7,6 +7,7 @@ import jakarta.annotation.Nullable;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
 /**
@@ -455,7 +456,7 @@ public class Long3 implements LongVector<Long3, Double3> {
      */
     @Nonnull
     @Override
-    public Long3 transform(@Nonnull UnaryOperator<Long> f) {
+    public Long3 transform(@Nonnull Function<? super Long, Long> f) {
         return new Long3(f.apply(x), f.apply(y), f.apply(z));
     }
 

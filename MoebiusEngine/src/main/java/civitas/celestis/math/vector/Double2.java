@@ -1,11 +1,14 @@
 package civitas.celestis.math.vector;
 
 import civitas.celestis.math.Numbers;
+import civitas.celestis.math.vector.boxed.BoxedVector;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
+import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
 /**
@@ -445,7 +448,7 @@ public class Double2 implements DoubleVector<Double2> {
      */
     @Nonnull
     @Override
-    public Double2 transform(@Nonnull UnaryOperator<Double> f) {
+    public Double2 transform(@Nonnull Function<? super Double, Double> f) {
         return new Double2(f.apply(x), f.apply(y));
     }
 
@@ -613,5 +616,12 @@ public class Double2 implements DoubleVector<Double2> {
                 "x=" + x +
                 ", y=" + y +
                 '}';
+    }
+
+    /**
+     * A vector which uses the type {@link BigInteger}.
+     * @param <V> Itself (the parameter and result of various operations)
+     */
+    public static interface IntegerVector<V extends IntegerVector<V>> extends BoxedVector<BigInteger, V> {
     }
 }

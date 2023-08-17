@@ -5,6 +5,7 @@ import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
 import java.io.Serializable;
+import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
 /**
@@ -75,7 +76,7 @@ public interface Vector<N extends Number, V extends Vector<N, V>> extends Group<
      * @return The resulting vector
      */
     @Nonnull
-    V transform(@Nonnull UnaryOperator<N> f);
+    V transform(@Nonnull Function<? super N, N> f);
 
     //
     // Clamping

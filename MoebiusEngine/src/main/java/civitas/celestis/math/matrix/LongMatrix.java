@@ -672,6 +672,39 @@ public class LongMatrix implements Matrix<Long, LongMatrix> {
     //
 
     /**
+     * Parses a string into a matrix.
+     *
+     * @param s String to parse
+     * @return Matrix parsed from given string
+     * @throws NumberFormatException    When the string is not parsable to a matrix
+     */
+    @Nonnull
+    public static LongMatrix parseMatrix(@Nonnull String s) throws NumberFormatException {
+        final String[] lines = s.replaceAll("Grid\\{\n|}", "").split(",\n");
+
+        final int rows = lines.length;
+        final int columns;
+        try {
+            columns = lines[0].replaceAll("\\[|]", "").trim().split(", ").length;
+        } catch (IndexOutOfBoundsException e) {
+            throw new NumberFormatException("String is not a grid.");
+        }
+
+        final long[][] values = new long[rows][columns];
+
+        for (int r = 0; r < lines.length; r++) {
+            final String cleanLine = lines[r].replaceAll("\\[|]", "").trim();
+            final String[] elements = cleanLine.split(", ");
+
+            for (int c = 0; c < columns; c++) {
+                values[r][c] = Integer.parseInt(elements[c]);
+            }
+        }
+
+        return new LongMatrix(values);
+    }
+
+    /**
      * {@inheritDoc}
      *
      * @return {@inheritDoc}
