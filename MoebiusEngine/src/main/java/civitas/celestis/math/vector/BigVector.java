@@ -1,5 +1,6 @@
 package civitas.celestis.math.vector;
 
+import civitas.celestis.util.group.Group;
 import jakarta.annotation.Nonnull;
 
 /**
@@ -146,4 +147,44 @@ public interface BigVector<N extends Number, V extends BigVector<N, V>> extends 
      */
     @Nonnull
     Vector<?, ?> normalize();
+
+    //
+    // Primitive Conversion
+    //
+
+    /**
+     * Converts this vector into a primitive vector of type {@code double}.
+     *
+     * @return The {@code double} vector value of this vector
+     * @see Number#doubleValue()
+     */
+    @Nonnull
+    Group<Double> toDouble();
+
+    /**
+     * Converts this vector into a primitive vector of type {@code float}.
+     *
+     * @return The {@code float} vector value of this vector
+     * @see Number#floatValue()
+     */
+    @Nonnull
+    Group<Float> toFloat();
+
+    /**
+     * Converts this vector into a primitive vector of type {@code long}.
+     *
+     * @return The {@code long} vector value of this vector
+     * @see Number#longValue()
+     */
+    @Nonnull
+    Group<Long> toLong();
+
+    /**
+     * Converts this vector into a primitive vector of type {@code int}.
+     *
+     * @return The {@code int} vector value of this vector
+     * @see Number#intValue()
+     */
+    @Nonnull
+    Group<Integer> toInt();
 }

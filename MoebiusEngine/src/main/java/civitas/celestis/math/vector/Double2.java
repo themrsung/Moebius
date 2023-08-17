@@ -4,7 +4,6 @@ import civitas.celestis.math.Numbers;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
-import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
@@ -616,11 +615,4 @@ public class Double2 implements DoubleVector<Double2> {
                 '}';
     }
 
-    /**
-     * A vector which uses the type {@link BigInteger}.
-     *
-     * @param <V> Itself (the parameter and result of various operations)
-     */
-    public interface IntegerVector<V extends IntegerVector<V>> extends BigVector<BigInteger, V> {
-    }
 }

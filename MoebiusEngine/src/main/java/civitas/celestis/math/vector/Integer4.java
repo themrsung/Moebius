@@ -1,6 +1,7 @@
 package civitas.celestis.math.vector;
 
 import civitas.celestis.math.DecimalMath;
+import civitas.celestis.math.IntegerMath;
 import civitas.celestis.math.Numbers;
 import civitas.celestis.util.tuple.Quad;
 import civitas.celestis.util.tuple.Tuple;
@@ -8,14 +9,15 @@ import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 
 /**
- * A four-dimensional vector which uses the type {@link BigDecimal}.
+ * A four-dimensional vector which uses the type {@link BigInteger}.
  */
-public class Decimal4 extends Quad<BigDecimal> implements DecimalVector<Decimal4> {
+public class Integer4 extends Quad<BigInteger> implements IntegerVector<Integer4> {
     //
     // Constants
     //
@@ -23,47 +25,47 @@ public class Decimal4 extends Quad<BigDecimal> implements DecimalVector<Decimal4
     /**
      * A vector with no direction or magnitude. Represents origin.
      */
-    public static final Decimal4 ZERO = new Decimal4(BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO);
+    public static final Integer4 ZERO = new Integer4(BigInteger.ZERO, BigInteger.ZERO, BigInteger.ZERO, BigInteger.ZERO);
 
     /**
      * The positive A unit vector.
      */
-    public static final Decimal4 POSITIVE_A = new Decimal4(BigDecimal.ONE, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO);
+    public static final Integer4 POSITIVE_A = new Integer4(BigInteger.ONE, BigInteger.ZERO, BigInteger.ZERO, BigInteger.ZERO);
 
     /**
      * The positive B unit vector.
      */
-    public static final Decimal4 POSITIVE_B = new Decimal4(BigDecimal.ZERO, BigDecimal.ONE, BigDecimal.ZERO, BigDecimal.ZERO);
+    public static final Integer4 POSITIVE_B = new Integer4(BigInteger.ZERO, BigInteger.ONE, BigInteger.ZERO, BigInteger.ZERO);
 
     /**
      * The positive C unit vector.
      */
-    public static final Decimal4 POSITIVE_C = new Decimal4(BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ONE, BigDecimal.ZERO);
+    public static final Integer4 POSITIVE_C = new Integer4(BigInteger.ZERO, BigInteger.ZERO, BigInteger.ONE, BigInteger.ZERO);
 
     /**
      * The positive D unit vector.
      */
-    public static final Decimal4 POSITIVE_D = new Decimal4(BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ONE);
+    public static final Integer4 POSITIVE_D = new Integer4(BigInteger.ZERO, BigInteger.ZERO, BigInteger.ZERO, BigInteger.ONE);
 
     /**
      * The negative A unit vector.
      */
-    public static final Decimal4 NEGATIVE_A = new Decimal4(BigDecimal.ONE.negate(), BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO);
+    public static final Integer4 NEGATIVE_A = new Integer4(BigInteger.ONE.negate(), BigInteger.ZERO, BigInteger.ZERO, BigInteger.ZERO);
 
     /**
      * The negative B unit vector.
      */
-    public static final Decimal4 NEGATIVE_B = new Decimal4(BigDecimal.ZERO, BigDecimal.ONE.negate(), BigDecimal.ZERO, BigDecimal.ZERO);
+    public static final Integer4 NEGATIVE_B = new Integer4(BigInteger.ZERO, BigInteger.ONE.negate(), BigInteger.ZERO, BigInteger.ZERO);
 
     /**
      * The negative C unit vector.
      */
-    public static final Decimal4 NEGATIVE_C = new Decimal4(BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ONE.negate(), BigDecimal.ZERO);
+    public static final Integer4 NEGATIVE_C = new Integer4(BigInteger.ZERO, BigInteger.ZERO, BigInteger.ONE.negate(), BigInteger.ZERO);
 
     /**
      * The negative D unit vector.
      */
-    public static final Decimal4 NEGATIVE_D = new Decimal4(BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ONE.negate());
+    public static final Integer4 NEGATIVE_D = new Integer4(BigInteger.ZERO, BigInteger.ZERO, BigInteger.ZERO, BigInteger.ONE.negate());
 
     //
     // Constructors
@@ -77,7 +79,7 @@ public class Decimal4 extends Quad<BigDecimal> implements DecimalVector<Decimal4
      * @param c The C component of this vector
      * @param d The D component of this vector
      */
-    public Decimal4(@Nonnull BigDecimal a, @Nonnull BigDecimal b, @Nonnull BigDecimal c, @Nonnull BigDecimal d) {
+    public Integer4(@Nonnull BigInteger a, @Nonnull BigInteger b, @Nonnull BigInteger c, @Nonnull BigInteger d) {
         super(a, b, c, d);
     }
 
@@ -86,7 +88,7 @@ public class Decimal4 extends Quad<BigDecimal> implements DecimalVector<Decimal4
      *
      * @param values An array containing the components of this vector in ABCD order
      */
-    public Decimal4(@Nonnull BigDecimal[] values) {
+    public Integer4(@Nonnull BigInteger[] values) {
         super(values[0], values[1], values[2], values[3]);
     }
 
@@ -95,7 +97,7 @@ public class Decimal4 extends Quad<BigDecimal> implements DecimalVector<Decimal4
      *
      * @param t The tuple of which to copy component values from
      */
-    public Decimal4(@Nonnull Tuple<BigDecimal, ?> t) {
+    public Integer4(@Nonnull Tuple<BigInteger, ?> t) {
         super(t);
     }
 
@@ -104,7 +106,7 @@ public class Decimal4 extends Quad<BigDecimal> implements DecimalVector<Decimal4
      *
      * @param q The quad of which to copy component values from
      */
-    public Decimal4(@Nonnull Quad<BigDecimal> q) {
+    public Integer4(@Nonnull Quad<BigInteger> q) {
         super(q);
     }
 
@@ -113,8 +115,13 @@ public class Decimal4 extends Quad<BigDecimal> implements DecimalVector<Decimal4
      *
      * @param v The vector of which to copy component values from
      */
-    public Decimal4(@Nonnull DecimalVector<?> v) {
-        this(v.array());
+    public Integer4(@Nonnull Double4 v) {
+        super(
+                BigDecimal.valueOf(v.w).toBigInteger(),
+                BigDecimal.valueOf(v.x).toBigInteger(),
+                BigDecimal.valueOf(v.y).toBigInteger(),
+                BigDecimal.valueOf(v.z).toBigInteger()
+        );
     }
 
     /**
@@ -122,8 +129,13 @@ public class Decimal4 extends Quad<BigDecimal> implements DecimalVector<Decimal4
      *
      * @param v The vector of which to copy component values from
      */
-    public Decimal4(@Nonnull Integer4 v) {
-        super(new BigDecimal(v.getA()), new BigDecimal(v.getB()), new BigDecimal(v.getC()), new BigDecimal(v.getD()));
+    public Integer4(@Nonnull Float4 v) {
+        super(
+                BigDecimal.valueOf(v.w).toBigInteger(),
+                BigDecimal.valueOf(v.x).toBigInteger(),
+                BigDecimal.valueOf(v.y).toBigInteger(),
+                BigDecimal.valueOf(v.z).toBigInteger()
+        );
     }
 
     /**
@@ -131,8 +143,8 @@ public class Decimal4 extends Quad<BigDecimal> implements DecimalVector<Decimal4
      *
      * @param v The vector of which to copy component values from
      */
-    public Decimal4(@Nonnull Double4 v) {
-        super(BigDecimal.valueOf(v.w), BigDecimal.valueOf(v.x), BigDecimal.valueOf(v.y), BigDecimal.valueOf(v.z));
+    public Integer4(@Nonnull Long4 v) {
+        super(BigInteger.valueOf(v.w), BigInteger.valueOf(v.x), BigInteger.valueOf(v.y), BigInteger.valueOf(v.z));
     }
 
     /**
@@ -140,26 +152,8 @@ public class Decimal4 extends Quad<BigDecimal> implements DecimalVector<Decimal4
      *
      * @param v The vector of which to copy component values from
      */
-    public Decimal4(@Nonnull Float4 v) {
-        super(BigDecimal.valueOf(v.w), BigDecimal.valueOf(v.x), BigDecimal.valueOf(v.y), BigDecimal.valueOf(v.z));
-    }
-
-    /**
-     * Creates a new vector.
-     *
-     * @param v The vector of which to copy component values from
-     */
-    public Decimal4(@Nonnull Long4 v) {
-        super(BigDecimal.valueOf(v.w), BigDecimal.valueOf(v.x), BigDecimal.valueOf(v.y), BigDecimal.valueOf(v.z));
-    }
-
-    /**
-     * Creates a new vector.
-     *
-     * @param v The vector of which to copy component values from
-     */
-    public Decimal4(@Nonnull Int4 v) {
-        super(BigDecimal.valueOf(v.w), BigDecimal.valueOf(v.x), BigDecimal.valueOf(v.y), BigDecimal.valueOf(v.z));
+    public Integer4(@Nonnull Int4 v) {
+        super(BigInteger.valueOf(v.w), BigInteger.valueOf(v.x), BigInteger.valueOf(v.y), BigInteger.valueOf(v.z));
     }
 
     //
@@ -173,8 +167,8 @@ public class Decimal4 extends Quad<BigDecimal> implements DecimalVector<Decimal4
      */
     @Nonnull
     @Override
-    public BigDecimal[] array() {
-        return new BigDecimal[]{a, b, c, d};
+    public BigInteger[] array() {
+        return new BigInteger[]{a, b, c, d};
     }
 
     //
@@ -188,10 +182,10 @@ public class Decimal4 extends Quad<BigDecimal> implements DecimalVector<Decimal4
      */
     @Override
     public boolean isZero() {
-        return a.equals(BigDecimal.ZERO) &&
-                b.equals(BigDecimal.ZERO) &&
-                c.equals(BigDecimal.ZERO) &&
-                d.equals(BigDecimal.ZERO);
+        return a.equals(BigInteger.ZERO) &&
+                b.equals(BigInteger.ZERO) &&
+                c.equals(BigInteger.ZERO) &&
+                d.equals(BigInteger.ZERO);
     }
 
     /**
@@ -202,7 +196,7 @@ public class Decimal4 extends Quad<BigDecimal> implements DecimalVector<Decimal4
     @Nonnull
     @Override
     public BigDecimal norm() {
-        return a.multiply(a).add(b.multiply(b)).add(c.multiply(c)).add(d.multiply(d))
+        return new BigDecimal(a.multiply(a).add(b.multiply(b)).add(c.multiply(c)).add(d.multiply(d)))
                 .sqrt(DecimalMath.RUNTIME_CONTEXT);
     }
 
@@ -213,7 +207,7 @@ public class Decimal4 extends Quad<BigDecimal> implements DecimalVector<Decimal4
      */
     @Nonnull
     @Override
-    public BigDecimal norm2() {
+    public BigInteger norm2() {
         return a.multiply(a).add(b.multiply(b)).add(c.multiply(c)).add(d.multiply(d));
     }
 
@@ -224,7 +218,7 @@ public class Decimal4 extends Quad<BigDecimal> implements DecimalVector<Decimal4
      */
     @Nonnull
     @Override
-    public BigDecimal normManhattan() {
+    public BigInteger normManhattan() {
         return a.abs().add(b.abs()).add(c.abs()).add(d.abs());
     }
 
@@ -240,8 +234,8 @@ public class Decimal4 extends Quad<BigDecimal> implements DecimalVector<Decimal4
      */
     @Nonnull
     @Override
-    public Decimal4 add(@Nonnull BigDecimal n) {
-        return new Decimal4(a.add(n), b.add(n), c.add(n), d.add(n));
+    public Integer4 add(@Nonnull BigInteger n) {
+        return new Integer4(a.add(n), b.add(n), c.add(n), d.add(n));
     }
 
     /**
@@ -252,8 +246,8 @@ public class Decimal4 extends Quad<BigDecimal> implements DecimalVector<Decimal4
      */
     @Nonnull
     @Override
-    public Decimal4 subtract(@Nonnull BigDecimal n) {
-        return new Decimal4(a.subtract(n), b.subtract(n), c.subtract(n), d.subtract(n));
+    public Integer4 subtract(@Nonnull BigInteger n) {
+        return new Integer4(a.subtract(n), b.subtract(n), c.subtract(n), d.subtract(n));
     }
 
     /**
@@ -264,8 +258,8 @@ public class Decimal4 extends Quad<BigDecimal> implements DecimalVector<Decimal4
      */
     @Nonnull
     @Override
-    public Decimal4 multiply(@Nonnull BigDecimal n) {
-        return new Decimal4(a.multiply(n), b.multiply(n), c.multiply(n), d.multiply(n));
+    public Integer4 multiply(@Nonnull BigInteger n) {
+        return new Integer4(a.multiply(n), b.multiply(n), c.multiply(n), d.multiply(n));
     }
 
     /**
@@ -277,13 +271,8 @@ public class Decimal4 extends Quad<BigDecimal> implements DecimalVector<Decimal4
      */
     @Nonnull
     @Override
-    public Decimal4 divide(@Nonnull BigDecimal n) throws ArithmeticException {
-        return new Decimal4(
-                a.divide(n, DecimalMath.RUNTIME_CONTEXT),
-                b.divide(n, DecimalMath.RUNTIME_CONTEXT),
-                c.divide(n, DecimalMath.RUNTIME_CONTEXT),
-                d.divide(n, DecimalMath.RUNTIME_CONTEXT)
-        );
+    public Integer4 divide(@Nonnull BigInteger n) throws ArithmeticException {
+        return new Integer4(a.divide(n), b.divide(n), c.divide(n), d.divide(n));
     }
 
     /**
@@ -294,8 +283,8 @@ public class Decimal4 extends Quad<BigDecimal> implements DecimalVector<Decimal4
      */
     @Nonnull
     @Override
-    public Decimal4 add(@Nonnull Decimal4 v) {
-        return new Decimal4(a.add(v.a), b.add(v.b), c.add(v.c), d.add(v.d));
+    public Integer4 add(@Nonnull Integer4 v) {
+        return new Integer4(a.add(v.a), b.add(v.b), c.add(v.c), d.add(v.d));
     }
 
     /**
@@ -306,8 +295,8 @@ public class Decimal4 extends Quad<BigDecimal> implements DecimalVector<Decimal4
      */
     @Nonnull
     @Override
-    public Decimal4 subtract(@Nonnull Decimal4 v) {
-        return new Decimal4(a.subtract(v.a), b.subtract(v.b), c.subtract(v.c), d.subtract(v.c));
+    public Integer4 subtract(@Nonnull Integer4 v) {
+        return new Integer4(a.subtract(v.a), b.subtract(v.b), c.subtract(v.c), d.subtract(v.c));
     }
 
 
@@ -318,8 +307,8 @@ public class Decimal4 extends Quad<BigDecimal> implements DecimalVector<Decimal4
      * @return The quaternion left-product of the two vectors
      */
     @Nonnull
-    public Decimal4 multiply(@Nonnull Decimal4 v) {
-        return new Decimal4(
+    public Integer4 multiply(@Nonnull Integer4 v) {
+        return new Integer4(
                 a.multiply(v.a).subtract(b.multiply(v.b)).subtract(c.multiply(v.c)).subtract(d.multiply(v.d)),
                 a.multiply(v.b).add(b.multiply(v.a)).add(c.multiply(v.d)).subtract(d.multiply(v.c)),
                 a.multiply(v.c).subtract(b.multiply(v.d)).add(c.multiply(v.a)).add(d.multiply(v.b)),
@@ -335,7 +324,7 @@ public class Decimal4 extends Quad<BigDecimal> implements DecimalVector<Decimal4
      */
     @Nonnull
     @Override
-    public BigDecimal dot(@Nonnull Decimal4 v) {
+    public BigInteger dot(@Nonnull Integer4 v) {
         return a.multiply(v.a).add(b.multiply(v.b)).add(c.multiply(v.c)).add(d.multiply(v.d));
     }
 
@@ -351,8 +340,8 @@ public class Decimal4 extends Quad<BigDecimal> implements DecimalVector<Decimal4
      */
     @Nonnull
     @Override
-    public Decimal4 transform(@Nonnull Function<? super BigDecimal, BigDecimal> f) {
-        return new Decimal4(f.apply(a), f.apply(b), f.apply(c), f.apply(d));
+    public Integer4 transform(@Nonnull Function<? super BigInteger, BigInteger> f) {
+        return new Integer4(f.apply(a), f.apply(b), f.apply(c), f.apply(d));
     }
 
     //
@@ -369,10 +358,10 @@ public class Decimal4 extends Quad<BigDecimal> implements DecimalVector<Decimal4
     public Decimal4 normalize() {
         final BigDecimal n = norm();
         return new Decimal4(
-                a.divide(n, DecimalMath.RUNTIME_CONTEXT),
-                b.divide(n, DecimalMath.RUNTIME_CONTEXT),
-                c.divide(n, DecimalMath.RUNTIME_CONTEXT),
-                d.divide(n, DecimalMath.RUNTIME_CONTEXT)
+                new BigDecimal(a).divide(n, DecimalMath.RUNTIME_CONTEXT),
+                new BigDecimal(b).divide(n, DecimalMath.RUNTIME_CONTEXT),
+                new BigDecimal(c).divide(n, DecimalMath.RUNTIME_CONTEXT),
+                new BigDecimal(d).divide(n, DecimalMath.RUNTIME_CONTEXT)
         );
     }
 
@@ -387,8 +376,8 @@ public class Decimal4 extends Quad<BigDecimal> implements DecimalVector<Decimal4
      */
     @Nonnull
     @Override
-    public Decimal4 negate() {
-        return new Decimal4(a.negate(), b.negate(), c.negate(), d.negate());
+    public Integer4 negate() {
+        return new Integer4(a.negate(), b.negate(), c.negate(), d.negate());
     }
 
     //
@@ -403,13 +392,13 @@ public class Decimal4 extends Quad<BigDecimal> implements DecimalVector<Decimal4
      */
     @Nonnull
     @Override
-    public BigDecimal distance(@Nonnull Decimal4 v) {
-        final BigDecimal da = a.subtract(v.a);
-        final BigDecimal db = b.subtract(v.b);
-        final BigDecimal dc = c.subtract(v.c);
-        final BigDecimal dd = d.subtract(v.d);
+    public BigDecimal distance(@Nonnull Integer4 v) {
+        final BigInteger da = a.subtract(v.a);
+        final BigInteger db = b.subtract(v.b);
+        final BigInteger dc = c.subtract(v.c);
+        final BigInteger dd = d.subtract(v.d);
 
-        return da.multiply(da).add(db.multiply(db)).add(dc.multiply(dc)).add(dd.multiply(dd))
+        return new BigDecimal(da.multiply(da).add(db.multiply(db)).add(dc.multiply(dc)).add(dd.multiply(dd)))
                 .sqrt(DecimalMath.RUNTIME_CONTEXT);
     }
 
@@ -421,11 +410,11 @@ public class Decimal4 extends Quad<BigDecimal> implements DecimalVector<Decimal4
      */
     @Nonnull
     @Override
-    public BigDecimal distance2(@Nonnull Decimal4 v) {
-        final BigDecimal da = a.subtract(v.a);
-        final BigDecimal db = b.subtract(v.b);
-        final BigDecimal dc = c.subtract(v.c);
-        final BigDecimal dd = d.subtract(v.d);
+    public BigInteger distance2(@Nonnull Integer4 v) {
+        final BigInteger da = a.subtract(v.a);
+        final BigInteger db = b.subtract(v.b);
+        final BigInteger dc = c.subtract(v.c);
+        final BigInteger dd = d.subtract(v.d);
 
         return da.multiply(da).add(db.multiply(db)).add(dc.multiply(dc)).add(dd.multiply(dd));
     }
@@ -438,11 +427,11 @@ public class Decimal4 extends Quad<BigDecimal> implements DecimalVector<Decimal4
      */
     @Nonnull
     @Override
-    public BigDecimal distanceManhattan(@Nonnull Decimal4 v) {
-        final BigDecimal da = a.subtract(v.a);
-        final BigDecimal db = b.subtract(v.b);
-        final BigDecimal dc = c.subtract(v.c);
-        final BigDecimal dd = d.subtract(v.d);
+    public BigInteger distanceManhattan(@Nonnull Integer4 v) {
+        final BigInteger da = a.subtract(v.a);
+        final BigInteger db = b.subtract(v.b);
+        final BigInteger dc = c.subtract(v.c);
+        final BigInteger dd = d.subtract(v.d);
 
         return da.abs().add(db.abs()).add(dc.abs()).add(dd.abs());
     }
@@ -459,8 +448,8 @@ public class Decimal4 extends Quad<BigDecimal> implements DecimalVector<Decimal4
      */
     @Nonnull
     @Override
-    public Decimal4 min(@Nonnull Decimal4 v) {
-        return new Decimal4(a.min(v.a), b.min(v.b), c.min(v.c), d.min(v.d));
+    public Integer4 min(@Nonnull Integer4 v) {
+        return new Integer4(a.min(v.a), b.min(v.b), c.min(v.c), d.min(v.d));
     }
 
     /**
@@ -471,8 +460,8 @@ public class Decimal4 extends Quad<BigDecimal> implements DecimalVector<Decimal4
      */
     @Nonnull
     @Override
-    public Decimal4 max(@Nonnull Decimal4 v) {
-        return new Decimal4(a.max(v.a), b.max(v.b), c.max(v.c), d.max(v.d));
+    public Integer4 max(@Nonnull Integer4 v) {
+        return new Integer4(a.max(v.a), b.max(v.b), c.max(v.c), d.max(v.d));
     }
 
     /**
@@ -484,28 +473,13 @@ public class Decimal4 extends Quad<BigDecimal> implements DecimalVector<Decimal4
      */
     @Nonnull
     @Override
-    public Decimal4 clamp(@Nonnull Decimal4 min, @Nonnull Decimal4 max) {
-        return new Decimal4(
-                DecimalMath.clamp(a, min.a, max.a),
-                DecimalMath.clamp(b, min.b, max.b),
-                DecimalMath.clamp(c, min.c, max.c),
-                DecimalMath.clamp(d, min.d, max.d)
+    public Integer4 clamp(@Nonnull Integer4 min, @Nonnull Integer4 max) {
+        return new Integer4(
+                IntegerMath.clamp(a, min.a, max.a),
+                IntegerMath.clamp(b, min.b, max.b),
+                IntegerMath.clamp(c, min.c, max.c),
+                IntegerMath.clamp(d, min.d, max.d)
         );
-    }
-
-    //
-    // Integer Conversion
-    //
-
-    /**
-     * {@inheritDoc}
-     *
-     * @return {@inheritDoc}
-     */
-    @Nonnull
-    @Override
-    public Integer4 toBigInteger() {
-        return new Integer4(a.toBigInteger(), b.toBigInteger(), c.toBigInteger(), d.toBigInteger());
     }
 
     //
@@ -570,17 +544,17 @@ public class Decimal4 extends Quad<BigDecimal> implements DecimalVector<Decimal4
      */
     @Override
     public boolean equals(@Nullable Object obj) {
-        if (obj instanceof Decimal4 dv4) {
+        if (obj instanceof Integer4 dv4) {
             return a.equals(dv4.a) && b.equals(dv4.b) && c.equals(dv4.c) && d.equals(dv4.d);
         }
 
-        if (obj instanceof DecimalVector<?> dv) {
-            final BigDecimal[] array = dv.array();
+        if (obj instanceof IntegerVector<?> dv) {
+            final BigInteger[] array = dv.array();
             return Arrays.equals(array(), array);
         }
 
         if (obj instanceof Vector<?, ?> v) {
-            final List<BigDecimal> l1 = list();
+            final List<BigInteger> l1 = list();
             final List<? extends Number> l2 = v.list();
 
             if (l2.size() != 4) return false;
@@ -602,7 +576,7 @@ public class Decimal4 extends Quad<BigDecimal> implements DecimalVector<Decimal4
      * @return {@inheritDoc}
      */
     @Override
-    public boolean equals(@Nonnull Decimal4 v) {
+    public boolean equals(@Nonnull Integer4 v) {
         return a.equals(v.a) && b.equals(v.b) && c.equals(v.c) && d.equals(v.d);
     }
 
@@ -618,7 +592,7 @@ public class Decimal4 extends Quad<BigDecimal> implements DecimalVector<Decimal4
      * @throws NumberFormatException When the format is invalid
      */
     @Nonnull
-    public static Decimal4 parseVector(@Nonnull String input) throws NumberFormatException {
+    public static Integer4 parseVector(@Nonnull String input) throws NumberFormatException {
         if (!input.startsWith("Vector{")) {
             throw new NumberFormatException("The provided string is not a vector.");
         }
@@ -628,7 +602,7 @@ public class Decimal4 extends Quad<BigDecimal> implements DecimalVector<Decimal4
             throw new NumberFormatException("The provided string does not have three components.");
         }
 
-        final BigDecimal[] values = new BigDecimal[4];
+        final BigInteger[] values = new BigInteger[4];
 
         for (final String valueString : valueStrings) {
             final String[] split = valueString.split("=");
@@ -642,10 +616,10 @@ public class Decimal4 extends Quad<BigDecimal> implements DecimalVector<Decimal4
                 case "y" -> 2;
                 case "z" -> 3;
                 default -> throw new NumberFormatException("The provided string has a non-XYZ component.");
-            }] = new BigDecimal(split[1]);
+            }] = new BigInteger(split[1]);
         }
 
-        return new Decimal4(values);
+        return new Integer4(values);
     }
 
     /**

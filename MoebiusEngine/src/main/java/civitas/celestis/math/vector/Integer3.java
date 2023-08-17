@@ -1,6 +1,7 @@
 package civitas.celestis.math.vector;
 
 import civitas.celestis.math.DecimalMath;
+import civitas.celestis.math.IntegerMath;
 import civitas.celestis.math.Numbers;
 import civitas.celestis.math.complex.DecimalQuaternion;
 import civitas.celestis.util.tuple.Triple;
@@ -9,14 +10,15 @@ import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 
 /**
- * A three-dimensional vector which uses the type {@link BigDecimal}.
+ * A three-dimensional vector which uses the type {@link BigInteger}.
  */
-public class Decimal3 extends Triple<BigDecimal> implements DecimalVector<Decimal3> {
+public class Integer3 extends Triple<BigInteger> implements IntegerVector<Integer3> {
     //
     // Constants
     //
@@ -24,37 +26,37 @@ public class Decimal3 extends Triple<BigDecimal> implements DecimalVector<Decima
     /**
      * A vector with no direction or magnitude. Represents origin.
      */
-    public static final Decimal3 ZERO = new Decimal3(BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO);
+    public static final Integer3 ZERO = new Integer3(BigInteger.ZERO, BigInteger.ZERO, BigInteger.ZERO);
 
     /**
      * The positive A unit vector.
      */
-    public static final Decimal3 POSITIVE_A = new Decimal3(BigDecimal.ONE, BigDecimal.ZERO, BigDecimal.ZERO);
+    public static final Integer3 POSITIVE_A = new Integer3(BigInteger.ONE, BigInteger.ZERO, BigInteger.ZERO);
 
     /**
      * The positive B unit vector.
      */
-    public static final Decimal3 POSITIVE_B = new Decimal3(BigDecimal.ZERO, BigDecimal.ONE, BigDecimal.ZERO);
+    public static final Integer3 POSITIVE_B = new Integer3(BigInteger.ZERO, BigInteger.ONE, BigInteger.ZERO);
 
     /**
      * The positive C unit vector.
      */
-    public static final Decimal3 POSITIVE_C = new Decimal3(BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ONE);
+    public static final Integer3 POSITIVE_C = new Integer3(BigInteger.ZERO, BigInteger.ZERO, BigInteger.ONE);
 
     /**
      * The negative A unit vector.
      */
-    public static final Decimal3 NEGATIVE_A = new Decimal3(BigDecimal.ONE.negate(), BigDecimal.ZERO, BigDecimal.ZERO);
+    public static final Integer3 NEGATIVE_A = new Integer3(BigInteger.ONE.negate(), BigInteger.ZERO, BigInteger.ZERO);
 
     /**
      * The negative B unit vector.
      */
-    public static final Decimal3 NEGATIVE_B = new Decimal3(BigDecimal.ZERO, BigDecimal.ONE.negate(), BigDecimal.ZERO);
+    public static final Integer3 NEGATIVE_B = new Integer3(BigInteger.ZERO, BigInteger.ONE.negate(), BigInteger.ZERO);
 
     /**
      * The negative C unit vector.
      */
-    public static final Decimal3 NEGATIVE_C = new Decimal3(BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ONE.negate());
+    public static final Integer3 NEGATIVE_C = new Integer3(BigInteger.ZERO, BigInteger.ZERO, BigInteger.ONE.negate());
 
     //
     // Constructors
@@ -67,7 +69,7 @@ public class Decimal3 extends Triple<BigDecimal> implements DecimalVector<Decima
      * @param b The B component of this vector
      * @param c The C component of this vector
      */
-    public Decimal3(@Nonnull BigDecimal a, @Nonnull BigDecimal b, @Nonnull BigDecimal c) {
+    public Integer3(@Nonnull BigInteger a, @Nonnull BigInteger b, @Nonnull BigInteger c) {
         super(a, b, c);
     }
 
@@ -76,7 +78,7 @@ public class Decimal3 extends Triple<BigDecimal> implements DecimalVector<Decima
      *
      * @param values An array containing the components of this vector in ABC order
      */
-    public Decimal3(@Nonnull BigDecimal[] values) {
+    public Integer3(@Nonnull BigInteger[] values) {
         super(values[0], values[1], values[2]);
     }
 
@@ -85,7 +87,7 @@ public class Decimal3 extends Triple<BigDecimal> implements DecimalVector<Decima
      *
      * @param t The tuple of which to copy component values from
      */
-    public Decimal3(@Nonnull Tuple<BigDecimal, ?> t) {
+    public Integer3(@Nonnull Tuple<BigInteger, ?> t) {
         super(t);
     }
 
@@ -94,7 +96,7 @@ public class Decimal3 extends Triple<BigDecimal> implements DecimalVector<Decima
      *
      * @param t The triple of which to copy component values from
      */
-    public Decimal3(@Nonnull Triple<BigDecimal> t) {
+    public Integer3(@Nonnull Triple<BigInteger> t) {
         super(t);
     }
 
@@ -103,7 +105,7 @@ public class Decimal3 extends Triple<BigDecimal> implements DecimalVector<Decima
      *
      * @param v The vector of which to copy component values from
      */
-    public Decimal3(@Nonnull DecimalVector<?> v) {
+    public Integer3(@Nonnull IntegerVector<?> v) {
         this(v.array());
     }
 
@@ -112,8 +114,12 @@ public class Decimal3 extends Triple<BigDecimal> implements DecimalVector<Decima
      *
      * @param v The vector of which to copy component values from
      */
-    public Decimal3(@Nonnull Integer3 v) {
-        super(new BigDecimal(v.getA()), new BigDecimal(v.getB()), new BigDecimal(v.getC()));
+    public Integer3(@Nonnull Double3 v) {
+        super(
+                BigDecimal.valueOf(v.x).toBigInteger(),
+                BigDecimal.valueOf(v.y).toBigInteger(),
+                BigDecimal.valueOf(v.z).toBigInteger()
+        );
     }
 
     /**
@@ -121,8 +127,12 @@ public class Decimal3 extends Triple<BigDecimal> implements DecimalVector<Decima
      *
      * @param v The vector of which to copy component values from
      */
-    public Decimal3(@Nonnull Double3 v) {
-        super(BigDecimal.valueOf(v.x), BigDecimal.valueOf(v.y), BigDecimal.valueOf(v.z));
+    public Integer3(@Nonnull Float3 v) {
+        super(
+                BigDecimal.valueOf(v.x).toBigInteger(),
+                BigDecimal.valueOf(v.y).toBigInteger(),
+                BigDecimal.valueOf(v.z).toBigInteger()
+        );
     }
 
     /**
@@ -130,8 +140,8 @@ public class Decimal3 extends Triple<BigDecimal> implements DecimalVector<Decima
      *
      * @param v The vector of which to copy component values from
      */
-    public Decimal3(@Nonnull Float3 v) {
-        super(BigDecimal.valueOf(v.x), BigDecimal.valueOf(v.y), BigDecimal.valueOf(v.z));
+    public Integer3(@Nonnull Long3 v) {
+        super(BigInteger.valueOf(v.x), BigInteger.valueOf(v.y), BigInteger.valueOf(v.z));
     }
 
     /**
@@ -139,17 +149,8 @@ public class Decimal3 extends Triple<BigDecimal> implements DecimalVector<Decima
      *
      * @param v The vector of which to copy component values from
      */
-    public Decimal3(@Nonnull Long3 v) {
-        super(BigDecimal.valueOf(v.x), BigDecimal.valueOf(v.y), BigDecimal.valueOf(v.z));
-    }
-
-    /**
-     * Creates a new vector.
-     *
-     * @param v The vector of which to copy component values from
-     */
-    public Decimal3(@Nonnull Int3 v) {
-        super(BigDecimal.valueOf(v.x), BigDecimal.valueOf(v.y), BigDecimal.valueOf(v.z));
+    public Integer3(@Nonnull Int3 v) {
+        super(BigInteger.valueOf(v.x), BigInteger.valueOf(v.y), BigInteger.valueOf(v.z));
     }
 
     //
@@ -163,8 +164,8 @@ public class Decimal3 extends Triple<BigDecimal> implements DecimalVector<Decima
      */
     @Nonnull
     @Override
-    public BigDecimal[] array() {
-        return new BigDecimal[]{a, b, c};
+    public BigInteger[] array() {
+        return new BigInteger[]{a, b, c};
     }
 
     //
@@ -178,7 +179,7 @@ public class Decimal3 extends Triple<BigDecimal> implements DecimalVector<Decima
      */
     @Override
     public boolean isZero() {
-        return a.equals(BigDecimal.ZERO) && b.equals(BigDecimal.ZERO) && c.equals(BigDecimal.ZERO);
+        return a.equals(BigInteger.ZERO) && b.equals(BigInteger.ZERO) && c.equals(BigInteger.ZERO);
     }
 
     /**
@@ -189,7 +190,7 @@ public class Decimal3 extends Triple<BigDecimal> implements DecimalVector<Decima
     @Nonnull
     @Override
     public BigDecimal norm() {
-        return a.multiply(a).add(b.multiply(b)).add(c.multiply(c)).sqrt(DecimalMath.RUNTIME_CONTEXT);
+        return new BigDecimal(a.multiply(a).add(b.multiply(b)).add(c.multiply(c))).sqrt(DecimalMath.RUNTIME_CONTEXT);
     }
 
     /**
@@ -199,7 +200,7 @@ public class Decimal3 extends Triple<BigDecimal> implements DecimalVector<Decima
      */
     @Nonnull
     @Override
-    public BigDecimal norm2() {
+    public BigInteger norm2() {
         return a.multiply(a).add(b.multiply(b)).add(c.multiply(c));
     }
 
@@ -210,7 +211,7 @@ public class Decimal3 extends Triple<BigDecimal> implements DecimalVector<Decima
      */
     @Nonnull
     @Override
-    public BigDecimal normManhattan() {
+    public BigInteger normManhattan() {
         return a.abs().add(b.abs()).add(c.abs());
     }
 
@@ -226,8 +227,8 @@ public class Decimal3 extends Triple<BigDecimal> implements DecimalVector<Decima
      */
     @Nonnull
     @Override
-    public Decimal3 add(@Nonnull BigDecimal n) {
-        return new Decimal3(a.add(n), b.add(n), c.add(n));
+    public Integer3 add(@Nonnull BigInteger n) {
+        return new Integer3(a.add(n), b.add(n), c.add(n));
     }
 
     /**
@@ -238,8 +239,8 @@ public class Decimal3 extends Triple<BigDecimal> implements DecimalVector<Decima
      */
     @Nonnull
     @Override
-    public Decimal3 subtract(@Nonnull BigDecimal n) {
-        return new Decimal3(a.subtract(n), b.subtract(n), c.subtract(n));
+    public Integer3 subtract(@Nonnull BigInteger n) {
+        return new Integer3(a.subtract(n), b.subtract(n), c.subtract(n));
     }
 
     /**
@@ -250,8 +251,8 @@ public class Decimal3 extends Triple<BigDecimal> implements DecimalVector<Decima
      */
     @Nonnull
     @Override
-    public Decimal3 multiply(@Nonnull BigDecimal n) {
-        return new Decimal3(a.multiply(n), b.multiply(n), c.multiply(n));
+    public Integer3 multiply(@Nonnull BigInteger n) {
+        return new Integer3(a.multiply(n), b.multiply(n), c.multiply(n));
     }
 
     /**
@@ -263,12 +264,8 @@ public class Decimal3 extends Triple<BigDecimal> implements DecimalVector<Decima
      */
     @Nonnull
     @Override
-    public Decimal3 divide(@Nonnull BigDecimal n) throws ArithmeticException {
-        return new Decimal3(
-                a.divide(n, DecimalMath.RUNTIME_CONTEXT),
-                b.divide(n, DecimalMath.RUNTIME_CONTEXT),
-                c.divide(n, DecimalMath.RUNTIME_CONTEXT)
-        );
+    public Integer3 divide(@Nonnull BigInteger n) throws ArithmeticException {
+        return new Integer3(a.divide(n), b.divide(n), c.divide(n));
     }
 
     /**
@@ -279,8 +276,8 @@ public class Decimal3 extends Triple<BigDecimal> implements DecimalVector<Decima
      */
     @Nonnull
     @Override
-    public Decimal3 add(@Nonnull Decimal3 v) {
-        return new Decimal3(a.add(v.a), b.add(v.b), c.add(v.c));
+    public Integer3 add(@Nonnull Integer3 v) {
+        return new Integer3(a.add(v.a), b.add(v.b), c.add(v.c));
     }
 
     /**
@@ -291,8 +288,8 @@ public class Decimal3 extends Triple<BigDecimal> implements DecimalVector<Decima
      */
     @Nonnull
     @Override
-    public Decimal3 subtract(@Nonnull Decimal3 v) {
-        return new Decimal3(a.subtract(v.a), b.subtract(v.b), c.subtract(v.c));
+    public Integer3 subtract(@Nonnull Integer3 v) {
+        return new Integer3(a.subtract(v.a), b.subtract(v.b), c.subtract(v.c));
     }
 
     /**
@@ -302,8 +299,8 @@ public class Decimal3 extends Triple<BigDecimal> implements DecimalVector<Decima
      * @return The cross product between the two vectors
      */
     @Nonnull
-    public Decimal3 cross(@Nonnull Decimal3 v) {
-        return new Decimal3(
+    public Integer3 cross(@Nonnull Integer3 v) {
+        return new Integer3(
                 b.multiply(v.c).subtract(c.multiply(v.b)),
                 c.multiply(v.a).subtract(a.multiply(v.c)),
                 a.multiply(v.b).subtract(b.multiply(v.a))
@@ -318,7 +315,7 @@ public class Decimal3 extends Triple<BigDecimal> implements DecimalVector<Decima
      */
     @Nonnull
     @Override
-    public BigDecimal dot(@Nonnull Decimal3 v) {
+    public BigInteger dot(@Nonnull Integer3 v) {
         return a.multiply(v.a).add(b.multiply(v.b)).add(c.multiply(v.c));
     }
 
@@ -334,8 +331,8 @@ public class Decimal3 extends Triple<BigDecimal> implements DecimalVector<Decima
      */
     @Nonnull
     @Override
-    public Decimal3 transform(@Nonnull Function<? super BigDecimal, BigDecimal> f) {
-        return new Decimal3(f.apply(a), f.apply(b), f.apply(c));
+    public Integer3 transform(@Nonnull Function<? super BigInteger, BigInteger> f) {
+        return new Integer3(f.apply(a), f.apply(b), f.apply(c));
     }
 
     //
@@ -353,9 +350,9 @@ public class Decimal3 extends Triple<BigDecimal> implements DecimalVector<Decima
     public Decimal3 normalize() throws ArithmeticException {
         final BigDecimal n = norm();
         return new Decimal3(
-                a.divide(n, DecimalMath.RUNTIME_CONTEXT),
-                b.divide(n, DecimalMath.RUNTIME_CONTEXT),
-                c.divide(n, DecimalMath.RUNTIME_CONTEXT)
+                new BigDecimal(a).divide(n, DecimalMath.RUNTIME_CONTEXT),
+                new BigDecimal(b).divide(n, DecimalMath.RUNTIME_CONTEXT),
+                new BigDecimal(c).divide(n, DecimalMath.RUNTIME_CONTEXT)
         );
     }
 
@@ -370,8 +367,8 @@ public class Decimal3 extends Triple<BigDecimal> implements DecimalVector<Decima
      */
     @Nonnull
     @Override
-    public Decimal3 negate() {
-        return new Decimal3(a.negate(), b.negate(), c.negate());
+    public Integer3 negate() {
+        return new Integer3(a.negate(), b.negate(), c.negate());
     }
 
     //
@@ -386,10 +383,10 @@ public class Decimal3 extends Triple<BigDecimal> implements DecimalVector<Decima
      */
     @Nonnull
     @Override
-    public BigDecimal distance(@Nonnull Decimal3 v) {
-        final BigDecimal da = a.subtract(v.a);
-        final BigDecimal db = b.subtract(v.b);
-        final BigDecimal dc = c.subtract(v.c);
+    public BigDecimal distance(@Nonnull Integer3 v) {
+        final BigDecimal da = new BigDecimal(a.subtract(v.a));
+        final BigDecimal db = new BigDecimal(b.subtract(v.b));
+        final BigDecimal dc = new BigDecimal(c.subtract(v.c));
 
         return da.multiply(da).add(db.multiply(db)).add(dc.multiply(dc)).sqrt(DecimalMath.RUNTIME_CONTEXT);
     }
@@ -402,10 +399,10 @@ public class Decimal3 extends Triple<BigDecimal> implements DecimalVector<Decima
      */
     @Nonnull
     @Override
-    public BigDecimal distance2(@Nonnull Decimal3 v) {
-        final BigDecimal da = a.subtract(v.a);
-        final BigDecimal db = b.subtract(v.b);
-        final BigDecimal dc = c.subtract(v.c);
+    public BigInteger distance2(@Nonnull Integer3 v) {
+        final BigInteger da = a.subtract(v.a);
+        final BigInteger db = b.subtract(v.b);
+        final BigInteger dc = c.subtract(v.c);
 
         return da.multiply(da).add(db.multiply(db)).add(dc.multiply(dc));
     }
@@ -418,10 +415,10 @@ public class Decimal3 extends Triple<BigDecimal> implements DecimalVector<Decima
      */
     @Nonnull
     @Override
-    public BigDecimal distanceManhattan(@Nonnull Decimal3 v) {
-        final BigDecimal da = a.subtract(v.a);
-        final BigDecimal db = b.subtract(v.b);
-        final BigDecimal dc = c.subtract(v.c);
+    public BigInteger distanceManhattan(@Nonnull Integer3 v) {
+        final BigInteger da = a.subtract(v.a);
+        final BigInteger db = b.subtract(v.b);
+        final BigInteger dc = c.subtract(v.c);
 
         return da.abs().add(db.abs()).add(dc.abs());
     }
@@ -438,8 +435,8 @@ public class Decimal3 extends Triple<BigDecimal> implements DecimalVector<Decima
      */
     @Nonnull
     @Override
-    public Decimal3 min(@Nonnull Decimal3 v) {
-        return new Decimal3(a.min(v.a), b.min(v.b), c.min(v.c));
+    public Integer3 min(@Nonnull Integer3 v) {
+        return new Integer3(a.min(v.a), b.min(v.b), c.min(v.c));
     }
 
     /**
@@ -450,8 +447,8 @@ public class Decimal3 extends Triple<BigDecimal> implements DecimalVector<Decima
      */
     @Nonnull
     @Override
-    public Decimal3 max(@Nonnull Decimal3 v) {
-        return new Decimal3(a.max(v.a), b.max(v.b), c.max(v.c));
+    public Integer3 max(@Nonnull Integer3 v) {
+        return new Integer3(a.max(v.a), b.max(v.b), c.max(v.c));
     }
 
     /**
@@ -463,11 +460,11 @@ public class Decimal3 extends Triple<BigDecimal> implements DecimalVector<Decima
      */
     @Nonnull
     @Override
-    public Decimal3 clamp(@Nonnull Decimal3 min, @Nonnull Decimal3 max) {
-        return new Decimal3(
-                DecimalMath.clamp(a, min.a, max.a),
-                DecimalMath.clamp(b, min.b, max.b),
-                DecimalMath.clamp(c, min.c, max.c)
+    public Integer3 clamp(@Nonnull Integer3 min, @Nonnull Integer3 max) {
+        return new Integer3(
+                IntegerMath.clamp(a, min.a, max.a),
+                IntegerMath.clamp(b, min.b, max.b),
+                IntegerMath.clamp(c, min.c, max.c)
         );
     }
 
@@ -484,7 +481,7 @@ public class Decimal3 extends Triple<BigDecimal> implements DecimalVector<Decima
      */
     @Nonnull
     public DecimalQuaternion quaternion() {
-        return new DecimalQuaternion(BigDecimal.ZERO, a, b, c);
+        return new DecimalQuaternion(BigDecimal.ZERO, new BigDecimal(a), new BigDecimal(b), new BigDecimal(c));
     }
 
     /**
@@ -494,23 +491,8 @@ public class Decimal3 extends Triple<BigDecimal> implements DecimalVector<Decima
      * @return The resulting vector
      */
     @Nonnull
-    public Decimal3 rotate(@Nonnull DecimalQuaternion rq) {
-        return rq.multiply(quaternion()).multiply(rq.conjugate()).vector();
-    }
-
-    //
-    // Integer Conversion
-    //
-
-    /**
-     * {@inheritDoc}
-     *
-     * @return {@inheritDoc}
-     */
-    @Nonnull
-    @Override
-    public Integer3 toBigInteger() {
-        return new Integer3(a.toBigInteger(), b.toBigInteger(), c.toBigInteger());
+    public Integer3 rotate(@Nonnull DecimalQuaternion rq) {
+        return rq.multiply(quaternion()).multiply(rq.conjugate()).vector().toBigInteger();
     }
 
     //
@@ -575,17 +557,17 @@ public class Decimal3 extends Triple<BigDecimal> implements DecimalVector<Decima
      */
     @Override
     public boolean equals(@Nullable Object obj) {
-        if (obj instanceof Decimal3 dv3) {
+        if (obj instanceof Integer3 dv3) {
             return a.equals(dv3.a) && b.equals(dv3.b) && c.equals(dv3.c);
         }
 
-        if (obj instanceof DecimalVector<?> dv) {
-            final BigDecimal[] array = dv.array();
+        if (obj instanceof IntegerVector<?> dv) {
+            final BigInteger[] array = dv.array();
             return Arrays.equals(array(), array);
         }
 
         if (obj instanceof Vector<?, ?> v) {
-            final List<BigDecimal> l1 = list();
+            final List<BigInteger> l1 = list();
             final List<? extends Number> l2 = v.list();
 
             if (l2.size() != 3) return false;
@@ -607,7 +589,7 @@ public class Decimal3 extends Triple<BigDecimal> implements DecimalVector<Decima
      * @return {@inheritDoc}
      */
     @Override
-    public boolean equals(@Nonnull Decimal3 v) {
+    public boolean equals(@Nonnull Integer3 v) {
         return a.equals(v.a) && b.equals(v.b) && c.equals(v.c);
     }
 
@@ -623,7 +605,7 @@ public class Decimal3 extends Triple<BigDecimal> implements DecimalVector<Decima
      * @throws NumberFormatException When the format is invalid
      */
     @Nonnull
-    public static Decimal3 parseVector(@Nonnull String input) throws NumberFormatException {
+    public static Integer3 parseVector(@Nonnull String input) throws NumberFormatException {
         if (!input.startsWith("Vector{")) {
             throw new NumberFormatException("The provided string is not a vector.");
         }
@@ -633,7 +615,7 @@ public class Decimal3 extends Triple<BigDecimal> implements DecimalVector<Decima
             throw new NumberFormatException("The provided string does not have three components.");
         }
 
-        final BigDecimal[] values = new BigDecimal[3];
+        final BigInteger[] values = new BigInteger[3];
 
         for (final String valueString : valueStrings) {
             final String[] split = valueString.split("=");
@@ -646,10 +628,10 @@ public class Decimal3 extends Triple<BigDecimal> implements DecimalVector<Decima
                 case "y" -> 1;
                 case "z" -> 2;
                 default -> throw new NumberFormatException("The provided string has a non-XYZ component.");
-            }] = new BigDecimal(split[1]);
+            }] = new BigInteger(split[1]);
         }
 
-        return new Decimal3(values);
+        return new Integer3(values);
     }
 
     /**

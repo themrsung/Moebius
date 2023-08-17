@@ -1,6 +1,7 @@
 package civitas.celestis.math.vector;
 
 import civitas.celestis.math.DecimalMath;
+import civitas.celestis.math.IntegerMath;
 import civitas.celestis.math.Numbers;
 import civitas.celestis.util.tuple.Pair;
 import civitas.celestis.util.tuple.Tuple;
@@ -8,14 +9,12 @@ import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 
-/**
- * A two-dimensional vector which uses the type {@link BigDecimal}.
- */
-public class Decimal2 extends Pair<BigDecimal> implements DecimalVector<Decimal2> {
+public class Integer2 extends Pair<BigInteger> implements IntegerVector<Integer2> {
     //
     // Constants
     //
@@ -23,27 +22,27 @@ public class Decimal2 extends Pair<BigDecimal> implements DecimalVector<Decimal2
     /**
      * A vector with no direction or magnitude. Represents origin.
      */
-    public static final Decimal2 ZERO = new Decimal2(BigDecimal.ZERO, BigDecimal.ZERO);
+    public static final Integer2 ZERO = new Integer2(BigInteger.ZERO, BigInteger.ZERO);
 
     /**
      * The positive A unit vector.
      */
-    public static final Decimal2 POSITIVE_A = new Decimal2(BigDecimal.ONE, BigDecimal.ZERO);
+    public static final Integer2 POSITIVE_A = new Integer2(BigInteger.ONE, BigInteger.ZERO);
 
     /**
      * The positive B unit vector.
      */
-    public static final Decimal2 POSITIVE_B = new Decimal2(BigDecimal.ZERO, BigDecimal.ONE);
+    public static final Integer2 POSITIVE_B = new Integer2(BigInteger.ZERO, BigInteger.ONE);
 
     /**
      * The negative A unit vector.
      */
-    public static final Decimal2 NEGATIVE_A = new Decimal2(BigDecimal.ONE.negate(), BigDecimal.ZERO);
+    public static final Integer2 NEGATIVE_A = new Integer2(BigInteger.ONE.negate(), BigInteger.ZERO);
 
     /**
      * The negative B unit vector.
      */
-    public static final Decimal2 NEGATIVE_B = new Decimal2(BigDecimal.ZERO, BigDecimal.ONE.negate());
+    public static final Integer2 NEGATIVE_B = new Integer2(BigInteger.ZERO, BigInteger.ONE.negate());
 
 
     //
@@ -56,7 +55,7 @@ public class Decimal2 extends Pair<BigDecimal> implements DecimalVector<Decimal2
      * @param a The A component of this vector
      * @param b The B component of this vector
      */
-    public Decimal2(@Nonnull BigDecimal a, @Nonnull BigDecimal b) {
+    public Integer2(@Nonnull BigInteger a, @Nonnull BigInteger b) {
         super(a, b);
     }
 
@@ -65,7 +64,7 @@ public class Decimal2 extends Pair<BigDecimal> implements DecimalVector<Decimal2
      *
      * @param values An array containing the components of this vector in AB order
      */
-    public Decimal2(@Nonnull BigDecimal[] values) {
+    public Integer2(@Nonnull BigInteger[] values) {
         super(values[0], values[1]);
     }
 
@@ -74,7 +73,7 @@ public class Decimal2 extends Pair<BigDecimal> implements DecimalVector<Decimal2
      *
      * @param t The tuple of which to copy component values from
      */
-    public Decimal2(@Nonnull Tuple<BigDecimal, ?> t) {
+    public Integer2(@Nonnull Tuple<BigInteger, ?> t) {
         super(t);
     }
 
@@ -83,7 +82,7 @@ public class Decimal2 extends Pair<BigDecimal> implements DecimalVector<Decimal2
      *
      * @param p The pair of which to copy component values from
      */
-    public Decimal2(@Nonnull Pair<BigDecimal> p) {
+    public Integer2(@Nonnull Pair<BigInteger> p) {
         super(p);
     }
 
@@ -92,7 +91,7 @@ public class Decimal2 extends Pair<BigDecimal> implements DecimalVector<Decimal2
      *
      * @param v The vector of which to copy component values from
      */
-    public Decimal2(@Nonnull DecimalVector<?> v) {
+    public Integer2(@Nonnull IntegerVector<?> v) {
         super(v);
     }
 
@@ -101,8 +100,8 @@ public class Decimal2 extends Pair<BigDecimal> implements DecimalVector<Decimal2
      *
      * @param v The vector of which to copy component values from
      */
-    public Decimal2(@Nonnull Integer2 v) {
-        super(new BigDecimal(v.getA()), new BigDecimal(v.getB()));
+    public Integer2(@Nonnull Double2 v) {
+        super(BigDecimal.valueOf(v.x).toBigInteger(), BigDecimal.valueOf(v.y).toBigInteger());
     }
 
     /**
@@ -110,8 +109,8 @@ public class Decimal2 extends Pair<BigDecimal> implements DecimalVector<Decimal2
      *
      * @param v The vector of which to copy component values from
      */
-    public Decimal2(@Nonnull Double2 v) {
-        super(BigDecimal.valueOf(v.x), BigDecimal.valueOf(v.y));
+    public Integer2(@Nonnull Float2 v) {
+        super(BigDecimal.valueOf(v.x).toBigInteger(), BigDecimal.valueOf(v.y).toBigInteger());
     }
 
     /**
@@ -119,8 +118,8 @@ public class Decimal2 extends Pair<BigDecimal> implements DecimalVector<Decimal2
      *
      * @param v The vector of which to copy component values from
      */
-    public Decimal2(@Nonnull Float2 v) {
-        super(BigDecimal.valueOf(v.x), BigDecimal.valueOf(v.y));
+    public Integer2(@Nonnull Long2 v) {
+        super(BigInteger.valueOf(v.x), BigInteger.valueOf(v.y));
     }
 
     /**
@@ -128,17 +127,8 @@ public class Decimal2 extends Pair<BigDecimal> implements DecimalVector<Decimal2
      *
      * @param v The vector of which to copy component values from
      */
-    public Decimal2(@Nonnull Long2 v) {
-        super(BigDecimal.valueOf(v.x), BigDecimal.valueOf(v.y));
-    }
-
-    /**
-     * Creates a new vector.
-     *
-     * @param v The vector of which to copy component values from
-     */
-    public Decimal2(@Nonnull Int2 v) {
-        super(BigDecimal.valueOf(v.x), BigDecimal.valueOf(v.y));
+    public Integer2(@Nonnull Int2 v) {
+        super(BigInteger.valueOf(v.x), BigInteger.valueOf(v.y));
     }
 
     //
@@ -152,8 +142,8 @@ public class Decimal2 extends Pair<BigDecimal> implements DecimalVector<Decimal2
      */
     @Nonnull
     @Override
-    public BigDecimal[] array() {
-        return new BigDecimal[]{a, b};
+    public BigInteger[] array() {
+        return new BigInteger[]{a, b};
     }
 
     //
@@ -167,7 +157,7 @@ public class Decimal2 extends Pair<BigDecimal> implements DecimalVector<Decimal2
      */
     @Override
     public boolean isZero() {
-        return a.equals(BigDecimal.ZERO) && b.equals(BigDecimal.ZERO);
+        return a.equals(BigInteger.ZERO) && b.equals(BigInteger.ZERO);
     }
 
     /**
@@ -178,7 +168,7 @@ public class Decimal2 extends Pair<BigDecimal> implements DecimalVector<Decimal2
     @Nonnull
     @Override
     public BigDecimal norm() {
-        return a.multiply(a).add(b.multiply(b)).sqrt(DecimalMath.RUNTIME_CONTEXT);
+        return new BigDecimal(a.multiply(a).add(b.multiply(b))).sqrt(DecimalMath.RUNTIME_CONTEXT);
     }
 
     /**
@@ -188,7 +178,7 @@ public class Decimal2 extends Pair<BigDecimal> implements DecimalVector<Decimal2
      */
     @Nonnull
     @Override
-    public BigDecimal norm2() {
+    public BigInteger norm2() {
         return a.multiply(a).add(b.multiply(b));
     }
 
@@ -199,7 +189,7 @@ public class Decimal2 extends Pair<BigDecimal> implements DecimalVector<Decimal2
      */
     @Nonnull
     @Override
-    public BigDecimal normManhattan() {
+    public BigInteger normManhattan() {
         return a.abs().add(b.abs());
     }
 
@@ -215,8 +205,8 @@ public class Decimal2 extends Pair<BigDecimal> implements DecimalVector<Decimal2
      */
     @Nonnull
     @Override
-    public Decimal2 add(@Nonnull BigDecimal n) {
-        return new Decimal2(a.add(n), b.add(n));
+    public Integer2 add(@Nonnull BigInteger n) {
+        return new Integer2(a.add(n), b.add(n));
     }
 
     /**
@@ -227,8 +217,8 @@ public class Decimal2 extends Pair<BigDecimal> implements DecimalVector<Decimal2
      */
     @Nonnull
     @Override
-    public Decimal2 subtract(@Nonnull BigDecimal n) {
-        return new Decimal2(a.subtract(n), b.subtract(n));
+    public Integer2 subtract(@Nonnull BigInteger n) {
+        return new Integer2(a.subtract(n), b.subtract(n));
     }
 
     /**
@@ -239,8 +229,8 @@ public class Decimal2 extends Pair<BigDecimal> implements DecimalVector<Decimal2
      */
     @Nonnull
     @Override
-    public Decimal2 multiply(@Nonnull BigDecimal n) {
-        return new Decimal2(a.multiply(n), b.multiply(n));
+    public Integer2 multiply(@Nonnull BigInteger n) {
+        return new Integer2(a.multiply(n), b.multiply(n));
     }
 
     /**
@@ -252,8 +242,8 @@ public class Decimal2 extends Pair<BigDecimal> implements DecimalVector<Decimal2
      */
     @Nonnull
     @Override
-    public Decimal2 divide(@Nonnull BigDecimal n) throws ArithmeticException {
-        return new Decimal2(a.divide(n, DecimalMath.RUNTIME_CONTEXT), b.divide(n, DecimalMath.RUNTIME_CONTEXT));
+    public Integer2 divide(@Nonnull BigInteger n) throws ArithmeticException {
+        return new Integer2(a.divide(n), b.divide(n));
     }
 
     /**
@@ -264,8 +254,8 @@ public class Decimal2 extends Pair<BigDecimal> implements DecimalVector<Decimal2
      */
     @Nonnull
     @Override
-    public Decimal2 add(@Nonnull Decimal2 v) {
-        return new Decimal2(a.add(v.a), b.add(v.b));
+    public Integer2 add(@Nonnull Integer2 v) {
+        return new Integer2(a.add(v.a), b.add(v.b));
     }
 
     /**
@@ -276,8 +266,8 @@ public class Decimal2 extends Pair<BigDecimal> implements DecimalVector<Decimal2
      */
     @Nonnull
     @Override
-    public Decimal2 subtract(@Nonnull Decimal2 v) {
-        return new Decimal2(a.subtract(v.a), b.subtract(v.b));
+    public Integer2 subtract(@Nonnull Integer2 v) {
+        return new Integer2(a.subtract(v.a), b.subtract(v.b));
     }
 
     /**
@@ -287,8 +277,8 @@ public class Decimal2 extends Pair<BigDecimal> implements DecimalVector<Decimal2
      * @return The complex number product between the two vectors
      */
     @Nonnull
-    public Decimal2 multiply(@Nonnull Decimal2 v) {
-        return new Decimal2(
+    public Integer2 multiply(@Nonnull Integer2 v) {
+        return new Integer2(
                 a.multiply(v.a).subtract(b.multiply(v.b)),
                 a.multiply(v.b).add(b.multiply(v.a))
         );
@@ -302,7 +292,7 @@ public class Decimal2 extends Pair<BigDecimal> implements DecimalVector<Decimal2
      */
     @Nonnull
     @Override
-    public BigDecimal dot(@Nonnull Decimal2 v) {
+    public BigInteger dot(@Nonnull Integer2 v) {
         return a.multiply(v.a).add(b.multiply(v.b));
     }
 
@@ -318,8 +308,8 @@ public class Decimal2 extends Pair<BigDecimal> implements DecimalVector<Decimal2
      */
     @Nonnull
     @Override
-    public Decimal2 transform(@Nonnull Function<? super BigDecimal, BigDecimal> f) {
-        return new Decimal2(f.apply(a), f.apply(b));
+    public Integer2 transform(@Nonnull Function<? super BigInteger, BigInteger> f) {
+        return new Integer2(f.apply(a), f.apply(b));
     }
 
     //
@@ -336,7 +326,10 @@ public class Decimal2 extends Pair<BigDecimal> implements DecimalVector<Decimal2
     @Override
     public Decimal2 normalize() {
         final BigDecimal n = norm();
-        return new Decimal2(a.divide(n, DecimalMath.RUNTIME_CONTEXT), b.divide(n, DecimalMath.RUNTIME_CONTEXT));
+        return new Decimal2(
+                new BigDecimal(a).divide(n, DecimalMath.RUNTIME_CONTEXT),
+                new BigDecimal(b).divide(n, DecimalMath.RUNTIME_CONTEXT)
+        );
     }
 
     //
@@ -350,8 +343,8 @@ public class Decimal2 extends Pair<BigDecimal> implements DecimalVector<Decimal2
      */
     @Nonnull
     @Override
-    public Decimal2 negate() {
-        return new Decimal2(a.negate(), b.negate());
+    public Integer2 negate() {
+        return new Integer2(a.negate(), b.negate());
     }
 
     //
@@ -366,9 +359,9 @@ public class Decimal2 extends Pair<BigDecimal> implements DecimalVector<Decimal2
      */
     @Nonnull
     @Override
-    public BigDecimal distance(@Nonnull Decimal2 v) {
-        final BigDecimal da = a.subtract(v.a);
-        final BigDecimal db = b.subtract(v.b);
+    public BigDecimal distance(@Nonnull Integer2 v) {
+        final BigDecimal da = new BigDecimal(a.subtract(v.a));
+        final BigDecimal db = new BigDecimal(b.subtract(v.b));
 
         return da.multiply(da).add(db.multiply(db)).sqrt(DecimalMath.RUNTIME_CONTEXT);
     }
@@ -381,9 +374,9 @@ public class Decimal2 extends Pair<BigDecimal> implements DecimalVector<Decimal2
      */
     @Nonnull
     @Override
-    public BigDecimal distance2(@Nonnull Decimal2 v) {
-        final BigDecimal da = a.subtract(v.a);
-        final BigDecimal db = b.subtract(v.b);
+    public BigInteger distance2(@Nonnull Integer2 v) {
+        final BigInteger da = a.subtract(v.a);
+        final BigInteger db = b.subtract(v.b);
 
         return da.multiply(da).add(db.multiply(db));
     }
@@ -396,9 +389,9 @@ public class Decimal2 extends Pair<BigDecimal> implements DecimalVector<Decimal2
      */
     @Nonnull
     @Override
-    public BigDecimal distanceManhattan(@Nonnull Decimal2 v) {
-        final BigDecimal da = a.subtract(v.a);
-        final BigDecimal db = b.subtract(v.b);
+    public BigInteger distanceManhattan(@Nonnull Integer2 v) {
+        final BigInteger da = a.subtract(v.a);
+        final BigInteger db = b.subtract(v.b);
 
         return da.abs().add(db.abs());
     }
@@ -415,8 +408,8 @@ public class Decimal2 extends Pair<BigDecimal> implements DecimalVector<Decimal2
      */
     @Nonnull
     @Override
-    public Decimal2 min(@Nonnull Decimal2 v) {
-        return new Decimal2(a.min(v.a), b.min(v.b));
+    public Integer2 min(@Nonnull Integer2 v) {
+        return new Integer2(a.min(v.a), b.min(v.b));
     }
 
     /**
@@ -427,8 +420,8 @@ public class Decimal2 extends Pair<BigDecimal> implements DecimalVector<Decimal2
      */
     @Nonnull
     @Override
-    public Decimal2 max(@Nonnull Decimal2 v) {
-        return new Decimal2(a.max(v.a), b.max(v.b));
+    public Integer2 max(@Nonnull Integer2 v) {
+        return new Integer2(a.max(v.a), b.max(v.b));
     }
 
     /**
@@ -440,8 +433,8 @@ public class Decimal2 extends Pair<BigDecimal> implements DecimalVector<Decimal2
      */
     @Nonnull
     @Override
-    public Decimal2 clamp(@Nonnull Decimal2 min, @Nonnull Decimal2 max) {
-        return new Decimal2(DecimalMath.clamp(a, min.a, max.a), DecimalMath.clamp(b, min.b, max.b));
+    public Integer2 clamp(@Nonnull Integer2 min, @Nonnull Integer2 max) {
+        return new Integer2(IntegerMath.clamp(a, min.a, max.a), IntegerMath.clamp(b, min.b, max.b));
     }
 
     //
@@ -454,29 +447,17 @@ public class Decimal2 extends Pair<BigDecimal> implements DecimalVector<Decimal2
      * @param angRads The angle of rotation to apply in radians
      */
     @Nonnull
-    public Decimal2 rotate(double angRads) {
+    public Integer2 rotate(double angRads) {
+        final BigDecimal da = new BigDecimal(a);
+        final BigDecimal db = new BigDecimal(b);
+
         final BigDecimal cos = BigDecimal.valueOf(Math.cos(angRads));
         final BigDecimal sin = BigDecimal.valueOf(Math.sin(angRads));
 
-        return new Decimal2(
-                cos.multiply(a).subtract(sin.multiply(b)),
-                sin.multiply(a).add(cos.multiply(b))
+        return new Integer2(
+                cos.multiply(da).subtract(sin.multiply(db)).toBigInteger(),
+                sin.multiply(da).add(cos.multiply(db)).toBigInteger()
         );
-    }
-
-    //
-    // Integer Conversion
-    //
-
-    /**
-     * {@inheritDoc}
-     *
-     * @return {@inheritDoc}
-     */
-    @Nonnull
-    @Override
-    public Integer2 toBigInteger() {
-        return new Integer2(a.toBigInteger(), b.toBigInteger());
     }
 
     //
@@ -541,17 +522,17 @@ public class Decimal2 extends Pair<BigDecimal> implements DecimalVector<Decimal2
      */
     @Override
     public boolean equals(@Nullable Object obj) {
-        if (obj instanceof Decimal2 dv2) {
-            return a.equals(dv2.a) && b.equals(dv2.b);
+        if (obj instanceof Integer2 iv2) {
+            return a.equals(iv2.a) && b.equals(iv2.b);
         }
 
-        if (obj instanceof DecimalVector<?> dv) {
-            final BigDecimal[] array = dv.array();
+        if (obj instanceof IntegerVector<?> iv) {
+            final BigInteger[] array = iv.array();
             return Arrays.equals(array(), array);
         }
 
         if (obj instanceof Vector<?, ?> v) {
-            final List<BigDecimal> l1 = list();
+            final List<BigInteger> l1 = list();
             final List<? extends Number> l2 = v.list();
 
             if (l2.size() != 2) return false;
@@ -573,7 +554,7 @@ public class Decimal2 extends Pair<BigDecimal> implements DecimalVector<Decimal2
      * @return {@inheritDoc}
      */
     @Override
-    public boolean equals(@Nonnull Decimal2 v) {
+    public boolean equals(@Nonnull Integer2 v) {
         return a.equals(v.a) && b.equals(v.b);
     }
 
@@ -589,7 +570,7 @@ public class Decimal2 extends Pair<BigDecimal> implements DecimalVector<Decimal2
      * @throws NumberFormatException When the format is invalid
      */
     @Nonnull
-    public static Decimal2 parseVector(@Nonnull String input) throws NumberFormatException {
+    public static Integer2 parseVector(@Nonnull String input) throws NumberFormatException {
         if (!input.startsWith("Vector{")) {
             throw new NumberFormatException("The provided string is not a vector.");
         }
@@ -599,7 +580,7 @@ public class Decimal2 extends Pair<BigDecimal> implements DecimalVector<Decimal2
             throw new NumberFormatException("The provided string does not have teo components.");
         }
 
-        final BigDecimal[] values = new BigDecimal[2];
+        final BigInteger[] values = new BigInteger[2];
 
         for (final String valueString : valueStrings) {
             final String[] split = valueString.split("=");
@@ -611,10 +592,10 @@ public class Decimal2 extends Pair<BigDecimal> implements DecimalVector<Decimal2
                 case "x" -> 0;
                 case "y" -> 1;
                 default -> throw new NumberFormatException("The provided string has a non-XY component.");
-            }] = new BigDecimal(split[1]);
+            }] = new BigInteger(split[1]);
         }
 
-        return new Decimal2(values);
+        return new Integer2(values);
     }
 
     /**
