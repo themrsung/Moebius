@@ -11,6 +11,12 @@ import java.util.UUID;
  *
  * @param <L> The datatype to use to represent location
  * @param <R> The datatype to use to represent rotation
+ * @see Movable2
+ * @see Movable3
+ * @see SingleMovable2
+ * @see SingleMovable3
+ * @see BigMovable2
+ * @see BigMovable3
  */
 public interface Movable<L, R> extends Unique<UUID> {
     //

@@ -23,6 +23,8 @@ import java.util.function.Predicate;
  * @see World3
  * @see SingleWorld2
  * @see SingleWorld3
+ * @see BigWorld2
+ * @see BigWorld3
  */
 public interface World<L, R, M extends Movable<L, R> & Tickable>
         extends Iterable<M>, Unique<UUID>, Nameable<String>, Tickable {
