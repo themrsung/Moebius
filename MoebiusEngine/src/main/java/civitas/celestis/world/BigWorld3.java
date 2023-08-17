@@ -1,11 +1,8 @@
 package civitas.celestis.world;
 
 import civitas.celestis.math.complex.DecimalQuaternion;
-import civitas.celestis.math.complex.Quaternion;
 import civitas.celestis.math.vector.Decimal3;
-import civitas.celestis.math.vector.Double3;
 import civitas.celestis.object.BigMovable3;
-import civitas.celestis.object.Movable3;
 import civitas.celestis.util.Tickable;
 
 /**
