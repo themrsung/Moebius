@@ -3,17 +3,14 @@ package civitas.celestis.util.collection;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.NoSuchElementException;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * A circular queue. Entries can be added or removed concurrently to this queue.
  *
  * @param <E> The type of element to contain in this queue
  */
-public class CircularQueue<E> extends GroupableList<E> implements Queue<E> {
+public class CircularQueue<E> extends ArrayList<E> implements GroupableCollection<E>, Queue<E> {
     //
     // Static Initializers
     //
@@ -65,7 +62,7 @@ public class CircularQueue<E> extends GroupableList<E> implements Queue<E> {
      * @param l The listable object of which to copy element values from
      */
     public CircularQueue(@Nonnull Listable<E> l) {
-        super(l);
+        super(l.list());
     }
 
     //

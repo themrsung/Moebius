@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @param <N> The type of number this list should hold
  */
-public class NumericList<N extends Number> extends GroupableList<N> {
+public class NumericList<N extends Number> extends ArrayList<N> implements GroupableCollection<N> {
     //
     // Static Initializers
     //
@@ -85,7 +85,7 @@ public class NumericList<N extends Number> extends GroupableList<N> {
      * @param l The listable object of which to copy element values from
      */
     public NumericList(@Nonnull Listable<N> l) {
-        super(l);
+        super(l.list());
     }
 
     //
