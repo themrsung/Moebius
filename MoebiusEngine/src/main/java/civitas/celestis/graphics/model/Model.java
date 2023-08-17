@@ -1,6 +1,7 @@
 package civitas.celestis.graphics.model;
 
 import civitas.celestis.math.vector.Vector;
+import civitas.celestis.util.group.Group;
 import jakarta.annotation.Nonnull;
 
 import java.util.Map;
@@ -12,7 +13,7 @@ import java.util.Set;
  *
  * @param <V> The type of vertex this model uses
  */
-public interface Model<V extends Vector<?, V>> {
+public interface Model<V extends Vector<?, V>> extends Group<V> {
     //
     // Vertices
     //

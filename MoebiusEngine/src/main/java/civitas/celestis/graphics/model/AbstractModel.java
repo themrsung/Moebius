@@ -462,6 +462,20 @@ public abstract class AbstractModel<V extends Vector<?, V>> implements Model<V> 
     }
 
     //
+    // List Conversion
+    //
+
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
+    @Nonnull
+    @Override
+    public List<V> list() {
+        return Arrays.stream(vertices).toList();
+    }
+
+    //
     // Serialization
     //
 
