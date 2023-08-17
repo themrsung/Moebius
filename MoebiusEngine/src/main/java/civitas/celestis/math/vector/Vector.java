@@ -6,7 +6,6 @@ import jakarta.annotation.Nullable;
 
 import java.io.Serializable;
 import java.util.function.Function;
-import java.util.function.UnaryOperator;
 
 /**
  * A mathematical tuple of numbers.

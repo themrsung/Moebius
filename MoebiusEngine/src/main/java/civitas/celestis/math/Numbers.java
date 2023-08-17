@@ -4,6 +4,8 @@ import civitas.celestis.math.vector.*;
 import civitas.celestis.util.collection.CircularQueue;
 import jakarta.annotation.Nonnull;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Random;
 
 /**
@@ -27,6 +29,15 @@ public class Numbers {
      * @return {@code true} if the values converted to {@code double} are equal
      */
     public static boolean equals(@Nonnull Number n1, @Nonnull Number n2) {
+        // BigDecimal comparison
+        if (n1 instanceof BigDecimal bd) return bd.equals(n2);
+        if (n2 instanceof BigDecimal bd) return bd.equals(n1);
+
+        // BigInteger comparison
+        if (n1 instanceof BigInteger bi) return bi.equals(n2);
+        if (n2 instanceof BigInteger bi) return bi.equals(n1);
+
+        // double value comparison
         return n1.doubleValue() == n2.doubleValue();
     }
 

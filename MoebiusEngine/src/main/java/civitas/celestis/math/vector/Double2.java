@@ -1,7 +1,6 @@
 package civitas.celestis.math.vector;
 
 import civitas.celestis.math.Numbers;
-import civitas.celestis.math.vector.boxed.BoxedVector;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
@@ -9,7 +8,6 @@ import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
-import java.util.function.UnaryOperator;
 
 /**
  * A two-dimensional vector which uses the type {@code double}.
@@ -507,8 +505,8 @@ public class Double2 implements DoubleVector<Double2> {
      */
     @Nonnull
     public Double2 rotate(double angRads) {
-        double cos = Math.cos(angRads);
-        double sin = Math.sin(angRads);
+        final double cos = Math.cos(angRads);
+        final double sin = Math.sin(angRads);
 
         return new Double2(
                 cos * x - sin * y,
@@ -541,10 +539,10 @@ public class Double2 implements DoubleVector<Double2> {
             final List<Double> l1 = list();
             final List<? extends Number> l2 = v.list();
 
-            if (l1.size() != l2.size()) return false;
+            if (l2.size() != 2) return false;
 
-            for (int i = 0; i < l2.size(); i++) {
-                if (l1.get(i).equals(l2.get(i))) return false;
+            for (int i = 0; i < 2; i++) {
+                if (!Numbers.equals(l1.get(i), l2.get(i))) return false;
             }
 
             return true;
@@ -620,8 +618,9 @@ public class Double2 implements DoubleVector<Double2> {
 
     /**
      * A vector which uses the type {@link BigInteger}.
+     *
      * @param <V> Itself (the parameter and result of various operations)
      */
-    public static interface IntegerVector<V extends IntegerVector<V>> extends BoxedVector<BigInteger, V> {
+    public interface IntegerVector<V extends IntegerVector<V>> extends BigVector<BigInteger, V> {
     }
 }

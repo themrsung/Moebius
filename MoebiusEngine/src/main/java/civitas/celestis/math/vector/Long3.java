@@ -8,7 +8,6 @@ import jakarta.annotation.Nullable;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
-import java.util.function.UnaryOperator;
 
 /**
  * A three-dimensional vector which uses the type {@code long}.
@@ -557,10 +556,10 @@ public class Long3 implements LongVector<Long3, Double3> {
             final List<Long> l1 = list();
             final List<? extends Number> l2 = v.list();
 
-            if (l1.size() != l2.size()) return false;
+            if (l2.size() != 3) return false;
 
-            for (int i = 0; i < l2.size(); i++) {
-                if (l1.get(i).equals(l2.get(i))) return false;
+            for (int i = 0; i < 3; i++) {
+                if (!Numbers.equals(l1.get(i), l2.get(i))) return false;
             }
 
             return true;

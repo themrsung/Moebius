@@ -48,7 +48,7 @@ public class Quaternion extends Double4 {
     /**
      * Creates a new quaternion.
      *
-     * @param values An array containing the WXYZ components o this quaternion
+     * @param values An array containing the WXYZ components of this quaternion
      */
     public Quaternion(@Nonnull double[] values) {
         super(values);

@@ -491,7 +491,7 @@ public class LongMatrix implements Matrix<Long, LongMatrix> {
 
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < columns; c++) {
-                result.values[r][c] = (long) f.apply(values[r][c]);
+                result.values[r][c] = f.apply(values[r][c]);
             }
         }
 
@@ -676,7 +676,7 @@ public class LongMatrix implements Matrix<Long, LongMatrix> {
      *
      * @param s String to parse
      * @return Matrix parsed from given string
-     * @throws NumberFormatException    When the string is not parsable to a matrix
+     * @throws NumberFormatException When the string is not parsable to a matrix
      */
     @Nonnull
     public static LongMatrix parseMatrix(@Nonnull String s) throws NumberFormatException {

@@ -3,7 +3,6 @@ package civitas.celestis.util.io;
 import civitas.celestis.graphics.color.LinearColor;
 import civitas.celestis.math.complex.Complex;
 import civitas.celestis.math.complex.Quaternion;
-import civitas.celestis.math.matrix.DoubleMatrix;
 import civitas.celestis.math.vector.Double2;
 import civitas.celestis.math.vector.Double3;
 import civitas.celestis.math.vector.Double4;
@@ -61,14 +60,15 @@ public final class Serialization {
      * of the provided group into an immutable copy, (which is achieved by {@link Group#copyOf(Group)})
      * then calls {@link Group#toString()}.
      * <p>
-     *     While this operation guarantees successful serialization, any type-specific data
-     *     will be lost. For example, serializing a {@link civitas.celestis.graphics.color.LinearColor LinearColor}
-     *     using this method will return a different string
-     *     from directly serializing it using {@link LinearColor#toString()}.
+     * While this operation guarantees successful serialization, any type-specific data
+     * will be lost. For example, serializing a {@link civitas.celestis.graphics.color.LinearColor LinearColor}
+     * using this method will return a different string
+     * from directly serializing it using {@link LinearColor#toString()}.
      * </p>
-     * @param g The group to serialize into a string
-     * @return The string representation of the provided group {@code g}.
+     *
+     * @param g   The group to serialize into a string
      * @param <E> The type of element the group is holding
+     * @return The string representation of the provided group {@code g}.
      */
     @Nonnull
     public static <E> String serializeGroup(@Nonnull Group<E> g) {

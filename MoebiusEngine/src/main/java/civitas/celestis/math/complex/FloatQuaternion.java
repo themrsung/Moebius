@@ -48,7 +48,7 @@ public class FloatQuaternion extends Float4 {
     /**
      * Creates a new quaternion.
      *
-     * @param values An array containing the WXYZ components o this quaternion
+     * @param values An array containing the WXYZ components of this quaternion
      */
     public FloatQuaternion(@Nonnull float[] values) {
         super(values);

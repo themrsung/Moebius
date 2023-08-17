@@ -87,13 +87,13 @@ public class Quad<E> implements Tuple<E, Quad<E>> {
     /**
      * Creates a new triple.
      *
-     * @param t The triple of which to copy values from
+     * @param q The triple of which to copy values from
      */
-    public Quad(@Nonnull Quad<E> t) {
-        this.a = t.a;
-        this.b = t.b;
-        this.c = t.c;
-        this.d = t.d;
+    public Quad(@Nonnull Quad<E> q) {
+        this.a = q.a;
+        this.b = q.b;
+        this.c = q.c;
+        this.d = q.d;
     }
 
     //

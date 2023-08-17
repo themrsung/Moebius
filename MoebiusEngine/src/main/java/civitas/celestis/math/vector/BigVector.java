@@ -1,14 +1,14 @@
-package civitas.celestis.math.vector.boxed;
+package civitas.celestis.math.vector;
 
-import civitas.celestis.math.vector.Vector;
 import jakarta.annotation.Nonnull;
 
 /**
  * A vector which uses non-primitive number types.
+ *
  * @param <N> The type of number to use
  * @param <V> Itself (the parameter and result of various operations)
  */
-public interface BoxedVector<N extends Number, V extends BoxedVector<N, V>> extends Vector<N, V> {
+public interface BigVector<N extends Number, V extends BigVector<N, V>> extends Vector<N, V> {
     //
     // Getters
     //
@@ -31,7 +31,7 @@ public interface BoxedVector<N extends Number, V extends BoxedVector<N, V>> exte
      * @return The Euclidean norm of this vector
      */
     @Nonnull
-    N norm();
+    Number norm();
 
     /**
      * Returns the squared Euclidean norm (the squared magnitude) of this vector.
@@ -112,7 +112,7 @@ public interface BoxedVector<N extends Number, V extends BoxedVector<N, V>> exte
      * @return The Euclidean distance to the provided vector {@code v}
      */
     @Nonnull
-    N distance(@Nonnull V v);
+    Number distance(@Nonnull V v);
 
     /**
      * Returns the squared Euclidean distance between this vector and the provided vector {@code v}.
@@ -145,5 +145,5 @@ public interface BoxedVector<N extends Number, V extends BoxedVector<N, V>> exte
      * @throws ArithmeticException When the Euclidean norm (magnitude) is zero
      */
     @Nonnull
-    V normalize();
+    Vector<?, ?> normalize();
 }

@@ -7,7 +7,6 @@ import jakarta.annotation.Nullable;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
-import java.util.function.UnaryOperator;
 
 /**
  * A four-dimensional vector which uses the type {@code int}.
@@ -566,10 +565,10 @@ public class Int4 implements IntVector<Int4, Float4> {
             final List<Integer> l1 = list();
             final List<? extends Number> l2 = v.list();
 
-            if (l1.size() != l2.size()) return false;
+            if (l2.size() != 4) return false;
 
             for (int i = 0; i < l2.size(); i++) {
-                if (l1.get(i).equals(l2.get(i))) return false;
+                if (!Numbers.equals(l1.get(i), l2.get(i))) return false;
             }
 
             return true;

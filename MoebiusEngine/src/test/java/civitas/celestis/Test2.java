@@ -1,17 +1,15 @@
 package civitas.celestis;
 
-import civitas.celestis.math.DecimalMath;
+import civitas.celestis.math.vector.Decimal3;
+import civitas.celestis.math.vector.Double3;
+import civitas.celestis.util.tuple.Tuple;
 
 import java.math.BigDecimal;
 
 public class Test2 {
     public static void main(String[] args) {
-        BigDecimal pi = DecimalMath.PI;
-        BigDecimal r2 = DecimalMath.SQRT_2;
+        final Decimal3 d3 = new Decimal3((Tuple<BigDecimal, ?>) Decimal3.ZERO);
 
-        System.out.println(pi);
-        System.out.println(r2);
-
-        System.out.println(pi.add(r2));
+        System.out.println(d3);
     }
 }
