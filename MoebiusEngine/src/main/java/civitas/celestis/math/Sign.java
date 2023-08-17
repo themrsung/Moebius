@@ -3,6 +3,9 @@ package civitas.celestis.math;
 import civitas.celestis.util.data.Packable8;
 import jakarta.annotation.Nonnull;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
 /**
  * The sign of a number.
  */
@@ -46,6 +49,56 @@ public enum Sign implements Packable8 {
     //
     // Factory
     //
+
+    /**
+     * Returns the sign of the provided number {@code n}.
+     *
+     * @param n The number of which to get the sign of
+     * @return The sign of the number {@code n}
+     */
+    @Nonnull
+    public static Sign ofNumber(@Nonnull Number n) {
+        if (n instanceof BigDecimal bd) return of(bd);
+        if (n instanceof BigInteger bi) return of(bi);
+        if (n instanceof Double d) return of(d);
+        if (n instanceof Float f) return of(f);
+        if (n instanceof Long l) return of(l);
+        if (n instanceof Integer i) return of(i);
+
+        return of(n.doubleValue());
+    }
+
+    /**
+     * Returns the sign of the provided value {@code v}.
+     *
+     * @param v The value of which to get the sign of
+     * @return The sign of the value {@code v}
+     */
+    @Nonnull
+    public static Sign of(@Nonnull BigDecimal v) {
+        return switch (v.signum()) {
+            case 1 -> POSITIVE;
+            case 0 -> ZERO;
+            case -1 -> NEGATIVE;
+            default -> NaN;
+        };
+    }
+
+    /**
+     * Returns the sign of the provided value {@code v}.
+     *
+     * @param v The value of which to get the sign of
+     * @return The sign of the value {@code v}
+     */
+    @Nonnull
+    public static Sign of(@Nonnull BigInteger v) {
+        return switch (v.signum()) {
+            case 1 -> POSITIVE;
+            case 0 -> ZERO;
+            case -1 -> NEGATIVE;
+            default -> NaN;
+        };
+    }
 
     /**
      * Returns the sign of the provided value {@code v}.

@@ -5,6 +5,7 @@ import civitas.celestis.math.matrix.FloatMatrix;
 import civitas.celestis.math.matrix.IntMatrix;
 import civitas.celestis.math.matrix.LongMatrix;
 import civitas.celestis.math.vector.*;
+import civitas.celestis.util.collection.Listable;
 import civitas.celestis.util.tuple.*;
 import jakarta.annotation.Nonnull;
 
@@ -36,8 +37,9 @@ import java.util.List;
  * @see IntVector
  * @see Grid
  * @see civitas.celestis.math.matrix.Matrix Matrix
+ * @see Groupable
  */
-public interface Group<E> extends Serializable {
+public interface Group<E> extends Listable<E>, Serializable {
     //
     // Factory
     //
@@ -320,6 +322,7 @@ public interface Group<E> extends Serializable {
      *
      * @return The list representation of this group
      */
+    @Override
     @Nonnull
     List<E> list();
 
