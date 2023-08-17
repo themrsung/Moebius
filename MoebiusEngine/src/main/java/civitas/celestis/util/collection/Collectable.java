@@ -2,6 +2,7 @@ package civitas.celestis.util.collection;
 
 import jakarta.annotation.Nonnull;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 /**
@@ -10,7 +11,7 @@ import java.util.Collection;
  * @param <E> The type of element this group is holding
  * @see Collection
  */
-public interface Collectable<E> {
+public interface Collectable<E> extends Serializable {
     /**
      * Converts this object into a collection.
      *

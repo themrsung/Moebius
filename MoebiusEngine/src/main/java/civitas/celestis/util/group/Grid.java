@@ -4,7 +4,6 @@ import civitas.celestis.math.vector.Int2;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
-import java.io.Serializable;
 import java.util.Iterator;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
@@ -18,7 +17,7 @@ import java.util.function.Function;
  * @see ArrayGrid
  * @see civitas.celestis.math.matrix.Matrix Matrix
  */
-public interface Grid<E> extends Group<E>, Iterable<E>, Serializable {
+public interface Grid<E> extends Group<E>, Iterable<E> {
     //
     // Dimensions
     //

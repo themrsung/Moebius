@@ -4,7 +4,6 @@ import civitas.celestis.util.group.Group;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
-import java.io.Serializable;
 import java.util.function.Function;
 
 /**
@@ -29,7 +28,7 @@ import java.util.function.Function;
  * @see QuaternaryQuad
  * @see ArrayTuple
  */
-public interface Tuple<E, T extends Tuple<E, T>> extends Group<E>, Iterable<E>, Serializable {
+public interface Tuple<E, T extends Tuple<E, T>> extends Group<E>, Iterable<E> {
     //
     // Getters
     //
