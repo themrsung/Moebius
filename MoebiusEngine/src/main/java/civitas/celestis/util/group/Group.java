@@ -9,6 +9,8 @@ import civitas.celestis.util.tuple.*;
 import jakarta.annotation.Nonnull;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -54,6 +56,38 @@ public interface Group<E> extends Serializable {
             case 2 -> new Pair<>(values[0], values[1]);
             case 3 -> new Triple<>(values[0], values[1], values[2]);
             case 4 -> new Quad<>(values[0], values[1], values[2], values[3]);
+            default -> new ArrayTuple<>(values);
+        };
+    }
+
+    /**
+     * Creates a new group of {@link BigDecimal}s.
+     *
+     * @param values The values to contain
+     * @return The constructed group
+     */
+    @Nonnull
+    static Group<BigDecimal> ofBigDecimal(@Nonnull BigDecimal... values) {
+        return switch (values.length) {
+            case 2 -> new Decimal2(values);
+            case 3 -> new Decimal3(values);
+            case 4 -> new Decimal4(values);
+            default -> new ArrayTuple<>(values);
+        };
+    }
+
+    /**
+     * Creates a new group of {@link BigInteger}s.
+     *
+     * @param values The values to contain
+     * @return The constructed group
+     */
+    @Nonnull
+    static Group<BigInteger> ofBigDecimal(@Nonnull BigInteger... values) {
+        return switch (values.length) {
+            case 2 -> new Integer2(values);
+            case 3 -> new Integer3(values);
+            case 4 -> new Integer4(values);
             default -> new ArrayTuple<>(values);
         };
     }
@@ -232,7 +266,19 @@ public interface Group<E> extends Serializable {
     static <E> Group<E> copyOf(@Nonnull Group<E> g) {
         if (g instanceof Grid<E> grid) return new ArrayGrid<>(grid);
 
-        // Vector constructors must be called in this specific order to prevent
+        if (g instanceof DecimalVector<?> dv) {
+            try {return (Group<E>) new Decimal4(dv);} catch (final Exception ignored) {}
+            try {return (Group<E>) new Decimal3(dv);} catch (final Exception ignored) {}
+            try {return (Group<E>) new Decimal2(dv);} catch (final Exception ignored) {}
+        }
+
+        if (g instanceof IntegerVector<?> iv) {
+            try {return (Group<E>) new Integer4(iv);} catch (final Exception ignored) {}
+            try {return (Group<E>) new Integer3(iv);} catch (final Exception ignored) {}
+            try {return (Group<E>) new Integer2(iv);} catch (final Exception ignored) {}
+        }
+
+        // Primitive vector constructors must be called in this specific order to prevent
         // inter-type copying and to prevent loss of precision.
 
         // 1. new Double3(Float3) will be harmless, while the other way around would lose precision.

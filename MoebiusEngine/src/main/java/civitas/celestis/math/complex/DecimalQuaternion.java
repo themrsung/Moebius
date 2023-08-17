@@ -4,6 +4,7 @@ import civitas.celestis.math.DecimalMath;
 import civitas.celestis.math.vector.Decimal3;
 import civitas.celestis.math.vector.Decimal4;
 import civitas.celestis.util.tuple.Quad;
+import civitas.celestis.util.tuple.Tuple;
 import jakarta.annotation.Nonnull;
 
 import java.math.BigDecimal;
@@ -77,7 +78,7 @@ public class DecimalQuaternion extends Decimal4 {
      * @param v The vector of which to copy component values from
      */
     public DecimalQuaternion(@Nonnull Decimal4 v) {
-        super(v);
+        super((Tuple<BigDecimal, ?>) v);
     }
 
     //

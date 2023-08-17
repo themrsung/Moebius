@@ -115,6 +115,15 @@ public class Integer4 extends Quad<BigInteger> implements IntegerVector<Integer4
      *
      * @param v The vector of which to copy component values from
      */
+    public Integer4(@Nonnull IntegerVector<?> v) {
+        this(v.array());
+    }
+
+    /**
+     * Creates a new vector.
+     *
+     * @param v The vector of which to copy component values from
+     */
     public Integer4(@Nonnull Double4 v) {
         super(
                 BigDecimal.valueOf(v.w).toBigInteger(),
