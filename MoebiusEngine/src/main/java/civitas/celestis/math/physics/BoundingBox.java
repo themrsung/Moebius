@@ -110,7 +110,7 @@ public class BoundingBox implements Solid {
      * @return {@code 8}
      */
     @Override
-    public int getNumCorners() {
+    public int getCornerCount() {
         return 8;
     }
 
@@ -204,7 +204,7 @@ public class BoundingBox implements Solid {
         }
 
         // Fallback to bounding box if the solid has no corners
-        if (s.getNumCorners() <= 0) {
+        if (s.getCornerCount() <= 0) {
             return overlaps(s.getBoundingBox());
         }
 

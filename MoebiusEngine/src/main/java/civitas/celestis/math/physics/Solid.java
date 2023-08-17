@@ -31,7 +31,7 @@ public interface Solid {
      *
      * @return The number of corners this solid has
      */
-    int getNumCorners();
+    int getCornerCount();
 
     /**
      * Returns the geometric centroid of this solid.

@@ -88,7 +88,7 @@ public class Sphere implements Solid {
      * @return {@code 0}
      */
     @Override
-    public int getNumCorners() {
+    public int getCornerCount() {
         return 0;
     }
 

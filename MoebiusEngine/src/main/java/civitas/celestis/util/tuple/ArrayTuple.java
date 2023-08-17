@@ -30,10 +30,10 @@ public class ArrayTuple<E> implements Tuple<E, ArrayTuple<E>> {
      * Creates a new tuple.
      *
      * @param t The tuple of which to copy values from
-     * @param a An empty array of type {@link E}
      */
-    public ArrayTuple(@Nonnull Tuple<E, ?> t, @Nonnull E[] a) {
-        this.values = t.list().toArray(a);
+    @SuppressWarnings("unchecked")
+    public ArrayTuple(@Nonnull Tuple<E, ?> t) {
+        this.values = (E[]) t.list().toArray(Object[]::new);
     }
 
     /**
