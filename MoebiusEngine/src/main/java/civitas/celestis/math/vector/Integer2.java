@@ -14,6 +14,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 
+/**
+ * A teo-dimensional vector which uses the type {@link BigInteger}.
+ */
 public class Integer2 extends Pair<BigInteger> implements IntegerVector<Integer2> {
     //
     // Constants
