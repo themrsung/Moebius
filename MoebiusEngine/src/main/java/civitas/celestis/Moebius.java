@@ -78,6 +78,7 @@ public class Moebius extends MoebiusApplication {
      *
      * @param args The array of arguments
      */
+    @ApplicationCritical
     public static void main(@Nonnull String[] args) {
         getApplication().start();
     }

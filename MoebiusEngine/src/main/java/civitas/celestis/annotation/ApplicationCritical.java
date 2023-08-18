@@ -2,10 +2,7 @@ package civitas.celestis.annotation;
 
 import jakarta.annotation.Nonnull;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 /**
  * A marker interface used to mark various fields and methods which are
@@ -17,6 +14,7 @@ import java.lang.annotation.Target;
  * double check if you are using it properly.
  * </p>
  */
+@Documented
 @Retention(RetentionPolicy.SOURCE)
 @Target({
 
