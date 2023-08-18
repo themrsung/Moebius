@@ -1,5 +1,7 @@
 package civitas.celestis.event;
 
+import civitas.celestis.annotation.ApplicationCritical;
+
 /**
  * The priority of an event handler.
  *
@@ -24,5 +26,6 @@ public enum HandlerPriority {
      * (or any variation of the event)
      * </p>
      */
-    TERMINATION;
+    @ApplicationCritical(lastUpdated = "0.3")
+    TERMINATION
 }

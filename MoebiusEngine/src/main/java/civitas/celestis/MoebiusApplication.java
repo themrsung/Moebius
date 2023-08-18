@@ -1,5 +1,6 @@
 package civitas.celestis;
 
+import civitas.celestis.annotation.ApplicationCritical;
 import civitas.celestis.event.lifecycle.EventManager;
 import civitas.celestis.event.lifecycle.SyncEventManager;
 import civitas.celestis.event.notification.ApplicationStartedEvent;
@@ -72,6 +73,7 @@ public class MoebiusApplication {
      * Starts this application.
      * This should be overridden completely to customize the behavior of your application.
      */
+    @ApplicationCritical(lastUpdated = "0.3")
     public void start() {
         // Register event listeners
         eventManager.register(new NotificationListener(logger::info));
@@ -90,6 +92,7 @@ public class MoebiusApplication {
      * Stops this application.
      * This should be overridden completely to customize the behavior of your application.
      */
+    @ApplicationCritical(lastUpdated = "0.3")
     public void stop() {
         // Notify classes that the application is about to stop
         eventManager.call(new ApplicationStoppingEvent(this, name + " " + version + " is stopping."));
@@ -99,6 +102,7 @@ public class MoebiusApplication {
      * Fully terminates this application.
      * This is invoked by the {@link ApplicationStateListener}, and should not be directly called.
      */
+    @ApplicationCritical(lastUpdated = "0.3")
     public void terminate() {
         // Interrupt the modules
         eventManager.interrupt();

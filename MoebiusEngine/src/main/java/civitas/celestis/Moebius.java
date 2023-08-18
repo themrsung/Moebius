@@ -1,5 +1,6 @@
 package civitas.celestis;
 
+import civitas.celestis.annotation.ApplicationCritical;
 import jakarta.annotation.Nonnull;
 
 /**
@@ -45,6 +46,7 @@ public class Moebius extends MoebiusApplication {
      * The entry point of this application.
      */
     @Override
+    @ApplicationCritical(lastUpdated = "0.3")
     public void start() {
         super.start();
     }
@@ -53,6 +55,7 @@ public class Moebius extends MoebiusApplication {
      * Called to initialize the termination of this application.
      */
     @Override
+    @ApplicationCritical(lastUpdated = "0.3")
     public void stop() {
         super.stop();
     }
@@ -61,6 +64,7 @@ public class Moebius extends MoebiusApplication {
      * Called by the application state listener to full terminate this application.
      */
     @Override
+    @ApplicationCritical(lastUpdated = "0.3")
     public void terminate() {
         super.terminate();
     }
