@@ -4,6 +4,7 @@ import civitas.celestis.event.lifecycle.EventManager;
 import civitas.celestis.event.lifecycle.SyncEventManager;
 import civitas.celestis.event.notification.ApplicationStartedEvent;
 import civitas.celestis.event.notification.ApplicationStoppingEvent;
+import civitas.celestis.listener.application.ApplicationStateListener;
 import civitas.celestis.listener.notification.NotificationListener;
 import civitas.celestis.task.lifecycle.AsyncScheduler;
 import civitas.celestis.task.lifecycle.Scheduler;
@@ -17,15 +18,6 @@ import java.util.logging.Logger;
  * The main class of a Moebius application.
  */
 public class MoebiusApplication {
-    //
-    // Constants
-    //
-
-    /**
-     * An application used for internal testing.
-     */
-    public static final MoebiusApplication TEST_APP = new MoebiusApplication("Moebius", "0.3");
-
     //
     // Constructors
     //
@@ -83,6 +75,7 @@ public class MoebiusApplication {
     public void start() {
         // Register event listeners
         eventManager.register(new NotificationListener(logger::info));
+        eventManager.register(new ApplicationStateListener());
 
         // Start the modules
         eventManager.start();
@@ -90,7 +83,7 @@ public class MoebiusApplication {
         worldManager.start();
 
         // Notify classes that the application has started
-        eventManager.call(new ApplicationStartedEvent(name + " " + version + " has started."));
+        eventManager.call(new ApplicationStartedEvent(this, name + " " + version + " has started."));
     }
 
     /**
@@ -99,13 +92,14 @@ public class MoebiusApplication {
      */
     public void stop() {
         // Notify classes that the application is about to stop
-        eventManager.call(new ApplicationStoppingEvent(name + " " + version + " is stopping."));
+        eventManager.call(new ApplicationStoppingEvent(this, name + " " + version + " is stopping."));
+    }
 
-        // Give the listeners time to process the stopping event
-        try {
-            Thread.sleep(1000);
-        } catch (final InterruptedException ignored) {}
-
+    /**
+     * Fully terminates this application.
+     * This is invoked by the {@link ApplicationStateListener}, and should not be directly called.
+     */
+    public void terminate() {
         // Interrupt the modules
         eventManager.interrupt();
         scheduler.interrupt();

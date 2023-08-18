@@ -13,5 +13,16 @@ public enum HandlerPriority {
     EARLY,
     MEDIUM,
     LATE,
-    PERMISSIVE
+    PERMISSIVE,
+
+    /**
+     * <b>THIS IS A RESERVED PRIORITY FOR TERMINATION OPERATIONS.</b><br>
+     * <p>
+     * This priority should only be used for event listeners which handle
+     * the termination of an application after every event listener subscribing
+     * to {@link civitas.celestis.event.notification.ApplicationStoppingEvent ApplicationStoppingEvent}.
+     * (or any variation of the event)
+     * </p>
+     */
+    TERMINATION;
 }

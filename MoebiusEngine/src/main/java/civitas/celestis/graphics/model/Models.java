@@ -2,12 +2,49 @@ package civitas.celestis.graphics.model;
 
 import civitas.celestis.math.vector.Double3;
 import civitas.celestis.util.tuple.ArrayTuple;
+import de.javagl.obj.ObjReader;
 import jakarta.annotation.Nonnull;
+
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
 /**
  * A utility class related to {@link Model} operations.
  */
 public final class Models {
+    //
+    // IO
+    //
+
+    /**
+     * Reads a Wavefront .OBJ file using the {@code de.javagl.obj} API.
+     *
+     * @param path The relative directory of the .OBJ file
+     * @return A constructed model containing the file's data
+     * @throws IOException When an exception occurs in the process of reading the file
+     */
+    @Nonnull
+    public static Model3 readWavefrontObjFile(@Nonnull String path) throws IOException {
+        return readWavefrontObjFile(new File(path));
+    }
+
+    /**
+     * Reads a Wavefront .OBJ file using the {@code de.javagl.obj} API.
+     *
+     * @param file The {@link File} object containing the reference to the .OBJ file
+     * @return A constructed model containing the file's data
+     * @throws IOException When an exception occurs in the process of reading the file
+     */
+    @Nonnull
+    public static Model3 readWavefrontObjFile(@Nonnull File file) throws IOException {
+        try {
+            return new Model3(ObjReader.read(new FileReader(file)));
+        } catch (final Exception e) {
+            throw new IOException(e);
+        }
+    }
+
     //
     // Normal Computation
     //
