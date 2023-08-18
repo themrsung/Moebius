@@ -1,29 +1,27 @@
 package civitas.celestis;
 
-import civitas.celestis.graphics.model.Model32;
-import civitas.celestis.graphics.model.Model64;
+import civitas.celestis.graphics.model.Model3;
 import de.javagl.obj.Obj;
 import de.javagl.obj.ObjReader;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
 
 public class Test2 {
     public static void main(String[] args) {
         final Obj obj;
 
         try {
-            obj = ObjReader.read(new FileReader(BC304));
+            obj = ObjReader.read(new FileReader(MCX));
         } catch (final IOException e) {
             e.printStackTrace();
             return;
         }
 
-        final Model32 model = new Model32(obj);
+        final Model3 model = new Model3(obj);
 
-        System.out.println(model);
+        System.out.println(model.getFaces());
     }
 
     ///////////////////////////////////////////////////
