@@ -1,8 +1,9 @@
 package civitas.celestis.util.collection;
 
+import civitas.celestis.util.array.SafeArray;
+import civitas.celestis.util.array.TypeSafe;
 import jakarta.annotation.Nonnull;
 
-import java.io.Serializable;
 import java.util.Collection;
 
 /**
@@ -11,7 +12,7 @@ import java.util.Collection;
  * @param <E> The type of element this group is holding
  * @see Collection
  */
-public interface Collectable<E> extends Serializable {
+public interface Collectable<E> extends TypeSafe<E> {
     /**
      * Converts this object into a collection.
      *
@@ -20,4 +21,14 @@ public interface Collectable<E> extends Serializable {
      */
     @Nonnull
     Collection<E> collection();
+
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
+    @Nonnull
+    @Override
+    default SafeArray<E> safeArray() {
+        return SafeArray.fromCollection(collection());
+    }
 }

@@ -25,8 +25,9 @@ public enum HandlerPriority {
      * to {@link civitas.celestis.event.notification.ApplicationStoppingEvent ApplicationStoppingEvent}.
      * (or any variation of the event)
      * </p>
+     *
      * @see ApplicationCritical
      */
-    @ApplicationCritical(created = "0.3", lastUpdated = "0.3")
-    TERMINATION;
+    @ApplicationCritical(created = "0.3")
+    TERMINATION
 }

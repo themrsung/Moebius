@@ -64,7 +64,7 @@ public class DoubleMatrix implements Matrix<Double, DoubleMatrix> {
 
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < columns; c++) {
-                values[r][c] = (double) g.get(r, c);
+                values[r][c] = g.get(r, c).doubleValue();
             }
         }
     }

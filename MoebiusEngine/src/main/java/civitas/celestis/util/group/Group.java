@@ -9,6 +9,7 @@ import civitas.celestis.util.collection.Listable;
 import civitas.celestis.util.tuple.*;
 import jakarta.annotation.Nonnull;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Arrays;
@@ -38,7 +39,7 @@ import java.util.List;
  * @see civitas.celestis.math.matrix.Matrix Matrix
  * @see Groupable
  */
-public interface Group<E> extends Listable<E> {
+public interface Group<E> extends Listable<E>, Serializable {
     //
     // Factory
     //

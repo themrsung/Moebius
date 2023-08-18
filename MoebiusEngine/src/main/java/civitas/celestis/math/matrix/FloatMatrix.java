@@ -64,7 +64,7 @@ public class FloatMatrix implements Matrix<Float, FloatMatrix> {
 
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < columns; c++) {
-                values[r][c] = (float) g.get(r, c);
+                values[r][c] = g.get(r, c).floatValue();
             }
         }
     }

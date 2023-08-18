@@ -1,7 +1,12 @@
 package civitas.celestis;
 
 import civitas.celestis.annotation.ApplicationCritical;
+import civitas.celestis.graphics.model.Model3;
+import civitas.celestis.graphics.model.Models;
 import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
+
+import java.io.IOException;
 
 /**
  * A {@link MoebiusApplication} used for internal testing.
@@ -27,6 +32,16 @@ public class Moebius extends MoebiusApplication {
      */
     private static final Moebius application = new Moebius();
 
+    /**
+     * The 3D model of a BC-304 battlecruiser.
+     */
+    static final Model3 BC304;
+
+    /**
+     * The 3D model of a Sig MCX.
+     */
+    static final Model3 MCX;
+
     //
     // Constructors
     //
@@ -36,6 +51,20 @@ public class Moebius extends MoebiusApplication {
      */
     private Moebius() {
         super("Moebius", "0.3");
+    }
+
+    //
+    // Main
+    //
+
+    /**
+     * The main method of this application.
+     *
+     * @param args The array of arguments
+     */
+    @ApplicationCritical(created = "0.3", lastUpdated = "0.3")
+    public static void main(@Nonnull String[] args) {
+        getApplication().start();
     }
 
     //
@@ -70,16 +99,50 @@ public class Moebius extends MoebiusApplication {
     }
 
     //
-    // Main
+    // Methods
     //
 
     /**
-     * The main method of this application.
+     * Prints a message to the logger.
      *
-     * @param args The array of arguments
+     * @param message The message to log
      */
-    @ApplicationCritical
-    public static void main(@Nonnull String[] args) {
-        getApplication().start();
+    public static void log(@Nonnull String message) {
+        getApplication().logger.info(message);
+    }
+
+    /**
+     * Prints a message to the logger.
+     *
+     * @param objects The objects to serialize and log
+     */
+    public static void log(@Nullable Object... objects) {
+        final StringBuilder out = new StringBuilder();
+
+        for (final Object object : objects) {
+            out.append(object);
+        }
+
+        getApplication().logger.info(out.toString());
+    }
+
+    //
+    // Static Operations
+    //
+
+    static {
+        // Load models
+
+        try {
+            BC304 = Models.readWavefrontObjFile("MoebiusEngine/src/main/resources/models/bc304/BC304Render.obj");
+        } catch (final IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            MCX = Models.readWavefrontObjFile("MoebiusEngine/src/main/resources/models/mcx/MCX.obj");
+        } catch (final IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

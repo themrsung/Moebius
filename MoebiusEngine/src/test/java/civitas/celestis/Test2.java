@@ -1,27 +1,17 @@
 package civitas.celestis;
 
-import civitas.celestis.graphics.model.Model3;
-import de.javagl.obj.Obj;
-import de.javagl.obj.ObjReader;
+import civitas.celestis.math.vector.Double3;
+import civitas.celestis.util.array.SafeArray;
 
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 
 public class Test2 {
     public static void main(String[] args) {
-        final Obj obj;
 
-        try {
-            obj = ObjReader.read(new FileReader(MCX));
-        } catch (final IOException e) {
-            e.printStackTrace();
-            return;
-        }
+        final SafeArray<Double> array = SafeArray.boxDoubles(23, 4220, 32, 3, 42, 2, 3, 24, 2, 3, 3);
 
-        final Model3 model = new Model3(obj);
+        System.out.println(Double3.POSITIVE_X.safeArray());
 
-        System.out.println(model.getFaces());
     }
 
     ///////////////////////////////////////////////////

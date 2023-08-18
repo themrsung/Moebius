@@ -59,9 +59,19 @@ public class DecimalMath {
     public static final BigDecimal SQRT_2;
 
     /**
+     * The value of {@code 1 / 2}.
+     */
+    public static final BigDecimal HALF = new BigDecimal("0.5");
+
+    /**
      * The value of {@code 1 / 3}.
      */
     public static final BigDecimal THIRD;
+
+    /**
+     * The value of {@code 1 / 5}.
+     */
+    public static final BigDecimal FIFTH = new BigDecimal("0.2");
 
     /**
      * The value of {@code 1 / 6}.
@@ -82,6 +92,60 @@ public class DecimalMath {
      * The value of {@code 1 / 9}.
      */
     public static final BigDecimal NINTH;
+
+    /**
+     * The value of {@code 1 / 10}.
+     */
+    public static final BigDecimal TENTH = new BigDecimal("0.1");
+
+    //
+    // Random
+    //
+
+    /**
+     * Returns a new random value between the range of {@code [0, 1)}.
+     *
+     * @return A random value between the range of {@code [0, 1)}
+     */
+    @Nonnull
+    public static BigDecimal random() {
+        return BigDecimal.valueOf(Math.random());
+    }
+
+    //
+    // Range Validation
+    //
+
+    /**
+     * Checks if the provided value is within the specified range if {@code min} and {@code max}.
+     *
+     * @param value The value to check
+     * @param min   The minimum allowed value
+     * @param max   The maximum allowed value
+     * @return {@code true} if the value is within the range
+     */
+    public static boolean isInRange(@Nonnull BigDecimal value, @Nonnull BigDecimal min, @Nonnull BigDecimal max) {
+        return value.compareTo(min) >= 0 && value.compareTo(max) <= 0;
+    }
+
+    /**
+     * Requires the provided value to be within the specified range of {@code min} and {@code max}.
+     * If the value is not within the range, an {@link IllegalArgumentException} is thrown.
+     *
+     * @param value The value to check
+     * @param min   The minimum allowed value
+     * @param max   The maximum allowed value
+     * @return The value provided as the parameter
+     * @throws IllegalArgumentException When the value is not within the specified range
+     */
+    @Nonnull
+    public static BigDecimal requireRange(@Nonnull BigDecimal value, @Nonnull BigDecimal min, @Nonnull BigDecimal max) {
+        if (!isInRange(value, min, max)) {
+            throw new IllegalArgumentException("This field requires the value to be within the range of " + min + "-" + max + ".");
+        }
+
+        return value;
+    }
 
     //
     // Clamping

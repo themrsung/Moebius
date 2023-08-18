@@ -13,6 +13,8 @@ import java.lang.annotation.*;
  * If you encounter a field which is annotated as application-critical,
  * double check if you are using it properly.
  * </p>
+ *
+ * @since 0.3
  */
 @Documented
 @Retention(RetentionPolicy.SOURCE)
@@ -31,23 +33,32 @@ import java.lang.annotation.*;
         ElementType.PACKAGE,
         ElementType.RECORD_COMPONENT
 })
-@ApplicationCritical(created = "0.3", lastUpdated = "0.3")
 public @interface ApplicationCritical {
-    /**
-     * The version of which this field was most recently updated in.
-     *
-     * @return The most recent version this field was modified in
-     */
-    @Nonnull
-    @ApplicationCritical(created = "0.3", lastUpdated = "0.3")
-    String lastUpdated() default "";
-
     /**
      * The version of which this field was created in.
      *
      * @return The version this field was created in
+     * @since 0.3
      */
     @Nonnull
-    @ApplicationCritical(created = "0.3", lastUpdated = "0.3")
-    String created() default "";
+    String created();
+
+    /**
+     * The version of which this field was most recently updated in.
+     *
+     * @return The most recent version this field was modified in
+     * @since 0.3
+     */
+    @Nonnull
+    String lastUpdated() default "";
+
+    /**
+     * The changes which were made in the last update.
+     * This field is optional.
+     *
+     * @return The changes which were made in the last update
+     * @since 0.3
+     */
+    @Nonnull
+    String[] changes() default "";
 }

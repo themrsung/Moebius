@@ -56,6 +56,26 @@ public class Numbers {
     );
 
     /**
+     * Returns a random value of {@code double} between the range of {@code [0-1)}.
+     *
+     * @return A random value of {@code double} between the range of {@code [0-1)}
+     */
+    @SuppressWarnings("ConstantConditions")
+    public static double random() {
+        return randomGenerators.next().nextDouble();
+    }
+
+    /**
+     * Returns a random value of {@code float} between the range of {@code [0-1)}.
+     *
+     * @return A random value of {@code float} between the range of {@code [0-1)}
+     */
+    @SuppressWarnings("ConstantConditions")
+    public static float randomFloat() {
+        return (float) randomGenerators.next().nextDouble();
+    }
+
+    /**
      * Returns a random finite value of {@code double}.
      *
      * @return A random finite value
@@ -63,6 +83,16 @@ public class Numbers {
     @SuppressWarnings("ConstantConditions")
     public static double randomFinite() {
         return (-1 + randomGenerators.next().nextDouble() * 2) * Double.MAX_VALUE;
+    }
+
+    /**
+     * Returns a random finite value of {@code float}.
+     *
+     * @return A random finite value
+     */
+    @SuppressWarnings("ConstantConditions")
+    public static float randomFiniteFloat() {
+        return (float) (-1 + randomGenerators.next().nextDouble() * 2) * Float.MAX_VALUE;
     }
 
     /**
@@ -147,6 +177,90 @@ public class Numbers {
     @SuppressWarnings("ConstantConditions")
     public static int random(int min, int max) {
         return min + (int) (randomGenerators.next().nextFloat() * (max - min));
+    }
+
+    /**
+     * Returns a new random unit vector.
+     *
+     * @return A random unit vector
+     */
+    @Nonnull
+    public static Double2 randomDouble2() {
+        try {
+            return new Double2(random(), random()).normalize();
+        } catch (final ArithmeticException e) {
+            return Double2.POSITIVE_X; // Special case for zero vectors
+        }
+    }
+
+    /**
+     * Returns a new random unit vector.
+     *
+     * @return A random unit vector
+     */
+    @Nonnull
+    public static Double3 randomDouble3() {
+        try {
+            return new Double3(random(), random(), random()).normalize();
+        } catch (final ArithmeticException e) {
+            return Double3.POSITIVE_X; // Special case for zero vectors
+        }
+    }
+
+    /**
+     * Returns a new random unit vector.
+     *
+     * @return A random unit vector
+     */
+    @Nonnull
+    public static Double4 randomDouble4() {
+        try {
+            return new Double4(random(), random(), random(), random()).normalize();
+        } catch (final ArithmeticException e) {
+            return Double4.POSITIVE_W; // Special case for zero vectors
+        }
+    }
+
+    /**
+     * Returns a new random unit vector.
+     *
+     * @return A random unit vector
+     */
+    @Nonnull
+    public static Float2 randomFloat2() {
+        try {
+            return new Float2(randomFloat(), randomFloat()).normalize();
+        } catch (final ArithmeticException e) {
+            return Float2.POSITIVE_X; // Special case for zero vectors
+        }
+    }
+
+    /**
+     * Returns a new random unit vector.
+     *
+     * @return A random unit vector
+     */
+    @Nonnull
+    public static Float3 randomFloat3() {
+        try {
+            return new Float3(randomFloat(), randomFloat(), randomFloat()).normalize();
+        } catch (final ArithmeticException e) {
+            return Float3.POSITIVE_X; // Special case for zero vectors
+        }
+    }
+
+    /**
+     * Returns a new random unit vector.
+     *
+     * @return A random unit vector
+     */
+    @Nonnull
+    public static Float4 randomFloat4() {
+        try {
+            return new Float4(randomFloat(), randomFloat(), randomFloat(), randomFloat()).normalize();
+        } catch (final ArithmeticException e) {
+            return Float4.POSITIVE_W;
+        }
     }
 
     //

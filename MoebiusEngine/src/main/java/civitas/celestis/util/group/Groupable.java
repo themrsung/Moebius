@@ -1,5 +1,7 @@
 package civitas.celestis.util.group;
 
+import civitas.celestis.util.array.SafeArray;
+import civitas.celestis.util.array.TypeSafe;
 import jakarta.annotation.Nonnull;
 
 /**
@@ -8,7 +10,7 @@ import jakarta.annotation.Nonnull;
  * @param <E> The type of element this object is holding
  * @see Group
  */
-public interface Groupable<E> {
+public interface Groupable<E> extends TypeSafe<E> {
     /**
      * Converts this object into a group.
      *
@@ -17,4 +19,14 @@ public interface Groupable<E> {
      */
     @Nonnull
     Group<E> group();
+
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
+    @Nonnull
+    @Override
+    default SafeArray<E> safeArray() {
+        return SafeArray.fromGroup(group());
+    }
 }
