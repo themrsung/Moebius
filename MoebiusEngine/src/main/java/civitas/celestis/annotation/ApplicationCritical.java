@@ -2,8 +2,10 @@ package civitas.celestis.annotation;
 
 import jakarta.annotation.Nonnull;
 
+import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * A marker interface used to mark various fields and methods which are
@@ -16,6 +18,22 @@ import java.lang.annotation.RetentionPolicy;
  * </p>
  */
 @Retention(RetentionPolicy.SOURCE)
+@Target({
+
+        /*
+         * Do not add TYPE.
+         * Maintaining last version fields for classes is both ambiguous and tedious.
+         */
+
+        ElementType.FIELD,
+        ElementType.METHOD,
+        ElementType.PARAMETER,
+        ElementType.CONSTRUCTOR,
+        ElementType.ANNOTATION_TYPE,
+        ElementType.PACKAGE,
+        ElementType.RECORD_COMPONENT
+})
+@ApplicationCritical(created = "0.3", lastUpdated = "0.3")
 public @interface ApplicationCritical {
     /**
      * The version of which this field was most recently updated in.
@@ -23,5 +41,15 @@ public @interface ApplicationCritical {
      * @return The most recent version this field was modified in
      */
     @Nonnull
+    @ApplicationCritical(created = "0.3", lastUpdated = "0.3")
     String lastUpdated() default "";
+
+    /**
+     * The version of which this field was created in.
+     *
+     * @return The version this field was created in
+     */
+    @Nonnull
+    @ApplicationCritical(created = "0.3", lastUpdated = "0.3")
+    String created() default "";
 }

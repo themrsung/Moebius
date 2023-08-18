@@ -26,6 +26,6 @@ public enum HandlerPriority {
      * (or any variation of the event)
      * </p>
      */
-    @ApplicationCritical(lastUpdated = "0.3")
+    @ApplicationCritical(created = "0.3", lastUpdated = "0.3")
     TERMINATION
 }
