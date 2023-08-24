@@ -20,6 +20,13 @@
 
 
     <dependencies>
+        <!-- Plains API -->
+        <dependency>
+            <groupId>civitas.celestis</groupId>
+            <artifactId>Plains</artifactId>
+            <version>0.4</version>
+        </dependency>
+
         <!-- Annotation APIs -->
 
         <dependency>
