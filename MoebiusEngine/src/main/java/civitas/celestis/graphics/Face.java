@@ -2,7 +2,10 @@ package civitas.celestis.graphics;
 
 import civitas.celestis.math.vector.Vector3;
 import civitas.celestis.math.vector.Vectors;
+import civitas.celestis.util.tuple.Tuple;
 import jakarta.annotation.Nonnull;
+
+import java.awt.*;
 
 public class Face {
     public Face(@Nonnull Vector3 a, @Nonnull Vector3 b, @Nonnull Vector3 c) {
@@ -14,6 +17,8 @@ public class Face {
         final Vector3 ac = c.subtract(a);
 
         this.normal = ab.cross(ac);
+
+        this.color = Colors.DARK_GOLDEN_ROD;
     }
 
     @Nonnull
@@ -21,6 +26,18 @@ public class Face {
 
     @Nonnull
     protected transient final Vector3 normal;
+
+    @Nonnull
+    protected Color color;
+
+    @Nonnull
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(@Nonnull Color color) {
+        this.color = color;
+    }
 
     @Nonnull
     public Vector3 getA() {
@@ -38,6 +55,11 @@ public class Face {
     }
 
     @Nonnull
+    public Tuple<Vector3> getVertices() {
+        return Tuple.of(a, b, c);
+    }
+
+    @Nonnull
     public Vector3 getCentroid() {
         return Vectors.avg(a, b, c);
     }
@@ -45,5 +67,16 @@ public class Face {
     @Nonnull
     public Vector3 getNormal() {
         return normal;
+    }
+
+    @Nonnull
+    @Override
+    public String toString() {
+        return "Face{" +
+                "a=" + a +
+                ", b=" + b +
+                ", c=" + c +
+                ", normal=" + normal +
+                '}';
     }
 }

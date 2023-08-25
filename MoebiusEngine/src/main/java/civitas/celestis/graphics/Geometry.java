@@ -141,7 +141,7 @@ public class Geometry {
     public static Vector2 translate3Dto2D(@Nonnull Vector3 in, double focalLength) {
         return new Vector2(
                 (focalLength / (focalLength + in.z())) * in.x(),
-                (focalLength / (focalLength + in.z())) * in.y()
+                (focalLength / (focalLength + in.z())) * -in.y()
         );
     }
 }
