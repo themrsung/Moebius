@@ -6,11 +6,13 @@
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/../Plains/pom.xml" />
+        <option value="$PROJECT_DIR$/../plains-0.4/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/MoebiusEditor/pom.xml" />
+        <option value="$PROJECT_DIR$/../Plains/pom.xml" />
       </set>
     </option>
   </component>
